@@ -1,10 +1,5 @@
 # focus.nvim
 
-
-**Demo**
-
-![screencast](https://i.ibb.co/17J882Y/ezgif-1-b3b5a4e585d9.gif)
-
 # Auto-Focussing Splits for Neovim**
 
 🔋 Batteries Included. No configuration neccessary
@@ -15,6 +10,9 @@
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree & QuickFix (Won't resize)
 
+# Demo
+
+![screencast](https://i.ibb.co/17J882Y/ezgif-1-b3b5a4e585d9.gif)
 
 ## Installation
 ### [vim-plug](https://github.com/junegunn/vim-plug)
