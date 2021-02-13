@@ -7,6 +7,7 @@ function M.split_resizer(width) --> Only resize normal buffers, set qf to 10 alw
         vim.o.winwidth = 10
     else
         vim.o.winwidth = width
+        vim.cmd('wincmd=') --> Auto-Maximize windows horizontally when in focus
     end
 
 end
