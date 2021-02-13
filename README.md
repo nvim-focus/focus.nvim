@@ -1,5 +1,3 @@
-# focus.nvim
-
 # Auto-Focussing Splits for Neovim**
 
 🔋 Batteries Included. No configuration neccessary
