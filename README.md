@@ -1,4 +1,4 @@
-# Auto-Focussing Splits for Neovim**
+# Auto-Focussing Splits/Windows for Neovim
 
 🔋 Batteries Included. No configuration neccessary
 
