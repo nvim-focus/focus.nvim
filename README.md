@@ -42,6 +42,3 @@ focus.width = 100
 - [ ] Adding Filetypes Support as we go
 - [ ] Decide default width as per feedback (I like 120)
 - [ ] Perhaps some other configs, maybe height?
-
-# This repo is in alpha stage and breaking changes may be made at any point
-
