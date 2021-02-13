@@ -15,11 +15,11 @@
 ## Installation
 ### [vim-plug](https://github.com/junegunn/vim-plug)
 ```vim
-Plug 'beauwilliams/focus.lua'
+Plug 'beauwilliams/focus.nvim'
 ```
 ### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
-use 'beauwilliams/focus.lua'
+use 'beauwilliams/focus.nvim'
 ```
 
 # Configuration
