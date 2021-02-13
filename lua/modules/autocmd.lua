@@ -1,7 +1,6 @@
 local api = vim.api
 local cmd = api.nvim_command
 local autocmd = {}
--- local focus = require 'focus'
 
 local function nvim_create_augroups(definitions)
   for group_name, definition in pairs(definitions) do
