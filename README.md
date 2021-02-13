@@ -4,9 +4,9 @@
 
 👌 Maximises Current Split/Window Automatically When Cursor Moves
 
-⚙️  Set Focus Split/Window Width, Disable
+⚙️  Set Focus Split/Window Width & Height, Disable
 
-🙌 Compatible with NvimTree, NerdTree, CHADTree & QuickFix (Won't resize)
+🙌 Compatible with NvimTree, NerdTree, CHADTree & QuickFix (QF default to 10, rest won't resize)
 
 # Demo
 
@@ -40,11 +40,19 @@ NOTE: issue command before making some splits
 ```lua
 -- place me somewhere in your init.lua
 local focus = require('focus')
-focus.width = 100
+focus.width = 120
+```
+
+**Set Focus Height**
+```lua
+-- place me somewhere in your init.lua
+local focus = require('focus')
+focus.height = 40
 ```
 
 ## Planned Improvements 😼
 
+- [ ] Refactoring
 - [ ] Adding Filetypes Support as we go
 - [ ] Decide default width as per feedback (I like 120)
-- [ ] Perhaps some other configs, maybe height?
+- [x] Perhaps some other configs, maybe height?

@@ -14,13 +14,13 @@ local function nvim_create_augroups(definitions)
   end
 end
 
-function autocmd.setup(width)
+function autocmd.setup(width,height)
   local definitions = {
     autocmds = {
-      { 'WinEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..width..')'},
-      { 'WinEnter', '*', 'setlocal cursorline'},
-      { 'WinEnter', '*', 'setlocal signcolumn=no'},
-      { 'WinLeave', '*', 'setlocal nocursorline'},
+      { 'BufEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..width..','..height..')'},
+      { 'BufEnter', '*', 'setlocal cursorline'},
+      { 'BufEnter', '*', 'setlocal signcolumn=no'},
+      { 'BufLeave', '*', 'setlocal nocursorline'},
   };
   }
 
