@@ -29,6 +29,11 @@ use 'beauwilliams/focus.nvim'
 local focus = require('focus')
 focus.enable = false
 ```
+**Disable Focus (Per Session)**
+NOTE: issue command before making some splits
+```vim
+:DisableFocus
+```
 
 **Set Focus Width**
 ```lua
