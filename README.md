@@ -2,6 +2,7 @@
 
 
 **Demo**
+
 ![screencast](https://i.ibb.co/17J882Y/ezgif-1-b3b5a4e585d9.gif)
 
 # Auto-Focussing Splits for Neovim**
