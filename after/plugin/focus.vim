@@ -7,7 +7,6 @@ let g:focus_enabled = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-
 "Adding command do DISABLE focus.
 "TODO--> [beauwilliams] --> Add hot toggling. The issue is, how do we know
 "what size to normalise the splits back to? If we run DisableToggle before
@@ -20,19 +19,14 @@ function! DisableFocus() abort
     if g:focus_enabled == 0
         return
     else
-    let g:focus_enabled = 0
-endif
+        let g:focus_enabled = 0
+    endif
 endfunction
-
 
 "Init focus, set autocmds and start the resizer
 " if g:focus_enabled == 1
-call v:lua.require('focus').focus_init()
+call v:lua.require('focus').init()
 " endif
-
-
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-
-

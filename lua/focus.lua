@@ -1,15 +1,33 @@
+local config = require('modules.config')
+
 local M = {}
 
-M.enable = true -- Default to enabled
-M.height_compatible = false
-M.width = 120 --> Default to 120 for now
-M.height = 0 --> Don't set height by default for now
-M.focus_init = function()
-    if M.width == nil then M.width = 120 end --> Catch exceptions in case people set values to nil in their init.lua
-    if M.height == nil then M.height = 0 end
+M.init = function()
+    -- Verify that configuration values are of the correct type
+    config.verify()
+
     if M.enable == true then
-    require 'modules.autocmd'.setup(M.width,M.height)
+      -- Pass this module, noting that `__index` actually references the
+      -- configuration module, to setup the autocmds used for this plugin
+      require 'modules.autocmd'.setup(M)
+
+      if M.winhighlight then
+        -- Allows user-overridable highlighting of the focused window
+        --
+        -- See `:h hi-default` for more details
+        vim.cmd('hi default link FocusedWindow VertSplit')
+        vim.cmd('hi default link UnfocusedWindow Normal')
+
+        vim.wo.winhighlight = 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
+      end
     end
 end
+
+setmetatable(M,
+    {
+        __newindex = config.set,
+        __index = config.get,
+    }
+)
 
 return M
