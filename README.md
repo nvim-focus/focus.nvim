@@ -27,7 +27,7 @@ use 'beauwilliams/focus.nvim'
 ```lua
 -- place me somewhere in your init.lua
 local focus = require('focus')
-focus.enable = false
+focus.focus = false
 ```
 **Disable Focus (Per Session)**
 
