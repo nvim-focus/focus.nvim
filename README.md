@@ -10,7 +10,7 @@
 
 # Demo
 
-![screencast](https://i.ibb.co/17J882Y/ezgif-1-b3b5a4e585d9.gif)
+![screencast](https://i.ibb.co/0tsKww4/focusop.gif)
 
 ## Installation
 ### [vim-plug](https://github.com/junegunn/vim-plug)
