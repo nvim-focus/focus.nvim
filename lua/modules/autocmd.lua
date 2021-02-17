@@ -14,19 +14,19 @@ local function nvim_create_augroups(definitions)
   end
 end
 
-function autocmd.setup(width,height)
-  local definitions = {
-    autocmds = {
-      { 'BufEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..width..','..height..')'},
-      { 'BufEnter', '*', 'setlocal cursorline'},
-      { 'BufEnter', '*', 'setlocal signcolumn=no'},
-      { 'BufLeave', '*', 'setlocal nocursorline'},
-  };
+function autocmd.setup(config)
+  local autocmds = {
+    { 'BufEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..config.width..','..config.height..')'},
+    { 'BufEnter', '*', 'setlocal signcolumn=no'},
   }
 
-  nvim_create_augroups(definitions)
+  if config.cursorline ~= false then
+    -- Explicitly check against false, as it not being present should default to it being on
+    table.insert(autocmds, { 'BufEnter', '*', 'setlocal cursorline' })
+    table.insert(autocmds, { 'BufLeave', '*', 'setlocal nocursorline' })
+  end
+
+  nvim_create_augroups({autocmds})
 end
 
-
 return autocmd
-
