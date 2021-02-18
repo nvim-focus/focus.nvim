@@ -36,20 +36,20 @@ NOTE: issue command before making some splits
 :DisableFocus
 ```
 
-**Set Focus Width**
+**Set Focus Width (Default to 120 px)**
 ```lua
 -- place me somewhere in your init.lua
 local focus = require('focus')
 focus.width = 120
 ```
 
-**Set Focus Height**
+**Set Focus Height (By default disabled)**
 ```lua
 -- place me somewhere in your init.lua
 local focus = require('focus')
 focus.height = 40
 ```
-**Set Focus Auto-Cursorline Enabling**
+**Set Focus Auto-Cursorline (By default enabled)**
 ```lua
 -- place me somewhere in your init.lua
 local focus = require('focus')
