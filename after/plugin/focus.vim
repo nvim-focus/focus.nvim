@@ -24,7 +24,7 @@ endif
 endfunction
 
 "If we do not do on winenter enabled_focus will not be read
-au WinEnter * call v:lua.require('focus').init()
+au VimEnter * call v:lua.require('focus').init()
 
 
 
