@@ -22,11 +22,11 @@ Plug 'beauwilliams/focus.nvim'
 use 'beauwilliams/focus.nvim'
 ```
 
-## Commands
+## Vim Commands
 
 | _Command_      | _Description_ |
 | -------------- | ------------- |
-| `DisableFocus` |  Disable the plugin entirely, but for now it has to be run before creating any splits |
+| `DisableFocus` |  Disable the plugin per session, but for now it has to be run before creating any splits |
 
 ## Configuration
 
