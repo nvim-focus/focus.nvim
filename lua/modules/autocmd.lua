@@ -16,14 +16,14 @@ end
 
 function autocmd.setup(config)
   local autocmds = {
-    { 'WinEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..config.width..','..config.height..')'},
-    { 'WinEnter', '*', 'setlocal signcolumn=no'},
+    { 'BufWinEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..config.width..','..config.height..')'},
+    { 'BufWinEnter', '*', 'setlocal signcolumn=no'},
   }
 
   if config.cursorline ~= false then
     -- Explicitly check against false, as it not being present should default to it being on
-    table.insert(autocmds, { 'WinEnter', '*', 'setlocal cursorline' })
-    table.insert(autocmds, { 'WinLeave', '*', 'setlocal nocursorline' })
+    table.insert(autocmds, { 'BufWinEnter', '*', 'setlocal cursorline' })
+    table.insert(autocmds, { 'BufWinLeave', '*', 'setlocal nocursorline' })
   end
 
   nvim_create_augroups({autocmds})
