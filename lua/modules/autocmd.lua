@@ -15,10 +15,7 @@ local function nvim_create_augroups(definitions)
 end
 
 function autocmd.setup(config)
-  local autocmds = {
-    --[[ { 'WinEnter', '*', 'setlocal signcolumn=yes'},
-    { 'WinLeave', '*', 'setlocal signcolumn=no'}, ]]
-  }
+  local autocmds = {}
 
   if config.signcolumn ~= false then
     -- Explicitly check against false, as it not being present should default to it being on
