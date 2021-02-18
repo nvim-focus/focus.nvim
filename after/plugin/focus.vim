@@ -1,7 +1,7 @@
-if exists('g:focus_loaded') | finish | endif
+if exists('g:loaded_focus') | finish | endif
 
-let g:focus_loaded = 1 "Don't Reload Twice"
-let g:focus_enabled = 1
+let g:loaded_focus = 1 "Don't Reload Twice"
+let g:enabled_focus = 1
 
 "A vim best practise
 let s:save_cpo = &cpo
@@ -16,17 +16,17 @@ set cpo&vim
 command! -nargs=0 DisableFocus call DisableFocus()
 
 function! DisableFocus() abort
-    if g:focus_enabled == 0
+    if g:enabled_focus == 0
         return
     else
-        let g:focus_enabled = 0
-    endif
+    let g:enabled_focus = 0
+endif
 endfunction
 
-"Init focus, set autocmds and start the resizer
-" if g:focus_enabled == 1
-call v:lua.require('focus').init()
-" endif
+"If we do not do on winenter enabled_focus will not be read
+au WinEnter * call v:lua.require('focus').init()
+
+
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

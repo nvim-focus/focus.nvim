@@ -2,7 +2,7 @@ local vim = vim --> Use locals
 
 local M = {}
 function M.split_resizer(width,height) --> Only resize normal buffers, set qf to 10 always
-    if vim.api.nvim_eval('g:focus_enabled') == 0 then return end
+    if vim.api.nvim_eval('g:enabled_focus') == 0 then return end --> TODO: FIX. Even though its 0 has no effect
     if vim.bo.ft == 'NvimTree' or vim.bo.ft == 'NerdTree'  or vim.bo.ft == 'CHADTree' then return end
     if vim.bo.ft == 'qf' then
         vim.o.winwidth = 10
