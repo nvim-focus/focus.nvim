@@ -14,7 +14,7 @@ local function nvim_create_augroups(definitions)
   end
 end
 
-function autocmd.setup(config)
+function autocmd.setup(config) --> TODO: Replace with WinEnter once telescope bug figured out
   local autocmds = {
     { 'BufWinEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..config.width..','..config.height..')'},
     { 'BufWinEnter', '*', 'setlocal signcolumn=no'},

@@ -10,11 +10,7 @@ function M.split_resizer(width,height) --> Only resize normal buffers, set qf to
         vim.o.winwidth = width --> lua print(vim.o.winwidth)
     end
     if height ~= 0 then vim.o.winheight = height --> Opt in to set height value, otherwise auto-size it
-    -- Below removed for now. Windows resize e.g when telescope prompt opened
-    -- else vim.cmd('wincmd=') end--> Auto-Maximize windows horizontally when in focus by DEFAULT
     end
-
-
 end
 
 return M
