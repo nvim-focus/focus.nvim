@@ -16,9 +16,7 @@ set cpo&vim
 command! -nargs=0 DisableFocus call DisableFocus()
 
 function! DisableFocus() abort
-    wincmd=
     if g:enabled_focus == 0
-    wincmd=
         return
     else
     let g:enabled_focus = 0
