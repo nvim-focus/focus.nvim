@@ -12,7 +12,7 @@
 
 ![screencast](https://i.ibb.co/0tsKww4/focusop.gif)
 
-*note: for reference this screencast features dimensions set to 120x40 (WxH)*
+*note: for reference this screencast features dimensions set to 120\*40 (W\*H)*
 
 ## Installation
 #### [vim-plug](https://github.com/junegunn/vim-plug)
