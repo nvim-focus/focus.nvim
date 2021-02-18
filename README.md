@@ -67,7 +67,7 @@ local focus = require('focus')
 -- Default: true
 focus.cursorline = true
 ```
-**Set Focus Window Highlighting (By default disabled)**
+**Set Focus Window Highlighting**
 ```lua
 -- Place me somewhere in your init.lua
 local focus = require('focus')
