@@ -23,7 +23,7 @@ function! DisableFocus() abort
 endif
 endfunction
 
-"If we do not do on winenter enabled_focus will not be read
+"If we do not do on vimenter enabled_focus will not be read
 au VimEnter * call v:lua.require('focus').init()
 
 
