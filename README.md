@@ -37,7 +37,6 @@ Place some version of this in your configuration file, e.g. `init.lua`, etc.
 
 **Enable/Disable Focus**
 ```lua
--- Place me somewhere in your init.lua
 local focus = require('focus')
 -- Completely disable this plugin
 -- Default: true
@@ -46,7 +45,6 @@ focus.enable = false
 
 **Set Focus Width**
 ```lua
--- Place me somewhere in your init.lua
 local focus = require('focus')
 -- Width for the focused window, other windows resized accordingly
 -- Default: 120
@@ -55,7 +53,6 @@ focus.width = 120
 
 **Set Focus Height**
 ```lua
--- Place me somewhere in your init.lua
 local focus = require('focus')
 -- Height for the focused window
 -- Default: 0
@@ -64,14 +61,12 @@ focus.height = 40
 ```
 **Set Focus Auto-Cursorline**
 ```lua
--- Place me somewhere in your init.lua
 local focus = require('focus')
 -- Default: true
 focus.cursorline = true
 ```
 **Set Focus Window Highlighting**
 ```lua
--- Place me somewhere in your init.lua
 local focus = require('focus')
 -- Default: false
 focus.winhighlight = true
