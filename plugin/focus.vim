@@ -7,7 +7,10 @@ let g:enabled_focus = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+"Export commands so we can do :DisableFocus etc
 command! -nargs=0 DisableFocus call DisableFocus()
+command! -nargs=0 EnableFocus call EnableFocus()
+command! -nargs=0 ToggleFocus call ToggleFocus()
 
 function! DisableFocus() abort
     if g:enabled_focus == 0
@@ -21,6 +24,27 @@ function! DisableFocus() abort
         wincmd=
 endif
 endfunction
+
+function! EnableFocus() abort
+    if g:enabled_focus == 1
+        return
+    else
+        let g:enabled_focus = 1
+        runtime autoload/focus.vim
+endif
+endfunction
+
+function! ToggleFocus() abort
+    if g:enabled_focus == 0
+        call EnableFocus()
+        return
+    else
+        let g:enabled_focus = 1
+        call DisableFocus()
+endif
+endfunction
+
+
 
 "don't require our files until we need them, hopefully it prevents lua file being
 "loaded if we run vim with focus disabled i.e `nvim +DisableFocus`
