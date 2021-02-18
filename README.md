@@ -33,18 +33,22 @@ use 'beauwilliams/focus.nvim'
 Place some version of this in your configuration file, e.g. `init.lua`, etc.
 
 
-**Set Focus Width**
+**Enable/Disable Focus**
 ```lua
 local focus = require('focus')
 
 -- Completely disable this plugin
 -- default: true
 focus.enable = true
+```
 
+**Set Focus Width**
+```lua
 -- Width for the focused window, other windows resized accordingly
 -- default: 120
 focus.width = 120
 ```
+
 **Set Focus Height**
 ```lua
 -- place me somewhere in your init.lua
@@ -75,7 +79,6 @@ focus.winhighlight = true
 vim.cmd('hi link UnfocusedWindow CursorLine')
 vim.cmd('hi link FocusedWindow VisualNOS')
 ```
-
 
 
 ## Planned Improvements 😼
