@@ -4,7 +4,7 @@
 
 👌 Maximises Current Split/Window Automatically When Cursor Moves
 
-⚙️  Set Focus Split/Window Width, Height, Cursorline & Active/Inactive Win-Highlight + Disable
+⚙️  Set Focus Split/Window Width, Height, Auto-Cursorline/SignColumn & Active/Inactive Win-Highlight + Disable
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
 
