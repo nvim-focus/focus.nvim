@@ -16,7 +16,7 @@ end
 
 function autocmd.setup(config)
   local autocmds = {
-    { 'BufWinEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..config.width..','..config.height..')'},
+    -- { 'BufWinEnter', '*', 'lua require \'modules.resizer\'.split_resizer('..config.width..','..config.height..')'},
     { 'BufWinEnter', '*', 'setlocal signcolumn=no'},
   }
 

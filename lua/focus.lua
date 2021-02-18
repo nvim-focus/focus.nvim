@@ -10,6 +10,8 @@ M.init = function()
       -- Pass this module, noting that `__index` actually references the
       -- configuration module, to setup the autocmds used for this plugin
       require 'modules.autocmd'.setup(M)
+      require 'modules.resizer'.split_resizer(M)
+
 
       if M.winhighlight then
         -- Allows user-overridable highlighting of the focused window
