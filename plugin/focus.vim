@@ -22,8 +22,11 @@ function! DisableFocus() abort
 endif
 endfunction
 
-"don't require our files until we need them
+"don't require our files until we need them, hopefully it prevents lua file being
+"loaded if we run vim with focus disabled i.e `nvim +DisableFocus`
+if g:enabled_focus == 1
 runtime autoload/focus.vim
+endif
 
 
 
