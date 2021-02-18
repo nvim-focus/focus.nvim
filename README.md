@@ -32,10 +32,8 @@ use 'beauwilliams/focus.nvim'
 
 Place some version of this in your configuration file, e.g. `init.lua`, etc.
 
-<<<<<<< HEAD
+
 **Set Focus Width (Default to 120 px)**
-=======
->>>>>>> a2bc7344bca14987f0a66a951b7e78a442a3341a
 ```lua
 local focus = require('focus')
 
@@ -47,15 +45,12 @@ focus.enable = true
 -- default: 120
 focus.width = 120
 
-<<<<<<< HEAD
 **Set Focus Height (By default disabled)**
 ```lua
 -- place me somewhere in your init.lua
 local focus = require('focus')
-=======
 -- Height for the focused window
 -- default: 0
->>>>>>> a2bc7344bca14987f0a66a951b7e78a442a3341a
 focus.height = 40
 
 -- Turn on the cursorline in the focused window, turn it off in unfocused windows
@@ -69,7 +64,7 @@ focus.winhighlight = true
 -- By default, the highlight groups are setup as such:
 --   hi default link FocusedWindow VertSplit
 --   hi default link UnfocusedWindow Normal
--- so to change them, you can just link them to a different highlight group, see `:h hi-default`
+-- To change them, you can link them to a different highlight group, see `:h hi-default` for more info.
 vim.cmd('hi link UnfocusedWindow CursorLine')
 vim.cmd('hi link FocusedWindow VisualNOS')
 ```
