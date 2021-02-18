@@ -35,15 +35,17 @@ Place some version of this in your configuration file, e.g. `init.lua`, etc.
 
 **Enable/Disable Focus**
 ```lua
+-- place me somewhere in your init.lua
 local focus = require('focus')
-
--- Completely disable this plugin
+-- completely disable this plugin
 -- default: true
-focus.enable = true
+focus.enable = false
 ```
 
 **Set Focus Width**
 ```lua
+-- place me somewhere in your init.lua
+local focus = require('focus')
 -- Width for the focused window, other windows resized accordingly
 -- default: 120
 focus.width = 120
