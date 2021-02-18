@@ -55,6 +55,13 @@ focus.height = 40
 local focus = require('focus')
 focus.cursorline = true
 ```
+**Set Focus Window Highlighting (By default disabled)**
+```lua
+-- place me somewhere in your init.lua
+local focus = require('focus')
+focus.winhighlight = false
+```
+
 
 
 ## Planned Improvements 😼
