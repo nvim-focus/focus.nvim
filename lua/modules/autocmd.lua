@@ -22,7 +22,7 @@ function autocmd.setup(config)
 
   if config.signcolumn ~= false then
     -- Explicitly check against false, as it not being present should default to it being on
-    table.insert(autocmds, { 'WinEnter', '*', 'setlocal signcolumn=yes'})
+    table.insert(autocmds, { 'WinEnter', '*', 'setlocal signcolumn=auto'})
     table.insert(autocmds, { 'WinLeave', '*', 'setlocal signcolumn=no'})
   end
 
