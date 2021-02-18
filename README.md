@@ -4,7 +4,7 @@
 
 👌 Maximises Current Split/Window Automatically When Cursor Moves
 
-⚙️  Set Focus Split/Window Width & Height, Disable
+⚙️  Set Focus Split/Window Width, Height, Cursorline & Highlight + Disable
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree & QuickFix (QF default to 10, rest won't resize)
 
@@ -49,6 +49,13 @@ focus.width = 120
 local focus = require('focus')
 focus.height = 40
 ```
+**Set Focus Auto-Cursorline Enabling**
+```lua
+-- place me somewhere in your init.lua
+local focus = require('focus')
+focus.cursorline = true
+```
+
 
 ## Planned Improvements 😼
 
