@@ -7,7 +7,7 @@ let g:enabled_focus = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-"Adding command do DISABLE focus.
+"Adding command to DISABLE focus.
 "TODO--> [beauwilliams] --> Add hot toggling. The issue is, how do we know
 "what size to normalise the splits back to? If we run DisableToggle before
 "setting up spilts we are all good. Need to think about what to do when splits
@@ -19,12 +19,16 @@ function! DisableFocus() abort
     if g:enabled_focus == 0
         return
     else
-    let g:enabled_focus = 0
+        let g:enabled_focus = 0
+        "Return win width to default to prevent it from resizing after disable
+        lua vim.o.winwidth = 20
+        lua vim.o.winheight = 1
+        "normalise the splits back evenly
+        wincmd=
 endif
 endfunction
 
-"If we do not do on vimenter enabled_focus will not be read
-au VimEnter * call v:lua.require('focus').init()
+runtime autoload/focus.vim
 
 
 
