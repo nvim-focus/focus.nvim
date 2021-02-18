@@ -33,7 +33,7 @@ use 'beauwilliams/focus.nvim'
 Place some version of this in your configuration file, e.g. `init.lua`, etc.
 
 
-**Set Focus Width (Default to 120 px)**
+**Set Focus Width**
 ```lua
 local focus = require('focus')
 
@@ -44,8 +44,8 @@ focus.enable = true
 -- Width for the focused window, other windows resized accordingly
 -- default: 120
 focus.width = 120
-
-**Set Focus Height (By default disabled)**
+```
+**Set Focus Height**
 ```lua
 -- place me somewhere in your init.lua
 local focus = require('focus')
@@ -53,11 +53,18 @@ local focus = require('focus')
 -- default: 0
 focus.height = 40
 
--- Turn on the cursorline in the focused window, turn it off in unfocused windows
+```
+**Set Focus Auto-Cursorline**
+```lua
+-- place me somewhere in your init.lua
+local focus = require('focus')
 -- default: true
 focus.cursorline = true
-
--- Highlight the focused window differently than unfocused windows, see `:h winhighlight`
+```
+**Set Focus Window Highlighting (By default disabled)**
+```lua
+-- place me somewhere in your init.lua
+local focus = require('focus')
 -- default: false
 focus.winhighlight = true
 
@@ -67,18 +74,6 @@ focus.winhighlight = true
 -- To change them, you can link them to a different highlight group, see `:h hi-default` for more info.
 vim.cmd('hi link UnfocusedWindow CursorLine')
 vim.cmd('hi link FocusedWindow VisualNOS')
-```
-**Set Focus Auto-Cursorline (By default enabled)**
-```lua
--- place me somewhere in your init.lua
-local focus = require('focus')
-focus.cursorline = true
-```
-**Set Focus Window Highlighting (By default disabled)**
-```lua
--- place me somewhere in your init.lua
-local focus = require('focus')
-focus.winhighlight = false
 ```
 
 
