@@ -6,7 +6,7 @@
 
 ⚙️  Set Focus Split/Window Width, Height, Cursorline & Active/Inactive Win-Highlight + Disable
 
-🙌 Compatible with NvimTree, NerdTree, CHADTree & QuickFix (QF default to 10, rest won't resize)
+🙌 Compatible with NvimTree, NerdTree, CHADTree, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
 
 # Demo
 
