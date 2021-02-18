@@ -59,12 +59,21 @@ local focus = require('focus')
 focus.height = 40
 
 ```
-**Set Focus Auto-Cursorline**
+
+**Set Focus Auto Cursorline**
 ```lua
 local focus = require('focus')
 -- Default: true
-focus.cursorline = true
+focus.cursorline = false
 ```
+
+**Set Focus Auto Sign Column**
+```lua
+local focus = require('focus')
+-- Default: true
+focus.signcolumn = false
+```
+
 **Set Focus Window Highlighting**
 ```lua
 local focus = require('focus')

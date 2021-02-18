@@ -7,6 +7,7 @@ local defaults = {
     width = DEFAULT_WIDTH,
     height = DEFAULT_HEIGHT,
     cursorline = true,
+    signcolumn = true,
     winhighlight = false,
 }
 
