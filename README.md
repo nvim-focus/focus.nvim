@@ -26,7 +26,7 @@ use 'beauwilliams/focus.nvim'
 
 | _Command_      | _Description_ |
 | -------------- | ------------- |
-| `DisableFocus` |  Disable the plugin per session, but for now it has to be run before creating any splits |
+| `DisableFocus` |  Disable the plugin per session, can be run at anytime. Splits will be normalised back to defaults and then space evenly. |
 
 ## Configuration
 
