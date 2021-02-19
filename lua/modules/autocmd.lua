@@ -1,5 +1,4 @@
-local api = vim.api
-local cmd = api.nvim_command
+local cmd = vim.api.nvim_command
 local autocmd = {}
 
 local function nvim_create_augroups(definitions)
