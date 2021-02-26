@@ -36,6 +36,8 @@ use 'beauwilliams/focus.nvim'
 
 Place some version of this in your configuration file, e.g. `init.lua`, etc.
 
+**NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*. That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus, but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus by following the below instructions to set them.
+
 
 **Enable/Disable Focus**
 ```lua
