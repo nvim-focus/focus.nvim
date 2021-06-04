@@ -3,7 +3,7 @@ local vim = vim --> Use locals
 local M = {}
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
     local ft = vim.bo.ft
-    if ft == 'NvimTree' or ft == 'NerdTree'  or ft == 'CHADTree' then
+    if ft == 'NvimTree' or ft == 'nerdtree'  or ft == 'CHADTree' then
         vim.o.winwidth = config.treewidth
     elseif ft == 'qf' then
         vim.o.winheight = 10

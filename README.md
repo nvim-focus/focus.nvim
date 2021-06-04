@@ -67,7 +67,7 @@ focus.height = 40
 ```lua
 local focus = require('focus')
 -- Sets the width of directory tree buffers such as NerdTree, NvimTree and CHADTree
--- Default: 30
+-- Default: vim.g.nvim_tree_width or 30
 focus.treewidth = 20
 ```
 
