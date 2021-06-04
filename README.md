@@ -61,7 +61,14 @@ local focus = require('focus')
 -- Height for the focused window
 -- Default: 0
 focus.height = 40
+```
 
+**Set Focus Tree Width**
+```lua
+local focus = require('focus')
+-- Sets the width of directory tree buffers such as NerdTree, NvimTree and CHADTree
+-- Default: 30
+focus.treewidth = 20
 ```
 
 **Set Focus Auto Cursorline**
@@ -97,5 +104,5 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 - [x] Refactoring
 - [ ] Adding `:h filetype` support as we go
-- [ ] Decide default width as per feedback (I like 120)
+- [x] Decide default width as per feedback (I like 120)
 - [x] Perhaps some other configs, maybe height?
