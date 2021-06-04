@@ -3,9 +3,10 @@ local vim = vim --> Use locals
 local M = {}
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
     local ft = vim.bo.ft
-    -- if ft == 'NvimTree' or ft == 'NerdTree'  or ft == 'CHADTree' then FIX: This does not work
-    if ft == 'qf' then
-        vim.o.winwidth = 10
+    if ft == 'NvimTree' or ft == 'NerdTree'  or ft == 'CHADTree' then
+        vim.o.winwidth = 30
+    elseif ft == 'qf' then
+        vim.o.winheight = 10
     else
         vim.o.winwidth = config.width --> lua print(vim.o.winwidth)
     end
