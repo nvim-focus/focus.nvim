@@ -24,8 +24,8 @@ function autocmd.setup(config)
 
   if config.cursorline ~= false then
     -- Explicitly check against false, as it not being present should default to it being on
-    table.insert(autocmds, { 'WinEnter', '*', 'setlocal cursorline' })
-    table.insert(autocmds, { 'WinLeave', '*', 'setlocal nocursorline' })
+    table.insert(autocmds, { 'BufEnter', '*', 'setlocal cursorline' })
+    table.insert(autocmds, { 'BufLeave', '*', 'setlocal nocursorline' })
   end
 
   nvim_create_augroups({autocmds})
