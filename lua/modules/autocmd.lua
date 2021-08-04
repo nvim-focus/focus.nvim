@@ -16,6 +16,10 @@ end
 function autocmd.setup(config)
   local autocmds = {}
 
+  --Re-init when leaving windows such as nvimtree where we disable it
+    table.insert(autocmds, { 'WinEnter', '*', 'lua require"focus".init()'})
+    table.insert(autocmds, { 'WinLeave', '*', ':lua require"focus".init()'})
+
   if config.signcolumn ~= false then
     -- Explicitly check against false, as it not being present should default to it being on
     table.insert(autocmds, { 'WinEnter', '*', 'setlocal signcolumn=auto'})
