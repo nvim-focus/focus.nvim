@@ -11,9 +11,9 @@
 
 🔋 Batteries Included. No configuration neccessary
 
-👌 Maximises Current Split/Window Automatically When Cursor Moves
+👌 Maximises Current Split/Window Automatically When Cursor Moves Based On Golden Ratio
 
-⚙️  Set Focus Split/Window Width, Height, Auto-Cursorline/SignColumn & Active/Inactive Win-Highlight + Disable
+⚙️  Set Focus Auto-Cursorline/SignColumn & Active/Inactive Win-Highlight + Disable
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
 
@@ -59,16 +59,16 @@ focus.enable = false
 **Set Focus Width**
 ```lua
 local focus = require('focus')
--- Width for the focused window, other windows resized accordingly
--- Default: 120
+-- Force width for the focused window
+-- Default: Calculated based on golden ratio
 focus.width = 120
 ```
 
 **Set Focus Height**
 ```lua
 local focus = require('focus')
--- Height for the focused window
--- Default: 0
+-- Force height for the focused window
+-- Default: Calculated based on golden ratio
 focus.height = 40
 ```
 
