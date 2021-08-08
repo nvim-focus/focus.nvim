@@ -40,6 +40,32 @@ use 'beauwilliams/focus.nvim'
 | `:DisableFocus` |  Disable the plugin per session. Splits will be normalised back to defaults and then spaced evenly. |
 | `:EnableFocus` |  Enable the plugin per session. Splits will be resized back to your configs or defaults if not set. |
 | `:ToggleFocus` |  Toggle focus on and off again. |
+| `:FocusSplitNicely` | Split a window based on the golden ratio rule |
+
+## Splitting Nicely
+
+Focus allows you to split windows to tiled windows nicely.
+
+```
++----------------+------------+
+|                |    S1      |
+|                |            |
+|                +------------+
+|                |            |
+|   MAIN PANE    |    S2      |
+|                |            |
+|                |            |
+|                |            |
++----------------+------------+
+```
+
+To get this view you would press the key combination 2 times.
+
+**Split nicely with `<C-L>`**
+
+```lua
+vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
+```
 
 ## Configuration
 

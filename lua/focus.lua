@@ -25,6 +25,10 @@ M.init = function()
     end
 end
 
+function M.split_nicely()
+    require('modules.split').split_nicely()
+end
+
 setmetatable(M,
     {
         __newindex = config.set,

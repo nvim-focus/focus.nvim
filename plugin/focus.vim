@@ -11,6 +11,7 @@ set cpo&vim
 command! -nargs=0 DisableFocus call DisableFocus()
 command! -nargs=0 EnableFocus call EnableFocus()
 command! -nargs=0 ToggleFocus call ToggleFocus()
+command! -nargs=0 FocusSplitNicely lua require('focus').split_nicely()
 
 function! DisableFocus() abort
     if g:enabled_focus == 0
