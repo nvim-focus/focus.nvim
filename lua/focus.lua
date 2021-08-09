@@ -1,4 +1,4 @@
-local config = require('modules.config')
+local config = require("modules.config")
 
 local M = {}
 
@@ -7,32 +7,32 @@ M.init = function()
     config.verify()
 
     if M.enable == true then
-      -- Pass this module, noting that `__index` actually references the
-      -- configuration module, to setup the autocmds used for this plugin
-      require 'modules.autocmd'.setup(M)
-      require 'modules.resizer'.split_resizer(M)
+        -- Pass this module, noting that `__index` actually references the
+        -- configuration module, to setup the autocmds used for this plugin
+        require "modules.autocmd".setup(M)
+        require "modules.resizer".split_resizer(M)
 
+        if M.winhighlight then
+            -- Allows user-overridable highlighting of the focused window
+            --
+            -- See `:h hi-default` for more details
+            vim.cmd("hi default link FocusedWindow VertSplit")
+            vim.cmd("hi default link UnfocusedWindow Normal")
 
-      if M.winhighlight then
-        -- Allows user-overridable highlighting of the focused window
-        --
-        -- See `:h hi-default` for more details
-        vim.cmd('hi default link FocusedWindow VertSplit')
-        vim.cmd('hi default link UnfocusedWindow Normal')
-
-        vim.wo.winhighlight = 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
-      end
+            vim.wo.winhighlight = "Normal:FocusedWindow,NormalNC:UnfocusedWindow"
+        end
     end
 end
 
 function M.split_nicely()
-    require('modules.split').split_nicely()
+    require("modules.split").split_nicely()
 end
 
-setmetatable(M,
+setmetatable(
+    M,
     {
         __newindex = config.set,
-        __index = config.get,
+        __index = config.get
     }
 )
 
