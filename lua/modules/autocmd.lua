@@ -17,7 +17,6 @@ function autocmd.setup(config)
   local autocmds = {}
 
   --Re-init when leaving windows such as nvimtree where we disable it
-    -- table.insert(autocmds, { 'BufEnter', '*', 'lua require"focus".init()'})
     table.insert(autocmds, { 'BufEnter', '*', ':lua require"focus".init()'})
 
   if config.signcolumn ~= false then
