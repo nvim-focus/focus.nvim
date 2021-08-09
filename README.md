@@ -126,7 +126,7 @@ focus.signcolumn = false
 ```lua
 local focus = require('focus')
 -- Default: true
-focus.relativenumber = false
+focus.number = false
 ```
 
 **Set Focus Auto Relative Numbers**
