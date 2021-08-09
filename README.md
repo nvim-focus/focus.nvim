@@ -139,5 +139,4 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 - [x] Refactoring
 - [ ] Adding `:h filetype` support as we go
-- [x] Decide default width as per feedback (I like 120)
-- [x] Perhaps some other configs, maybe height?
+- [ ] Adding Auto Line Numbers, options for relative,norelative
