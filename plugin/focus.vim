@@ -7,26 +7,33 @@ let g:enabled_focus = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+command! -nargs=0 DisableFocus echo "Deprecated -> Use :FocusDisable"
+command! -nargs=0 EnableFocus echo "Deprecated -> Use :FocusEnable"
+command! -nargs=0 ToggleFocus echo "Deprecated -> Use :FocusToggle"
+
+
 "Export commands so we can do :DisableFocus etc
-command! -nargs=0 DisableFocus call DisableFocus()
-command! -nargs=0 EnableFocus call EnableFocus()
-command! -nargs=0 ToggleFocus call ToggleFocus()
+command! -nargs=0 FocusDisable call FocusDisable()
+command! -nargs=0 FocusEnable call FocusEnable()
+command! -nargs=0 FocusToggle call FocusToggle()
 command! -nargs=0 FocusSplitNicely lua require('focus').split_nicely()
 
-function! DisableFocus() abort
+function! FocusDisable() abort
     if g:enabled_focus == 0
         return
     else
         let g:enabled_focus = 0
         "Return win width to default to prevent it from resizing after disable
+        lua vim.o.winminwidth = 0
         lua vim.o.winwidth = 20
+        lua vim.o.winminheight = 1
         lua vim.o.winheight = 1
         "normalise the splits back evenly
         wincmd=
 endif
 endfunction
 
-function! EnableFocus() abort
+function! FocusEnable() abort
     if g:enabled_focus == 1
         return
     else
@@ -35,13 +42,12 @@ function! EnableFocus() abort
 endif
 endfunction
 
-function! ToggleFocus() abort
+function! FocusToggle() abort
     if g:enabled_focus == 0
-        call EnableFocus()
+        call FocusEnable()
         return
     else
-        let g:enabled_focus = 1
-        call DisableFocus()
+        call FocusDisable()
 endif
 endfunction
 
@@ -54,6 +60,7 @@ au BufEnter,WinEnter NvimTree lua require'focus'.init()
 "loaded if we run vim with focus disabled i.e `nvim +DisableFocus`
 if g:enabled_focus == 1
 runtime autoload/focus.vim
+au VimEnter * :lua require('focus').init()
 endif
 
 
