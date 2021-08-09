@@ -10,11 +10,11 @@ local golden_ratio_split_cmd = function(winnr)
     local textwidth = vim.bo.textwidth
 
     if textwidth > 0 and winwidth > math.floor(textwidth * golden_ratio) then
-        return "vsplit | winc r"
+        return "vsplit"
     end
 
     if winwidth > math.floor(maxwidth / golden_ratio) then
-        return "vsplit | winc r"
+        return "vsplit"
     end
 
     return "split"
@@ -36,6 +36,14 @@ function M.split_nicely()
         else
             vim.o.minwinwidth = vim.o.minwinwidth / 2
         end
+    end
+
+    if split_cmd == 'vsplit' and not vim.o.splitright then
+        vim.api.nvim_command('wincmd p')
+    end
+
+    if split_cmd == 'split' and not vim.o.splitbelow then
+        vim.api.nvim_command('wincmd p')
     end
 end
 
