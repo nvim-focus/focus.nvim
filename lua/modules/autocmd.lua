@@ -20,6 +20,8 @@ function autocmd.setup(config)
     table.insert(autocmds, {"BufRead,BufRead", "*", ':lua require"focus".init()'})
     -- NOTE: Don't ask me why the below works. aucommands are a sour point of this plugin. But this works for now.
     table.insert(autocmds, {"BufEnter", "*.*", ':lua require"focus".init()'})
+    -- So that we can resize windows such as NvimTree correctly, we run init when we open a buffer
+    table.insert(autocmds, {"BufEnter,WinEnter" , "NvimTree,nerdtree,CHADTree,qf" , ":lua require'focus'.init()"})
 
     if config.signcolumn ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
