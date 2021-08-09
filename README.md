@@ -37,9 +37,9 @@ use 'beauwilliams/focus.nvim'
 
 | _Command_      | _Description_ |
 | -------------- | ------------- |
-| `:DisableFocus` |  Disable the plugin per session. Splits will be normalised back to defaults and then spaced evenly. |
-| `:EnableFocus` |  Enable the plugin per session. Splits will be resized back to your configs or defaults if not set. |
-| `:ToggleFocus` |  Toggle focus on and off again. |
+| `:FocusDisable` |  Disable the plugin per session. Splits will be normalised back to defaults and then spaced evenly. |
+| `:FocusEnable` |  Enable the plugin per session. Splits will be resized back to your configs or defaults if not set. |
+| `:FocusToggle` |  Toggle focus on and off again. |
 | `:FocusSplitNicely` | Split a window based on the golden ratio rule |
 
 ## Splitting Nicely
@@ -139,5 +139,4 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 - [x] Refactoring
 - [ ] Adding `:h filetype` support as we go
-- [x] Decide default width as per feedback (I like 120)
-- [x] Perhaps some other configs, maybe height?
+- [ ] Adding Auto Line Numbers, options for relative,norelative
