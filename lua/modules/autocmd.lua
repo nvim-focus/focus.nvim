@@ -34,6 +34,16 @@ function autocmd.setup(config)
         table.insert(autocmds, {"BufEnter,WinEnter", "*", "setlocal cursorline"})
         table.insert(autocmds, {"BufLeave,WinLeave", "*", "setlocal nocursorline"})
     end
+    if config.relativenumber ~= false then
+        -- Explicitly check against false, as it not being present should default to it being on
+        table.insert(autocmds, {"BufAdd,BufEnter,WinEnter", "*", "set relativenumber"})
+        table.insert(autocmds, {"BufLeave,WinLeave", "*", "setlocal norelativenumber | setlocal nonumber"})
+    end
+    if config.number ~= false then
+        -- Explicitly check against false, as it not being present should default to it being on
+        table.insert(autocmds, {"BufEnter,WinEnter", "*", "setlocal number"})
+        table.insert(autocmds, {"BufLeave,WinLeave", "*", "setlocal nonumber"})
+    end
 
     nvim_create_augroups({autocmds})
 end

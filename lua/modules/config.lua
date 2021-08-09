@@ -9,7 +9,9 @@ local defaults = {
     treewidth = DEFAULT_TREE_WIDTH,
     cursorline = true,
     signcolumn = true,
-    winhighlight = false
+    winhighlight = false,
+    number = false,
+    relativenumber = false
 }
 
 local function verify()

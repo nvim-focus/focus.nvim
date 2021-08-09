@@ -13,9 +13,11 @@
 
 👌 Maximises Current Split/Window Automatically When Cursor Moves Based On Golden Ratio
 
-⚙️  Set Focus Auto-Cursorline/SignColumn & Active/Inactive Win-Highlight + Disable
+⚙️  Set Focus Auto-Cursorline/SignColumn/LineNums & Active/Inactive Win-Highlight + Disable
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
+
+👁️  Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
 
 # Demo
 
@@ -44,7 +46,7 @@ use 'beauwilliams/focus.nvim'
 
 ## Splitting Nicely
 
-Focus allows you to split windows to tiled windows nicely.
+Focus allows you to split windows to tiled windows nicely and sized according to the golden ratio
 
 ```
 +----------------+------------+
@@ -118,6 +120,20 @@ focus.cursorline = false
 local focus = require('focus')
 -- Default: true
 focus.signcolumn = false
+```
+
+**Set Focus Auto Numbers**
+```lua
+local focus = require('focus')
+-- Default: true
+focus.relativenumber = false
+```
+
+**Set Focus Auto Relative Numbers**
+```lua
+local focus = require('focus')
+-- Default: false
+focus.relativenumber = true
 ```
 
 **Set Focus Window Highlighting**
