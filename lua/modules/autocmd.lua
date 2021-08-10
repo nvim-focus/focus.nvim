@@ -16,10 +16,12 @@ end
 function autocmd.setup(config)
     local autocmds = {
         focus_init = {
-            --Re-init when leaving windows such as nvimtree where we disable it
-            {"BufRead,BufRead", "*", ':lua require"focus".init()'},
-            -- NOTE: Don't ask me why the below works. aucommands are a sour point of this plugin. But this works for now.
+            -- Resize files with typical naming convention *.* i.e focus.lua
             {"BufEnter", "*.*", ':lua require"focus".init()'},
+            -- Resize files with no filetype
+            {"Filetype", "", ':lua require"focus".init()'},
+            -- Resize startify
+            {"BufEnter", "startify", ':lua require"focus".init()'},
             -- So that we can resize windows such as NvimTree correctly, we run init when we open a buffer
             {"BufEnter,WinEnter" , "NvimTree,nerdtree,CHADTree,qf" , ":lua require'focus'.init()"},
         },
@@ -47,11 +49,11 @@ function autocmd.setup(config)
             {"BufLeave,WinLeave", "*", "setlocal norelativenumber | setlocal nonumber"},
         }
     end
-    if config.number ~= false then
+    if config.hybridnumber ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
-        autocmds['focus_number'] = {
-            {"BufEnter,WinEnter", "*", "setlocal number"},
-            {"BufLeave,WinLeave", "*", "setlocal nonumber"},
+        autocmds['focus_hybridnumber'] = {
+            {"BufAdd,BufEnter,WinEnter", "*", "set relativenumber | set nu rnu"},
+            {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber | setlocal nonu nornu"},
         }
     end
 

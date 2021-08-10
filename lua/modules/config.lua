@@ -11,7 +11,8 @@ local defaults = {
     signcolumn = true,
     winhighlight = false,
     number = false,
-    relativenumber = false
+    relativenumber = false,
+    hybridnumber = false
 }
 
 local function verify()
