@@ -12,7 +12,8 @@ local defaults = {
     winhighlight = false,
     number = false,
     relativenumber = false,
-    hybridnumber = false
+    hybridnumber = false,
+    quickfix = true
 }
 
 local function verify()

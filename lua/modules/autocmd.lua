@@ -63,6 +63,11 @@ function autocmd.setup(config)
             {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber"}
         }
     end
+    if config.quickfix ~= false then
+        autocmds["focus_quickfix"] = {
+            {"FileType", "qf", "wincmd J | resize 10"}
+        }
+    end
 
     nvim_create_augroups(autocmds)
 end
