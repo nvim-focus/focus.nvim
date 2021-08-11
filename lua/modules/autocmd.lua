@@ -30,8 +30,8 @@ function autocmd.setup(config)
     if config.signcolumn ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
         autocmds["focus_signcolumn"] = {
-            {"WinEnter", "*", "setlocal signcolumn=auto"},
-            {"WinLeave", "*", "setlocal signcolumn=no"}
+            {"BufEnter,WinEnter", "*", "setlocal signcolumn=auto"},
+            {"BufLeave,WinLeave", "*", "setlocal signcolumn=no"}
         }
     end
 
