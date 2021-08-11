@@ -23,37 +23,44 @@ function autocmd.setup(config)
             -- Resize startify
             {"BufEnter", "startify", ':lua require"focus".init()'},
             -- So that we can resize windows such as NvimTree correctly, we run init when we open a buffer
-            {"BufEnter,WinEnter" , "NvimTree,nerdtree,CHADTree,qf" , ":lua require'focus'.init()"},
-        },
+            {"BufEnter,WinEnter", "NvimTree,nerdtree,CHADTree,qf", ":lua require'focus'.init()"}
+        }
     }
 
     if config.signcolumn ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
-        autocmds['focus_signcolumn'] = {
+        autocmds["focus_signcolumn"] = {
             {"WinEnter", "*", "setlocal signcolumn=auto"},
-            {"WinLeave", "*", "setlocal signcolumn=no"},
+            {"WinLeave", "*", "setlocal signcolumn=no"}
         }
     end
 
     if config.cursorline ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
-        autocmds['focus_cursorline'] = {
+        autocmds["focus_cursorline"] = {
             {"BufEnter,WinEnter", "*", "setlocal cursorline"},
-            {"BufLeave,WinLeave", "*", "setlocal nocursorline"},
+            {"BufLeave,WinLeave", "*", "setlocal nocursorline"}
+        }
+    end
+    if config.number ~= false then
+        -- Explicitly check against false, as it not being present should default to it being on
+        autocmds["focus_relativenumber"] = {
+            {"BufAdd,BufEnter,WinEnter", "*", "setlocal number"},
+            {"BufLeave,WinLeave", "*", "setlocal nonumber"}
         }
     end
     if config.relativenumber ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
-        autocmds['focus_relativenumber'] = {
-            {"BufAdd,BufEnter,WinEnter", "*", "set relativenumber"},
-            {"BufLeave,WinLeave", "*", "setlocal norelativenumber | setlocal nonumber"},
+        autocmds["focus_relativenumber"] = {
+            {"BufAdd,BufEnter,WinEnter", "*", "setlocal relativenumber"},
+            {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber"}
         }
     end
     if config.hybridnumber ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
-        autocmds['focus_hybridnumber'] = {
-            {"BufAdd,BufEnter,WinEnter", "*", "set relativenumber | set nu rnu"},
-            {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber | setlocal nonu nornu"},
+        autocmds["focus_hybridnumber"] = {
+            {"BufAdd,BufEnter,WinEnter", "*", "setlocal number relativenumber"},
+            {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber"}
         }
     end
 
