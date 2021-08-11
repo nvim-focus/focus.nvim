@@ -44,7 +44,7 @@ function autocmd.setup(config)
     end
     if config.number ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
-        autocmds["focus_relativenumber"] = {
+        autocmds["number"] = {
             {"BufAdd,BufEnter,WinEnter", "*", "set number"},
             {"BufLeave,WinLeave", "*", "setlocal nonumber"}
         }
