@@ -111,6 +111,8 @@ focus.treewidth = 20
 **Set Focus Auto Cursorline**
 ```lua
 local focus = require('focus')
+-- Enables the cursorline in the focussed window only
+-- Disabled in unfocussed windows
 -- Default: true
 focus.cursorline = false
 ```
@@ -118,6 +120,8 @@ focus.cursorline = false
 **Set Focus Auto Sign Column**
 ```lua
 local focus = require('focus')
+-- Enables the sign column in the focussed window only
+-- Disabled in unfocussed windows
 -- Default: true
 focus.signcolumn = false
 ```
@@ -125,6 +129,8 @@ focus.signcolumn = false
 **Set Focus Auto Numbers**
 ```lua
 local focus = require('focus')
+-- Enables line numbers in the focussed window only
+-- Disabled in unfocussed windows
 -- Default: true
 focus.number = false
 ```
@@ -132,6 +138,17 @@ focus.number = false
 **Set Focus Auto Relative Numbers**
 ```lua
 local focus = require('focus')
+-- Enables relative line numbers in the focussed window only
+-- Disabled in unfocussed windows
+-- Default: false
+focus.relativenumber = true
+```
+
+**Set Focus Auto Hybrid Numbers**
+```lua
+local focus = require('focus')
+-- Enables hybrid line numbers in the focussed window only
+-- Disabled in unfocussed windows
 -- Default: false
 focus.relativenumber = true
 ```
@@ -139,6 +156,7 @@ focus.relativenumber = true
 **Set Focus Window Highlighting**
 ```lua
 local focus = require('focus')
+-- Enable auto highlighting for focussed/unfocussed windows
 -- Default: false
 focus.winhighlight = true
 
@@ -153,6 +171,6 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 ## Planned Improvements 😼
 
-- [x] Refactoring
+- [ ] Refactoring
 - [ ] Adding `:h filetype` support as we go
-- [ ] Adding Auto Line Numbers, options for relative,norelative
+- [x] Adding Auto Line Numbers, options for relative,norelative
