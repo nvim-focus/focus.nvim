@@ -45,21 +45,21 @@ function autocmd.setup(config)
     if config.number ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
         autocmds["number"] = {
-            {"BufAdd,BufEnter,WinEnter", "*", "set number"},
+            {"BufEnter,WinEnter", "*", "set number"},
             {"BufLeave,WinLeave", "*", "setlocal nonumber"}
         }
     end
     if config.relativenumber ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
         autocmds["focus_relativenumber"] = {
-            {"BufAdd,BufEnter,WinEnter", "*", "set relativenumber nonumber"},
+            {"BufEnter,WinEnter,InsertEnter", "*", "set nonumber relativenumber"},
             {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber"}
         }
     end
     if config.hybridnumber ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
         autocmds["focus_hybridnumber"] = {
-            {"BufAdd,BufEnter,WinEnter", "*", "set number relativenumber"},
+            {"BufEnter,WinEnter", "*", "set number relativenumber"},
             {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber"}
         }
     end
