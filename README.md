@@ -25,7 +25,7 @@
 
 *note: for reference this screencast features dimensions set to 120\*40 (W\*H)*
 
-[See a visual demonstration of each focus feature here](https://github.com/beauwilliams/focus.nvim/blob/master/demo.md)
+**[See a visual demonstration of each focus feature here](https://github.com/beauwilliams/focus.nvim/blob/master/demo.md)**
 
 
 ## Installation
