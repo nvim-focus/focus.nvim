@@ -150,7 +150,7 @@ local focus = require('focus')
 -- Enables hybrid line numbers in the focussed window only
 -- Disabled in unfocussed windows
 -- Default: false
-focus.relativenumber = true
+focus.hybridnumber = true
 ```
 
 **Set Focus Window Highlighting**

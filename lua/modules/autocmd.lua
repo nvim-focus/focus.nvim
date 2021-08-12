@@ -52,7 +52,7 @@ function autocmd.setup(config)
     if config.relativenumber ~= false then
         -- Explicitly check against false, as it not being present should default to it being on
         autocmds["focus_relativenumber"] = {
-            {"BufEnter,WinEnter,InsertEnter", "*", "set nonumber relativenumber"},
+            {"BufEnter,WinEnter", "*", "set nonumber relativenumber"},
             {"BufLeave,WinLeave", "*", "setlocal nonumber norelativenumber"}
         }
     end
