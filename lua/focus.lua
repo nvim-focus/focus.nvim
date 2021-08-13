@@ -28,6 +28,10 @@ function M.split_nicely()
     require("modules.split").split_nicely()
 end
 
+function M.split_command(direction)
+    require("modules.split").split_command(direction)
+end
+
 setmetatable(
     M,
     {

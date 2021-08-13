@@ -19,6 +19,8 @@
 
 👁️  Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
 
+🏃 Move to existing or else create new splits based on direction with only a single command for each direction
+
 # Demo
 
 ![screencast](https://i.ibb.co/0tsKww4/focusop.gif)
@@ -40,12 +42,17 @@ use 'beauwilliams/focus.nvim'
 
 ## Vim Commands
 
+*For more information on below commands scroll down to see them each described in more detail*
 | _Command_      | _Description_ |
 | -------------- | ------------- |
 | `:FocusDisable` |  Disable the plugin per session. Splits will be normalised back to defaults and then spaced evenly. |
 | `:FocusEnable` |  Enable the plugin per session. Splits will be resized back to your configs or defaults if not set. |
 | `:FocusToggle` |  Toggle focus on and off again. |
 | `:FocusSplitNicely` | Split a window based on the golden ratio rule |
+| `:FocusSplitLeft` | Move to existing or create a new split to the left of your current window |
+| `:FocusSplitDown` | Move to existing or create a new split to the bottom of your current window |
+| `:FocusSplitUp` | Move to existing or create a new split to the top of your current window |
+| `:FocusSplitRight` | Move to existing or create a new split to the right of your current window |
 
 ## Splitting Nicely
 
@@ -72,11 +79,32 @@ To get this view you would press the key combination 2 times.
 vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
 ```
 
+## Auto Splitting Directionally
+
+Instead of worrying about multiple commands and shortcuts, simply think about splits as to which direction you would like to go
+
+Calling a focus split command i.e :FocusSplitRight will do one of two things, firstly it will attempt to move across to the window in the specified direction.
+Otherwise, if no window exists in the specified direction relative to the current window then it will instead create a new blank buffer window in the direction specified,
+and then move to that window.
+
+*Recommended commands, leverage hjkl to move and create your splits directionally with ease*
+```lua
+vim.api.nvim_set_keymap('n', '<leader>h', ':FocusSplitLeft<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>j', ':FocusSplitDown<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', { silent = true })
+```
+
+
+
+
 ## Configuration
 
 Place some version of this in your configuration file, e.g. `init.lua`, etc.
 
-**NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*. That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus, but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus by following the below instructions to set them.
+**NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
+That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
+but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus by following the below instructions to set them.
 
 
 **Enable/Disable Focus**
@@ -114,8 +142,8 @@ focus.treewidth = 20
 **Set Focus Auto Cursorline**
 ```lua
 local focus = require('focus')
--- Enables the cursorline in the focussed window only
--- Disabled in unfocussed windows
+-- Displays a cursorline in the focussed window only
+-- Not displayed in unfocussed windows
 -- Default: true
 focus.cursorline = false
 ```
@@ -123,8 +151,8 @@ focus.cursorline = false
 **Set Focus Auto Sign Column**
 ```lua
 local focus = require('focus')
--- Enables the sign column in the focussed window only
--- Disabled in unfocussed windows
+-- Displays a sign column in the focussed window only
+-- Not displayed in unfocussed windows
 -- Default: true
 focus.signcolumn = false
 ```
@@ -132,8 +160,8 @@ focus.signcolumn = false
 **Set Focus Auto Numbers**
 ```lua
 local focus = require('focus')
--- Enables line numbers in the focussed window only
--- Disabled in unfocussed windows
+-- Displays line numbers in the focussed window only
+-- Not displayed in unfocussed windows
 -- Default: true
 focus.number = false
 ```
@@ -141,8 +169,9 @@ focus.number = false
 **Set Focus Auto Relative Numbers**
 ```lua
 local focus = require('focus')
--- Enables relative line numbers in the focussed window only
--- Disabled in unfocussed windows
+-- Displays relative line numbers in the focussed window only
+-- Not displayed in unfocussed windows
+-- See :h relativenumber
 -- Default: false
 focus.relativenumber = true
 ```
@@ -150,8 +179,9 @@ focus.relativenumber = true
 **Set Focus Auto Hybrid Numbers**
 ```lua
 local focus = require('focus')
--- Enables hybrid line numbers in the focussed window only
--- Disabled in unfocussed windows
+-- Displays hybrid line numbers in the focussed window only
+-- Not displayed in unfocussed windows
+-- Combination of :h relativenumber, but also displays the line number of the current line only
 -- Default: false
 focus.hybridnumber = true
 ```
