@@ -215,3 +215,5 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 Please before submitting a PR install stylua [here](https://github.com/JohnnyMorganz/StyLua)
 
 And run `stylua .` from your shell in the root folder of `focus.nvim`
+
+This will format the code according to the guidlines set in `stylua.toml`
