@@ -207,3 +207,11 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 - [ ] Refactoring
 - [ ] Adding `:h filetype` support as we go
 - [x] Adding Auto Line Numbers, options for relative,norelative
+
+# Developers Only
+
+**Contributing**
+
+Please before submitting a PR install stylua [here](https://github.com/JohnnyMorganz/StyLua)
+
+And run `stylua .` from your shell in the root folder of `focus.nvim`
