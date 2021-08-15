@@ -35,7 +35,7 @@ function! FocusDisable() abort
         lua vim.o.winheight = 1
         "normalise the splits back evenly
         wincmd=
-endif
+    endif
 endfunction
 
 function! FocusEnable() abort
@@ -44,7 +44,7 @@ function! FocusEnable() abort
     else
         let g:enabled_focus = 1
         runtime autoload/focus.vim
-endif
+    endif
 endfunction
 
 function! FocusToggle() abort
@@ -53,14 +53,14 @@ function! FocusToggle() abort
         return
     else
         call FocusDisable()
-endif
+    endif
 endfunction
 
 
 
 "hopefully focus is not loaded if we run vim with focus disabled i.e `nvim +DisableFocus`
 if g:enabled_focus == 1
-runtime autoload/focus.vim
+    runtime autoload/focus.vim
 endif
 
 
