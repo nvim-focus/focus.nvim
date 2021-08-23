@@ -1,4 +1,4 @@
-local config = require('modules.config')
+local config = require('focus.modules.config')
 
 local M = {}
 
@@ -9,8 +9,8 @@ M.init = function()
 	if M.enable == true then
 		-- Pass this module, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
-		require('modules.autocmd').setup(M)
-		require('modules.resizer').split_resizer(M)
+		require('focus.modules.autocmd').setup(M)
+		require('focus.modules.resizer').split_resizer(M)
 
 		if M.winhighlight then
 			-- Allows user-overridable highlighting of the focused window
@@ -25,11 +25,11 @@ M.init = function()
 end
 
 function M.split_nicely()
-	require('modules.split').split_nicely()
+	require('focus.modules.split').split_nicely()
 end
 
 function M.split_command(direction)
-	require('modules.split').split_command(direction)
+	require('focus.modules.split').split_command(direction)
 end
 
 setmetatable(M, {
