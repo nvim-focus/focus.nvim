@@ -58,7 +58,7 @@ function M.split_command(direction, fileName)
 			cmd('wincmd s')
 		end
 		cmd('wincmd ' .. direction)
-		if fileName then
+		if fileName ~= '' then
 			cmd('e', fileName)
 		else
 			cmd('enew')
