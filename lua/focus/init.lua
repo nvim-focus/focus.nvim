@@ -29,6 +29,7 @@ function M.split_nicely()
 end
 
 function M.split_command(direction, fileName)
+	fileName = fileName or ''
 	require('focus.modules.split').split_command(direction, fileName)
 end
 
