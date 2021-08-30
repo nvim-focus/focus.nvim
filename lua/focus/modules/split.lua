@@ -59,7 +59,7 @@ function M.split_command(direction, fileName)
 		end
 		cmd('wincmd ' .. direction)
 		if fileName ~= '' then
-			cmd('e ' ... fileName)
+			cmd('edit ' ... fileName)
 		else
 			cmd('enew')
 		end
