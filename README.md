@@ -17,9 +17,12 @@
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
 
-👁️  Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
+👁️ Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
 
-🏃 Move to existing or else create new splits based on direction with only a single command for each direction
+🏃 Move to around existing windows or else create new splits automatically, with only a single command for each direction (option to specify a file to open) 
+
+⏱ Supports lazy loading via packer
+
 
 # Demo
 
