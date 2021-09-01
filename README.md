@@ -113,6 +113,13 @@ focusmap('k')
 focusmap('l')
 ```
 
+## Opening a file in a new split directionally
+
+*This feature allows you to open a file in a split specifying which position you want it to be located*
+For example `:FocusSplitRight somefile.lua` will open `somefile.lua ` to the right of your current window
+You can also specify a mapping, or perhaps a function to even add lazy loading.
+
+
 ## Configuration
 
 Place some version of this in your configuration file, e.g. `init.lua`, etc.
