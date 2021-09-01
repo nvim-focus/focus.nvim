@@ -48,7 +48,7 @@ function M.split_nicely()
 	end
 end
 
-function M.split_command(direction)
+function M.split_command(direction, fileName)
 	local winnr = vim.api.nvim_get_current_win()
 	cmd('wincmd ' .. direction)
 	if winnr == vim.api.nvim_get_current_win() then
@@ -58,7 +58,11 @@ function M.split_command(direction)
 			cmd('wincmd s')
 		end
 		cmd('wincmd ' .. direction)
-		cmd('enew')
+		if fileName ~= '' then
+			cmd('edit ' .. fileName)
+		else
+			cmd('enew')
+		end
 	end
 end
 

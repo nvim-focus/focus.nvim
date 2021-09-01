@@ -17,10 +17,10 @@ command! -nargs=0 FocusDisable call FocusDisable()
 command! -nargs=0 FocusEnable call FocusEnable()
 command! -nargs=0 FocusToggle call FocusToggle()
 command! -nargs=0 FocusSplitNicely lua require('focus').split_nicely()
-command! -nargs=0 FocusSplitLeft lua require('focus').split_command("h")
-command! -nargs=0 FocusSplitDown lua require('focus').split_command("j")
-command! -nargs=0 FocusSplitUp lua require('focus').split_command("k")
-command! -nargs=0 FocusSplitRight lua require('focus').split_command("l")
+command! -nargs=? FocusSplitLeft lua require('focus').split_command("h", <q-args>)
+command! -nargs=? FocusSplitDown lua require('focus').split_command("j", <q-args>)
+command! -nargs=? FocusSplitUp lua require('focus').split_command("k", <q-args>)
+command! -nargs=? FocusSplitRight lua require('focus').split_command("l", <q-args>)
 
 
 function! FocusDisable() abort

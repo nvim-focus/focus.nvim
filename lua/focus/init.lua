@@ -28,8 +28,9 @@ function M.split_nicely()
 	require('focus.modules.split').split_nicely()
 end
 
-function M.split_command(direction)
-	require('focus.modules.split').split_command(direction)
+function M.split_command(direction, fileName)
+	fileName = fileName or ''
+	require('focus.modules.split').split_command(direction, fileName)
 end
 
 setmetatable(M, {
