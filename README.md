@@ -19,7 +19,7 @@
 
 👁️ Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
 
-🏃 Move to existing windows or else create new splits automatically - single command for each direction + can specify a file to open 
+🏃 Move to existing windows or else create new splits automatically - single command + can specify a file to open 
 
 ⏱ Supports lazy loading via packer
 
@@ -43,7 +43,7 @@ Plug 'beauwilliams/focus.nvim'
 use 'beauwilliams/focus.nvim'
 -- Or lazy load with `module` option. See further down for info
 -- use {'beauwilliams/focus.nvim', module = "focus"}
--- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim*
+-- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely" }
 ```
 
