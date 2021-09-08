@@ -1,9 +1,8 @@
 local vim = vim
 local commands = {}
 
-
 commands.setup = function()
-vim.cmd([[
+	vim.cmd([[
 command! -nargs=0 DisableFocus echo "Deprecated -> Use :FocusDisable"
 command! -nargs=0 EnableFocus echo "Deprecated -> Use :FocusEnable"
 command! -nargs=0 ToggleFocus echo "Deprecated -> Use :FocusToggle"
