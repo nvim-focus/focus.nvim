@@ -1,10 +1,13 @@
 local config = require('focus.modules.config')
+local commands = require('focus.modules.commands')
+
 
 local M = {}
 
 M.init = function()
 	-- Verify that configuration values are of the correct type
 	config.verify()
+    commands.setup()
 
 	if M.enable == true then
 		-- Pass this module, noting that `__index` actually references the
