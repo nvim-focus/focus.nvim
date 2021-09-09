@@ -3,6 +3,7 @@ local commands = require('focus.modules.commands')
 local autocmd = require('focus.modules.autocmd')
 local resizer = require('focus.modules.resizer')
 local split = require('focus.modules.split')
+local functions = require('focus.modules.functions')
 
 local M = {}
 
@@ -29,6 +30,7 @@ M.init = function()
 	end
 end
 
+-- Exported internal functions for use in commands etc
 function M.split_nicely()
 	split.split_nicely()
 end
@@ -36,6 +38,18 @@ end
 function M.split_command(direction, fileName)
 	fileName = fileName or ''
 	split.split_command(direction, fileName)
+end
+
+function M.focus_enable()
+	functions.focus_enable()
+end
+
+function M.focus_disable()
+	functions.focus_disable()
+end
+
+function M.focus_toggle()
+	functions.focus_toggle()
 end
 
 setmetatable(M, {
