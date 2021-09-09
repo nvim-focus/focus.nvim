@@ -237,7 +237,7 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 # FAQ
 
-**Quickfix window opens in the right split always. Is this cause by focus.lua?**
+**Quickfix window opens in the right split always. Is this caused by focus.lua?**
 
 No. This is a [documented](http://vimdoc.sourceforge.net/htmldoc/quickfix.html#quickfix) design decision by core vim, this might be something that can be adjusted upstream.
 
