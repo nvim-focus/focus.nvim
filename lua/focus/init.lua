@@ -1,16 +1,16 @@
 local config = require('focus.modules.config')
-local commands = require('focus.modules.commands')
+-- local commands = require('focus.modules.commands')
 
 local M = {}
 
 M.init = function()
 	-- Verify that configuration values are of the correct type
 	config.verify()
-	commands.setup() -- TODO: Prevent loading commands when enable = false, but still make sure focusdisable command works etc
 
 	if M.enable == true then
 		-- Pass this module, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
+        require('focus.modules.commands').setup()
 		require('focus.modules.autocmd').setup(M)
 		require('focus.modules.resizer').split_resizer(M)
 
