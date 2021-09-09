@@ -18,3 +18,9 @@
 
 # Auto Hybrid Numbers
 
+
+# Auto Splitting Directionally
+
+
+# Opening Files In Splits Directionally
+

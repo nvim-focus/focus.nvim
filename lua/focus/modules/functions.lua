@@ -9,7 +9,6 @@ M.focus_enable = function()
 	else
 		vim.g.enabled_focus = 1
 		require('focus').init()
-		-- vim.cmd('runtime autoload/focus.vim')
 	end
 end
 
