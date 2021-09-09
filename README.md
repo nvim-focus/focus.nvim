@@ -235,6 +235,15 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 - [ ] Adding `:h filetype` support as we go
 - [x] Adding Auto Line Numbers, options for relative,norelative
 
+# FAQ
+
+**Quickfix window opens in the right split always. Is this caused by focus.lua?**
+
+No. This is a [documented](http://vimdoc.sourceforge.net/htmldoc/quickfix.html#quickfix) design decision by core vim, this might be something that can be adjusted upstream.
+
+In the meantime, you can open a quickfix window occupying the the full width of the window with `:botright copen`
+
+
 # Developers Only
 
 **Contributing**
