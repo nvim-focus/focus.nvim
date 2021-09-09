@@ -35,9 +35,9 @@
 
 # Auto Relative Numbers
 
-![](https://i.ibb.co/bBfxCfW/relative.gif)
+![](https://i.ibb.co/kHz8r6s/hybrid.gif)
 
 
 # Auto Hybrid Numbers
 
-![](https://i.ibb.co/kHz8r6s/hybrid.gif)
+![](https://i.ibb.co/bBfxCfW/relative.gif)
