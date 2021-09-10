@@ -127,19 +127,23 @@ You can also specify a mapping, or perhaps a function to even add lazy loading.
 
 ## Configuration
 
-Place some version of this in your configuration file, e.g. `init.lua`, etc.
+Call the setup() function however you prefer, e.g place the example configuration in your `init.lua` to get started
 
 **NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
 That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
 but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus by following the below instructions to set them.
 
+**Example Configuration**
+```lua
+require("focus").setup({enable = true, cursorline = true, signcolumn = true, hybridnumber = true})
+```
+### Available Options
 
 **Enable/Disable Focus**
 ```lua
-local focus = require('focus')
 -- Completely disable this plugin
 -- Default: true
-focus.enable = false
+require("focus").setup({enable = false})
 ```
 
 **Set Focus Width**
@@ -147,32 +151,29 @@ focus.enable = false
 local focus = require('focus')
 -- Force width for the focused window
 -- Default: Calculated based on golden ratio
-focus.width = 120
+require("focus").setup({width = 120})
 ```
 
 **Set Focus Height**
 ```lua
-local focus = require('focus')
 -- Force height for the focused window
 -- Default: Calculated based on golden ratio
-focus.height = 40
+require("focus").setup({height = 40})
 ```
 
 **Set Focus Tree Width**
 ```lua
-local focus = require('focus')
 -- Sets the width of directory tree buffers such as NerdTree, NvimTree and CHADTree
 -- Default: vim.g.nvim_tree_width or 30
-focus.treewidth = 20
+require("focus").setup({treewidth = 20})
 ```
 
 **Set Focus Auto Cursorline**
 ```lua
-local focus = require('focus')
 -- Displays a cursorline in the focussed window only
 -- Not displayed in unfocussed windows
 -- Default: true
-focus.cursorline = false
+require("focus").setup({cursorline = false})
 ```
 
 **Set Focus Auto Sign Column**
@@ -181,44 +182,40 @@ local focus = require('focus')
 -- Displays a sign column in the focussed window only
 -- Not displayed in unfocussed windows
 -- Default: true
-focus.signcolumn = false
+require("focus").setup({signcolumn = false})
 ```
 
 **Set Focus Auto Numbers**
 ```lua
-local focus = require('focus')
 -- Displays line numbers in the focussed window only
 -- Not displayed in unfocussed windows
 -- Default: true
-focus.number = false
+require("focus").setup({number = false})
 ```
 
 **Set Focus Auto Relative Numbers**
 ```lua
-local focus = require('focus')
 -- Displays relative line numbers in the focussed window only
 -- Not displayed in unfocussed windows
 -- See :h relativenumber
 -- Default: false
-focus.relativenumber = true
+require("focus").setup({relativenumber = true})
 ```
 
 **Set Focus Auto Hybrid Numbers**
 ```lua
-local focus = require('focus')
 -- Displays hybrid line numbers in the focussed window only
 -- Not displayed in unfocussed windows
 -- Combination of :h relativenumber, but also displays the line number of the current line only
 -- Default: false
-focus.hybridnumber = true
+require("focus").setup({hybridnumber = true})
 ```
 
 **Set Focus Window Highlighting**
 ```lua
-local focus = require('focus')
 -- Enable auto highlighting for focussed/unfocussed windows
 -- Default: false
-focus.winhighlight = true
+require("focus").setup({winhighlight = true})
 
 -- By default, the highlight groups are setup as such:
 --   hi default link FocusedWindow VertSplit
@@ -231,7 +228,7 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 ## Planned Improvements 😼
 
-- [ ] Refactoring
+- [x] Refactoring
 - [ ] Adding `:h filetype` support as we go
 - [x] Adding Auto Line Numbers, options for relative,norelative
 
