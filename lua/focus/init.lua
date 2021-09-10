@@ -38,8 +38,8 @@ M.setup = function(options)
 			vim.wo.winhighlight = 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
 		end
 
-		-- Finally call init() to begin resizing
-		M.init()
+		-- Finally begin resizing when enabled and configs set
+		M.resize()
 	end
 end
 
