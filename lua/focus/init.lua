@@ -12,7 +12,7 @@ M.setup = function(options)
 		__newindex = config.set,
 		__index = config.get,
 	})
-    -- if options provided to setup, override defaults
+	-- if options provided to setup, override defaults
 	if options ~= nil then
 		for k, v1 in pairs(options) do
 			config.defaults[k] = v1
