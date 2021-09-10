@@ -39,9 +39,9 @@
 ```lua
 use {'beauwilliams/focus.nvim', config = require("focus").setup()}
 -- Or lazy load with `module` option. See further down for info
--- use {'beauwilliams/focus.nvim', module = "focus"}
+-- use {'beauwilliams/focus.nvim', config = require("focus").setup(), module = "focus"}
 -- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
--- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely" }
+-- use { 'beauwilliams/focus.nvim', config = require("focus").setup(), cmd = "FocusSplitNicely" }
 ```
 
 #### [vim-plug](https://github.com/junegunn/vim-plug)
