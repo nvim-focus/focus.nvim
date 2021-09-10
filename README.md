@@ -91,7 +91,7 @@ vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true }
 
 ## Auto Splitting Directionally
 
-Instead of worrying about multiple commands and shortcuts, simply think about splits as to which direction you would like to go
+Instead of worrying about multiple commands and shortcuts, *simply think about splits as to which direction you would like to go*.
 
 Calling a focus split command i.e :FocusSplitRight will do one of two things, **it will attempt to move across to the window** in the specified direction.
 Otherwise, **if no window exists in the specified direction** relative to the current window **then it will instead create a new blank buffer window** in the direction specified,
@@ -127,7 +127,7 @@ You can also specify a mapping, or perhaps a function to even add lazy loading.
 
 ## Configuration
 
-Call the setup() function however you prefer, e.g place the example configuration in your `init.lua` to get started
+To start using focus.nvim call the setup() function however you prefer, e.g place the example configuration in your `init.lua`
 
 **NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
 That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
