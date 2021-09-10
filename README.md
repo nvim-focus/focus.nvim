@@ -91,7 +91,7 @@ vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true }
 
 ## Auto Splitting Directionally
 
-Instead of worrying about multiple commands and shortcuts, simply think about splits as to which direction you would like to go
+Instead of worrying about multiple commands and shortcuts, *simply think about splits as to which direction you would like to go*.
 
 Calling a focus split command i.e :FocusSplitRight will do one of two things, **it will attempt to move across to the window** in the specified direction.
 Otherwise, **if no window exists in the specified direction** relative to the current window **then it will instead create a new blank buffer window** in the direction specified,
