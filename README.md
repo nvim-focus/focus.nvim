@@ -34,10 +34,7 @@
 
 
 ## Installation
-#### [vim-plug](https://github.com/junegunn/vim-plug)
-```vim
-Plug 'beauwilliams/focus.nvim'
-```
+
 #### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
 use {'beauwilliams/focus.nvim', config = require("focus").setup()}
@@ -45,6 +42,13 @@ use {'beauwilliams/focus.nvim', config = require("focus").setup()}
 -- use {'beauwilliams/focus.nvim', module = "focus"}
 -- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely" }
+```
+
+#### [vim-plug](https://github.com/junegunn/vim-plug)
+```vim
+Plug 'beauwilliams/focus.nvim'
+"You must run setup() to begin using focus
+lua require("focus").setup()
 ```
 
 ## Vim Commands
