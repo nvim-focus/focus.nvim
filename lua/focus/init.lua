@@ -43,7 +43,7 @@ M.setup = function(options)
 	end
 end
 
-M.init = function()
+M.resize = function()
 	resizer.split_resizer(M)
 end
 
