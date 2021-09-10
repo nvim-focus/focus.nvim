@@ -148,7 +148,6 @@ require("focus").setup({enable = false})
 
 **Set Focus Width**
 ```lua
-local focus = require('focus')
 -- Force width for the focused window
 -- Default: Calculated based on golden ratio
 require("focus").setup({width = 120})
