@@ -178,7 +178,6 @@ require("focus").setup({cursorline = false})
 
 **Set Focus Auto Sign Column**
 ```lua
-local focus = require('focus')
 -- Displays a sign column in the focussed window only
 -- Not displayed in unfocussed windows
 -- Default: true
