@@ -127,7 +127,7 @@ You can also specify a mapping, or perhaps a function to even add lazy loading.
 
 ## Configuration
 
-Call the setup() function however you prefer, e.g place the example configuration in your `init.lua` to get started
+To start using focus.nvim call the setup() function however you prefer, e.g place the example configuration in your `init.lua`
 
 **NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
 That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
