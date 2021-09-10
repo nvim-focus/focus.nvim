@@ -40,14 +40,12 @@ Plug 'beauwilliams/focus.nvim'
 ```
 #### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
-use 'beauwilliams/focus.nvim'
+use {'beauwilliams/focus.nvim', config = require("focus").setup()}
 -- Or lazy load with `module` option. See further down for info
 -- use {'beauwilliams/focus.nvim', module = "focus"}
 -- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely" }
 ```
-
-**To start using focus.nvim call the setup() function however you prefer. Stuck? See configuration below for example**
 
 ## Vim Commands
 
