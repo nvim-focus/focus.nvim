@@ -7,9 +7,23 @@ local functions = require('focus.modules.functions')
 
 local M = {}
 
+M.setup = function(options)
+	setmetatable(M, {
+		__newindex = config.set,
+		__index = config.get,
+	})
+    -- if options provided to setup, override defaults
+	if options ~= nil then
+		for k, v1 in pairs(options) do
+			config.defaults[k] = v1
+		end
+	end
+	config.verify()
+	M.init()
+end
+
 M.init = function()
 	-- Verify that configuration values are of the correct type
-	config.verify()
 
 	if M.enable == true then
 		-- Pass this module, noting that `__index` actually references the
@@ -51,10 +65,5 @@ end
 function M.focus_toggle()
 	functions.focus_toggle()
 end
-
-setmetatable(M, {
-	__newindex = config.set,
-	__index = config.get,
-})
 
 return M

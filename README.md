@@ -19,7 +19,7 @@
 
 👁️ Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
 
-🏃 Move to existing windows or else create new splits automatically, using single command + can specify a file to open 
+🏃 Move to existing windows or else create new splits automatically, using single command + can specify a file to open
 
 ⏱ Supports lazy loading via packer
 
@@ -110,7 +110,7 @@ local focusmap = function(direction)
     vim.api.nvim_set_keymap('n', '<Leader>'..direction, ":lua require'focus'.split_command('"..direction.."')<CR>", { silent = true })
 end
 -- Use `<Leader>h` to split the screen to the left, same as command FocusSplitLeft etc
-focusmap('h') 
+focusmap('h')
 focusmap('j')
 focusmap('k')
 focusmap('l')
