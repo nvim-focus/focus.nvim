@@ -227,8 +227,8 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 ## Planned Improvements 😼
 
 - [x] Refactoring
-- [ ] Adding `:h filetype` support as we go
-- [x] Adding Auto Line Numbers, options for relative,norelative
+- [ ] Adding more filetype support as we go
+- [x] Adding Auto Line Numbers, options for relative, norelative
 
 # FAQ
 
