@@ -47,6 +47,8 @@ use 'beauwilliams/focus.nvim'
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely" }
 ```
 
+*To start using focus.nvim call the setup() function however you prefer, see example configuration below for more info*
+
 ## Vim Commands
 
 *For more information on below commands scroll down to see them each described in more detail*
@@ -126,8 +128,6 @@ You can also specify a mapping, or perhaps a function to even add lazy loading.
 
 
 ## Configuration
-
-To start using focus.nvim call the setup() function however you prefer, e.g place the example configuration in your `init.lua`
 
 **NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
 That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
