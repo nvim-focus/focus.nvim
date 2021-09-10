@@ -22,7 +22,7 @@ M.setup = function(options)
 	config.verify()
 
 	-- Don't set up focus if its not enabled by the user
-	if M.enable == true then
+	if M.enable then
 		-- Pass this module, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
 		autocmd.setup(M)
