@@ -47,7 +47,7 @@ use 'beauwilliams/focus.nvim'
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely" }
 ```
 
-**To start using focus.nvim call the setup() function however you prefer, see example configuration below for more info**
+**To start using focus.nvim call the setup() function however you prefer. Stuck? See configuration below for example**
 
 ## Vim Commands
 
