@@ -18,19 +18,15 @@ M.setup = function(options)
 			config.defaults[k] = v1
 		end
 	end
-	config.verify()
-	M.init()
-end
-
-M.init = function()
 	-- Verify that configuration values are of the correct type
+	config.verify()
 
+	-- Don't set up focus if its not enabled by the user
 	if M.enable == true then
 		-- Pass this module, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
-		commands.setup()
 		autocmd.setup(M)
-		resizer.split_resizer(M)
+		commands.setup()
 
 		if M.winhighlight then
 			-- Allows user-overridable highlighting of the focused window
@@ -41,7 +37,14 @@ M.init = function()
 
 			vim.wo.winhighlight = 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
 		end
+
+		-- Finally call init() to begin resizing
+		M.init()
 	end
+end
+
+M.init = function()
+	resizer.split_resizer(M)
 end
 
 -- Exported internal functions for use in commands etc
