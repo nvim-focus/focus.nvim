@@ -8,7 +8,7 @@ M.focus_enable = function()
 		return
 	else
 		vim.g.enabled_focus = 1
-		require('focus').init()
+		require('focus').resize()
 	end
 end
 
