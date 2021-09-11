@@ -138,10 +138,6 @@ You can also specify a mapping, or perhaps a function to even add lazy loading.
 
 ## Configuration
 
-**NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
-That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
-but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus by following the below instructions to set them.
-
 **Example Configuration**
 ```lua
 require("focus").setup({enable = true, cursorline = true, signcolumn = true, hybridnumber = true})
@@ -240,6 +236,14 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 - [x] Adding Auto Line Numbers, options for relative, norelative
 
 # FAQ
+
+**I have a small display and I am finding splits are resized too much
+
+If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
+
+That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
+but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus.
+
 
 **Quickfix window opens in the right split always. Is this caused by focus.lua?**
 
