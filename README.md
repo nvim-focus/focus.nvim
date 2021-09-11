@@ -44,6 +44,7 @@ Details below and code snippets are in the readme to get you started.
 use {'beauwilliams/focus.nvim', config = require("focus").setup()}
 -- Or lazy load with `module` option. See further down for info on how to lazy load when using FocusSplit commands
 -- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
+-- Please note if you lazy load with command :FocusToggle, it will load focus, but will toggle it off initially. See #34
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely", module = "focus",
 --     config = function()
 --         require("focus").setup({hybridnumber = true})
