@@ -45,8 +45,6 @@ use {'beauwilliams/focus.nvim', config = require("focus").setup()}
 --         require("focus").setup({hybridnumber = true})
 --     end
 -- }
-
--- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely"}
 ```
 
 #### [vim-plug](https://github.com/junegunn/vim-plug)
