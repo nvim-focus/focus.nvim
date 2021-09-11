@@ -41,7 +41,7 @@ Details below and code snippets are in the readme to get you started.
 
 #### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
-use {'beauwilliams/focus.nvim', config = require("focus").setup()}
+use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
 -- Or lazy load with `module` option. See further down for info on how to lazy load when using FocusSplit commands
 -- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely", module = "focus",
