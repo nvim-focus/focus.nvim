@@ -44,7 +44,6 @@ Details below and code snippets are in the readme to get you started.
 use {'beauwilliams/focus.nvim', config = require("focus").setup()}
 -- Or lazy load with `module` option. See further down for info on how to lazy load when using FocusSplit commands
 -- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
--- Please note if you lazy load with command :FocusToggle, it will load focus, but will toggle it off initially. See #34
 -- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely", module = "focus",
 --     config = function()
 --         require("focus").setup({hybridnumber = true})
@@ -247,6 +246,12 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 No. This is a [documented](http://vimdoc.sourceforge.net/htmldoc/quickfix.html#quickfix) design decision by core vim, this might be something that can be adjusted upstream.
 
 In the meantime, you can open a quickfix window occupying the the full width of the window with `:botright copen`
+
+**I tried to lazy load focus with :FocusToggle, but I need to toggle it again to get auto-resizing working
+
+Please note if you lazy load with command :FocusToggle, it will load focus, but will toggle it off initially. See #34
+
+This is because focus is toggled on by default when you load focus, so if you load it and then run the command :FocusToggle, it toggles it off again.
 
 
 # Developers Only
