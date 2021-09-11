@@ -17,13 +17,13 @@ function autocmd.setup(config)
 	local autocmds = {
 		focus_init = {
 			-- Resize files with typical naming convention *.* i.e focus.lua
-			{ 'BufEnter', '*.*', ':lua require"focus".init()' },
+			{ 'BufEnter', '*.*', ':lua require"focus".resize()' },
 			-- Resize files with no filetype
-			{ 'Filetype', '', ':lua require"focus".init()' },
+			{ 'Filetype', '', ':lua require"focus".resize()' },
 			-- Resize startify
-			{ 'BufEnter', 'startify', ':lua require"focus".init()' },
-			-- So that we can resize windows such as NvimTree correctly, we run init when we open a buffer
-			{ 'BufEnter,WinEnter', 'NvimTree,nerdtree,CHADTree,qf', ":lua require'focus'.init()" },
+			{ 'BufEnter', 'startify', ':lua require"focus".resize()' },
+			-- So that we can resize windows such as NvimTree correctly, we run resize when we open a buffer
+			{ 'BufEnter,WinEnter', 'NvimTree,nerdtree,CHADTree,qf', ":lua require'focus'.resize()" },
 		},
 	}
 

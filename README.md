@@ -5,7 +5,11 @@
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/beauwilliams/focus.nvim.svg)](https://GitHub.com/beauwilliams/focus.nvim/issues?q=is%3Aissue+is%3Aclosed)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
+# Breaking Change
 
+You must now run the setup() function to being using focus.
+
+Details below and code snippets are in the readme to get you started.
 
 # Auto-resizing Focused Splits/Windows for Neovim
 
@@ -19,7 +23,7 @@
 
 👁️ Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
 
-🏃 Move to existing windows or else create new splits automatically, using single command + can specify a file to open 
+🏃 Move to existing windows or else create new splits automatically, using single command + can specify a file to open
 
 ⏱ Supports lazy loading via packer
 
@@ -34,17 +38,24 @@
 
 
 ## Installation
+
+#### [packer.nvim](https://github.com/wbthomason/packer.nvim)
+```lua
+use {'beauwilliams/focus.nvim', config = require("focus").setup()}
+-- Or lazy load with `module` option. See further down for info on how to lazy load when using FocusSplit commands
+-- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
+-- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely", module = "focus",
+--     config = function()
+--         require("focus").setup({hybridnumber = true})
+--     end
+-- }
+```
+
 #### [vim-plug](https://github.com/junegunn/vim-plug)
 ```vim
 Plug 'beauwilliams/focus.nvim'
-```
-#### [packer.nvim](https://github.com/wbthomason/packer.nvim)
-```lua
-use 'beauwilliams/focus.nvim'
--- Or lazy load with `module` option. See further down for info
--- use {'beauwilliams/focus.nvim', module = "focus"}
--- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
--- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely" }
+"You must run setup() to begin using focus
+lua require("focus").setup()
 ```
 
 ## Vim Commands
@@ -91,7 +102,7 @@ vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true }
 
 ## Auto Splitting Directionally
 
-Instead of worrying about multiple commands and shortcuts, simply think about splits as to which direction you would like to go
+Instead of worrying about multiple commands and shortcuts, *simply think about splits as to which direction you would like to go*.
 
 Calling a focus split command i.e :FocusSplitRight will do one of two things, **it will attempt to move across to the window** in the specified direction.
 Otherwise, **if no window exists in the specified direction** relative to the current window **then it will instead create a new blank buffer window** in the direction specified,
@@ -110,7 +121,7 @@ local focusmap = function(direction)
     vim.api.nvim_set_keymap('n', '<Leader>'..direction, ":lua require'focus'.split_command('"..direction.."')<CR>", { silent = true })
 end
 -- Use `<Leader>h` to split the screen to the left, same as command FocusSplitLeft etc
-focusmap('h') 
+focusmap('h')
 focusmap('j')
 focusmap('k')
 focusmap('l')
@@ -127,98 +138,91 @@ You can also specify a mapping, or perhaps a function to even add lazy loading.
 
 ## Configuration
 
-Place some version of this in your configuration file, e.g. `init.lua`, etc.
-
 **NOTE:** If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
 That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
 but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus by following the below instructions to set them.
 
+**Example Configuration**
+```lua
+require("focus").setup({enable = true, cursorline = true, signcolumn = true, hybridnumber = true})
+```
+### Available Options
 
 **Enable/Disable Focus**
 ```lua
-local focus = require('focus')
 -- Completely disable this plugin
 -- Default: true
-focus.enable = false
+require("focus").setup({enable = false})
 ```
 
 **Set Focus Width**
 ```lua
-local focus = require('focus')
 -- Force width for the focused window
 -- Default: Calculated based on golden ratio
-focus.width = 120
+require("focus").setup({width = 120})
 ```
 
 **Set Focus Height**
 ```lua
-local focus = require('focus')
 -- Force height for the focused window
 -- Default: Calculated based on golden ratio
-focus.height = 40
+require("focus").setup({height = 40})
 ```
 
 **Set Focus Tree Width**
 ```lua
-local focus = require('focus')
 -- Sets the width of directory tree buffers such as NerdTree, NvimTree and CHADTree
 -- Default: vim.g.nvim_tree_width or 30
-focus.treewidth = 20
+require("focus").setup({treewidth = 20})
 ```
 
 **Set Focus Auto Cursorline**
 ```lua
-local focus = require('focus')
 -- Displays a cursorline in the focussed window only
 -- Not displayed in unfocussed windows
 -- Default: true
-focus.cursorline = false
+require("focus").setup({cursorline = false})
 ```
 
 **Set Focus Auto Sign Column**
 ```lua
-local focus = require('focus')
 -- Displays a sign column in the focussed window only
 -- Not displayed in unfocussed windows
 -- Default: true
-focus.signcolumn = false
+require("focus").setup({signcolumn = false})
 ```
 
 **Set Focus Auto Numbers**
 ```lua
-local focus = require('focus')
 -- Displays line numbers in the focussed window only
 -- Not displayed in unfocussed windows
 -- Default: true
-focus.number = false
+require("focus").setup({number = false})
 ```
 
 **Set Focus Auto Relative Numbers**
 ```lua
-local focus = require('focus')
 -- Displays relative line numbers in the focussed window only
 -- Not displayed in unfocussed windows
 -- See :h relativenumber
 -- Default: false
-focus.relativenumber = true
+require("focus").setup({relativenumber = true})
 ```
 
 **Set Focus Auto Hybrid Numbers**
 ```lua
-local focus = require('focus')
 -- Displays hybrid line numbers in the focussed window only
 -- Not displayed in unfocussed windows
 -- Combination of :h relativenumber, but also displays the line number of the current line only
 -- Default: false
-focus.hybridnumber = true
+require("focus").setup({hybridnumber = true})
 ```
 
 **Set Focus Window Highlighting**
 ```lua
-local focus = require('focus')
 -- Enable auto highlighting for focussed/unfocussed windows
 -- Default: false
-focus.winhighlight = true
+require("focus").setup({winhighlight = true})
 
 -- By default, the highlight groups are setup as such:
 --   hi default link FocusedWindow VertSplit
@@ -231,9 +235,9 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 ## Planned Improvements 😼
 
-- [ ] Refactoring
-- [ ] Adding `:h filetype` support as we go
-- [x] Adding Auto Line Numbers, options for relative,norelative
+- [x] Refactoring
+- [ ] Adding more filetype support as we go
+- [x] Adding Auto Line Numbers, options for relative, norelative
 
 # FAQ
 

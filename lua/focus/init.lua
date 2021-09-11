@@ -7,16 +7,26 @@ local functions = require('focus.modules.functions')
 
 local M = {}
 
-M.init = function()
+M.setup = function(options)
+	setmetatable(M, {
+		__newindex = config.set,
+		__index = config.get,
+	})
+	-- if options provided to setup, override defaults
+	if options ~= nil then
+		for k, v1 in pairs(options) do
+			config.defaults[k] = v1
+		end
+	end
 	-- Verify that configuration values are of the correct type
 	config.verify()
 
-	if M.enable == true then
+	-- Don't set up focus if its not enabled by the user
+	if M.enable then
 		-- Pass this module, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
-		commands.setup()
 		autocmd.setup(M)
-		resizer.split_resizer(M)
+		commands.setup()
 
 		if M.winhighlight then
 			-- Allows user-overridable highlighting of the focused window
@@ -27,7 +37,14 @@ M.init = function()
 
 			vim.wo.winhighlight = 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
 		end
+
+		-- Finally begin resizing when enabled and configs set
+		M.resize()
 	end
+end
+
+M.resize = function()
+	resizer.split_resizer(M)
 end
 
 -- Exported internal functions for use in commands etc
@@ -51,10 +68,5 @@ end
 function M.focus_toggle()
 	functions.focus_toggle()
 end
-
-setmetatable(M, {
-	__newindex = config.set,
-	__index = config.get,
-})
 
 return M
