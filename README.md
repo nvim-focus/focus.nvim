@@ -247,7 +247,7 @@ No. This is a [documented](http://vimdoc.sourceforge.net/htmldoc/quickfix.html#q
 
 In the meantime, you can open a quickfix window occupying the the full width of the window with `:botright copen`
 
-**I tried to lazy load focus with :FocusToggle, but I need to toggle it again to get auto-resizing working
+**I tried to lazy load focus with :FocusToggle, but I need to toggle it again to get auto-resizing working**
 
 Please note if you lazy load with command :FocusToggle, it will load focus, but will toggle it off initially. See #34
 
