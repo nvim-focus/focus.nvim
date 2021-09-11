@@ -38,16 +38,15 @@
 #### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
 use {'beauwilliams/focus.nvim', config = require("focus").setup()}
--- Or lazy load with `module` option. See further down for info
--- use {'beauwilliams/focus.nvim', config = require("focus").setup(), module = "focus"}
+-- Or lazy load with `module` option. See further down for info on how to lazy load when using FocusSplit commands
 -- Or lazy load this plugin by creating an arbitrary command using the cmd option in packer.nvim
--- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely",
+-- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely", module = "focus",
 --     config = function()
---         require("focus").setup()
+--         require("focus").setup({hybridnumber = true})
 --     end
 -- }
 
--- use { 'beauwilliams/focus.nvim', config = require("focus").setup(), cmd = "FocusSplitNicely" }
+-- use { 'beauwilliams/focus.nvim', cmd = "FocusSplitNicely"}
 ```
 
 #### [vim-plug](https://github.com/junegunn/vim-plug)
@@ -117,8 +116,6 @@ vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', { silent = tru
 **If you lazy load this plugin with packer `module` option, please use lua-style keymap**
 ```lua
 local focusmap = function(direction)
-    -- we must require focus.setup() first to load the module
-    require "focus".setup({hybridnumber = true})
     vim.api.nvim_set_keymap('n', '<Leader>'..direction, ":lua require'focus'.split_command('"..direction.."')<CR>", { silent = true })
 end
 -- Use `<Leader>h` to split the screen to the left, same as command FocusSplitLeft etc
