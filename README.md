@@ -5,7 +5,11 @@
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/beauwilliams/focus.nvim.svg)](https://GitHub.com/beauwilliams/focus.nvim/issues?q=is%3Aissue+is%3Aclosed)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
+# Breaking Change
 
+You must now run the setup() function to being using focus.
+
+Details below and code snippets are in the readme to get you started.
 
 # Auto-resizing Focused Splits/Windows for Neovim
 
