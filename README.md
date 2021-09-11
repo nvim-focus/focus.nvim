@@ -237,7 +237,7 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 
 # FAQ
 
-**I have a small display and I am finding splits are resized too much
+**I have a small display and I am finding splits are resized too much**
 
 If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
 
