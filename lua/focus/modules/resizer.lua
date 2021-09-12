@@ -26,7 +26,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local ft = vim.bo.ft
 	if vim.g.enabled_focus == 0 then
 		return
-	elseif ft == 'NvimTree' or ft == 'nerdtree' or ft == 'CHADTree' then
+	elseif ft == 'NvimTree' or ft == 'nerdtree' or ft == 'CHADTree' or ft == 'scrollview' then
 		vim.o.winwidth = config.treewidth
 	elseif ft == 'qf' then
 		vim.o.winheight = 10
