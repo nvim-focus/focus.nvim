@@ -73,7 +73,7 @@ lua require("focus").setup()
 | `:FocusSplitRight` | Move to existing or create a new split to the right of your current window |
 | `:FocusEqualise` | Temporarily equalises the splits so they are all of similar width/height  |
 | `:FocusMaximise` | Temporarily maximises the focussed window |
-| `:FocusMaxOrEqual` | Toggles Between having the splits equalised or the focussed window mazimised |
+| `:FocusMaxOrEqual` | Toggles Between having the splits equalised or the focussed window maximised |
 
 ## Splitting Nicely
 
