@@ -57,12 +57,12 @@ function M.split_command(direction, fileName)
 		elseif direction == 'j' or direction == 'k' then
 			cmd('wincmd s')
 		end
-		cmd('wincmd ' .. direction)
-		if fileName ~= '' then
-			cmd('edit ' .. fileName)
-		else
-			cmd('enew')
-		end
+	end
+	cmd('wincmd ' .. direction)
+	if fileName ~= '' then
+		cmd('edit ' .. fileName)
+	else
+		cmd('enew')
 	end
 end
 
