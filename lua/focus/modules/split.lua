@@ -62,13 +62,13 @@ function M.split_command(direction, fileName, tmux)
 		elseif direction == 'j' or direction == 'k' then
 			cmd('wincmd s')
 		end
-	    cmd('wincmd ' .. direction)
+		cmd('wincmd ' .. direction)
 	end
-		if fileName ~= '' then
-			cmd('edit ' .. fileName)
-		else
-			cmd('enew')
-		end
+	if fileName ~= '' then
+		cmd('edit ' .. fileName)
+	else
+		cmd('enew')
+	end
 end
 
 return M

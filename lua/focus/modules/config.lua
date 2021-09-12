@@ -13,7 +13,7 @@ local defaults = {
 	number = false,
 	relativenumber = false,
 	hybridnumber = false,
-    tmux = false
+	tmux = false,
 }
 
 local function verify()
