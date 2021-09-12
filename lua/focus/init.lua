@@ -77,4 +77,9 @@ function M.focus_equalise()
 	functions.focus_equalise()
 end
 
+function M.focus_max_or_equal()
+	functions.focus_max_or_equal()
+end
+
+
 return M
