@@ -48,11 +48,14 @@ function M.split_nicely()
 	end
 end
 
-function M.split_command(direction, fileName)
+function M.split_command(direction, fileName, tmux)
 	local winnr = vim.api.nvim_get_current_win()
 	cmd('wincmd ' .. direction)
+
 	if winnr == vim.api.nvim_get_current_win() then
-		if direction == 'h' or direction == 'l' then
+		if tmux == true then
+			vim.fn.system('tmux select-pane -' .. vim.fn.tr(direction, 'hjkl', 'lLDUR'))
+		elseif direction == 'h' or direction == 'l' then
 			cmd('wincmd v')
 		elseif direction == 'j' or direction == 'k' then
 			cmd('wincmd s')

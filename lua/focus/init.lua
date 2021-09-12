@@ -54,7 +54,7 @@ end
 
 function M.split_command(direction, fileName)
 	fileName = fileName or ''
-	split.split_command(direction, fileName)
+	split.split_command(direction, fileName, M.tmux)
 end
 
 function M.focus_enable()
