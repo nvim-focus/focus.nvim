@@ -34,4 +34,18 @@ M.focus_toggle = function()
 	end
 end
 
+M.focus_maximise = function()
+		vim.cmd('wincmd|')
+
+end
+
+M.focus_equalise = function()
+		vim.o.winminwidth = 0
+		vim.o.winwidth = 20
+		vim.o.winminheight = 1
+		vim.o.winheight = 1
+		vim.cmd('wincmd=')
+
+end
+
 return M

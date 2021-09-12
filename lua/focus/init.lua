@@ -69,4 +69,12 @@ function M.focus_toggle()
 	functions.focus_toggle()
 end
 
+function M.focus_maximise()
+	functions.focus_maximise()
+end
+
+function M.focus_equalise()
+	functions.focus_equalise()
+end
+
 return M
