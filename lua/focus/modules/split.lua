@@ -58,7 +58,7 @@ function M.split_command(direction, fileName, tmux)
 	if winnr == vim.api.nvim_get_current_win() then
 		created = true
 		if tmux == true then
-			vim.fn.system('tmux select-pane -' .. vim.fn.tr(direction, 'hjkl', 'lLDUR'))
+			vim.fn.system('tmux select-pane -' .. vim.fn.tr(direction, 'phjkl', 'lLDUR'))
 		elseif direction == 'h' or direction == 'l' then
 			cmd('wincmd v')
 		elseif direction == 'j' or direction == 'k' then
