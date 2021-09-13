@@ -191,6 +191,7 @@ require("focus").setup({cursorline = false})
 require("focus").setup({signcolumn = false})
 -- Configure sign column to show in focussed window always, i.e :set signcolumn yes
 -- Or see :h signcolumn for more options
+-- As it grabs the vim variable setcolumn you must set it before running focus.setup()
 -- Default: "auto", shows sign column only when errors etc are present
 ```
 
