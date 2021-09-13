@@ -30,6 +30,11 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		vim.o.winwidth = config.treewidth
 	elseif ft == 'qf' then
 		vim.o.winheight = 10
+	elseif ft == 'toggleterm' or ft == '' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
+		vim.o.winminheight = 0
+		vim.o.winheight = 1
+		vim.o.winminwidth = 0
+		vim.o.winwidth = 1
 	else
 		if config.width > 0 then
 			vim.o.winwidth = config.width
@@ -44,15 +49,9 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 			vim.o.winheight = golden_ratio_height()
 			vim.o.winminheight = golden_ratio_minheight()
 		end
-		-- FIXME: Fix this mess
-		--[[ if ft == 'toggleterm' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
-        vim.o.winminheight = 0
-        vim.o.winheight = 1
-        vim.o.winminwidth = 0
-        vim.o.winwidth = 1 ]]
-		-- end
 	end
 	-- FIXME: Placing this line here solves issue #38 but disables resize for blank buffer
+	-- We also end up with blank splits being squashed and becoming nearly invisible as they are 1 column wide
 	vim.o.winminheight = 0
 	vim.o.winheight = 1
 	vim.o.winminwidth = 0

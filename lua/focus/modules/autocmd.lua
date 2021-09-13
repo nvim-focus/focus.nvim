@@ -14,7 +14,6 @@ local function nvim_create_augroups(definitions)
 end
 
 function autocmd.setup(config)
-
 	local autocmds = {
 		focus_init = {
 			-- Resize files with typical naming convention *.* i.e focus.lua
