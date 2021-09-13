@@ -1,7 +1,11 @@
+local utils = require('focus.modules.utils')
 local vim = vim --> Use locals
 
 local M = {}
 
+local filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' }
+-- TODO: Implement
+-- local excluded_filetypes = {}
 local golden_ratio = 1.618
 
 local golden_ratio_width = function()
@@ -24,10 +28,12 @@ end
 
 -- TEST: floating windows, snap/telescope, toggleterm, trees, scrollview.nvim, blank buffer, popups during autocompletion i.e coq
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
-	local ft = vim.bo.ft
+	local ft = vim.bo.ft:lower()
+	-- local buftype = vim.bo.buftype
+	local filetrees_set = utils.to_set(filetrees)
 	if vim.g.enabled_focus == 0 then
 		return
-	elseif ft == 'NvimTree' or ft == 'nerdtree' or ft == 'CHADTree' then
+	elseif filetrees_set[ft] then
 		vim.o.winwidth = config.treewidth
 	elseif ft == 'qf' then
 		vim.o.winheight = 10
