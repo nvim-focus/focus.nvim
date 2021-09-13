@@ -143,7 +143,7 @@ You can also specify a mapping, or perhaps a function to even add lazy loading.
 
 **Example Configuration**
 ```lua
-require("focus").setup({enable = true, cursorline = true, signcolumn = true, hybridnumber = true})
+require("focus").setup({hybridnumber = true, excluded_filetypes = {"toggleterm"}})
 ```
 ### Available Options
 
