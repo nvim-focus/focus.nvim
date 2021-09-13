@@ -26,8 +26,13 @@ local split_ENOROOM = function(err)
 end
 
 function M.split_nicely()
+	vim.g.counter_focus_resizing = vim.g.counter_focus_resizing + 1
 	local winnr = vim.api.nvim_get_current_win()
 	local split_cmd = golden_ratio_split_cmd(winnr)
+
+	if vim.g.counter_focus_resizing == 3 then
+		cmd('wincmd h')
+	end
 
 	local _, e = xpcall(cmd, split_ENOROOM, split_cmd)
 	if e then
@@ -47,6 +52,10 @@ function M.split_nicely()
 		cmd('wincmd p')
 		cmd('enew')
 	end
+
+	-- FIXME: Why are the below values always false?
+	-- print(vim.o.splitbelow)
+	-- print(vim.o.splitright)
 end
 
 function M.split_command(direction, fileName, tmux)
