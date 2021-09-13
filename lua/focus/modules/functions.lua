@@ -49,7 +49,9 @@ M.focus_equalise = function()
 end
 
 M.focus_max_or_equal = function()
-	if vim.o.winwidth > vim.o.columns / 2 then
+    -- vim.o.winwidth does not give you the current width of the focussed display
+    -- so we use a vim command winwidth(0) instead
+	if vim.api.nvim_eval("winwidth(0)") > vim.o.columns / 2 then
 		M.focus_equalise()
 	else
 		M.focus_maximise()
