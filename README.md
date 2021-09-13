@@ -7,19 +7,19 @@
 
 # Breaking Change
 
-You must now run the setup() function to being using focus.
+You must now run the `setup()` function to begin using focus.
 
 Details below and code snippets are in the readme to get you started.
 
-# Auto-resizing Focused Splits/Windows for Neovim
+# Auto-Resizing Focused Splits/Windows for Neovim
 
-🔋 Batteries Included. No configuration neccessary
+🔋 Batteries included - no configuration neccessary
 
-👌 Maximises Current Split/Window Automatically When Cursor Moves Based On Golden Ratio
+👌 Maximises current split/window automatically when cursor moves based on golden ratio
 
-⚙️  Set Focus Auto-Cursorline/SignColumn/LineNums & Active/Inactive Win-Highlight + Disable
+⚙️  Set Focus auto-cursorline/signcolumn/linenums & active/inactive win-highlight + disable
 
-🙌 Compatible with NvimTree, NerdTree, CHADTree, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
+🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
 
 👁️ Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
 
@@ -257,7 +257,7 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 - [x] Refactoring
 - [x] Adding more filetype support as we go
 - [x] Adding Auto Line Numbers, options for relative, norelative
-- [ ] Adding a FocusSplitCycle command, create split if there are none, else cycle, choice bewtwen vsplit or split as default
+- [ ] Adding a FocusSplitCycle command, create split if there are none, else cycle, choice between vsplit or split as default
 
 # FAQ
 
@@ -266,6 +266,7 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 If for example your screen resolution is *1024x768* --> i.e on the smaller side, you may notice that focus by default can maximise a window *too much*.
 
 That is, the window will sort of 'crush' some of your other splits due to the limited screen real estate. This is not an issue with focus,
+
 but an issue with minimal screen real estate. In this case, you can simply reduce the width/height of focus.
 
 
@@ -275,11 +276,11 @@ No. This is a [documented](http://vimdoc.sourceforge.net/htmldoc/quickfix.html#q
 
 In the meantime, you can open a quickfix window occupying the the full width of the window with `:botright copen`
 
-**I tried to lazy load focus with :FocusToggle, but I need to toggle it again to get auto-resizing working**
+**I tried to lazy load focus with `:FocusToggle`, but I need to toggle it again to get auto-resizing working**
 
-Please note if you lazy load with command :FocusToggle, it will load focus, but will toggle it off initially. See #34
+Please note if you lazy load with command `:FocusToggle`, it will load focus, but will toggle it off initially. See [#34](https://github.com/beauwilliams/focus.nvim/issues/34).
 
-This is because focus is toggled on by default when you load focus, so if you load it and then run the command :FocusToggle, it toggles it off again.
+This is because focus is toggled on by default when you load focus, so if you load it and then run the command `:FocusToggle`, it toggles it off again.
 
 
 # Developers Only
