@@ -53,6 +53,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
         -- end
 
 	end
+        -- FIXME: Placing this line here solves issue #38 but disables resize for blank buffer
         vim.o.winminheight = 0
         vim.o.winheight = 1
         vim.o.winminwidth = 0
