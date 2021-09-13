@@ -30,8 +30,8 @@ function M.split_nicely()
 	local winnr = vim.api.nvim_get_current_win()
 	local split_cmd = golden_ratio_split_cmd(winnr)
 
-	if vim.g.counter_focus_resizing == 3 then
-		cmd('wincmd h')
+	if vim.g.counter_focus_resizing > 2 then
+		cmd('wincmd w')
 	end
 
 	local _, e = xpcall(cmd, split_ENOROOM, split_cmd)
