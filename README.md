@@ -189,6 +189,10 @@ require("focus").setup({cursorline = false})
 -- Not displayed in unfocussed windows
 -- Default: true
 require("focus").setup({signcolumn = false})
+-- Configure sign column to show in focussed window always, i.e :set signcolumn yes
+-- Default: false, shows sign column only when errors etc are present
+require("focus").setup({signcolumn_always = true})
+
 ```
 
 **Set Focus Auto Numbers**
