@@ -30,7 +30,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local filetrees_set = utils.to_set(config.compatible_filetrees)
 	local excluded_ft_set = utils.to_set(config.excluded_filetypes)
 	local excluded_bt_set = utils.to_set(config.excluded_buftypes)
-	if vim.g.enabled_focus == 0 then
+	if vim.g.enabled_focus_resizing == 0 then
 		return
 	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
 		vim.o.winminheight = 0
