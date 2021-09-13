@@ -35,13 +35,11 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		-- We also end up with blank splits being squashed and becoming nearly invisible as they are 1 column wide
 		-- We also have problems with snap fuzzy finder prompts ocassionally messed up
 	elseif ft == 'toggleterm' or ft == '' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
-		print('hello')
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
 		vim.o.winminwidth = 0
 		vim.o.winwidth = 1
 	else
-		print('nooo')
 		if config.width > 0 then
 			vim.o.winwidth = config.width
 		else
