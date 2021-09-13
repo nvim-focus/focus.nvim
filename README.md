@@ -154,7 +154,7 @@ require("focus").setup({hybridnumber = true, excluded_filetypes = {"toggleterm"}
 require("focus").setup({enable = false})
 ```
 
-**Set Focus Excluded Filetypes**
+**Set Focus Excluded Filetypes or Buftypes**
 ```lua
 -- Prevents focus automatically resizing windows based on configured excluded filetypes or buftypes
 -- Query filetypes using :lua print(vim.bo.ft) or buftypes using :lua print(vim.bo.buftype)
