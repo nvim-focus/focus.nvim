@@ -26,7 +26,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local ft = vim.bo.ft
 	if vim.g.enabled_focus == 0 then
 		return
-	elseif ft == 'NvimTree' or ft == 'nerdtree' or ft == 'CHADTree' or ft == 'scrollview' then
+	elseif ft == 'NvimTree' or ft == 'nerdtree' or ft == 'CHADTree' then
 		vim.o.winwidth = config.treewidth
 	elseif ft == 'qf' then
 		vim.o.winheight = 10
@@ -44,12 +44,23 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 			vim.o.winheight = golden_ratio_height()
 			vim.o.winminheight = golden_ratio_minheight()
 		end
+    -- FIXME: Fix this mess
+        --[[ if ft == 'toggleterm' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
+        vim.o.winminheight = 0
+        vim.o.winheight = 1
+        vim.o.winminwidth = 0
+        vim.o.winwidth = 1 ]]
+        -- end
+
 	end
-	if ft == '' or 'toggleterm' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
+        vim.o.winminheight = 0
+        vim.o.winheight = 1
+        vim.o.winminwidth = 0
+        vim.o.winwidth = 1
 		-- BUG: config.height is nil
-	elseif config.height ~= 0 then
-		vim.o.winheight = config.height --> Opt in to set height value, otherwise auto-size it
-	end
+	--[[ elseif config.height ~= 0 then
+		vim.o.winheight = config.height --> Opt in to set height value, otherwise auto-size it ]]
+	-- end
 end
 
 return M
