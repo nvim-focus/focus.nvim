@@ -1,6 +1,5 @@
 local vim = vim --> Use locals
 local cmd = vim.api.nvim_command
-
 local M = {}
 
 local golden_ratio = 1.618

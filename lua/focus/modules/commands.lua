@@ -1,7 +1,7 @@
 local vim = vim
-local commands = {}
+local M = {}
 
-commands.setup = function()
+M.setup = function()
 	vim.cmd([[
 command! -nargs=0 FocusDisable lua require('focus').focus_disable()
 command! -nargs=0 FocusEnable lua require('focus').focus_enable()
@@ -17,4 +17,4 @@ command! -nargs=? FocusSplitRight lua require('focus').split_command("l", <q-arg
 ]])
 end
 
-return commands
+return M

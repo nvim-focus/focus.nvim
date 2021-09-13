@@ -1,6 +1,8 @@
 local cmd = vim.api.nvim_command
-local autocmd = {}
+local M = {}
 
+-- if focus auto signcolumn is set to true then
+-- we assume it to be auto in case signcolumn = no
 local function get_sign_column()
 	local default_signcolumn = 'auto'
 	if vim.opt.signcolumn:get() == 'no' then
@@ -22,44 +24,38 @@ local function nvim_create_augroups(definitions)
 	end
 end
 
-function autocmd.setup(config)
+function M.setup(config)
 	local autocmds = {
 		focus_resize = {
 			{ 'BufEnter,WinEnter', '*', ':lua require"focus".resize()' },
 		},
 	}
-
-	if config.signcolumn ~= false then
-		-- Explicitly check against false, as it not being present should default to it being on
+	if config.signcolumn then
 		autocmds['focus_signcolumn'] = {
 			{ 'BufEnter,WinEnter', '*', 'setlocal signcolumn=' .. get_sign_column() },
 			{ 'BufLeave,WinLeave', '*', 'setlocal signcolumn=no' },
 		}
 	end
 
-	if config.cursorline ~= false then
-		-- Explicitly check against false, as it not being present should default to it being on
+	if config.cursorline then
 		autocmds['focus_cursorline'] = {
 			{ 'BufEnter,WinEnter', '*', 'setlocal cursorline' },
 			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorline' },
 		}
 	end
-	if config.number ~= false then
-		-- Explicitly check against false, as it not being present should default to it being on
+	if config.number then
 		autocmds['number'] = {
 			{ 'BufEnter,WinEnter', '*', 'set number' },
 			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber' },
 		}
 	end
-	if config.relativenumber ~= false then
-		-- Explicitly check against false, as it not being present should default to it being on
+	if config.relativenumber then
 		autocmds['focus_relativenumber'] = {
 			{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
 			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
 		}
 	end
-	if config.hybridnumber ~= false then
-		-- Explicitly check against false, as it not being present should default to it being on
+	if config.hybridnumber then
 		autocmds['focus_hybridnumber'] = {
 			{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
 			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
@@ -69,4 +65,4 @@ function autocmd.setup(config)
 	nvim_create_augroups(autocmds)
 end
 
-return autocmd
+return M

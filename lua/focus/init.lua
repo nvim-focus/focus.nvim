@@ -8,6 +8,7 @@ local functions = require('focus.modules.functions')
 local M = {}
 
 M.setup = function(options)
+	--load the configs
 	setmetatable(M, {
 		__newindex = config.set,
 		__index = config.get,
@@ -23,15 +24,12 @@ M.setup = function(options)
 
 	-- Don't set up focus if its not enabled by the user
 	if M.enable then
-		-- Pass this module, noting that `__index` actually references the
+		-- Pass this module M, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
 		autocmd.setup(M)
 		commands.setup()
 
 		if M.winhighlight then
-			-- Allows user-overridable highlighting of the focused window
-			--
-			-- See `:h hi-default` for more details
 			vim.cmd('hi default link FocusedWindow VertSplit')
 			vim.cmd('hi default link UnfocusedWindow Normal')
 
@@ -47,7 +45,7 @@ M.resize = function()
 	resizer.split_resizer(M)
 end
 
--- Exported internal functions for use in commands etc
+-- Exported internal functions for use in commands
 function M.split_nicely()
 	split.split_nicely()
 end

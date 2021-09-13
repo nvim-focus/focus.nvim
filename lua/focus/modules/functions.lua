@@ -1,5 +1,3 @@
---TODO: implement
-
 local vim = vim
 local M = {}
 

@@ -1,6 +1,5 @@
 local utils = require('focus.modules.utils')
-local vim = vim --> Use locals
-
+local vim = vim
 local M = {}
 
 local golden_ratio = 1.618
@@ -25,7 +24,7 @@ end
 
 -- TEST: floating windows, snap/telescope, toggleterm, trees, scrollview.nvim, blank buffer, popups during autocompletion i.e coq
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
-	-- FIXME: We have problems with snap fuzzy finder prompts ocassionally messed up
+	-- FIXME: We have problems with snap fuzzy finder prompts ocassionally messed up, everything else seems fine
 	local ft = vim.bo.ft:lower()
 	local bt = vim.bo.buftype:lower()
 	local filetrees_set = utils.to_set(config.compatible_filetrees)
