@@ -1,6 +1,15 @@
 local cmd = vim.api.nvim_command
 local autocmd = {}
 
+local function get_sign_column()
+	local default_signcolumn = 'auto'
+	if vim.opt.signcolumn:get() == 'no' then
+		return default_signcolumn
+	else
+		return vim.opt.signcolumn:get()
+	end
+end
+
 local function nvim_create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do
 		cmd('augroup ' .. group_name)
@@ -33,7 +42,7 @@ function autocmd.setup(config)
 	if config.signcolumn ~= false then
 		-- Explicitly check against false, as it not being present should default to it being on
 		autocmds['focus_signcolumn'] = {
-			{ 'BufEnter,WinEnter', '*', 'setlocal signcolumn=' .. config.signcolumn_setting },
+			{ 'BufEnter,WinEnter', '*', 'setlocal signcolumn=' .. get_sign_column() },
 			{ 'BufLeave,WinLeave', '*', 'setlocal signcolumn=no' },
 		}
 	end

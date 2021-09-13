@@ -9,7 +9,6 @@ local defaults = {
 	treewidth = DEFAULT_TREE_WIDTH,
 	cursorline = true,
 	signcolumn = true,
-	signcolumn_setting = 'auto',
 	winhighlight = false,
 	number = false,
 	relativenumber = false,
