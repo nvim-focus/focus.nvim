@@ -16,6 +16,7 @@ local defaults = {
 	tmux = false,
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
 	excluded_filetypes = {},
+	excluded_buftypes = { 'nofile', 'prompt' },
 }
 
 local function verify()

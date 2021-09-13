@@ -25,21 +25,21 @@ end
 
 -- TEST: floating windows, snap/telescope, toggleterm, trees, scrollview.nvim, blank buffer, popups during autocompletion i.e coq
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
-	-- FIXME: We end up with blank splits being squashed and becoming nearly invisible as they are 1 column wide
 	-- FIXME: We have problems with snap fuzzy finder prompts ocassionally messed up
 	local ft = vim.bo.ft:lower()
-	-- local buftype = vim.bo.buftype
+	local bt = vim.bo.buftype:lower()
 	local filetrees_set = utils.to_set(config.compatible_filetrees)
-	local excluded_set = utils.to_set(config.excluded_filetypes)
+	local excluded_ft_set = utils.to_set(config.excluded_filetypes)
+	local excluded_bt_set = utils.to_set(config.excluded_buftypes)
 	if vim.g.enabled_focus == 0 then
 		return
-	elseif filetrees_set[ft] then
-		vim.o.winwidth = config.treewidth
-	elseif excluded_set[ft] or ft == '' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
+	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
 		vim.o.winminwidth = 0
 		vim.o.winwidth = 1
+	elseif filetrees_set[ft] then
+		vim.o.winwidth = config.treewidth
 	elseif ft == 'qf' then
 		vim.o.winheight = 10
 	else
