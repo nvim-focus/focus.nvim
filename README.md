@@ -202,13 +202,10 @@ require("focus").setup({cursorline = false})
 **Set Focus Auto Sign Column**
 ```lua
 -- Displays a sign column in the focussed window only
--- Not displayed in unfocussed windows
--- Default: true
+-- Gets the vim variable setcolumn when focus.setup() is run
+-- See :h signcolumn for more options e.g :set signcolum=yes
+-- Default: true, signcolumn=auto
 require("focus").setup({signcolumn = false})
--- Configure sign column to show in focussed window always, i.e :set signcolumn yes
--- Or see :h signcolumn for more options
--- As it grabs the vim variable setcolumn you must set it before running focus.setup()
--- Default: "auto", shows sign column only when errors etc are present
 ```
 
 **Set Focus Auto Numbers**
