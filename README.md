@@ -188,7 +188,7 @@ require("focus").setup({treewidth = 20})
 -- Prevents focus automatically resizing windows based on configured file trees
 -- Query filetypes using :lua print(vim.bo.ft)
 -- Default: { 'nvimtree', 'nerdtree', 'chadtree', 'fern' }
-require("focus").setup({filetrees = {"filetree"}})
+require("focus").setup({compatible_filetrees = {"filetree"}})
 ```
 
 **Set Focus Auto Cursorline**

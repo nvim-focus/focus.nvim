@@ -29,7 +29,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	-- FIXME: We have problems with snap fuzzy finder prompts ocassionally messed up
 	local ft = vim.bo.ft:lower()
 	-- local buftype = vim.bo.buftype
-	local filetrees_set = utils.to_set(config.filetrees)
+	local filetrees_set = utils.to_set(config.compatible_filetrees)
 	local excluded_set = utils.to_set(config.excluded_filetypes)
 	if vim.g.enabled_focus == 0 then
 		return
