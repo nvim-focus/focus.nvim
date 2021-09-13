@@ -14,6 +14,8 @@ local defaults = {
 	relativenumber = false,
 	hybridnumber = false,
 	tmux = false,
+	filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
+	excluded_filetypes = {},
 }
 
 local function verify()

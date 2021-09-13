@@ -154,6 +154,14 @@ require("focus").setup({enable = true, cursorline = true, signcolumn = true, hyb
 require("focus").setup({enable = false})
 ```
 
+**Set Focus Excluded Filetypes**
+```lua
+-- Prevents focus automatically resizing windows based on configured excluded filetypes
+-- Query filetypes using :lua print(vim.bo.ft)
+-- Default: none
+require("focus").setup({excluded_filetypes = {"toggleterm"}})
+```
+
 **Set Focus Width**
 ```lua
 -- Force width for the focused window
@@ -173,6 +181,14 @@ require("focus").setup({height = 40})
 -- Sets the width of directory tree buffers such as NerdTree, NvimTree and CHADTree
 -- Default: vim.g.nvim_tree_width or 30
 require("focus").setup({treewidth = 20})
+```
+
+**Set Focus Compatible File Trees**
+```lua
+-- Prevents focus automatically resizing windows based on configured file trees
+-- Query filetypes using :lua print(vim.bo.ft)
+-- Default: { 'nvimtree', 'nerdtree', 'chadtree', 'fern' }
+require("focus").setup({filetrees = {"filetree"}})
 ```
 
 **Set Focus Auto Cursorline**
@@ -234,6 +250,7 @@ require("focus").setup({winhighlight = true})
 vim.cmd('hi link UnfocusedWindow CursorLine')
 vim.cmd('hi link FocusedWindow VisualNOS')
 ```
+
 
 
 ## Planned Improvements 😼

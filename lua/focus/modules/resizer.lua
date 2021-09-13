@@ -3,9 +3,6 @@ local vim = vim --> Use locals
 
 local M = {}
 
-local filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' }
--- TODO: Implement
--- local excluded_filetypes = {}
 local golden_ratio = 1.618
 
 local golden_ratio_width = function()
@@ -28,23 +25,23 @@ end
 
 -- TEST: floating windows, snap/telescope, toggleterm, trees, scrollview.nvim, blank buffer, popups during autocompletion i.e coq
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
+	-- FIXME: We end up with blank splits being squashed and becoming nearly invisible as they are 1 column wide
+	-- FIXME: We have problems with snap fuzzy finder prompts ocassionally messed up
 	local ft = vim.bo.ft:lower()
 	-- local buftype = vim.bo.buftype
-	local filetrees_set = utils.to_set(filetrees)
+	local filetrees_set = utils.to_set(config.filetrees)
+	local excluded_set = utils.to_set(config.excluded_filetypes)
 	if vim.g.enabled_focus == 0 then
 		return
 	elseif filetrees_set[ft] then
 		vim.o.winwidth = config.treewidth
-	elseif ft == 'qf' then
-		vim.o.winheight = 10
-		-- FIXME: Placing this line here solves issue #38 but disables resize for blank buffer
-		-- We also end up with blank splits being squashed and becoming nearly invisible as they are 1 column wide
-		-- We also have problems with snap fuzzy finder prompts ocassionally messed up
-	elseif ft == 'toggleterm' or ft == '' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
+	elseif excluded_set[ft] or ft == '' then -- if we dont do something about the '' case, wilder.nvim resizes when searching with /
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
 		vim.o.winminwidth = 0
 		vim.o.winwidth = 1
+	elseif ft == 'qf' then
+		vim.o.winheight = 10
 	else
 		if config.width > 0 then
 			vim.o.winwidth = config.width
