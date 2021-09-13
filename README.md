@@ -13,19 +13,25 @@ Details below and code snippets are in the readme to get you started.
 
 # Auto-Resizing Focused Splits/Windows for Neovim
 
-🔋 Batteries included - no configuration neccessary
-
 👌 Maximises current split/window automatically when cursor moves based on golden ratio
 
 ⚙️  Set Focus auto-cursorline/signcolumn/linenums & active/inactive win-highlight + disable
 
-🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, FZF & QuickFix (QF default to 10, rest won't resize)
+🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, FZF & QuickFix
 
-👁️ Currently focussed split/window automagically maximised to the perfect viewing size according to golden ratio
+👁️ Currently focussed split/window maximised to the perfect viewing size according to golden ratio
 
-🏃 Move to existing windows or else create new splits automatically, using single command + can specify a file to open
+🏃 Move to existing windows or else create new splits automatically, only a single command + can specify a file to open
+
+🔌 Option to open tmux windows instead of creating new splits
+
+🖥 Equalise splits or maximise focussed splits, and toggle between the two
+
+💾 Set custom filetypes or buftypes to be excluded from resizing
 
 ⏱ Supports lazy loading via packer
+
+💯 Written in pure lua
 
 
 # Demo
