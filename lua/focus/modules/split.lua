@@ -1,4 +1,4 @@
-local vim = vim --> Use locals
+local vim = vim
 local cmd = vim.api.nvim_command
 local M = {}
 
