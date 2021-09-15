@@ -58,6 +58,10 @@ function M.split_command(direction, fileName)
 	split.split_command(direction, fileName, M.tmux)
 end
 
+function M.split_cycle()
+	split.split_cycle()
+end
+
 function M.focus_enable()
 	functions.focus_enable()
 end

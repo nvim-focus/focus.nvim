@@ -81,4 +81,14 @@ function M.split_command(direction, fileName, tmux)
 	end
 end
 
+function M.split_cycle()
+	local winnr = vim.api.nvim_get_current_win()
+	cmd('wincmd w')
+
+	if winnr == vim.api.nvim_get_current_win() then
+		cmd('wincmd v')
+		cmd('wincmd w')
+	end
+end
+
 return M

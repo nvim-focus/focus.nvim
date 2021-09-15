@@ -74,6 +74,7 @@ lua require("focus").setup()
 | `:FocusEnable` |  Enable the plugin per session. Splits will be resized back to your configs or defaults if not set. |
 | `:FocusToggle` |  Toggle focus on and off again. |
 | `:FocusSplitNicely` | Split a window based on the golden ratio rule |
+| `:FocusSplitCycle` | If there are no splits, create one and move to it, else cycle between them |
 | `:FocusSplitLeft` | Move to existing or create a new split to the left of your current window |
 | `:FocusSplitDown` | Move to existing or create a new split to the bottom of your current window |
 | `:FocusSplitUp` | Move to existing or create a new split to the top of your current window |
