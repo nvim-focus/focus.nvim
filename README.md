@@ -22,7 +22,9 @@ Details below and code snippets are in the readme to get you started.
 
 👁️ Currently focussed split/window maximised to the perfect viewing size according to golden ratio
 
-🏃 Move to existing windows or else create new splits automatically, only a single command + can specify a file to open
+🏃 Move to existing windows or else create new splits automatically, only a single command
+
+📲 Also specify a file to be opened or run a custom command after moving to an existing/created window
 
 🔌 Option to open tmux windows instead of creating new splits
 
