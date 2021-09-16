@@ -75,13 +75,14 @@ lua require("focus").setup()
 | `:FocusToggle` |  Toggle focus on and off again. |
 | `:FocusSplitNicely` | Split a window based on the golden ratio rule |
 | `:FocusSplitCycle` | If there are no splits, create one and move to it, else cycle between them |
-| `:FocusSplitLeft` | Move to existing or create a new split to the left of your current window |
-| `:FocusSplitDown` | Move to existing or create a new split to the bottom of your current window |
-| `:FocusSplitUp` | Move to existing or create a new split to the top of your current window |
-| `:FocusSplitRight` | Move to existing or create a new split to the right of your current window |
+| `:FocusSplitLeft` | Move to existing or create a new split to the left of your current window + open file or custom command |
+| `:FocusSplitDown` | Move to existing or create a new split to the bottom of your current window + open file or custom command |
+| `:FocusSplitUp` | Move to existing or create a new split to the top of your current window + open file or custom command |
+| `:FocusSplitRight` | Move to existing or create a new split to the right of your current window + open file or custom command |
 | `:FocusEqualise` | Temporarily equalises the splits so they are all of similar width/height  |
 | `:FocusMaximise` | Temporarily maximises the focussed window |
 | `:FocusMaxOrEqual` | Toggles Between having the splits equalised or the focussed window maximised |
+
 
 ## Splitting Nicely
 
@@ -103,6 +104,18 @@ Focus allows you to split windows to tiled windows nicely and sized according to
 To get this view you would press the key combination 2 times.
 
 **Split nicely with `<C-L>`**
+
+❗ **NOTE** ❗
+
+Additionally you can open a file or a run a custom command with the `:FocusSplitNicely` command
+
+*Opens a file in the split created by SplitNicely command*
+`:FocusSplitNicely README.md`
+
+*Opens a terminal window in the split created by SplitNicely command by using the cmd arg to run a custom command*
+`:FocusSplitNicely cmd term`
+
+
 
 ```lua
 vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
@@ -138,13 +151,16 @@ focusmap('k')
 focusmap('l')
 ```
 
-## Opening a file in a new split directionally
+❗ **NOTE** ❗
 
-*This feature allows you to open a file in a split specifying which position you want it to be located*
+Additionally you can open a file or a run a custom command with the `:FocusSplit<direction>` command
 
-For example `:FocusSplitRight somefile.lua` will open `somefile.lua ` to the right of your current window.
+*Opens a file in a split that was either created or moved to*
+`:FocusSplitRight README.md`
 
-You can also specify a mapping, or perhaps a function to even add lazy loading.
+*Opening a terminal window by using the cmd arg to run a custom command in a split that was created or moved to*
+`:FocusSplitDown cmd term`
+
 
 
 ## Configuration

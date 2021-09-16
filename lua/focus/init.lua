@@ -49,13 +49,13 @@ M.resize = function()
 end
 
 -- Exported internal functions for use in commands
-function M.split_nicely()
-	split.split_nicely()
+function M.split_nicely(args)
+	split.split_nicely(args)
 end
 
-function M.split_command(direction, fileName)
-	fileName = fileName or ''
-	split.split_command(direction, fileName, M.tmux)
+function M.split_command(direction, args)
+	args = args or ''
+	split.split_command(direction, args, M.tmux)
 end
 
 function M.split_cycle()

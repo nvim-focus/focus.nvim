@@ -1,8 +1,23 @@
+local utils = require('focus.modules.utils')
 local vim = vim
 local cmd = vim.api.nvim_command
 local M = {}
 
 local golden_ratio = 1.618
+
+local function process_split_args(created, args)
+	local args_array = utils.split(args, ' ')
+	print(args_array[1])
+	-- print('2 is '..args_array[2])
+	if args_array[1] ~= '' and args_array[1] ~= 'cmd' then
+		cmd('edit ' .. args_array[1])
+	elseif args_array[1] == 'cmd' and args_array[2] ~= nil then
+		cmd('enew')
+		cmd(args_array[2])
+	elseif created == true then
+		cmd('enew')
+	end
+end
 
 local golden_ratio_split_cmd = function(winnr)
 	local maxwidth = vim.o.columns
@@ -25,7 +40,7 @@ local split_ENOROOM = function(err)
 	return string.match(err, 'Vim([a-z]split):E36:.*')
 end
 
-function M.split_nicely()
+function M.split_nicely(args)
 	vim.g.counter_focus_resizing = vim.g.counter_focus_resizing + 1
 	local winnr = vim.api.nvim_get_current_win()
 	local split_cmd = golden_ratio_split_cmd(winnr)
@@ -45,12 +60,16 @@ function M.split_nicely()
 
 	if split_cmd == 'vsplit' and not vim.o.splitright then
 		cmd('wincmd p')
-		cmd('enew')
+		process_split_args(true, args)
+		--[[
+		cmd('enew') ]]
 	end
 
 	if split_cmd == 'split' and not vim.o.splitbelow then
 		cmd('wincmd p')
-		cmd('enew')
+		process_split_args(true, args)
+		--[[ cmd('wincmd p')
+		cmd('enew') ]]
 	end
 
 	-- FIXME: Why are the below values always false?
@@ -58,7 +77,7 @@ function M.split_nicely()
 	-- print(vim.o.splitright)
 end
 
-function M.split_command(direction, fileName, tmux)
+function M.split_command(direction, args, tmux)
 	local winnr = vim.api.nvim_get_current_win()
 	cmd('wincmd ' .. direction)
 
@@ -74,11 +93,18 @@ function M.split_command(direction, fileName, tmux)
 		end
 		cmd('wincmd ' .. direction)
 	end
-	if fileName ~= '' then
-		cmd('edit ' .. fileName)
+	process_split_args(created, args)
+	--[[ local args_array = utils.split(args, " ")
+    -- print(args_array[1])
+    -- print('2 is '..args_array[2])
+    if args_array[1] ~= '' and args_array[1] ~= 'cmd' then
+		cmd('edit ' .. args_array[1])
+    elseif args_array[1] == 'cmd' and args_array[2] ~= nil then
+		cmd('enew')
+        cmd(args_array[2])
 	elseif created == true then
 		cmd('enew')
-	end
+	end ]]
 end
 
 function M.split_cycle()
