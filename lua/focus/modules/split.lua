@@ -58,21 +58,17 @@ function M.split_nicely(args)
 		end
 	end
 
-	if split_cmd == 'vsplit' and not vim.o.splitright then
+	if split_cmd == 'vsplit' then
 		cmd('wincmd p')
 		process_split_args(true, args)
-		--[[
-		cmd('enew') ]]
 	end
 
-	if split_cmd == 'split' and not vim.o.splitbelow then
+	if split_cmd == 'split' then
 		cmd('wincmd p')
 		process_split_args(true, args)
-		--[[ cmd('wincmd p')
-		cmd('enew') ]]
 	end
 
-	-- FIXME: Why are the below values always false?
+    -- ensure that whenever you split vertically, it’s going to appear on the right. Moreover, for a horizontal split, the new split is going to appear at the bottom.
 	-- print(vim.o.splitbelow)
 	-- print(vim.o.splitright)
 end
@@ -94,17 +90,6 @@ function M.split_command(direction, args, tmux)
 		cmd('wincmd ' .. direction)
 	end
 	process_split_args(created, args)
-	--[[ local args_array = utils.split(args, " ")
-    -- print(args_array[1])
-    -- print('2 is '..args_array[2])
-    if args_array[1] ~= '' and args_array[1] ~= 'cmd' then
-		cmd('edit ' .. args_array[1])
-    elseif args_array[1] == 'cmd' and args_array[2] ~= nil then
-		cmd('enew')
-        cmd(args_array[2])
-	elseif created == true then
-		cmd('enew')
-	end ]]
 end
 
 function M.split_cycle()
