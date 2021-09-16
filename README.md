@@ -112,9 +112,11 @@ To get this view you would press the key combination 2 times.
 Additionally you can open a file or a run a custom command with the `:FocusSplitNicely` command
 
 *Opens a file in the split created by SplitNicely command*
+
 `:FocusSplitNicely README.md`
 
 *Opens a terminal window in the split created by SplitNicely command by using the cmd arg to run a custom command*
+
 `:FocusSplitNicely cmd term`
 
 
@@ -158,9 +160,11 @@ focusmap('l')
 Additionally you can open a file or a run a custom command with the `:FocusSplit<direction>` command
 
 *Opens a file in a split that was either created or moved to*
+
 `:FocusSplitRight README.md`
 
 *Opening a terminal window by using the cmd arg to run a custom command in a split that was created or moved to*
+
 `:FocusSplitDown cmd term`
 
 
