@@ -107,6 +107,12 @@ To get this view you would press the key combination 2 times.
 
 **Split nicely with `<C-L>`**
 
+```lua
+vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
+-- Or use lua-style keymap
+--vim.api.nvim_set_keymap('n', '<c-l>', ":lua require('focus').split_nicely()<CR>", { silent = true })
+```
+
 ❗ **NOTE** ❗
 
 Additionally you can open a file or a run a custom command with the `:FocusSplitNicely` command
@@ -119,13 +125,6 @@ Additionally you can open a file or a run a custom command with the `:FocusSplit
 
 `:FocusSplitNicely cmd term`
 
-
-
-```lua
-vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
--- Or use lua-style keymap
---vim.api.nvim_set_keymap('n', '<c-l>', ":lua require('focus').split_nicely()<CR>", { silent = true })
-```
 
 
 ## Auto Splitting Directionally
