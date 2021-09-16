@@ -22,7 +22,9 @@ Details below and code snippets are in the readme to get you started.
 
 👁️ Currently focussed split/window maximised to the perfect viewing size according to golden ratio
 
-🏃 Move to existing windows or else create new splits automatically, only a single command + can specify a file to open
+🏃 Move to existing windows or else create new splits automatically, only a single command
+
+📲 Also specify a file to be opened or run a custom command after moving to an existing/created window
 
 🔌 Option to open tmux windows instead of creating new splits
 
@@ -105,23 +107,24 @@ To get this view you would press the key combination 2 times.
 
 **Split nicely with `<C-L>`**
 
-❗ **NOTE** ❗
-
-Additionally you can open a file or a run a custom command with the `:FocusSplitNicely` command
-
-*Opens a file in the split created by SplitNicely command*
-`:FocusSplitNicely README.md`
-
-*Opens a terminal window in the split created by SplitNicely command by using the cmd arg to run a custom command*
-`:FocusSplitNicely cmd term`
-
-
-
 ```lua
 vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
 -- Or use lua-style keymap
 --vim.api.nvim_set_keymap('n', '<c-l>', ":lua require('focus').split_nicely()<CR>", { silent = true })
 ```
+
+❗ **NOTE** ❗
+
+Additionally you can open a file or a run a custom command with the `:FocusSplitNicely` command
+
+*Opens a file in the split created by SplitNicely command*
+
+`:FocusSplitNicely README.md`
+
+*Opens a terminal window in the split created by SplitNicely command by using the cmd arg to run a custom command*
+
+`:FocusSplitNicely cmd term`
+
 
 
 ## Auto Splitting Directionally
@@ -156,9 +159,11 @@ focusmap('l')
 Additionally you can open a file or a run a custom command with the `:FocusSplit<direction>` command
 
 *Opens a file in a split that was either created or moved to*
+
 `:FocusSplitRight README.md`
 
 *Opening a terminal window by using the cmd arg to run a custom command in a split that was created or moved to*
+
 `:FocusSplitDown cmd term`
 
 
