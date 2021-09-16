@@ -32,6 +32,12 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local excluded_bt_set = utils.to_set(config.excluded_buftypes)
 	if vim.g.enabled_focus_resizing == 0 then
 		return
+    elseif ft == 'spectre_panel' then
+		vim.o.winminheight = 0
+		vim.o.winheight = 1
+		vim.o.winminwidth = 0
+		vim.o.winwidth = 1
+        vim.cmd("vertical resize 70")
 	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
