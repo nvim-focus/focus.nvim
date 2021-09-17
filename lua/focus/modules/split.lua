@@ -93,13 +93,16 @@ function M.split_command(direction, args, tmux)
 	process_split_args(created, args)
 end
 
-function M.split_cycle()
+function M.split_cycle(reverse)
 	local winnr = vim.api.nvim_get_current_win()
 	cmd('wincmd w')
 
 	if winnr == vim.api.nvim_get_current_win() then
 		cmd('wincmd v')
-		cmd('wincmd w')
+		if reverse == nil or reverse ~= 'reverse' then
+			cmd('wincmd w')
+		end
+		cmd('enew')
 	end
 end
 

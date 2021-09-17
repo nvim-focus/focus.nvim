@@ -58,8 +58,8 @@ function M.split_command(direction, args)
 	split.split_command(direction, args, M.tmux)
 end
 
-function M.split_cycle()
-	split.split_cycle()
+function M.split_cycle(reverse)
+	split.split_cycle(reverse)
 end
 
 function M.focus_enable()
