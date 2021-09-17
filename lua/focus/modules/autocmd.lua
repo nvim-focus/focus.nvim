@@ -27,8 +27,8 @@ end
 function M.setup(config)
 	local autocmds = {
 		focus_resize = {
-			{ 'BufEnter,InsertEnter', '*', ':lua require"focus".resize()' },
-			{ 'WinLeave', '*', ':lua require"focus".resize()' },
+            --Adding WinEnter breaks snap support..
+			{ 'WinLeave,BufEnter,InsertEnter', '*', ':lua require"focus".resize()' },
 		},
 	}
 	if config.signcolumn then
