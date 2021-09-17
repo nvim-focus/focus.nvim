@@ -15,9 +15,7 @@ Creates a split in direction if there is not one there
 
 Otherwise will move to it automatcally
 
-Option to open a file, or run an arbitrary command 
-
-in the split specified by the direction
+Option to open a file, or run an arbitrary command in the split specified by the direction
 
 ![](https://i.ibb.co/kBT3svN/movement.gif)
 
@@ -27,9 +25,7 @@ Moves to the split or creates one in the direction then..
 
 Will open the file specified or Run a command specified
 
-Example: `FocusSplitDown cmd term` opens/creates a terminal
-
-split window below the current window you are in.
+Example: `FocusSplitDown cmd term` opens/creates a terminal split window below the current window you are in.
 
 
 ![](https://i.ibb.co/Jk5GFLm/openfile.gif)
