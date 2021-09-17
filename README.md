@@ -14,7 +14,7 @@ Details below and code snippets are in the readme to get you started.
 
 # Auto-Resizing Focused Splits/Windows for Neovim
 # Window Navigation/Creation and Specify Files/Commands 
-# Complete Set of Splits/Window Management Enhancements
+# Useful Splits/Window Management Enhancements for Neovim
 
 👌 Maximises current split/window automatically when cursor moves based on golden ratio
 
