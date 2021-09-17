@@ -24,12 +24,11 @@ end
 
 -- TEST: floating windows, snap/telescope, toggleterm, trees, scrollview.nvim, blank buffer, popups during autocompletion i.e coq
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
-	-- FIXME: We have problems with snap fuzzy finder prompts ocassionally messed up, everything else seems fine
 	local ft = vim.bo.ft:lower()
 	local bt = vim.bo.buftype:lower()
-	local filetrees_set = utils.to_set(config.compatible_filetrees)
-	local excluded_ft_set = utils.to_set(config.excluded_filetypes)
-	local excluded_bt_set = utils.to_set(config.excluded_buftypes)
+	local filetrees_set = utils.to_set(utils.to_lower(config.compatible_filetrees))
+	local excluded_ft_set = utils.to_set(utils.to_lower(config.excluded_filetypes))
+	local excluded_bt_set = utils.to_set(utils.to_lower(config.excluded_buftypes))
 	if vim.g.enabled_focus_resizing == 0 then
 		return
     elseif ft == 'diffviewfiles' then
