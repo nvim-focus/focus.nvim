@@ -18,7 +18,7 @@ Details below and code snippets are in the readme to get you started.
 
 ⚙️  Set Focus auto-cursorline/signcolumn/linenums & active/inactive win-highlight + disable
 
-🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, FZF & QuickFix
+🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, Snap, FZF & QuickFix
 
 👁️ Currently focussed split/window maximised to the perfect viewing size according to golden ratio
 
@@ -286,7 +286,7 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 - [x] Refactoring
 - [x] Adding more filetype support as we go
 - [x] Adding Auto Line Numbers, options for relative, norelative
-- [ ] Adding a FocusSplitCycle command, create split if there are none, else cycle, choice between vsplit or split as default
+- [x] Adding a FocusSplitCycle command, create split if there are none, else cycle, choice between vsplit or split as default
 
 # FAQ
 
