@@ -6,11 +6,6 @@
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/beauwilliams/focus.nvim.svg)](https://GitHub.com/beauwilliams/focus.nvim/issues?q=is%3Aissue+is%3Aclosed)
 
 
-# Breaking Change
-
-You must now run the `setup()` function to begin using focus.
-
-Details below and code snippets are in the readme to get you started.
 
 # Auto-Resizing Focused Splits/Windows for Neovim
 # Window Navigation/Creation and Specify Files/Commands 
@@ -49,6 +44,13 @@ Details below and code snippets are in the readme to get you started.
 
 
 ## Installation
+
+
+### Breaking Change
+
+You must now run the `setup()` function to begin using focus.
+
+Details below and code snippets are in the readme to get you started.
 
 #### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
