@@ -10,7 +10,7 @@ Also choose to open a terminal, file, or run any command
 ![](https://i.ibb.co/n0xbJht/nicely.gif)
 
 
-# Auto Splitting + Naviagtion Directionally
+# Auto Splitting + Navigation Directionally
 Creates a split in direction if there is not one there
 
 Otherwise will move to it automatcally
