@@ -18,7 +18,7 @@ Details below and code snippets are in the readme to get you started.
 
 ⚙️  Set Focus auto-cursorline/signcolumn/linenums & active/inactive win-highlight + disable
 
-🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, Snap, FZF, diffview.nvim & QuickFix
+🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, Snap, FZF, Diffview.nvim & QuickFix
 
 👁️ Currently focussed split/window maximised to the perfect viewing size according to golden ratio
 
