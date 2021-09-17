@@ -115,6 +115,7 @@ function M.split_cycle()
 	if winnr == vim.api.nvim_get_current_win() then
 		cmd('wincmd v')
 		cmd('wincmd w')
+        cmd('enew')
 	end
 end
 
