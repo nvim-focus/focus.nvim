@@ -14,7 +14,7 @@ local defaults = {
 	hybridnumber = false,
 	tmux = false,
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
-	excluded_filetypes = {},
+	excluded_filetypes = {''},
 	excluded_buftypes = { 'nofile', 'prompt', 'help' },
 }
 
