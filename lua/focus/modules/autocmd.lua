@@ -29,7 +29,8 @@ function M.setup(config)
 		focus_resize = {
 			--Adding WinEnter breaks snap support..
 			{ 'WinLeave,BufEnter', '*', ':lua require"focus".resize()' },
-			{ 'InsertEnter', 'spectre_panel', ':lua require"focus".resize()' },
+            -- This is for spectre support
+			{ 'InsertEnter', 'spectre', ':lua require"focus".resize()' },
 		},
 	}
 	if config.signcolumn then
