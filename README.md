@@ -291,6 +291,7 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 - [x] Adding more filetype support as we go
 - [x] Adding Auto Line Numbers, options for relative, norelative
 - [x] Adding a FocusSplitCycle command, create split if there are none, else cycle, choice between vsplit or split as default
+- [x] Adding SplitCycleReverse, so we can auto-create split on left instead of right and cycle backwards
 
 # FAQ
 
