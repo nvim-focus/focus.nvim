@@ -123,7 +123,7 @@ function M.split_exists_direction(winnr, direction)
 	if winnr == vim.api.nvim_get_current_win() then
 		return false
 	else
-        -- we want to stay in the current split we were in
+		-- we want to stay in the current split we were in
 		cmd('wincmd ' .. move_back(direction))
 		return true
 	end
