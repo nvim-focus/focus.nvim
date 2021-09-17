@@ -58,10 +58,10 @@ function M.split_nicely(args)
 		end
 	end
 
-    -- splitright.. ensure that whenever you split vertically, it’s going to appear on the right.
-    -- Moreover, for a horizontal split, the new split is going to appear at the bottom.
-    -- always returns false/nil below when not set by user
-    -- we check it because when splitbelow/right is set, wincmd happens automatically
+	-- splitright.. ensure that whenever you split vertically, it’s going to appear on the right.
+	-- Moreover, for a horizontal split, the new split is going to appear at the bottom.
+	-- always returns false/nil below when not set by user
+	-- we check it because when splitbelow/right is set, wincmd happens automatically
 	if split_cmd == 'vsplit' and not vim.o.splitright then
 		cmd('wincmd p')
 	end
@@ -70,7 +70,7 @@ function M.split_nicely(args)
 		cmd('wincmd p')
 	end
 
-    --open file or term .. etc if args provided
+	--open file or term .. etc if args provided
 	process_split_args(true, args)
 end
 

@@ -27,7 +27,7 @@ end
 function M.setup(config)
 	local autocmds = {
 		focus_resize = {
-            --Adding WinEnter breaks snap support..
+			--Adding WinEnter breaks snap support..
 			{ 'WinLeave,BufEnter,InsertEnter', '*', ':lua require"focus".resize()' },
 			{ 'InsertEnter', 'spectre_panel', ':lua require"focus".resize()' },
 		},

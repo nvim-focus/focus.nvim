@@ -31,14 +31,14 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local excluded_bt_set = utils.to_set(utils.to_lower(config.excluded_buftypes))
 	if vim.g.enabled_focus_resizing == 0 then
 		return
-    elseif ft == 'diffviewfiles' then
-        vim.cmd('FocusEqualise')
-    elseif ft == 'spectre_panel' then
+	elseif ft == 'diffviewfiles' then
+		vim.cmd('FocusEqualise')
+	elseif ft == 'spectre_panel' then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
 		vim.o.winminwidth = 0
 		vim.o.winwidth = 1
-        vim.cmd("vertical resize 90")
+		vim.cmd('vertical resize 90')
 	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1

@@ -3,12 +3,11 @@ local M = {}
 --RETURNS TABLE OF LOWER CASE STRINGS
 --
 function M.to_lower(list)
-    for k,v in ipairs(list) do
-    list[k] = v:lower()
-    end
-    return list
+	for k, v in ipairs(list) do
+		list[k] = v:lower()
+	end
+	return list
 end
-
 
 --RETURNS SET FROM A TABLE FOR FAST LOOKUPS
 function M.to_set(list)
