@@ -37,7 +37,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		vim.o.winheight = 1
 		vim.o.winminwidth = 0
 		vim.o.winwidth = 1
-        vim.cmd("vertical resize 70")
+        vim.cmd("vertical resize 90")
 	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
