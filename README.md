@@ -13,6 +13,8 @@ You must now run the `setup()` function to begin using focus.
 Details below and code snippets are in the readme to get you started.
 
 # Auto-Resizing Focused Splits/Windows for Neovim
+# Window Navigation/Creation and Specify Files/Commands 
+# Complete Set of Splits/Window Management Enhancements
 
 👌 Maximises current split/window automatically when cursor moves based on golden ratio
 
