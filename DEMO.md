@@ -41,3 +41,9 @@
 # Auto Hybrid Numbers
 
 ![](https://i.ibb.co/bBfxCfW/relative.gif)
+
+# Opening an auto-resizing terminal window by specifying its location
+This example uses `:FocusSplitDown cmd term` to create a split below
+the current window and then runs the `:term` command to open a terminal
+
+![](https://i.ibb.co/bNkQWGf/ezgif-7-c215974aca1b.gif)
