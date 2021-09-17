@@ -35,6 +35,18 @@ local golden_ratio_split_cmd = function(winnr)
 	return 'split'
 end
 
+local function move_back(direction)
+	if direction == 'h' then
+		return 'l'
+	elseif direction == 'l' then
+		return 'h'
+	elseif direction == 'j' then
+		return 'k'
+	elseif direction == 'k' then
+		return 'j'
+	end
+end
+
 local split_ENOROOM = function(err)
 	-- err: Vim(split):E36: Not enough room
 	return string.match(err, 'Vim([a-z]split):E36:.*')
@@ -76,18 +88,21 @@ end
 
 function M.split_command(direction, args, tmux)
 	local winnr = vim.api.nvim_get_current_win()
-	cmd('wincmd ' .. direction)
 
 	local created = false
-	if winnr == vim.api.nvim_get_current_win() then
+	if M.split_exists_direction(winnr, direction) == false then
 		created = true
 		if tmux == true then
 			vim.fn.system('tmux select-pane -' .. vim.fn.tr(direction, 'phjkl', 'lLDUR'))
 		elseif direction == 'h' or direction == 'l' then
 			cmd('wincmd v')
+			cmd('wincmd ' .. direction)
 		elseif direction == 'j' or direction == 'k' then
+			print('hi')
 			cmd('wincmd s')
+			cmd('wincmd ' .. direction)
 		end
+	else
 		cmd('wincmd ' .. direction)
 	end
 	process_split_args(created, args)
@@ -100,6 +115,20 @@ function M.split_cycle()
 	if winnr == vim.api.nvim_get_current_win() then
 		cmd('wincmd v')
 		cmd('wincmd w')
+	end
+end
+
+function M.split_exists_direction(winnr, direction)
+	cmd('wincmd ' .. direction)
+
+	if winnr == vim.api.nvim_get_current_win() then
+		-- print('yo')
+		-- cmd('wincmd p')
+		return false
+	else
+		-- print('hi')
+		cmd('wincmd ' .. move_back(direction))
+		return true
 	end
 end
 
