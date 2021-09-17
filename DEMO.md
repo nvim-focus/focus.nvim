@@ -11,7 +11,7 @@ Also choose to open a terminal, file, or run any command
 
 
 # Auto Splitting + Naviagtion Directionally
-Creates a split in direction if the is not one there
+Creates a split in direction if there is not one there
 
 Otherwise will move to it automatcally
 
