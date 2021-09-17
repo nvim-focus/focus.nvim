@@ -27,7 +27,8 @@ end
 function M.setup(config)
 	local autocmds = {
 		focus_resize = {
-			{ 'WinLeave,InsertEnter,BufEnter,WinEnter', '*', ':lua require"focus".resize()' },
+			{ 'BufEnter,InsertEnter', '*', ':lua require"focus".resize()' },
+			{ 'WinLeave', '*', ':lua require"focus".resize()' },
 		},
 	}
 	if config.signcolumn then
