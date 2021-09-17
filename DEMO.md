@@ -12,8 +12,11 @@ Also choose to open a terminal, file, or run any command
 
 # Auto Splitting + Naviagtion Directionally
 Creates a split in direction if the is not one there
+
 Otherwise will move to it automatcally
+
 Option to open a file, or run an arbitrary command 
+
 in the split specified by the direction
 
 ![](https://i.ibb.co/kBT3svN/movement.gif)
@@ -21,8 +24,11 @@ in the split specified by the direction
 
 # Opening Files or Run Commands In Splits Directionally
 Moves to the split or creates one in the direction then..
+
 Will open the file specified or Run a command specified
+
 Example: `FocusSplitDown cmd term` opens/creates a terminal
+
 split window below the current window you are in.
 
 
