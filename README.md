@@ -220,9 +220,9 @@ require("focus").setup({treewidth = 20})
 
 **When creating a new split window, do/don't initialise it as an empty buffer**
 ```lua
+-- True: When a :Focus.. command creates a new split window, initialise it as a new blank buffer
 -- False: When a :Focus.. command creates a new split, retain a copy of the current window in the new window
--- True: When a :Focus.. command creates a new split window, make that window a blank buffer
--- Default: true
+-- Default: false
 require("focus").setup({bufnew =  false})
 ```
 
