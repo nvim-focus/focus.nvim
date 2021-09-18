@@ -49,16 +49,16 @@ end
 
 -- Exported internal functions for use in commands
 function M.split_nicely(args)
-	split.split_nicely(args)
+	split.split_nicely(args, M.bufnew)
 end
 
 function M.split_command(direction, args)
 	args = args or ''
-	split.split_command(direction, args, M.tmux)
+	split.split_command(direction, args, M.tmux, M.bufnew)
 end
 
 function M.split_cycle(reverse)
-	split.split_cycle(reverse)
+	split.split_cycle(reverse, M.bufnew)
 end
 
 function M.focus_enable()

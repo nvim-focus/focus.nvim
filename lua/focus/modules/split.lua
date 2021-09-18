@@ -5,14 +5,14 @@ local M = {}
 
 local golden_ratio = 1.618
 
-local function process_split_args(created, args)
+local function process_split_args(created, args, bufnew)
 	local args_array = utils.split(args, ' ')
 	if args_array[1] ~= '' and args_array[1] ~= 'cmd' then
 		cmd('edit ' .. args_array[1])
 	elseif args_array[1] == 'cmd' and args_array[2] ~= nil then
 		cmd('enew')
 		cmd(args_array[2])
-	elseif created == true then
+	elseif created == true and bufnew == true then
 		cmd('enew')
 	end
 end
@@ -50,7 +50,7 @@ local split_ENOROOM = function(err)
 	return string.match(err, 'Vim([a-z]split):E36:.*')
 end
 
-function M.split_nicely(args)
+function M.split_nicely(args, bufnew)
 	local winnr = vim.api.nvim_get_current_win()
 	local split_cmd = golden_ratio_split_cmd(winnr)
 
@@ -84,10 +84,10 @@ function M.split_nicely(args)
 	end
 
 	--open file or term .. etc if args provided
-	process_split_args(true, args)
+	process_split_args(true, args, bufnew)
 end
 
-function M.split_command(direction, args, tmux)
+function M.split_command(direction, args, tmux, bufnew)
 	local winnr = vim.api.nvim_get_current_win()
 
 	local created = false
@@ -106,10 +106,10 @@ function M.split_command(direction, args, tmux)
 	else
 		cmd('wincmd ' .. direction)
 	end
-	process_split_args(created, args)
+	process_split_args(created, args, bufnew)
 end
 
-function M.split_cycle(reverse)
+function M.split_cycle(reverse, bufnew)
 	local winnr = vim.api.nvim_get_current_win()
 	cmd('wincmd w')
 
@@ -118,7 +118,9 @@ function M.split_cycle(reverse)
 		if reverse == nil or reverse ~= 'reverse' then
 			cmd('wincmd w')
 		end
-		cmd('enew')
+		if bufnew == true then
+			cmd('enew')
+		end
 	end
 end
 

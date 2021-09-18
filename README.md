@@ -8,7 +8,7 @@
 
 
 # Auto-Resizing Focused Splits/Windows for Neovim
-# Window Navigation/Creation and Specify Files/Commands 
+# Window Navigation/Creation and Specify Files/Commands
 # Useful Splits/Window Management Enhancements for Neovim
 
 👌 Maximises current split/window automatically when cursor moves based on golden ratio
@@ -216,6 +216,14 @@ require("focus").setup({height = 40})
 -- Sets the width of directory tree buffers such as NerdTree, NvimTree and CHADTree
 -- Default: vim.g.nvim_tree_width or 30
 require("focus").setup({treewidth = 20})
+```
+
+**When creating a new split window, do/don't initialise it as an empty buffer**
+```lua
+-- False: When a :Focus.. command creates a new split, retain a copy of the current window in the new window
+-- True: When a :Focus.. command creates a new split window, make that window a blank buffer
+-- Default: true
+require("focus").setup({bufnew =  false})
 ```
 
 **Set Focus Compatible File Trees**
