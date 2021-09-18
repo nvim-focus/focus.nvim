@@ -7,8 +7,6 @@ local golden_ratio = 1.618
 
 local function process_split_args(created, args)
 	local args_array = utils.split(args, ' ')
-	print(args_array[1])
-	-- print('2 is '..args_array[2])
 	if args_array[1] ~= '' and args_array[1] ~= 'cmd' then
 		cmd('edit ' .. args_array[1])
 	elseif args_array[1] == 'cmd' and args_array[2] ~= nil then
@@ -56,15 +54,18 @@ function M.split_nicely(args)
 	local winnr = vim.api.nvim_get_current_win()
 	local split_cmd = golden_ratio_split_cmd(winnr)
 
-	if #vim.api.nvim_tabpage_list_wins({0}) == 4 then
+	-- this allows use to get 4 split layout
+	if #vim.api.nvim_tabpage_list_wins({ 0 }) == 4 then
 		cmd('wincmd w')
 	end
 
 	local _, e = xpcall(cmd, split_ENOROOM, split_cmd)
 	if e then
 		if split_cmd == 'split' then
+			-- TODO: Determine what effect the below code has
 			vim.o.minwinheight = vim.o.minwinheight / 2
-			-- vim.api.nvim_win_set_height(winnr, vim.api.nvim_win_get_height(winnr))
+			-- this is not useful here but keeping as this might be useful to halve window sizes in future
+			-- vim.api.nvim_win_set_height(winnr, vim.api.nvim_win_get_height(winnr)/2)
 		else
 			vim.o.minwinwidth = vim.o.minwinwidth / 2
 		end
@@ -113,11 +114,11 @@ function M.split_cycle(reverse)
 	cmd('wincmd w')
 
 	if winnr == vim.api.nvim_get_current_win() then
-			cmd('wincmd v')
+		cmd('wincmd v')
 		if reverse == nil or reverse ~= 'reverse' then
 			cmd('wincmd w')
 		end
-        cmd('enew')
+		cmd('enew')
 	end
 end
 

@@ -41,7 +41,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		vim.api.nvim_win_set_width(winnr, config.treewidth)
 	elseif ft == 'qf' then
 		vim.api.nvim_win_set_height(winnr, 10)
-        -- this needs to be checked after diffviewfiles ft
+		-- this needs to be checked after diffviewfiles ft
 	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
 		return
 	else
