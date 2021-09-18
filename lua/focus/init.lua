@@ -26,7 +26,6 @@ M.setup = function(options)
 	if M.enable then
 		-- Focus is enabled when setup is run, we use this var to enable/disable/toggle
 		vim.g.enabled_focus_resizing = 1
-		vim.g.counter_focus_resizing = 0
 		-- Pass this module M, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
 		autocmd.setup(M)

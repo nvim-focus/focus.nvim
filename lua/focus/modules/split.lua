@@ -53,11 +53,10 @@ local split_ENOROOM = function(err)
 end
 
 function M.split_nicely(args)
-	vim.g.counter_focus_resizing = vim.g.counter_focus_resizing + 1
 	local winnr = vim.api.nvim_get_current_win()
 	local split_cmd = golden_ratio_split_cmd(winnr)
 
-	if vim.g.counter_focus_resizing > 2 then
+	if #vim.api.nvim_tabpage_list_wins({0}) == 4 then
 		cmd('wincmd w')
 	end
 
@@ -65,6 +64,7 @@ function M.split_nicely(args)
 	if e then
 		if split_cmd == 'split' then
 			vim.o.minwinheight = vim.o.minwinheight / 2
+			-- vim.api.nvim_win_set_height(winnr, vim.api.nvim_win_get_height(winnr))
 		else
 			vim.o.minwinwidth = vim.o.minwinwidth / 2
 		end
