@@ -31,8 +31,9 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local filetrees_set = utils.to_set(utils.to_lower(config.compatible_filetrees))
 	local excluded_ft_set = utils.to_set(utils.to_lower(config.excluded_filetypes))
 	local excluded_bt_set = utils.to_set(utils.to_lower(config.excluded_buftypes))
+    -- TODO: Add note about needing fterm && term filetype set for fterm popup toggle support
 	if vim.g.enabled_focus_resizing == 0 then
-		return print(ft)
+		return
 	elseif ft == 'diffviewfiles' then
 		vim.cmd('FocusEqualise')
 	elseif ft == 'spectre_panel' then
