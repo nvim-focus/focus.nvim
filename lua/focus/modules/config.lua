@@ -13,9 +13,10 @@ local defaults = {
 	relativenumber = false,
 	hybridnumber = false,
 	tmux = false,
+	bufnew = false,
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
-	excluded_filetypes = { '' },
-	excluded_buftypes = { 'nofile', 'prompt', 'help' },
+	excluded_filetypes = {},
+	excluded_buftypes = { 'nofile', 'prompt' },
 }
 
 local function verify()

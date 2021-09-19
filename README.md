@@ -6,13 +6,10 @@
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/beauwilliams/focus.nvim.svg)](https://GitHub.com/beauwilliams/focus.nvim/issues?q=is%3Aissue+is%3Aclosed)
 
 
-# Breaking Change
-
-You must now run the `setup()` function to begin using focus.
-
-Details below and code snippets are in the readme to get you started.
 
 # Auto-Resizing Focused Splits/Windows for Neovim
+# Window Navigation/Creation and Specify Files/Commands
+# Useful Splits/Window Management Enhancements for Neovim
 
 👌 Maximises current split/window automatically when cursor moves based on golden ratio
 
@@ -43,10 +40,17 @@ Details below and code snippets are in the readme to get you started.
 
 *note: for reference this screencast features dimensions set to 120\*40 (W\*H)*
 
-**[See a visual demonstration of each focus feature here](https://github.com/beauwilliams/focus.nvim/blob/master/DEMO.md)**
+## **[See a visual demonstration of each focus feature here](https://github.com/beauwilliams/focus.nvim/blob/master/DEMO.md)**
 
 
 ## Installation
+
+
+### Breaking Change
+
+You must now run the `setup()` function to begin using focus.
+
+Details below and code snippets are in the readme to get you started.
 
 #### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
@@ -214,6 +218,14 @@ require("focus").setup({height = 40})
 require("focus").setup({treewidth = 20})
 ```
 
+**When creating a new split window, do/don't initialise it as an empty buffer**
+```lua
+-- True: When a :Focus.. command creates a new split window, initialise it as a new blank buffer
+-- False: When a :Focus.. command creates a new split, retain a copy of the current window in the new window
+-- Default: false
+require("focus").setup({bufnew =  false})
+```
+
 **Set Focus Compatible File Trees**
 ```lua
 -- Prevents focus automatically resizing windows based on configured file trees
@@ -287,6 +299,8 @@ vim.cmd('hi link FocusedWindow VisualNOS')
 - [x] Adding more filetype support as we go
 - [x] Adding Auto Line Numbers, options for relative, norelative
 - [x] Adding a FocusSplitCycle command, create split if there are none, else cycle, choice between vsplit or split as default
+- [x] Adding SplitCycleReverse, so we can auto-create split on left instead of right and cycle backwards
+- [x] Switch back to setting height/width manually. Using vim.o.winwidth and wim.o.winminwidth was not flexible enough.
 
 # FAQ
 

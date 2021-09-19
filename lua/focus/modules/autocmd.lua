@@ -28,8 +28,9 @@ function M.setup(config)
 	local autocmds = {
 		focus_resize = {
 			--Adding WinEnter breaks snap support..
-			{ 'WinLeave,BufEnter,InsertEnter', '*', ':lua require"focus".resize()' },
-			{ 'InsertEnter', 'spectre_panel', ':lua require"focus".resize()' },
+			{ 'WinLeave,BufEnter', '*', ':lua require"focus".resize()' },
+			-- This is for spectre support
+			{ 'InsertEnter', 'spectre', ':lua require"focus".resize()' },
 		},
 	}
 	if config.signcolumn then
@@ -45,6 +46,7 @@ function M.setup(config)
 			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorline' },
 		}
 	end
+	-- FIXME: Disable line numbers on startify buffer, add user config?
 	if config.number then
 		autocmds['number'] = {
 			{ 'BufEnter,WinEnter', '*', 'set number' },
