@@ -8,8 +8,8 @@
 
 
 # Auto-Resizing Focused Splits/Windows for Neovim
-# Goto/Create Splits Based on Specified Direction
-# Run Cmds/Open Files in New/Current Windows By Direction
+# Go to/Create New Split Windows Based on Specified Direction
+# Run Cmds/Open Files in New/Current Windows by Direction
 # Useful Splits/Window Management Enhancements for Neovim
 
 👌 Maximises current split/window automatically when cursor moves based on golden ratio
