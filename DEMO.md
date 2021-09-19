@@ -29,15 +29,15 @@ Will open the file specified or Run a command specified
 
 Example: `FocusSplitRight README.md` opens/creates a window with the file 'README.md to the right the current window you are in.
 
+![](https://i.ibb.co/Jk5GFLm/openfile.gif)
+
+
 # Opening an auto-resizing terminal window by specifying its location
 
 This example uses `:FocusSplitDown cmd term` to create a split below
 the current window and then runs the `:term` command to open a terminal
 
 ![](https://i.ibb.co/bNkQWGf/ezgif-7-c215974aca1b.gif)
-
-
-![](https://i.ibb.co/Jk5GFLm/openfile.gif)
 
 
 # Auto Cursorline
