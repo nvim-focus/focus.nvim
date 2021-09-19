@@ -1,7 +1,3 @@
-# Toggling/Enabling/Disabling Focus
-
-![](https://i.ibb.co/r7VZ831/enable.gif)
-
 # Auto Resizing of the Focussed Window
 
 Resizes the currently focussed window to the perfect viewing size as per golden ratio
@@ -48,12 +44,23 @@ the current window and then runs the `:term` command to open a terminal
 ![](https://i.ibb.co/bNkQWGf/ezgif-7-c215974aca1b.gif)
 
 
+# Toggling/Enabling/Disabling Focus
+
+![](https://i.ibb.co/r7VZ831/enable.gif)
+
+
 # Auto Cursorline
 
 ![](https://i.ibb.co/6Rdn0Qx/cursorline.gif)
 
 
 # Auto Sign Column
+
+Shows the sign column in the focussed window only
+
+Default = 'auto' sign column. However gets the user configuration i.e
+
+If `signcolumn = "number"` set in vimrc then show errors in number column in focussed window only
 
 ![](https://i.ibb.co/C5qFgw2/gutter.gif)
 
