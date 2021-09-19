@@ -8,7 +8,7 @@
 
 
 # Auto-Resizing Focused Splits/Windows for Neovim
-# Simple Directional Split Navigation/Creation
+# Goto/Create Splits Based on Specified Direction
 # Run Cmds/Open Files in New/Current Windows By Direction
 # Useful Splits/Window Management Enhancements for Neovim
 
