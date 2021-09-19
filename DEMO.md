@@ -2,6 +2,14 @@
 
 ![](https://i.ibb.co/r7VZ831/enable.gif)
 
+# Auto Resizing of the Focussed Window
+
+Resizes the currently focussed window to the perfect viewing size as per golden ratio
+
+Focussed window size can also be specified by the user.
+
+![screencast](https://i.ibb.co/0tsKww4/focusop.gif)
+
 
 # Auto Splitting Nicely
 Creates splits in a nice arrancement
