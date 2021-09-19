@@ -11,6 +11,7 @@ Also choose to open a terminal, file, or run any command
 
 
 # Auto Splitting + Navigation Directionally
+
 Creates a split in direction if there is not one there
 
 Otherwise will move to it automatcally
@@ -21,11 +22,19 @@ Option to open a file, or run an arbitrary command in the split specified by the
 
 
 # Opening Files or Run Commands In Splits Directionally
+
 Moves to the split or creates one in the direction then..
 
 Will open the file specified or Run a command specified
 
-Example: `FocusSplitDown cmd term` opens/creates a terminal split window below the current window you are in.
+Example: `FocusSplitRight README.md` opens/creates a window with the file 'README.md to the right the current window you are in.
+
+# Opening an auto-resizing terminal window by specifying its location
+
+This example uses `:FocusSplitDown cmd term` to create a split below
+the current window and then runs the `:term` command to open a terminal
+
+![](https://i.ibb.co/bNkQWGf/ezgif-7-c215974aca1b.gif)
 
 
 ![](https://i.ibb.co/Jk5GFLm/openfile.gif)
@@ -55,8 +64,4 @@ Example: `FocusSplitDown cmd term` opens/creates a terminal split window below t
 
 ![](https://i.ibb.co/bBfxCfW/relative.gif)
 
-# Opening an auto-resizing terminal window by specifying its location
-This example uses `:FocusSplitDown cmd term` to create a split below
-the current window and then runs the `:term` command to open a terminal
 
-![](https://i.ibb.co/bNkQWGf/ezgif-7-c215974aca1b.gif)
