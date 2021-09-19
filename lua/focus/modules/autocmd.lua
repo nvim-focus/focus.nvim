@@ -46,6 +46,7 @@ function M.setup(config)
 			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorline' },
 		}
 	end
+	-- FIXME: Disable line numbers on startify buffer, add user config?
 	if config.number then
 		autocmds['number'] = {
 			{ 'BufEnter,WinEnter', '*', 'set number' },

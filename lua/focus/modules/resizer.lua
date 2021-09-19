@@ -23,6 +23,7 @@ local golden_ratio_minheight = function()
 	return math.floor(golden_ratio_height() / (3 * golden_ratio))
 end
 
+-- TODO: Support: Vista.vim
 -- TEST: floating windows, snap/telescope, toggleterm, trees, scrollview.nvim, blank buffer, popups during autocompletion i.e coq
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
 	local winnr = vim.api.nvim_get_current_win()
