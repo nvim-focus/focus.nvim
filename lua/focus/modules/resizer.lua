@@ -38,7 +38,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	elseif ft == 'diffviewfiles' then
 		vim.cmd('FocusEqualise')
 	elseif ft == 'spectre_panel' then
-		-- vim.cmd('FocusEqualise')
+		vim.cmd('FocusEqualise')
 		-- vim.api.nvim_win_set_width(winnr, 90)
         -- just return for now.. REF #43
         return
