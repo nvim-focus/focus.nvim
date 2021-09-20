@@ -35,7 +35,8 @@ function M.setup(config)
             -- This is an upstream vim issue because there is no way to specify filetype etc when creating a new buffer
             -- You can only create a blank buffer, and then set the variables after it was created
             -- Which means focus will initially read it as blank buffer and resize. This is an issue for many other plugins that read ft too.
-			{ 'WinEnter,BufEnter', '*', 'lua vim.defer_fn(function() require"focus".resize() end, 5)' },
+			{ 'WinLeave,BufEnter', '*', 'lua require"focus".resize()' },
+			{ 'FileType', 'spectre_panel', 'lua require"focus".resize()' },
 		},
 	}
 	if config.signcolumn then
