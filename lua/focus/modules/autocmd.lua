@@ -27,8 +27,15 @@ end
 function M.setup(config)
 	local autocmds = {
 		focus_resize = {
-			--Adding WinEnter breaks snap support..
-			{ 'WinLeave,BufEnter', '*', ':lua vim.defer_fn(function() require"focus".resize() end, 1)' },
+			--Adding WinEnter no longer breaks snap etc support.. using defer_fn ensures filetype that is set AFTER
+            --buffer creation is read, instead of getting the blank filetypes, buffertypes when buffer is INITIALLY created
+            -- When a buffer is created its filetype and buffertype etc are blank, and focus reads these
+            -- By using defer, focus waits for some time, and then attempts to read the filetype and buffertype
+            -- This wait time is enough for plugins to properly set their options to the buffer such as filetype
+            -- This is an upstream vim issue because there is no way to specify filetype etc when creating a new buffer
+            -- You can only create a blank buffer, and then set the variables after it was created
+            -- Which means focus will initially read it as blank buffer and resize. This is an issue for many other plugins that read ft too.
+			{ 'WinEnter,BufEnter', '*', 'lua vim.defer_fn(function() require"focus".resize() end, 1)' },
 		},
 	}
 	if config.signcolumn then
