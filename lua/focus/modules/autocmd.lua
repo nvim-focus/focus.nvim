@@ -28,7 +28,7 @@ function M.setup(config)
 	local autocmds = {
 		focus_resize = {
 			--Adding WinEnter breaks snap support..
-			{ 'WinLeave,BufEnter', '*', ':lua vim.defer_fn(function() require"focus".resize() end, 10)' },
+			{ 'WinLeave,BufEnter', '*', ':lua vim.defer_fn(function() require"focus".resize() end, 1)' },
 		},
 	}
 	if config.signcolumn then
