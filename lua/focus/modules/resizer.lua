@@ -58,9 +58,9 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		if config.height > 0 then
 			vim.o.winminheight = config.height
 			vim.o.winheight = config.height
-		elseif split.split_exists_direction(winnr, 'j') == true or split.split_exists_direction(winnr, 'k') == true then
-			vim.o.winminheight = golden_ratio_minheight()
+        else
 			vim.o.winheight = golden_ratio_height()
+			vim.o.winminheight = golden_ratio_minheight()
 		end
 	end
 
