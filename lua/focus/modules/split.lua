@@ -111,7 +111,11 @@ end
 
 function M.split_cycle(reverse, bufnew)
 	local winnr = vim.api.nvim_get_current_win()
+	if reverse == 'reverse' then
+		cmd('wincmd W')
+	else
 	cmd('wincmd w')
+	end
 
 	if winnr == vim.api.nvim_get_current_win() then
 		cmd('wincmd v')
