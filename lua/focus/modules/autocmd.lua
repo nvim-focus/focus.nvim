@@ -53,6 +53,21 @@ function M.setup(config)
 			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorline' },
 		}
 	end
+
+	if config.cursorcolumn then
+		autocmds['focus_cursorcolumn'] = {
+			{ 'BufEnter,WinEnter', '*', 'set cursorcolumn' },
+			{ 'BufLeave,WinLeave', '*', 'set nocursorcolumn' },
+		}
+	end
+
+	if config.colorcolumn.enable then
+		autocmds['focus_colorcolumn'] = {
+			{ 'BufEnter,WinEnter', '*', 'set colorcolumn=' .. config.colorcolumn.width },
+			{ 'BufLeave,WinLeave', '*', 'set colorcolumn=0' },
+		}
+	end
+
 	-- FIXME: Disable line numbers on startify buffer, add user config?
 	if config.number then
 		autocmds['number'] = {

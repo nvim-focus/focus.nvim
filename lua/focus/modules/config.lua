@@ -7,7 +7,12 @@ local defaults = {
 	height = 0,
 	treewidth = DEFAULT_TREE_WIDTH,
 	cursorline = true,
+	cursorcolumn = true,
 	signcolumn = true,
+	colorcolumn = {
+		enable = true,
+		width = 80
+	},
 	winhighlight = false,
 	number = false,
 	relativenumber = false,
