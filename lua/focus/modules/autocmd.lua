@@ -56,15 +56,15 @@ function M.setup(config)
 
 	if config.cursorcolumn then
 		autocmds['focus_cursorcolumn'] = {
-			{ 'BufEnter,WinEnter', '*', 'set cursorcolumn' },
-			{ 'BufLeave,WinLeave', '*', 'set nocursorcolumn' },
+			{ 'BufEnter,WinEnter', '*', 'setlocal cursorcolumn' },
+			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorcolumn' },
 		}
 	end
 
 	if config.colorcolumn.enable then
 		autocmds['focus_colorcolumn'] = {
-			{ 'BufEnter,WinEnter', '*', 'set colorcolumn=' .. config.colorcolumn.width },
-			{ 'BufLeave,WinLeave', '*', 'set colorcolumn=0' },
+			{ 'BufEnter,WinEnter', '*', 'setlocal colorcolumn=' .. config.colorcolumn.width },
+			{ 'BufLeave,WinLeave', '*', 'setlocal colorcolumn=0' },
 		}
 	end
 
