@@ -22,6 +22,7 @@ local defaults = {
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
 	excluded_filetypes = {},
 	excluded_buftypes = { 'nofile', 'prompt' },
+	blacklist = "{}" -- example (as string): blacklist = "{'dashboard', 'vista'}"
 }
 
 local function verify()
