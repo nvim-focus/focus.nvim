@@ -193,7 +193,7 @@ require("focus").setup({enable = false})
 -- Prevents focus automatically resizing windows based on configured excluded filetypes or buftypes
 -- Query filetypes using :lua print(vim.bo.ft) or buftypes using :lua print(vim.bo.buftype)
 -- Default[filetypes]: none
--- Default[buftypes]: 'nofile', 'prompt', 'help'
+-- Default[buftypes]: 'nofile', 'prompt', 'popup'
 require("focus").setup({excluded_filetypes = {"toggleterm"}})
 require("focus").setup({excluded_buftypes = {"help"}})
 ```
