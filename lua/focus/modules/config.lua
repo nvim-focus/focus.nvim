@@ -12,6 +12,7 @@ local defaults = {
 	number = false,
 	relativenumber = false,
 	hybridnumber = false,
+	absolutenumber = false,
 	tmux = false,
 	bufnew = false,
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },

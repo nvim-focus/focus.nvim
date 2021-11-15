@@ -28,14 +28,14 @@ function M.setup(config)
 	local autocmds = {
 		focus_resize = {
 			--Adding WinEnter no longer breaks snap etc support.. using *defer_fn* ensures filetype that is set AFTER
-            -- NOTE: Switched to vim.schedule as its more appropriate for the task and no worry about slow processors etc
-            --buffer creation is read, instead of getting the blank filetypes, buffertypes when buffer is INITIALLY created
-            -- When a buffer is created its filetype and buffertype etc are blank, and focus reads these
-            -- By using defer, focus waits for some time, and then attempts to read the filetype and buffertype
-            -- This wait time is enough for plugins to properly set their options to the buffer such as filetype
-            -- This is an upstream vim issue because there is no way to specify filetype etc when creating a new buffer
-            -- You can only create a blank buffer, and then set the variables after it was created
-            -- Which means focus will initially read it as blank buffer and resize. This is an issue for many other plugins that read ft too.
+			-- NOTE: Switched to vim.schedule as its more appropriate for the task and no worry about slow processors etc
+			--buffer creation is read, instead of getting the blank filetypes, buffertypes when buffer is INITIALLY created
+			-- When a buffer is created its filetype and buffertype etc are blank, and focus reads these
+			-- By using defer, focus waits for some time, and then attempts to read the filetype and buffertype
+			-- This wait time is enough for plugins to properly set their options to the buffer such as filetype
+			-- This is an upstream vim issue because there is no way to specify filetype etc when creating a new buffer
+			-- You can only create a blank buffer, and then set the variables after it was created
+			-- Which means focus will initially read it as blank buffer and resize. This is an issue for many other plugins that read ft too.
 			{ 'WinEnter,BufEnter', '*', 'lua vim.schedule(function() require"focus".resize() end)' },
 			{ 'WinEnter,BufEnter', 'NvimTree', 'lua require"focus".resize()' },
 		},
@@ -61,16 +61,30 @@ function M.setup(config)
 		}
 	end
 	if config.relativenumber then
-		autocmds['focus_relativenumber'] = {
-			{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
-			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
-		}
+		if config.absolutenumber then
+			autocmds['focus_relativenumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+			}
+		else
+			autocmds['focus_relativenumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+			}
+		end
 	end
 	if config.hybridnumber then
-		autocmds['focus_hybridnumber'] = {
-			{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
-			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
-		}
+		if config.absolutenumber then
+			autocmds['focus_hybridnumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+			}
+		else
+			autocmds['focus_hybridnumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+			}
+		end
 	end
 
 	nvim_create_augroups(autocmds)
