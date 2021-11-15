@@ -278,12 +278,12 @@ require("focus").setup({relativenumber = true})
 require("focus").setup({hybridnumber = true})
 ```
 
-**Set Preserve Absolute Numbers**
+**Set Presrve Absolute Numbers**
 ```lua
 -- Preserve absolute numbers in the unfocussed windows
 -- Works in combination with relativenumber or hybridnumber
 -- Default: false
-require("focus").setup({absolutenumber = true})
+require("focus").setup({absolutenumber_unfocussed = true})
 ```
 
 **Set Focus Window Highlighting**

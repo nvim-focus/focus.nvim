@@ -61,7 +61,7 @@ function M.setup(config)
 		}
 	end
 	if config.relativenumber then
-		if config.absolutenumber then
+		if config.absolutenumber_unfocussed then
 			autocmds['focus_relativenumber'] = {
 				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
 				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
@@ -74,7 +74,7 @@ function M.setup(config)
 		end
 	end
 	if config.hybridnumber then
-		if config.absolutenumber then
+		if config.absolutenumber_unfocussed then
 			autocmds['focus_hybridnumber'] = {
 				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
 				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
