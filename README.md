@@ -205,6 +205,13 @@ require("focus").setup({excluded_buftypes = {"help"}})
 require("focus").setup({width = 120})
 ```
 
+**Set Focus Minimum Width**
+```lua
+-- Force minimum width for the unfocused window
+-- Default: Calculated based on golden ratio
+require("focus").setup({minwidth = 80})
+```
+
 **Set Focus Height**
 ```lua
 -- Force height for the focused window
