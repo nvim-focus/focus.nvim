@@ -12,7 +12,7 @@ local defaults = {
 	signcolumn = true,
 	colorcolumn = {
 		enable = false,
-		width = 80
+		width = 80,
 	},
 	winhighlight = false,
 	number = false,
@@ -23,8 +23,8 @@ local defaults = {
 	bufnew = false,
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
 	excluded_filetypes = {},
-  excluded_buftypes = { 'nofile', 'prompt', 'popup' },
-	blacklist = "{}" -- example (as string): blacklist = "{'dashboard', 'vista'}"
+	excluded_buftypes = { 'nofile', 'prompt', 'popup' },
+	blacklist = '{}', -- example (as string): blacklist = "{'dashboard', 'vista'}"
 }
 
 local function verify()

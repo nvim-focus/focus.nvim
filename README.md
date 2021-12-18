@@ -242,7 +242,7 @@ require("focus").setup({bufnew =  false})
 require("focus").setup({compatible_filetrees = {"filetree"}})
 ```
 
-**Set Focus Auto Cursorline**
+**Set Focus Auto Cursor Line**
 ```lua
 -- Displays a cursorline in the focussed window only
 -- Not displayed in unfocussed windows
@@ -257,6 +257,22 @@ require("focus").setup({cursorline = false})
 -- See :h signcolumn for more options e.g :set signcolum=yes
 -- Default: true, signcolumn=auto
 require("focus").setup({signcolumn = false})
+```
+
+**Set Focus Auto Cursor Column**
+```lua
+-- Displays a cursor column in the focussed window only
+-- See :h cursorcolumn for more options
+-- Default: false
+require("focus").setup({cursorcolumn = true})
+```
+
+**Set Focus Auto Color Column**
+```lua
+-- Displays a color column in the focussed window only
+-- See :h colorcolumn for more options
+-- Default: enable = false, width = 80
+require("focus").setup({colorcolumn = {enable = true, width = 100}})
 ```
 
 **Set Focus Auto Numbers**
