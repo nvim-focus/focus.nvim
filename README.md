@@ -357,6 +357,12 @@ Please note if you lazy load with command `:FocusToggle`, it will load focus, bu
 
 This is because focus is toggled on by default when you load focus, so if you load it and then run the command `:FocusToggle`, it toggles it off again.
 
+**My terminal window is being resized despite 'term' filetype being ignored**
+
+This is an issue with how and when the filetype is set for a buffer. It is recommended to use [toggleterm](https://github.com/akinsho/toggleterm.nvim)
+
+And set excluded filetypes to include toggleterm e.g.. `excluded_filetypes = { 'fterm', 'term', 'toggleterm' }`
+
 
 # Developers Only
 
