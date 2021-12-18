@@ -40,30 +40,52 @@ function M.setup(config)
 			{ 'WinEnter,BufEnter', 'NvimTree', 'lua require"focus".resize()' },
 		},
 	}
+
 	if config.signcolumn then
 		autocmds['focus_signcolumn'] = {
-			{
-				'BufEnter,WinEnter',
-				'*',
-				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal signcolumn=' .. get_sign_column(),
-			},
-			{
-				'BufLeave,WinLeave',
-				'*',
-				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal signcolumn=no',
-			},
+			{ 'BufEnter,WinEnter', '*', 'setlocal signcolumn=' .. get_sign_column() },
+			{ 'BufLeave,WinLeave', '*', 'setlocal signcolumn=no' },
 		}
 	end
 
 	if config.cursorline then
 		autocmds['focus_cursorline'] = {
-			{ 'BufEnter,WinEnter', '*', 'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal cursorline' },
-			{
-				'BufLeave,WinLeave',
-				'*',
-				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nocursorline',
-			},
+			{ 'BufEnter,WinEnter', '*', 'setlocal cursorline' },
+			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorline' },
 		}
+	end
+	-- FIXME: Disable line numbers on startify buffer, add user config?
+	if config.number then
+		autocmds['number'] = {
+			{ 'BufEnter,WinEnter', '*', 'set number' },
+			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber' },
+		}
+	end
+	if config.relativenumber then
+		if config.absolutenumber_unfocussed then
+			autocmds['focus_relativenumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+			}
+		else
+			autocmds['focus_relativenumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+			}
+		end
+	end
+	if config.hybridnumber then
+		if config.absolutenumber_unfocussed then
+			autocmds['focus_hybridnumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+			}
+		else
+			autocmds['focus_hybridnumber'] = {
+				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
+				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+			}
+		end
 	end
 
 	if config.cursorcolumn then
@@ -71,12 +93,12 @@ function M.setup(config)
 			{
 				'BufEnter,WinEnter',
 				'*',
-				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal cursorcolumn',
+				'setlocal cursorcolumn',
 			},
 			{
 				'BufLeave,WinLeave',
 				'*',
-				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nocursorcolumn',
+				'setlocal nocursorcolumn',
 			},
 		}
 	end
@@ -86,85 +108,16 @@ function M.setup(config)
 			{
 				'BufEnter,WinEnter',
 				'*',
-				'if index(luaeval("'
-					.. config.blacklist
-					.. '"), &ft) < 0 | setlocal colorcolumn='
-					.. config.colorcolumn.width,
+				'setlocal colorcolumn=' .. config.colorcolumn.width,
 			},
 			{
 				'BufLeave,WinLeave',
 				'*',
-				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal colorcolumn=0',
+				'setlocal colorcolumn=0',
 			},
 		}
 	end
 
-	-- FIXME: Disable line numbers on startify buffer, add user config?
-	if config.number then
-		autocmds['number'] = {
-			{ 'BufEnter,WinEnter', '*', 'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set number' },
-			{ 'BufLeave,WinLeave', '*', 'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nonumber' },
-		}
-	end
-
-	if config.relativenumber then
-		if config.absolutenumber_unfocussed then
-			autocmds['focus_relativenumber'] = {
-				{
-					'BufEnter,WinEnter',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set nonumber relativenumber',
-				},
-				{
-					'BufLeave,WinLeave',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal number norelativenumber',
-				},
-			}
-		else
-			autocmds['focus_relativenumber'] = {
-				{
-					'BufEnter,WinEnter',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set nonumber relativenumber',
-				},
-				{
-					'BufLeave,WinLeave',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nonumber norelativenumber',
-				},
-			}
-		end
-	end
-	if config.hybridnumber then
-		if config.absolutenumber_unfocussed then
-			autocmds['focus_hybridnumber'] = {
-				{
-					'BufEnter,WinEnter',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set number relativenumber',
-				},
-				{
-					'BufLeave,WinLeave',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal number norelativenumber',
-				},
-			}
-		else
-			autocmds['focus_hybridnumber'] = {
-				{
-					'BufEnter,WinEnter',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set number relativenumber',
-				},
-				{
-					'BufLeave,WinLeave',
-					'*',
-					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nonumber norelativenumber',
-				},
-			}
-		end
-	end
 	nvim_create_augroups(autocmds)
 end
 
