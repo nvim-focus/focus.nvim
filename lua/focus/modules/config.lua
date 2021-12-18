@@ -4,6 +4,7 @@ local DEFAULT_TREE_WIDTH = globals.nvim_tree_width or 30
 local defaults = {
 	enable = true,
 	width = 0,
+	minwidth = 0,
 	height = 0,
 	treewidth = DEFAULT_TREE_WIDTH,
 	cursorline = true,
@@ -17,11 +18,12 @@ local defaults = {
 	number = false,
 	relativenumber = false,
 	hybridnumber = false,
+	absolutenumber_unfocussed = false,
 	tmux = false,
 	bufnew = false,
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
 	excluded_filetypes = {},
-	excluded_buftypes = { 'nofile', 'prompt' },
+  excluded_buftypes = { 'nofile', 'prompt', 'popup' },
 	blacklist = "{}" -- example (as string): blacklist = "{'dashboard', 'vista'}"
 }
 

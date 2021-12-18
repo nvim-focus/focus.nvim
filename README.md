@@ -193,7 +193,7 @@ require("focus").setup({enable = false})
 -- Prevents focus automatically resizing windows based on configured excluded filetypes or buftypes
 -- Query filetypes using :lua print(vim.bo.ft) or buftypes using :lua print(vim.bo.buftype)
 -- Default[filetypes]: none
--- Default[buftypes]: 'nofile', 'prompt', 'help'
+-- Default[buftypes]: 'nofile', 'prompt', 'popup'
 require("focus").setup({excluded_filetypes = {"toggleterm"}})
 require("focus").setup({excluded_buftypes = {"help"}})
 ```
@@ -203,6 +203,13 @@ require("focus").setup({excluded_buftypes = {"help"}})
 -- Force width for the focused window
 -- Default: Calculated based on golden ratio
 require("focus").setup({width = 120})
+```
+
+**Set Focus Minimum Width**
+```lua
+-- Force minimum width for the unfocused window
+-- Default: Calculated based on golden ratio
+require("focus").setup({minwidth = 80})
 ```
 
 **Set Focus Height**
@@ -276,6 +283,14 @@ require("focus").setup({relativenumber = true})
 -- Combination of :h relativenumber, but also displays the line number of the current line only
 -- Default: false
 require("focus").setup({hybridnumber = true})
+```
+
+**Set Presrve Absolute Numbers**
+```lua
+-- Preserve absolute numbers in the unfocussed windows
+-- Works in combination with relativenumber or hybridnumber
+-- Default: false
+require("focus").setup({absolutenumber_unfocussed = true})
 ```
 
 **Set Focus Window Highlighting**

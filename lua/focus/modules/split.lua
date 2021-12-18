@@ -11,7 +11,8 @@ local function process_split_args(created, args, bufnew)
 		cmd('edit ' .. args_array[1])
 	elseif args_array[1] == 'cmd' and args_array[2] ~= nil then
 		cmd('enew')
-		cmd(args_array[2])
+		local cmd_to_run = table.concat(args_array, ' ', 2)
+		cmd(cmd_to_run)
 	elseif created == true and bufnew == true then
 		cmd('enew')
 	end
@@ -114,7 +115,7 @@ function M.split_cycle(reverse, bufnew)
 	if reverse == 'reverse' then
 		cmd('wincmd W')
 	else
-	cmd('wincmd w')
+		cmd('wincmd w')
 	end
 
 	if winnr == vim.api.nvim_get_current_win() then

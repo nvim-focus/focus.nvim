@@ -34,13 +34,17 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local excluded_bt_set = utils.to_set(utils.to_lower(config.excluded_buftypes))
 	if vim.g.enabled_focus_resizing == 0 then
 		return
-    elseif ft == 'diffviewfiles' then
-        vim.schedule(function() vim.cmd('FocusEqualise') end)
-    elseif ft == 'spectre_panel' then
-        vim.schedule(function() vim.cmd('FocusEqualise') end)
-	elseif filetrees_set[ft] or ft == "nvimtree" then
-			vim.o.winminwidth = 0
-			vim.o.winwidth = config.treewidth
+	elseif ft == 'diffviewfiles' then
+		vim.schedule(function()
+			vim.cmd('FocusEqualise')
+		end)
+	elseif ft == 'spectre_panel' then
+		vim.schedule(function()
+			vim.cmd('FocusEqualise')
+		end)
+	elseif filetrees_set[ft] or ft == 'nvimtree' then
+		vim.o.winminwidth = 0
+		vim.o.winwidth = config.treewidth
 	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
@@ -53,19 +57,23 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 			vim.o.winwidth = config.width
 		else
 			vim.o.winwidth = golden_ratio_width()
-			vim.o.winminwidth = golden_ratio_minwidth()
+			if config.minwidth > 0 then
+				vim.o.winminwidth = config.minwidth
+			else
+				vim.o.winminwidth = golden_ratio_minwidth()
+			end
 		end
 
 		if config.height > 0 then
 			vim.o.winminheight = config.height
 			vim.o.winheight = config.height
-        else
+		else
 			vim.o.winheight = golden_ratio_height()
 			vim.o.winminheight = golden_ratio_minheight()
 		end
 	end
 
-    --TODO: Find solution to nvimtree resizing when unfoccused for the below code..
+	--TODO: Find solution to nvimtree resizing when unfoccused for the below code..
 	--[[ elseif ft == 'diffviewfiles' or ft == 'spectre_panel' then
 		vim.cmd('FocusEqualise')
         return
