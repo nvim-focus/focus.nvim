@@ -8,7 +8,12 @@ local defaults = {
 	height = 0,
 	treewidth = DEFAULT_TREE_WIDTH,
 	cursorline = true,
+	cursorcolumn = false,
 	signcolumn = true,
+	colorcolumn = {
+		enable = false,
+		width = 80
+	},
 	winhighlight = false,
 	number = false,
 	relativenumber = false,
@@ -18,7 +23,8 @@ local defaults = {
 	bufnew = false,
 	compatible_filetrees = { 'nvimtree', 'nerdtree', 'chadtree', 'fern' },
 	excluded_filetypes = {},
-	excluded_buftypes = { 'nofile', 'prompt', 'popup' },
+  excluded_buftypes = { 'nofile', 'prompt', 'popup' },
+	blacklist = "{}" -- example (as string): blacklist = "{'dashboard', 'vista'}"
 }
 
 local function verify()

@@ -42,51 +42,129 @@ function M.setup(config)
 	}
 	if config.signcolumn then
 		autocmds['focus_signcolumn'] = {
-			{ 'BufEnter,WinEnter', '*', 'setlocal signcolumn=' .. get_sign_column() },
-			{ 'BufLeave,WinLeave', '*', 'setlocal signcolumn=no' },
+			{
+				'BufEnter,WinEnter',
+				'*',
+				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal signcolumn=' .. get_sign_column(),
+			},
+			{
+				'BufLeave,WinLeave',
+				'*',
+				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal signcolumn=no',
+			},
 		}
 	end
 
 	if config.cursorline then
 		autocmds['focus_cursorline'] = {
-			{ 'BufEnter,WinEnter', '*', 'setlocal cursorline' },
-			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorline' },
+			{ 'BufEnter,WinEnter', '*', 'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal cursorline' },
+			{
+				'BufLeave,WinLeave',
+				'*',
+				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nocursorline',
+			},
 		}
 	end
+
+	if config.cursorcolumn then
+		autocmds['focus_cursorcolumn'] = {
+			{
+				'BufEnter,WinEnter',
+				'*',
+				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal cursorcolumn',
+			},
+			{
+				'BufLeave,WinLeave',
+				'*',
+				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nocursorcolumn',
+			},
+		}
+	end
+
+	if config.colorcolumn.enable then
+		autocmds['focus_colorcolumn'] = {
+			{
+				'BufEnter,WinEnter',
+				'*',
+				'if index(luaeval("'
+					.. config.blacklist
+					.. '"), &ft) < 0 | setlocal colorcolumn='
+					.. config.colorcolumn.width,
+			},
+			{
+				'BufLeave,WinLeave',
+				'*',
+				'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal colorcolumn=0',
+			},
+		}
+	end
+
 	-- FIXME: Disable line numbers on startify buffer, add user config?
 	if config.number then
 		autocmds['number'] = {
-			{ 'BufEnter,WinEnter', '*', 'set number' },
-			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber' },
+			{ 'BufEnter,WinEnter', '*', 'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set number' },
+			{ 'BufLeave,WinLeave', '*', 'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nonumber' },
 		}
 	end
+
 	if config.relativenumber then
 		if config.absolutenumber_unfocussed then
 			autocmds['focus_relativenumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+				{
+					'BufEnter,WinEnter',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set nonumber relativenumber',
+				},
+				{
+					'BufLeave,WinLeave',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal number norelativenumber',
+				},
 			}
 		else
 			autocmds['focus_relativenumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+				{
+					'BufEnter,WinEnter',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set nonumber relativenumber',
+				},
+				{
+					'BufLeave,WinLeave',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nonumber norelativenumber',
+				},
 			}
 		end
 	end
 	if config.hybridnumber then
 		if config.absolutenumber_unfocussed then
 			autocmds['focus_hybridnumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+				{
+					'BufEnter,WinEnter',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set number relativenumber',
+				},
+				{
+					'BufLeave,WinLeave',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal number norelativenumber',
+				},
 			}
 		else
 			autocmds['focus_hybridnumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+				{
+					'BufEnter,WinEnter',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | set number relativenumber',
+				},
+				{
+					'BufLeave,WinLeave',
+					'*',
+					'if index(luaeval("' .. config.blacklist .. '"), &ft) < 0 | setlocal nonumber norelativenumber',
+				},
 			}
 		end
 	end
-
 	nvim_create_augroups(autocmds)
 end
 
