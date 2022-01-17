@@ -56,7 +56,8 @@ function M.split_nicely(args, bufnew)
 	local split_cmd = golden_ratio_split_cmd(winnr)
 
 	-- this allows use to get 4 split layout
-	if #vim.api.nvim_tabpage_list_wins({ 0 }) == 4 then
+	-- if #vim.api.nvim_tabpage_list_wins({ 0 }) == 4 then
+	if #vim.api.nvim_tabpage_list_wins(0) == 4 then
 		cmd('wincmd w')
 	end
 
