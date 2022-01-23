@@ -3,6 +3,7 @@ local DEFAULT_TREE_WIDTH = globals.nvim_tree_width or 30
 
 local defaults = {
 	enable = true,
+	autoresize = true,
 	width = 0,
 	minwidth = 0,
 	height = 0,

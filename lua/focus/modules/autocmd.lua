@@ -25,8 +25,9 @@ local function nvim_create_augroups(definitions)
 end
 
 function M.setup(config)
-	local autocmds = {
-		focus_resize = {
+	local autocmds = {}
+	if config.autoresize then
+		autocmds['focus_resize'] = {
 			--Adding WinEnter no longer breaks snap etc support.. using *defer_fn* ensures filetype that is set AFTER
 			-- NOTE: Switched to vim.schedule as its more appropriate for the task and no worry about slow processors etc
 			--buffer creation is read, instead of getting the blank filetypes, buffertypes when buffer is INITIALLY created
@@ -38,8 +39,8 @@ function M.setup(config)
 			-- Which means focus will initially read it as blank buffer and resize. This is an issue for many other plugins that read ft too.
 			{ 'WinEnter,BufEnter', '*', 'lua vim.schedule(function() require"focus".resize() end)' },
 			{ 'WinEnter,BufEnter', 'NvimTree', 'lua require"focus".resize()' },
-		},
-	}
+		}
+	end
 
 	if config.signcolumn then
 		autocmds['focus_signcolumn'] = {

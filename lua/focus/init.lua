@@ -39,7 +39,9 @@ M.setup = function(options)
 		end
 
 		-- Finally begin resizing when enabled and configs set
+		if config.autoresize then
 		M.resize()
+		end
 	end
 end
 
