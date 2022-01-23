@@ -47,12 +47,6 @@
 ## Installation
 
 
-### Breaking Change
-
-You must now run the `setup()` function to begin using focus.
-
-Details below and code snippets are in the readme to get you started.
-
 #### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
 use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
@@ -187,6 +181,14 @@ require("focus").setup({hybridnumber = true, excluded_filetypes = {"toggleterm"}
 -- Default: true
 require("focus").setup({enable = false})
 ```
+
+**Enable/Disable Focus Window Autoresizing**
+```lua
+--The focussed window will no longer automatically resize. Other focus features are still available
+-- Default: true
+require("focus").setup({autoresize = false})
+```
+
 
 **Set Focus Excluded Filetypes or Buftypes**
 ```lua
