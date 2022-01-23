@@ -55,6 +55,11 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	else
 		if config.width > 0 then
 			vim.o.winwidth = config.width
+			if config.minwidth > 0 then
+				vim.o.winminwidth = config.minwidth
+			else
+				vim.o.winminwidth = golden_ratio_minwidth()
+			end
 		else
 			vim.o.winwidth = golden_ratio_width()
 			if config.minwidth > 0 then
