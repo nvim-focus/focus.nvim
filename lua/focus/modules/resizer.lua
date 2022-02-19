@@ -26,15 +26,19 @@ end
 -- TODO: Support: Vista.vim
 -- TEST: floating windows, snap/telescope, toggleterm, trees, scrollview.nvim, blank buffer, popups during autocompletion i.e coq
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
+	if vim.g.enabled_focus_resizing == 0 or vim.api.nvim_win_get_option(0, 'diff') then
+		return
+	end
+
 	local winnr = vim.api.nvim_get_current_win()
 	local ft = vim.bo.ft:lower()
 	local bt = vim.bo.buftype:lower()
 	local filetrees_set = utils.to_set(utils.to_lower(config.compatible_filetrees))
 	local excluded_ft_set = utils.to_set(utils.to_lower(config.excluded_filetypes))
 	local excluded_bt_set = utils.to_set(utils.to_lower(config.excluded_buftypes))
-	if vim.g.enabled_focus_resizing == 0 then
-		return
-	elseif ft == 'diffviewfiles' then
+	local forced_ft_set = utils.to_set(utils.to_lower(config.forced_filetypes))
+
+	if ft == 'diffviewfiles' or ft == 'spectre_panel' then
 		vim.schedule(function()
 			vim.cmd('FocusEqualise')
 		end)
