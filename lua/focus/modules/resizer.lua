@@ -32,6 +32,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local filetrees_set = utils.to_set(utils.to_lower(config.compatible_filetrees))
 	local excluded_ft_set = utils.to_set(utils.to_lower(config.excluded_filetypes))
 	local excluded_bt_set = utils.to_set(utils.to_lower(config.excluded_buftypes))
+	local forced_ft_set = utils.to_set(utils.to_lower(config.forced_filetypes))
 	if vim.g.enabled_focus_resizing == 0 then
 		return
 	elseif ft == 'diffviewfiles' then
@@ -45,7 +46,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	elseif filetrees_set[ft] or ft == 'nvimtree' then
 		vim.o.winminwidth = 0
 		vim.o.winwidth = config.treewidth
-	elseif excluded_bt_set[bt] or excluded_ft_set[ft] then
+	elseif (excluded_bt_set[bt] or excluded_ft_set[ft]) and not forced_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
 		vim.o.winminwidth = 0
