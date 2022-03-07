@@ -198,7 +198,11 @@ require("focus").setup({autoresize = false})
 -- Default[buftypes]: 'nofile', 'prompt', 'popup'
 require("focus").setup({excluded_filetypes = {"toggleterm"}})
 require("focus").setup({excluded_buftypes = {"help"}})
+-- Enable resizing for excluded filetypes using forced_filetypes
+require("focus").setup({forced_filetypes = {"dan_repl"}})
 ```
+
+
 
 **Set Focus Width**
 ```lua
