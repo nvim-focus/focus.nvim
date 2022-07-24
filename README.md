@@ -225,11 +225,24 @@ require("focus").setup({minwidth = 80})
 require("focus").setup({height = 40})
 ```
 
+**Set Focus Minimum Height**
+```lua
+-- Force minimum height for the unfocused window
+-- Default: 0
+require("focus").setup({minheight = 10})
+```
+
 **Set Focus Tree Width**
 ```lua
 -- Sets the width of directory tree buffers such as NerdTree, NvimTree and CHADTree
 -- Default: vim.g.nvim_tree_width or 30
 require("focus").setup({treewidth = 20})
+```
+**Set Focus Quickfix Height**
+```lua
+-- Sets the height of quickfix panel
+-- Default: 10
+require("focus").setup({quickfixheight = 20})
 ```
 
 **When creating a new split window, do/don't initialise it as an empty buffer**

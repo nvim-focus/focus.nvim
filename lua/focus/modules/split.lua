@@ -101,7 +101,6 @@ function M.split_command(direction, args, tmux, bufnew)
 			cmd('wincmd v')
 			cmd('wincmd ' .. direction)
 		elseif direction == 'j' or direction == 'k' then
-			print('hi')
 			cmd('wincmd s')
 			cmd('wincmd ' .. direction)
 		end
