@@ -83,7 +83,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 				vim.o.winminheight = config.minheight
 			else
 				--NOTE: avoid setting width lower than mindwidth
-				vim.o.winminheight = config.height - 1
+				vim.o.winminheight = golden_ratio_minheight()
 			end
 		else
 			vim.o.winheight = golden_ratio_height()
