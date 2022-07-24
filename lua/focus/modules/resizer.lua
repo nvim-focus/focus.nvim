@@ -37,6 +37,8 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local excluded_ft_set = utils.to_set(utils.to_lower(config.excluded_filetypes))
 	local excluded_bt_set = utils.to_set(utils.to_lower(config.excluded_buftypes))
 	local forced_ft_set = utils.to_set(utils.to_lower(config.forced_filetypes))
+	local excluded_windows_set = utils.to_set(config.excluded_windows)
+	local winnr = vim.api.nvim_get_current_win()
 
 	if ft == 'diffviewfiles' or ft == 'spectre_panel' then
 		vim.schedule(function()
@@ -45,7 +47,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	elseif filetrees_set[ft] or ft == 'nvimtree' then
 		vim.o.winminwidth = config.minwidth or 0
 		vim.o.winwidth = config.treewidth
-	elseif (excluded_bt_set[bt] or excluded_ft_set[ft]) and not forced_ft_set[ft] then
+	elseif (excluded_bt_set[bt] or excluded_ft_set[ft]) or excluded_windows_set[winnr] and not forced_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
 		vim.o.winminwidth = 0

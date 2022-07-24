@@ -18,6 +18,16 @@ function M.to_set(list)
 	return set
 end
 
+function M.add_to_set(set, item)
+	set[item] = true
+	return set
+end
+
+function M.remove_from_set(set, item)
+	set[item] = nil
+	return set
+end
+
 -- SPLITS A STRING BY SPACE FOR : COMMAND PARSING
 function M.split(s, delimiter)
 	local result = {}

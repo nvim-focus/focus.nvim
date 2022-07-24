@@ -14,7 +14,7 @@
 
 👌 Maximises current split/window automatically when cursor moves based on golden ratio
 
-⚙️  Set Focus auto-cursorline/signcolumn/linenums & active/inactive win-highlight + disable
+⚙️ Set Focus auto-cursorline/signcolumn/linenums & active/inactive win-highlight + disable
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, Snap, FZF, Diffview.nvim & QuickFix
 
@@ -76,6 +76,10 @@ lua require("focus").setup()
 | `:FocusToggle` |  Toggle focus on and off again. |
 | `:FocusSplitNicely` | Split a window based on the golden ratio rule |
 | `:FocusSplitCycle` | If there are no splits, create one and move to it, else cycle focussed split. `:FocusSplitCycle reverse` for counterclockwise |
+| `:FocusDisableWindow` | Disable resizing of the current window (winnr). |
+| `:FocusEnableWindow` | Enable resizing of the current window (winnr). |
+| `:FocusToggleWindow` | Toggle focus on and off again on a per window basis. |
+| `:FocusGetDisabledWindows` | Pretty prints the list of disabled window ID's along with the current window ID. |
 | `:FocusSplitLeft` | Move to existing or create a new split to the left of your current window + open file or custom command |
 | `:FocusSplitDown` | Move to existing or create a new split to the bottom of your current window + open file or custom command |
 | `:FocusSplitUp` | Move to existing or create a new split to the top of your current window + open file or custom command |

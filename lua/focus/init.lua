@@ -4,6 +4,7 @@ local autocmd = require('focus.modules.autocmd')
 local resizer = require('focus.modules.resizer')
 local split = require('focus.modules.split')
 local functions = require('focus.modules.functions')
+local utils = require('focus.modules.utils')
 
 local M = {}
 
@@ -85,6 +86,45 @@ end
 
 function M.focus_max_or_equal()
 	functions.focus_max_or_equal()
+end
+
+function M.focus_disable_window()
+	table.insert(M.excluded_windows, vim.api.nvim_get_current_win())
+end
+
+function M.focus_enable_window()
+	for k, v in pairs(M.excluded_windows) do
+		if v == vim.api.nvim_get_current_win() then
+			table.remove(M.excluded_windows, k)
+		end
+	end
+end
+
+
+function M.focus_toggle_window()
+	for _, v in pairs(M.excluded_windows) do
+		if v == vim.api.nvim_get_current_win() then
+			M.focus_enable_window()
+			return
+		end
+	end
+		M.focus_disable_window()
+end
+
+
+function M.focus_get_disabled_windows()
+	print('------------------')
+	print('█▀ ▄▀▄ ▄▀▀ █ █ ▄▀▀')
+	print('█▀ ▀▄▀ ▀▄▄ ▀▄█ ▄██')
+	print('------------------')
+	print('Disabled Windows')
+	for _, v in pairs(M.excluded_windows) do
+		print('- ' .. v)
+	end
+	print('-------------------')
+	print('Current Window')
+	print('- ' .. vim.api.nvim_get_current_win())
+	print('-------------------')
 end
 
 return M
