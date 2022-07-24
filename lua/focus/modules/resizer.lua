@@ -30,7 +30,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		return
 	end
 
-	local winnr = vim.api.nvim_get_current_win()
+	-- local winnr = vim.api.nvim_get_current_win()
 	local ft = vim.bo.ft:lower()
 	local bt = vim.bo.buftype:lower()
 	local filetrees_set = utils.to_set(utils.to_lower(config.compatible_filetrees))
@@ -39,10 +39,6 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local forced_ft_set = utils.to_set(utils.to_lower(config.forced_filetypes))
 
 	if ft == 'diffviewfiles' or ft == 'spectre_panel' then
-		vim.schedule(function()
-			vim.cmd('FocusEqualise')
-		end)
-	elseif ft == 'spectre_panel' then
 		vim.schedule(function()
 			vim.cmd('FocusEqualise')
 		end)
