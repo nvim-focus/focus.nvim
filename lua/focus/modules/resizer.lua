@@ -44,7 +44,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 			vim.cmd('FocusEqualise')
 		end)
 	elseif filetrees_set[ft] or ft == 'nvimtree' then
-		vim.o.winminwidth = 0
+		vim.o.winminwidth = config.minwidth or 0
 		vim.o.winwidth = config.treewidth
 	elseif (excluded_bt_set[bt] or excluded_ft_set[ft]) and not forced_ft_set[ft] then
 		vim.o.winminheight = 0
@@ -64,18 +64,41 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		else
 			vim.o.winwidth = golden_ratio_width()
 			if config.minwidth > 0 then
-				vim.o.winminwidth = config.minwidth
+				if config.minwidth < golden_ratio_width() then
+					print(
+						'Focus.nvim: Configured minwidth is less than default golden_ratio_width derived from your display. Please set minwidth to at least '
+							.. golden_ratio_width()
+					)
+				else
+					vim.o.winminwidth = config.minwidth
+				end
 			else
 				vim.o.winminwidth = golden_ratio_minwidth()
 			end
 		end
 
 		if config.height > 0 then
-			vim.o.winminheight = 0
 			vim.o.winheight = config.height
+			if config.minheight > 0 then
+				vim.o.winminheight = config.minheight
+			else
+				--NOTE: avoid setting width lower than mindwidth
+				vim.o.winminheight = config.height - 1
+			end
 		else
 			vim.o.winheight = golden_ratio_height()
-			vim.o.winminheight = golden_ratio_minheight()
+			if config.minheight > 0 then
+				if config.minheight < golden_ratio_height() then
+					print(
+						'Focus.nvim: Configured minheight is less than default golden_ratio_height derived from your display. Please set minheight to at least '
+							.. golden_ratio_height()
+					)
+				else
+					vim.o.winminheight = config.minheight
+				end
+			else
+				vim.o.winminheight = golden_ratio_minheight()
+			end
 		end
 	end
 
