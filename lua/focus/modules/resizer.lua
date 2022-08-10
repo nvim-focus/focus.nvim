@@ -44,9 +44,11 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 		vim.schedule(function()
 			vim.cmd('FocusEqualise')
 		end)
-	elseif filetrees_set[ft] or ft == 'nvimtree' then
+	elseif filetrees_set[ft] then
 		vim.o.winminwidth = config.minwidth or 0
 		vim.o.winwidth = config.treewidth
+		vim.o.winminheight = 0
+		vim.o.winheight = 1
 	elseif (excluded_bt_set[bt] or excluded_ft_set[ft]) or excluded_windows_set[winnr] and not forced_ft_set[ft] then
 		vim.o.winminheight = 0
 		vim.o.winheight = 1
