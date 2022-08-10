@@ -51,7 +51,6 @@ function M.is_buffer_filetype_excluded(config)
 		(filetrees_set[ft] or excluded_bt_set[bt] or excluded_ft_set[ft])
 		or excluded_windows_set[winnr] and not forced_ft_set[ft]
 	then
-		print('hello')
 		return true
 	else
 		return false
