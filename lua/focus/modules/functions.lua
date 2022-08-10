@@ -1,4 +1,5 @@
 local vim = vim
+local cmd = vim.cmd
 local M = {}
 
 M.focus_enable = function()
@@ -19,7 +20,7 @@ M.focus_disable = function()
 		vim.o.winwidth = 20
 		vim.o.winminheight = 1
 		vim.o.winheight = 1
-		vim.cmd('wincmd=')
+		cmd('wincmd=')
 	end
 end
 
@@ -43,7 +44,7 @@ M.focus_equalise = function()
 	vim.o.winwidth = 20
 	vim.o.winminheight = 1
 	vim.o.winheight = 1
-	vim.cmd('wincmd=')
+	cmd('wincmd=')
 end
 
 M.focus_max_or_equal = function()

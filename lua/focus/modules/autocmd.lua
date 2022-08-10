@@ -1,16 +1,8 @@
+local utils = require('focus.modules.utils')
 local cmd = vim.api.nvim_command
+local vim = vim
 local M = {}
 
--- if focus auto signcolumn is set to true then
--- we assume it to be auto in case signcolumn = no
-local function get_sign_column()
-	local default_signcolumn = 'auto'
-	if vim.opt.signcolumn:get() == 'no' then
-		return default_signcolumn
-	else
-		return vim.opt.signcolumn:get()
-	end
-end
 
 local function nvim_create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do
@@ -23,6 +15,99 @@ local function nvim_create_augroups(definitions)
 		cmd('augroup END')
 	end
 end
+
+-- if focus auto signcolumn is set to true then
+-- we assume it to be auto in case signcolumn = no
+local function get_sign_column()
+	local default_signcolumn = 'auto'
+	if vim.opt.signcolumn:get() == 'no' then
+		return default_signcolumn
+	else
+		return vim.opt.signcolumn:get()
+	end
+end
+
+M.run_cmd = function(config, command)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		cmd(command)
+	end
+end
+
+--[[ M.signcolumn = function (config, entering_buffer)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		if entering_buffer then
+			cmd('setlocal signcolumn=' .. utils.get_sign_column())
+		else
+			cmd('setlocal signcolumn=no')
+		end
+
+
+		end
+end
+
+M.cursorline = function (config, entering_buffer)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		if entering_buffer then
+			cmd('setlocal cursorline')
+		else
+			cmd('setlocal nocursorline')
+		end
+	end
+end
+
+M.number = function(config, entering_buffer)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		if entering_buffer then
+			cmd('set number')
+		else
+			cmd('setlocal nonumber')
+		end
+	end
+end
+
+M.relativenumber = function(config, entering_buffer)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		if entering_buffer then
+			cmd('set nonumber relativenumber')
+		else
+			cmd('setlocal number norelativenumber')
+		end
+	end
+end
+
+M.hybridnumber = function(config, entering_buffer)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		if entering_buffer then
+			cmd('setlocal number=yes')
+			cmd('setlocal relativenumber=yes')
+		else
+			cmd('set nonumber relativenumber')
+			cmd('setlocal nonumber norelativenumber')
+		end
+	end
+end
+
+M.cursorcolumn = function(config, entering_buffer)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		if entering_buffer then
+			cmd('setlocal cursorcolumn=yes')
+		else
+			cmd('setlocal cursorcolumn=no')
+		end
+	end
+end
+
+M.colorcolumn = function(config, entering_buffer)
+	if not (utils.is_buffer_filtype_excluded(config)) then
+		if entering_buffer then
+			cmd('setlocal colorcolumn=yes')
+		else
+			cmd('setlocal colorcolumn=no')
+		end
+	end
+end ]]
+
+
 
 function M.setup(config)
 	local autocmds = {}
@@ -49,47 +134,46 @@ function M.setup(config)
 
 	if config.signcolumn then
 		autocmds['focus_signcolumn'] = {
-			{ 'BufEnter,WinEnter', '*', 'setlocal signcolumn=' .. get_sign_column() },
-			{ 'BufLeave,WinLeave', '*', 'setlocal signcolumn=no' },
+			{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("setlocal signcolumn=' .. get_sign_column() .. '")' },
+			{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal signcolumn=no")' },
 		}
 	end
 
 	if config.cursorline then
 		autocmds['focus_cursorline'] = {
-			{ 'BufEnter,WinEnter', '*', 'setlocal cursorline' },
-			{ 'BufLeave,WinLeave', '*', 'setlocal nocursorline' },
+			{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("setlocal cursorline")' },
+			{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nocursorline")' },
 		}
 	end
-	-- FIXME: Disable line numbers on startify buffer, add user config?
 	if config.number then
 		autocmds['number'] = {
-			{ 'BufEnter,WinEnter', '*', 'set number' },
-			{ 'BufLeave,WinLeave', '*', 'setlocal nonumber' },
+			{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set number")' },
+			{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nonumber")' },
 		}
 	end
 	if config.relativenumber then
 		if config.absolutenumber_unfocussed then
 			autocmds['focus_relativenumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set nonumber relativenumber")' },
+				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal number norelativenumber")' },
 			}
 		else
 			autocmds['focus_relativenumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set nonumber relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set nonumber relativenumber")' },
+				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nonumber norelativenumber")' },
 			}
 		end
 	end
 	if config.hybridnumber then
 		if config.absolutenumber_unfocussed then
 			autocmds['focus_hybridnumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal number norelativenumber' },
+				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set number relativenumber")' },
+				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal number norelativenumber")' },
 			}
 		else
 			autocmds['focus_hybridnumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'set number relativenumber' },
-				{ 'BufLeave,WinLeave', '*', 'setlocal nonumber norelativenumber' },
+				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set number relativenumber")' },
+				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nonumber norelativenumber")' },
 			}
 		end
 	end
@@ -99,12 +183,12 @@ function M.setup(config)
 			{
 				'BufEnter,WinEnter',
 				'*',
-				'setlocal cursorcolumn',
+				'lua require"focus".run_cmd("setlocal cursorcolumn")',
 			},
 			{
 				'BufLeave,WinLeave',
 				'*',
-				'setlocal nocursorcolumn',
+				'lua require"focus".run_cmd("setlocal nocursorcolumn")',
 			},
 		}
 	end
@@ -114,12 +198,12 @@ function M.setup(config)
 			{
 				'BufEnter,WinEnter',
 				'*',
-				'setlocal colorcolumn=' .. config.colorcolumn.width,
+				'lua require"focus".run_cmd("setlocal colorcolumn=' .. config.colorcolumn.width .. '")',
 			},
 			{
 				'BufLeave,WinLeave',
 				'*',
-				'setlocal colorcolumn=0',
+				'lua require"focus".run_cmd("setlocal colorcolumn=0")',
 			},
 		}
 	end

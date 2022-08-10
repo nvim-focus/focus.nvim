@@ -37,4 +37,20 @@ function M.split(s, delimiter)
 	return result
 end
 
+-- RETURNS TRUE IF THE STRING IS IN THE SET
+function M.is_buffer_filtype_excluded(config)
+	local ft = vim.bo.ft:lower()
+	local bt = vim.bo.buftype:lower()
+	local filetrees_set = M.to_set(M.to_lower(config.compatible_filetrees))
+	local excluded_ft_set = M.to_set(M.to_lower(config.excluded_filetypes))
+	local excluded_bt_set = M.to_set(M.to_lower(config.excluded_buftypes))
+	local forced_ft_set = M.to_set(M.to_lower(config.forced_filetypes))
+	local excluded_windows_set = M.to_set(config.excluded_windows)
+	local winnr = vim.api.nvim_get_current_win()
+	if (filetrees_set[ft] or excluded_bt_set[bt] or excluded_ft_set[ft]) or excluded_windows_set[winnr] and not forced_ft_set[ft] then
+		return true
+	else return false
+	end
+end
+
 return M

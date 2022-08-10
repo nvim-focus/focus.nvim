@@ -1,10 +1,9 @@
 local config = require('focus.modules.config')
 local commands = require('focus.modules.commands')
 local autocmd = require('focus.modules.autocmd')
-local resizer = require('focus.modules.resizer')
 local split = require('focus.modules.split')
 local functions = require('focus.modules.functions')
-local utils = require('focus.modules.utils')
+local resizer = require('focus.modules.resizer')
 
 local M = {}
 
@@ -44,6 +43,39 @@ M.setup = function(options)
 			M.resize()
 		end
 	end
+end
+
+--[[ M.signcolumn = function()
+	functions.focus_signcolumn(M)
+end
+
+M.cursorline = function()
+	functions.focus_cursorline(M)
+end
+
+M.number = function()
+	functions.focus_number(M)
+end
+
+M.relativenumber = function()
+	functions.focus_relativenumber(M)
+end
+
+M.hybridnumber = function()
+	functions.focus_hybridnumber(M)
+end
+
+M.cursorcolumn = function()
+	functions.focus_cursorcolumn(M)
+end
+
+M.colorcolumn = function()
+	functions.focus_colorcolumn(M)
+end ]]
+
+--Used to run commands in respect to filetype/buffertype exclusions
+M.run_cmd = function(command)
+	autocmd.run_cmd(M, command)
 end
 
 M.resize = function()
