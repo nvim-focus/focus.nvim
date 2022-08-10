@@ -40,7 +40,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 	local excluded_windows_set = utils.to_set(config.excluded_windows)
 	local winnr = vim.api.nvim_get_current_win()
 
-	if ft == 'diffviewfiles' or ft == 'spectre_panel' then
+	if ft == 'diffviewfiles' then
 		vim.schedule(function()
 			vim.cmd('FocusEqualise')
 		end)
