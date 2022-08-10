@@ -3,7 +3,6 @@ local cmd = vim.api.nvim_command
 local vim = vim
 local M = {}
 
-
 local function nvim_create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do
 		cmd('augroup ' .. group_name)
@@ -28,86 +27,10 @@ local function get_sign_column()
 end
 
 M.run_cmd = function(config, command)
-	if not (utils.is_buffer_filtype_excluded(config)) then
+	if not (utils.is_buffer_filetype_excluded(config)) then
 		cmd(command)
 	end
 end
-
---[[ M.signcolumn = function (config, entering_buffer)
-	if not (utils.is_buffer_filtype_excluded(config)) then
-		if entering_buffer then
-			cmd('setlocal signcolumn=' .. utils.get_sign_column())
-		else
-			cmd('setlocal signcolumn=no')
-		end
-
-
-		end
-end
-
-M.cursorline = function (config, entering_buffer)
-	if not (utils.is_buffer_filtype_excluded(config)) then
-		if entering_buffer then
-			cmd('setlocal cursorline')
-		else
-			cmd('setlocal nocursorline')
-		end
-	end
-end
-
-M.number = function(config, entering_buffer)
-	if not (utils.is_buffer_filtype_excluded(config)) then
-		if entering_buffer then
-			cmd('set number')
-		else
-			cmd('setlocal nonumber')
-		end
-	end
-end
-
-M.relativenumber = function(config, entering_buffer)
-	if not (utils.is_buffer_filtype_excluded(config)) then
-		if entering_buffer then
-			cmd('set nonumber relativenumber')
-		else
-			cmd('setlocal number norelativenumber')
-		end
-	end
-end
-
-M.hybridnumber = function(config, entering_buffer)
-	if not (utils.is_buffer_filtype_excluded(config)) then
-		if entering_buffer then
-			cmd('setlocal number=yes')
-			cmd('setlocal relativenumber=yes')
-		else
-			cmd('set nonumber relativenumber')
-			cmd('setlocal nonumber norelativenumber')
-		end
-	end
-end
-
-M.cursorcolumn = function(config, entering_buffer)
-	if not (utils.is_buffer_filtype_excluded(config)) then
-		if entering_buffer then
-			cmd('setlocal cursorcolumn=yes')
-		else
-			cmd('setlocal cursorcolumn=no')
-		end
-	end
-end
-
-M.colorcolumn = function(config, entering_buffer)
-	if not (utils.is_buffer_filtype_excluded(config)) then
-		if entering_buffer then
-			cmd('setlocal colorcolumn=yes')
-		else
-			cmd('setlocal colorcolumn=no')
-		end
-	end
-end ]]
-
-
 
 function M.setup(config)
 	local autocmds = {}

@@ -45,34 +45,6 @@ M.setup = function(options)
 	end
 end
 
---[[ M.signcolumn = function()
-	functions.focus_signcolumn(M)
-end
-
-M.cursorline = function()
-	functions.focus_cursorline(M)
-end
-
-M.number = function()
-	functions.focus_number(M)
-end
-
-M.relativenumber = function()
-	functions.focus_relativenumber(M)
-end
-
-M.hybridnumber = function()
-	functions.focus_hybridnumber(M)
-end
-
-M.cursorcolumn = function()
-	functions.focus_cursorcolumn(M)
-end
-
-M.colorcolumn = function()
-	functions.focus_colorcolumn(M)
-end ]]
-
 --Used to run commands in respect to filetype/buffertype exclusions
 M.run_cmd = function(command)
 	autocmd.run_cmd(M, command)
@@ -132,7 +104,6 @@ function M.focus_enable_window()
 	end
 end
 
-
 function M.focus_toggle_window()
 	for _, v in pairs(M.excluded_windows) do
 		if v == vim.api.nvim_get_current_win() then
@@ -140,9 +111,8 @@ function M.focus_toggle_window()
 			return
 		end
 	end
-		M.focus_disable_window()
+	M.focus_disable_window()
 end
-
 
 function M.focus_get_disabled_windows()
 	print('------------------')
