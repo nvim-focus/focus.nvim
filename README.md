@@ -18,7 +18,7 @@
 
 🙌 Compatible with NvimTree, NerdTree, CHADTree, Fern, Telescope, Snap, FZF, Diffview.nvim & QuickFix
 
-👁️ Currently focussed split/window maximised to the perfect viewing size according to golden ratio
+👁️ Currently focused split/window maximised to the perfect viewing size according to golden ratio
 
 🏃 Move to existing windows or else create new splits automatically, only a single command
 
@@ -26,7 +26,7 @@
 
 🔌 Option to open tmux windows instead of creating new splits
 
-🖥 Equalise splits or maximise focussed splits, and toggle between the two
+🖥 Equalise splits or maximise focused splits, and toggle between the two
 
 💾 Set custom filetypes or buftypes to be excluded from resizing
 
