@@ -1,19 +1,6 @@
 local utils = require('focus.modules.utils')
-local cmd = vim.api.nvim_command
 local vim = vim
 local M = {}
-
-local function nvim_create_augroups(definitions)
-	for group_name, definition in pairs(definitions) do
-		cmd('augroup ' .. group_name)
-		cmd('autocmd!')
-		for _, def in ipairs(definition) do
-			local command = table.concat(vim.tbl_flatten({ 'autocmd', def }), ' ')
-			cmd(command)
-		end
-		cmd('augroup END')
-	end
-end
 
 -- if focus auto signcolumn is set to true then
 -- we assume it to be auto in case signcolumn = no
@@ -26,112 +13,200 @@ local function get_sign_column()
 	end
 end
 
-M.run_cmd = function(config, command)
-	if not (utils.is_buffer_filetype_excluded(config)) then
-		cmd(command)
-	end
-end
-
 function M.setup(config)
-	local autocmds = {}
 	if config.autoresize then
-		autocmds['focus_resize'] = {
-			--Adding WinEnter no longer breaks snap etc support.. using *defer_fn* ensures filetype that is set AFTER
-			-- NOTE: Switched to vim.schedule as its more appropriate for the task and no worry about slow processors etc
-			--buffer creation is read, instead of getting the blank filetypes, buffertypes when buffer is INITIALLY created
-			-- When a buffer is created its filetype and buffertype etc are blank, and focus reads these
-			-- By using defer, focus waits for some time, and then attempts to read the filetype and buffertype
-			-- This wait time is enough for plugins to properly set their options to the buffer such as filetype
-			-- This is an upstream vim issue because there is no way to specify filetype etc when creating a new buffer
-			-- You can only create a blank buffer, and then set the variables after it was created
-			-- Which means focus will initially read it as blank buffer and resize. This is an issue for many other plugins that read ft too.
-			{
-				'BufEnter',
-				'*',
-				'doautocmd WinScrolled | lua require"focus".resize()',
-				-- 'lua vim.schedule(function() require"focus".resize(); vim.cmd([[doautocmd WinScrolled]]) end)',
-			},
-			{ 'WinEnter,BufEnter', 'NvimTree_*', 'lua require"focus".resize()' },
-		}
+		local augroup = vim.api.nvim_create_augroup('FocusAutoResize', { clear = true })
+
+		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+			group = augroup,
+			callback = function(_)
+				vim.api.nvim_exec_autocmds('WinScrolled', {})
+				require('focus').resize()
+			end,
+			desc = 'Resize window',
+		})
 	end
 
 	if config.signcolumn then
-		autocmds['focus_signcolumn'] = {
-			{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("setlocal signcolumn=' .. get_sign_column() .. '")' },
-			{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal signcolumn=no")' },
-		}
+		local augroup = vim.api.nvim_create_augroup('FocusSignColumn', { clear = true })
+
+		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.signcolumn = get_sign_column()
+			end,
+			desc = 'Enable signcolumn',
+		})
+		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.signcolumn = 'no'
+			end,
+			desc = 'Disable signcolumn',
+		})
 	end
 
 	if config.cursorline then
-		autocmds['focus_cursorline'] = {
-			{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("setlocal cursorline")' },
-			{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nocursorline")' },
-		}
+		local augroup = vim.api.nvim_create_augroup('FocusCursorLine', { clear = true })
+
+		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.cursorline = true
+			end,
+			desc = 'Enable cursorline',
+		})
+		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.cursorline = false
+			end,
+			desc = 'Disable cursorline',
+		})
 	end
+
 	if config.number then
-		autocmds['number'] = {
-			{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set number")' },
-			{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nonumber")' },
-		}
+		local augroup = vim.api.nvim_create_augroup('FocusNumber', { clear = true })
+
+		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.number = true
+			end,
+			desc = 'Enable cursorline',
+		})
+		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.number = false
+			end,
+			desc = 'Disable cursorline',
+		})
 	end
+
 	if config.relativenumber then
 		if config.absolutenumber_unfocussed then
-			autocmds['focus_relativenumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set nonumber relativenumber")' },
-				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal number norelativenumber")' },
-			}
+			local augroup = vim.api.nvim_create_augroup('FocusRelativeNumber', { clear = true })
+
+			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = false
+					vim.wo.relativenumber = true
+				end,
+				desc = 'Absolutnumber unfoccused enter',
+			})
+			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = true
+					vim.wo.relativenumber = false
+				end,
+				desc = 'Absolutnumber unfoccused leave',
+			})
 		else
-			autocmds['focus_relativenumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set nonumber relativenumber")' },
-				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nonumber norelativenumber")' },
-			}
+			local augroup = vim.api.nvim_create_augroup('FocusRelativeNumber', { clear = true })
+
+			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = false
+					vim.wo.relativenumber = true
+				end,
+				desc = 'Absolutnumber foccused enter',
+			})
+			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = false
+					vim.wo.relativenumber = false
+				end,
+				desc = 'Absolutnumber foccused leave',
+			})
 		end
 	end
 	if config.hybridnumber then
 		if config.absolutenumber_unfocussed then
-			autocmds['focus_hybridnumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set number relativenumber")' },
-				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal number norelativenumber")' },
-			}
+			local augroup = vim.api.nvim_create_augroup('FocusHybridNumber', { clear = true })
+
+			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = true
+					vim.wo.relativenumber = true
+				end,
+				desc = 'Absolutenumber unfoccused enter',
+			})
+			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = true
+					vim.wo.relativenumber = false
+				end,
+				desc = 'Absolutenumber unfoccused leave',
+			})
 		else
-			autocmds['focus_hybridnumber'] = {
-				{ 'BufEnter,WinEnter', '*', 'lua require"focus".run_cmd("set number relativenumber")' },
-				{ 'BufLeave,WinLeave', '*', 'lua require"focus".run_cmd("setlocal nonumber norelativenumber")' },
-			}
+			local augroup = vim.api.nvim_create_augroup('FocusHybridNumber', { clear = true })
+
+			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = true
+					vim.wo.relativenumber = true
+				end,
+				desc = 'Hybrid number enter',
+			})
+			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+				group = augroup,
+				callback = function(_)
+					vim.wo.number = false
+					vim.wo.relativenumber = false
+				end,
+				desc = 'Hybrid number leave',
+			})
 		end
 	end
 
 	if config.cursorcolumn then
-		autocmds['focus_cursorcolumn'] = {
-			{
-				'BufEnter,WinEnter',
-				'*',
-				'lua require"focus".run_cmd("setlocal cursorcolumn")',
-			},
-			{
-				'BufLeave,WinLeave',
-				'*',
-				'lua require"focus".run_cmd("setlocal nocursorcolumn")',
-			},
-		}
+		local augroup = vim.api.nvim_create_augroup('FocusCursorColumn', { clear = true })
+
+		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.cursorcolumn = true
+			end,
+			desc = 'Cursor column enter',
+		})
+		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.cursorcolumn = false
+			end,
+			desc = 'Cursor column leave',
+		})
 	end
 
 	if config.colorcolumn.enable then
-		autocmds['focus_colorcolumn'] = {
-			{
-				'BufEnter,WinEnter',
-				'*',
-				'lua require"focus".run_cmd("setlocal colorcolumn=' .. config.colorcolumn.width .. '")',
-			},
-			{
-				'BufLeave,WinLeave',
-				'*',
-				'lua require"focus".run_cmd("setlocal colorcolumn=0")',
-			},
-		}
-	end
+		local augroup = vim.api.nvim_create_augroup('FocusColorColumn', { clear = true })
 
-	nvim_create_augroups(autocmds)
+		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+			group = augroup,
+			callback = function(_)
+				if utils.is_buffer_filetype_excluded(config) then
+				    return
+				end
+				vim.wo.colorcolumn = config.colorcolumn.width
+			end,
+			desc = 'Color column enter',
+		})
+		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+			group = augroup,
+			callback = function(_)
+				vim.wo.colorcolumn = 0
+			end,
+			desc = 'Color column leave',
+		})
+	end
 end
 
 return M

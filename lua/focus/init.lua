@@ -50,11 +50,6 @@ M.setup = function(options)
 	end
 end
 
---Used to run commands in respect to filetype/buffertype exclusions
-M.run_cmd = function(command)
-	autocmd.run_cmd(M, command)
-end
-
 M.resize = function()
 	resizer.split_resizer(M)
 end
