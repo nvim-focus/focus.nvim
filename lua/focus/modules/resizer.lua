@@ -1,5 +1,6 @@
 local utils = require('focus.modules.utils')
 local split = require('focus.modules.split')
+local functions = require('focus.modules.functions')
 local vim = vim
 local M = {}
 
@@ -42,7 +43,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 
 	if ft == 'diffviewfiles' then
 		vim.schedule(function()
-			vim.cmd('FocusEqualise')
+			functions.focus_equalise()
 		end)
 	elseif filetrees_set[ft] then
 		vim.o.winminwidth = config.minwidth or 0
@@ -107,7 +108,7 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
 
 	--TODO: Find solution to nvimtree resizing when unfoccused for the below code..
 	--[[ elseif ft == 'diffviewfiles' or ft == 'spectre_panel' then
-		vim.cmd('FocusEqualise')
+		functions.focus_equalise()
         return
 	elseif filetrees_set[ft] then
 		vim.api.nvim_win_set_width(winnr, config.treewidth)
