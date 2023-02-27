@@ -56,6 +56,9 @@ end
 
 -- Exported internal functions for use in commands
 function M.split_nicely(args)
+	if args == nil then
+		args = ''
+	end
 	split.split_nicely(args, M.bufnew)
 end
 
