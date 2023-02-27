@@ -186,6 +186,13 @@ require("focus").setup({hybridnumber = true, excluded_filetypes = {"toggleterm"}
 require("focus").setup({enable = false})
 ```
 
+**Enable/Disable Focus Commands**
+```lua
+-- This not export :Focus* commands
+-- Default: true
+require("focus").setup({commands = false})
+```
+
 **Enable/Disable Focus Window Autoresizing**
 ```lua
 --The focussed window will no longer automatically resize. Other focus features are still available
