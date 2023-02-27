@@ -342,8 +342,8 @@ require("focus").setup({winhighlight = true})
 --   hi default link FocusedWindow VertSplit
 --   hi default link UnfocusedWindow Normal
 -- To change them, you can link them to a different highlight group, see `:h hi-default` for more info.
-vim.cmd('hi link UnfocusedWindow CursorLine')
-vim.cmd('hi link FocusedWindow VisualNOS')
+vim.highlight.link('FocusedWindow', 'CursorLine', true)
+vim.highlight.link('UnfocusedWindow', 'VisualNOS', true)
 ```
 
 

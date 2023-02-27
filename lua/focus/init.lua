@@ -32,8 +32,8 @@ M.setup = function(options)
 		commands.setup()
 
 		if M.winhighlight then
-			vim.cmd('hi default link FocusedWindow VertSplit')
-			vim.cmd('hi default link UnfocusedWindow Normal')
+			vim.highlight.link('FocusedWindow', 'VertSplit', true)
+			vim.highlight.link('UnfocusedWindow', 'Normal', true)
 
 			vim.wo.winhighlight = 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
 		end
