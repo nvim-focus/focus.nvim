@@ -29,7 +29,9 @@ M.setup = function(options)
 		-- Pass this module M, noting that `__index` actually references the
 		-- configuration module, to setup the autocmds used for this plugin
 		autocmd.setup(M)
-		commands.setup()
+		if M.commands then
+			commands.setup()
+		end
 
 		if M.winhighlight then
 			if vim.fn.has('nvim-0.9') then
