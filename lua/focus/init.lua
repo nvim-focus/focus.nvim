@@ -4,6 +4,7 @@ local autocmd = require('focus.modules.autocmd')
 local split = require('focus.modules.split')
 local functions = require('focus.modules.functions')
 local resizer = require('focus.modules.resizer')
+local utils = require('focus.modules.utils')
 
 local M = {}
 
@@ -53,6 +54,9 @@ M.setup = function(options)
 end
 
 M.resize = function()
+	if utils.is_disabled() then
+			return
+	end
 	resizer.split_resizer(M)
 end
 
