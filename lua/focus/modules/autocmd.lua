@@ -14,13 +14,13 @@ local function get_sign_column()
 end
 
 function M.setup(config)
+	local augroup = vim.api.nvim_create_augroup('Focus', { clear = true })
+
 	if utils.is_disabled() then
 		return
 	end
 
 	if config.autoresize then
-		local augroup = vim.api.nvim_create_augroup('FocusAutoResize', { clear = true })
-
 		vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 			group = augroup,
 			callback = function(_)
@@ -32,8 +32,6 @@ function M.setup(config)
 	end
 
 	if config.signcolumn then
-		local augroup = vim.api.nvim_create_augroup('FocusSignColumn', { clear = true })
-
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
@@ -54,8 +52,6 @@ function M.setup(config)
 	end
 
 	if config.cursorline then
-		local augroup = vim.api.nvim_create_augroup('FocusCursorLine', { clear = true })
-
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
@@ -79,8 +75,6 @@ function M.setup(config)
 	end
 
 	if config.number then
-		local augroup = vim.api.nvim_create_augroup('FocusNumber', { clear = true })
-
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
@@ -102,8 +96,6 @@ function M.setup(config)
 
 	if config.relativenumber then
 		if config.absolutenumber_unfocussed then
-			local augroup = vim.api.nvim_create_augroup('FocusRelativeNumber', { clear = true })
-
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 				group = augroup,
 				callback = function(_)
@@ -127,8 +119,6 @@ function M.setup(config)
 				desc = 'Absolutnumber unfoccused leave',
 			})
 		else
-			local augroup = vim.api.nvim_create_augroup('FocusRelativeNumber', { clear = true })
-
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 				group = augroup,
 				callback = function(_)
@@ -155,8 +145,6 @@ function M.setup(config)
 	end
 	if config.hybridnumber then
 		if config.absolutenumber_unfocussed then
-			local augroup = vim.api.nvim_create_augroup('FocusHybridNumber', { clear = true })
-
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 				group = augroup,
 				callback = function(_)
@@ -177,8 +165,6 @@ function M.setup(config)
 				desc = 'Absolutenumber unfoccused leave',
 			})
 		else
-			local augroup = vim.api.nvim_create_augroup('FocusHybridNumber', { clear = true })
-
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 				group = augroup,
 				callback = function(_)
@@ -205,8 +191,6 @@ function M.setup(config)
 	end
 
 	if config.cursorcolumn then
-		local augroup = vim.api.nvim_create_augroup('FocusCursorColumn', { clear = true })
-
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
@@ -230,7 +214,6 @@ function M.setup(config)
 	end
 
 	if config.colorcolumn.enable then
-		local augroup = vim.api.nvim_create_augroup('FocusColorColumn', { clear = true })
 
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
