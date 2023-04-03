@@ -14,10 +14,14 @@ local function get_sign_column()
 end
 
 function M.setup(config)
+	if utils.is_disabled() then
+		return
+	end
+
 	if config.autoresize then
 		local augroup = vim.api.nvim_create_augroup('FocusAutoResize', { clear = true })
 
-		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+		vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 			group = augroup,
 			callback = function(_)
 				vim.api.nvim_exec_autocmds('WinScrolled', {})
@@ -33,6 +37,9 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
+				if utils.is_disabled() then
+					return
+				end
 				vim.wo.signcolumn = get_sign_column()
 			end,
 			desc = 'Enable signcolumn',
@@ -52,6 +59,9 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
+				if utils.is_disabled() then
+					return
+				end
 				vim.wo.cursorline = true
 			end,
 			desc = 'Enable cursorline',
@@ -59,6 +69,9 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 			group = augroup,
 			callback = function(_)
+				if utils.is_disabled() then
+					return
+				end
 				vim.wo.cursorline = false
 			end,
 			desc = 'Disable cursorline',
@@ -71,6 +84,9 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
+				if utils.is_disabled() then
+					return
+				end
 				vim.wo.number = true
 			end,
 			desc = 'Enable cursorline',
@@ -91,6 +107,9 @@ function M.setup(config)
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 				group = augroup,
 				callback = function(_)
+					if utils.is_disabled() then
+						return
+					end
 					vim.wo.number = false
 					vim.wo.relativenumber = true
 				end,
@@ -99,6 +118,9 @@ function M.setup(config)
 			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 				group = augroup,
 				callback = function(_)
+					if utils.is_disabled() then
+						return
+					end
 					vim.wo.number = true
 					vim.wo.relativenumber = false
 				end,
@@ -110,6 +132,9 @@ function M.setup(config)
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 				group = augroup,
 				callback = function(_)
+					if utils.is_disabled() then
+						return
+					end
 					vim.wo.number = false
 					vim.wo.relativenumber = true
 				end,
@@ -118,6 +143,9 @@ function M.setup(config)
 			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 				group = augroup,
 				callback = function(_)
+					if utils.is_disabled() then
+						return
+					end
 					vim.wo.number = false
 					vim.wo.relativenumber = false
 				end,
@@ -140,6 +168,9 @@ function M.setup(config)
 			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 				group = augroup,
 				callback = function(_)
+					if utils.is_disabled() then
+						return
+					end
 					vim.wo.number = true
 					vim.wo.relativenumber = false
 				end,
@@ -151,6 +182,9 @@ function M.setup(config)
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 				group = augroup,
 				callback = function(_)
+					if utils.is_disabled() then
+						return
+					end
 					vim.wo.number = true
 					vim.wo.relativenumber = true
 				end,
@@ -159,6 +193,9 @@ function M.setup(config)
 			vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 				group = augroup,
 				callback = function(_)
+					if utils.is_disabled() then
+						return
+					end
 					vim.wo.number = false
 					vim.wo.relativenumber = false
 				end,
@@ -173,6 +210,9 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
+				if utils.is_disabled() then
+					return
+				end
 				vim.wo.cursorcolumn = true
 			end,
 			desc = 'Cursor column enter',
@@ -180,6 +220,9 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 			group = augroup,
 			callback = function(_)
+				if utils.is_disabled() then
+					return
+				end
 				vim.wo.cursorcolumn = false
 			end,
 			desc = 'Cursor column leave',
@@ -192,8 +235,8 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 			group = augroup,
 			callback = function(_)
-				if utils.is_buffer_filetype_excluded(config) then
-				    return
+				if utils.is_disabled() then
+					return
 				end
 				vim.wo.colorcolumn = config.colorcolumn.width
 			end,
@@ -202,6 +245,9 @@ function M.setup(config)
 		vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 			group = augroup,
 			callback = function(_)
+				if utils.is_disabled() then
+					return
+				end
 				vim.wo.colorcolumn = 0
 			end,
 			desc = 'Color column leave',
