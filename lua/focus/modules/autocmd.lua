@@ -48,8 +48,7 @@ function M.setup(config)
 			{
 				'BufEnter',
 				'*',
-				'doautocmd WinScrolled | lua require"focus".resize()',
-				-- 'lua vim.schedule(function() require"focus".resize(); vim.cmd([[doautocmd WinScrolled]]) end)',
+				'lua vim.schedule(function() require"focus".resize(); vim.cmd([[doautocmd WinScrolled]]) end)',
 			},
 			{ 'WinEnter,BufEnter', 'NvimTree_*', 'lua require"focus".resize()' },
 		}
