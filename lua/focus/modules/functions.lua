@@ -1,36 +1,37 @@
-local vim = vim
+local utils = require('focus.modules.utils')
 local cmd = vim.cmd
 local M = {}
 
 M.focus_enable = function()
-	if vim.g.enabled_focus_resizing == 1 then
-		return
-	else
-		vim.g.enabled_focus_resizing = 1
-		require('focus').resize()
-	end
+    if not utils.is_disabled() then
+        return
+    end
+
+    vim.g.focus_disable = false
+    require('focus').resize()
 end
 
 M.focus_disable = function()
-	if vim.g.enabled_focus_resizing == 0 then
-		return
-	else
-		vim.g.enabled_focus_resizing = 0
-		vim.o.winminwidth = 0
-		vim.o.winwidth = 20
-		vim.o.winminheight = 1
-		vim.o.winheight = 1
-		cmd('wincmd=')
-	end
+    if utils.is_disabled() then
+        return
+    end
+
+    vim.g.enabled_focus_resizing = 0
+    vim.o.winminwidth = 0
+    vim.o.winwidth = 20
+    vim.o.winminheight = 1
+    vim.o.winheight = 1
+    cmd('wincmd=')
 end
 
 M.focus_toggle = function()
-	if vim.g.enabled_focus_resizing == 0 then
-		M.focus_enable()
-		return
-	else
-		M.focus_disable()
-	end
+    if utils.is_disabled() then
+        M.focus_enable()
+
+        return
+    end
+
+    M.focus_disable()
 end
 
 M.focus_maximise = function()
