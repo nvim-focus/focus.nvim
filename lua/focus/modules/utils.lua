@@ -57,4 +57,8 @@ function M.is_buffer_filetype_excluded(config)
 	end
 end
 
+M.is_disabled = function()
+    return vim.g.focus_disable == true or vim.b.focus_disable == true
+end
+
 return M
