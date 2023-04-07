@@ -34,9 +34,88 @@ T = new_set({
 -- Unit tests =================================================================
 T['setup()'] = new_set()
 
-T['setup()']['default'] = function()
+T['setup()']['global'] = function()
     -- Global variable
     eq(child.lua_get('type(_G.Focus)'), 'table')
+end
+
+T['setup()']['default config'] = function()
+    eq(child.lua_get('type(_G.Focus.config)'), 'table')
+
+    -- Check default values
+    local expect_config = function(field, value)
+        eq(child.lua_get('Focus.config.' .. field), value)
+    end
+    expect_config('enable', true)
+    expect_config('commands', true)
+    expect_config('autoresize', true)
+    expect_config('width', 0)
+    expect_config('height', 0)
+    expect_config('minwidth', 0)
+    expect_config('minheight', 0)
+    expect_config('height_quickfix', 10)
+    expect_config('cursorline', true)
+    expect_config('cursorcolumn', false)
+    expect_config('signcolumn', true)
+    expect_config('colorcolumn.enable', false)
+    expect_config('colorcolumn.width', 80)
+    expect_config('winhighlight', false)
+    expect_config('number', false)
+    expect_config('relativenumber', false)
+    expect_config('hybridnumber', false)
+    expect_config('absolutenumber_unfocussed', false)
+    expect_config('tmux', false)
+    expect_config('bufnew', false)
+end
+
+T['setup()']['respects config argument'] = function()
+    reload_module({ commands = false })
+    eq(child.lua_get('Focus.config.commands'), false)
+end
+
+T['setup()']['validates config argument'] = function()
+    local expect_config_error = function(config, name, target_type)
+        expect.error(
+            reload_module,
+            vim.pesc(name) .. '.*' .. vim.pesc(target_type),
+            config
+        )
+    end
+
+    expect_config_error('a', 'config', 'table')
+    expect_config_error({ enable = 3 }, 'enable', 'boolean')
+    expect_config_error({ commands = 3 }, 'commands', 'boolean')
+    expect_config_error({ autoresize = 3 }, 'autoresize', 'boolean')
+    expect_config_error({ width = '5' }, 'width', 'number')
+    expect_config_error({ height = '5' }, 'height', 'number')
+    expect_config_error({ minwidth = '5' }, 'minwidth', 'number')
+    expect_config_error({ minheight = '5' }, 'minheight', 'number')
+    expect_config_error({ minheight = '5' }, 'minheight', 'number')
+    expect_config_error({ height_quickfix = '5' }, 'height_quickfix', 'number')
+    expect_config_error({ cursorline = 3 }, 'cursorline', 'boolean')
+    expect_config_error({ cursorcolumn = 3 }, 'cursorcolumn', 'boolean')
+    expect_config_error({ signcolumn = 3 }, 'signcolumn', 'boolean')
+    expect_config_error(
+        { colorcolumn = { enable = 3 } },
+        'colorcolumn.enable',
+        'boolean'
+    )
+    expect_config_error(
+        { colorcolumn = { width = '3' } },
+        'colorcolumn.width',
+        'number'
+    )
+    expect_config_error({ winhighlight = 3 }, 'winhighlight', 'boolean')
+    expect_config_error({ number = 3 }, 'number', 'boolean')
+    expect_config_error({ relativenumber = 3 }, 'relativenumber', 'boolean')
+    expect_config_error({ hybridnumber = 3 }, 'hybridnumber', 'boolean')
+    expect_config_error(
+        { absolutenumber_unfocussed = 3 },
+        'absolutenumber_unfocussed',
+        'boolean'
+    )
+    expect_config_error({ tmux = 3 }, 'tmux', 'boolean')
+    expect_config_error({ bufnew = 3 }, 'bufnew', 'boolean')
 end
 
 T['setup()']['autoresize'] = function()
@@ -49,7 +128,7 @@ T['setup()']['autoresize'] = function()
 end
 
 T['setup()']['signcolumn'] = function()
-    reload_module({ signcolumn = true })
+    reload_module({ autoresize = false, signcolumn = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -62,7 +141,7 @@ T['setup()']['signcolumn'] = function()
 end
 
 T['setup()']['cursorline'] = function()
-    reload_module({ cursorline = true })
+    reload_module({ autoresize = false, cursorline = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -75,7 +154,7 @@ T['setup()']['cursorline'] = function()
 end
 
 T['setup()']['number'] = function()
-    reload_module({ number = true })
+    reload_module({ autoresize = false, number = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -88,7 +167,7 @@ T['setup()']['number'] = function()
 end
 
 T['setup()']['relativenumber'] = function()
-    reload_module({ relativenumber = true })
+    reload_module({ autoresize = false, relativenumber = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -101,7 +180,11 @@ T['setup()']['relativenumber'] = function()
 end
 
 T['setup()']['relativenumber absolutenumber_unfocussed'] = function()
-    reload_module({ relativenumber = true, absolutenumber_unfocussed = true })
+    reload_module({
+        autoresize = false,
+        relativenumber = true,
+        absolutenumber_unfocussed = true,
+    })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -114,7 +197,7 @@ T['setup()']['relativenumber absolutenumber_unfocussed'] = function()
 end
 
 T['setup()']['hybridnumber'] = function()
-    reload_module({ hybridnumber = true })
+    reload_module({ autoresize = false, hybridnumber = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -127,7 +210,11 @@ T['setup()']['hybridnumber'] = function()
 end
 
 T['setup()']['hybridnumber absolutenumber_unfocussed'] = function()
-    reload_module({ hybridnumber = true, absolutenumber_unfocussed = true })
+    reload_module({
+        autoresize = false,
+        hybridnumber = true,
+        absolutenumber_unfocussed = true,
+    })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -140,7 +227,7 @@ T['setup()']['hybridnumber absolutenumber_unfocussed'] = function()
 end
 
 T['setup()']['cursorcolumn'] = function()
-    reload_module({ cursorcolumn = true })
+    reload_module({ autoresize = false, cursorcolumn = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -153,7 +240,7 @@ T['setup()']['cursorcolumn'] = function()
 end
 
 T['setup()']['colorcolumn'] = function()
-    reload_module({ colorcolumn = { enabled = true } })
+    reload_module({ autoresize = false, colorcolumn = { enabled = true } })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
