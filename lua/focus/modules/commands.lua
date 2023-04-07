@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.setup = function()
-    vim.cmd([[
+    vim.api.nvim_exec([[
 command! -nargs=0 FocusDisable lua require('focus').focus_disable()
 command! -nargs=0 FocusEnable lua require('focus').focus_enable()
 command! -nargs=0 FocusToggle lua require('focus').focus_toggle()
@@ -18,7 +18,7 @@ command! -nargs=? -complete=file FocusSplitLeft lua require('focus').split_comma
 command! -nargs=? -complete=file FocusSplitDown lua require('focus').split_command("j", <q-args>)
 command! -nargs=? -complete=file FocusSplitUp lua require('focus').split_command("k", <q-args>)
 command! -nargs=? -complete=file FocusSplitRight lua require('focus').split_command("l", <q-args>)
-]])
+]], false)
 end
 
 return M
