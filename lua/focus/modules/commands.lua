@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.setup = function()
-	vim.cmd([[
+    vim.cmd([[
 command! -nargs=0 FocusDisable lua require('focus').focus_disable()
 command! -nargs=0 FocusEnable lua require('focus').focus_enable()
 command! -nargs=0 FocusToggle lua require('focus').focus_toggle()
