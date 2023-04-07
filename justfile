@@ -33,7 +33,8 @@ default:
     @just --list --unsorted --list-heading $'{{BOLD}}{{GREEN}}Available recipes:{{NEWLINE}}{{RESET}}'
 format:
     stylua .
-
+test:
+	make test
 
 # Hidden Recipes
 
