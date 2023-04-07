@@ -1,5 +1,4 @@
 local utils = require('focus.modules.utils')
-local functions = require('focus.modules.functions')
 local M = {}
 
 local golden_ratio = 1.618
