@@ -34,9 +34,30 @@ T = new_set({
 -- Unit tests =================================================================
 T['setup()'] = new_set()
 
-T['setup()']['global'] = function()
+T['setup()']['defaults'] = function()
     -- Global variable
     eq(child.lua_get('type(_G.Focus)'), 'table')
+
+    -- Commands
+    eq(child.fn.exists(':FocusEnable'), 2)
+    eq(child.fn.exists(':FocusDisable'), 2)
+    eq(child.fn.exists(':FocusToggle'), 2)
+
+    eq(child.fn.exists(':FocusEnableWindow'), 2)
+    eq(child.fn.exists(':FocusDisableWindow'), 2)
+    eq(child.fn.exists(':FocusToggleWindow'), 2)
+
+    eq(child.fn.exists(':FocusEqualise'), 2)
+    eq(child.fn.exists(':FocusMaximise'), 2)
+    eq(child.fn.exists(':FocusMaxOrEqual'), 2)
+
+    eq(child.fn.exists(':FocusSplitNicely'), 2)
+    eq(child.fn.exists(':FocusSplitCycle'), 2)
+
+    eq(child.fn.exists(':FocusSplitLeft'), 2)
+    eq(child.fn.exists(':FocusSplitRight'), 2)
+    eq(child.fn.exists(':FocusSplitUp'), 2)
+    eq(child.fn.exists(':FocusSplitDown'), 2)
 end
 
 T['setup()']['default config'] = function()
