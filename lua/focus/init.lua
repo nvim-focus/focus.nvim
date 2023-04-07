@@ -135,40 +135,15 @@ function Focus.focus_max_or_equal()
 end
 
 function Focus.focus_disable_window()
-    table.insert(Focus.excluded_windows, vim.api.nvim_get_current_win())
+    vim.b.focus_disable = true
 end
 
 function Focus.focus_enable_window()
-    for k, v in pairs(Focus.excluded_windows) do
-        if v == vim.api.nvim_get_current_win() then
-            table.remove(Focus.excluded_windows, k)
-        end
-    end
+    vim.b.focus_disable = false
 end
 
 function Focus.focus_toggle_window()
-    for _, v in pairs(Focus.excluded_windows) do
-        if v == vim.api.nvim_get_current_win() then
-            Focus.focus_enable_window()
-            return
-        end
-    end
-    Focus.focus_disable_window()
-end
-
-function Focus.focus_get_disabled_windows()
-    print('------------------')
-    print('█▀ ▄▀▄ ▄▀▀ █ █ ▄▀▀')
-    print('█▀ ▀▄▀ ▀▄▄ ▀▄█ ▄██')
-    print('------------------')
-    print('Disabled Windows')
-    for _, v in pairs(Focus.excluded_windows) do
-        print('- ' .. v)
-    end
-    print('-------------------')
-    print('Current Window')
-    print('- ' .. vim.api.nvim_get_current_win())
-    print('-------------------')
+    vim.b.focus_disable = not vim.b.focus_disable
 end
 
 H.default_config = Focus.config
