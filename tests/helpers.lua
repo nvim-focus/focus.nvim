@@ -106,6 +106,45 @@ Helpers.new_child_neovim = function()
         return { child.o.lines, child.o.columns }
     end
 
+    child.get_layout_windows = function(layout)
+        local res = {}
+        local traverse
+        traverse = function(l)
+            if l[1] == 'leaf' then
+                table.insert(res, l[2])
+                return
+            end
+            for _, sub_l in ipairs(l[2]) do
+                traverse(sub_l)
+            end
+        end
+        traverse(layout)
+
+        return res
+    end
+
+    child.get_resize_state = function()
+        local layout = child.fn.winlayout()
+
+        local windows = child.get_layout_windows(layout)
+        local win_ids, sizes, buffer = {}, {}, {}
+        for _, win_id in ipairs(windows) do
+            sizes[win_id] = {
+                height = child.api.nvim_win_get_height(win_id),
+                width = child.api.nvim_win_get_width(win_id),
+            }
+            buffer[win_id] = child.api.nvim_win_get_buf(win_id)
+            table.insert(win_ids, win_id)
+        end
+
+        return {
+            windows = win_ids,
+            layout = layout,
+            sizes = sizes,
+            buffer = buffer,
+        }
+    end
+
     --- Assert visual marks
     ---
     --- Useful to validate visual selection
