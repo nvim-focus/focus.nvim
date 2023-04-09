@@ -24,7 +24,10 @@ function M.setup(config)
         vim.api.nvim_create_autocmd({ 'BufEnter' }, {
             group = augroup,
             callback = function(_)
-                vim.api.nvim_exec_autocmds('WinScrolled', {})
+                -- This shouldn't be required with WinScrolled rewrite of 0.9
+                if not vim.fn.has('nvim-0.9') then
+                    vim.api.nvim_exec_autocmds('WinScrolled', {})
+                end
                 require('focus').resize()
             end,
             desc = 'Resize window',
