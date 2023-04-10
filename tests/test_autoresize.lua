@@ -31,13 +31,13 @@ local edit = function(x)
     child.cmd('edit ' .. x)
 end
 local validate_win_dims = function(win_id, ref)
-    eq(
-        {
-            child.api.nvim_win_get_width(win_id),
-            child.api.nvim_win_get_height(win_id),
-        },
-        ref
-    )
+    eq({
+        child.api.nvim_win_get_width(win_id),
+        child.api.nvim_win_get_height(win_id),
+    }, ref)
+end
+local validate_win_layout = function(ref)
+    eq(child.fn.winlayout(), ref)
 end
 
 ---@diagnostic disable-next-line: unused-local
@@ -48,7 +48,8 @@ T = new_set({
     hooks = {
         pre_case = function()
             child.setup()
-            child.set_size(20, 80)
+            child.set_size(25, 80)
+            child.o.wrap = false
             load_module()
         end,
         post_once = child.stop,
@@ -62,15 +63,18 @@ local lorem_ipsum_file = make_path(testdata_dir, 'loremipsum.txt')
 
 T['autoresize']['split'] = function()
     edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
     child.cmd('split')
     local resize_state = child.get_resize_state()
 
     -- Check if we have a column layout
-    eq(resize_state.layout[1], 'col')
-    eq(#resize_state.layout[2], 2)
-
     local win_id_upper = resize_state.windows[1]
     local win_id_lower = resize_state.windows[2]
+
+    validate_win_layout({
+        'col',
+        { { 'leaf', win_id_upper }, { 'leaf', win_id_lower } },
+    })
 
     eq(win_id_upper, child.api.nvim_get_current_win())
 
@@ -78,28 +82,39 @@ T['autoresize']['split'] = function()
     eq(resize_state.buffer[win_id_upper], resize_state.buffer[win_id_lower])
 
     -- Check dimensions
-    validate_win_dims(win_id_upper, { 80, 12 })
-    validate_win_dims(win_id_lower, { 80, 5 })
+    validate_win_dims(win_id_upper, { 80, 15 })
+    validate_win_dims(win_id_lower, { 80, 7 })
+
+    -- Check if the window has been centered on line 15
+    eq(child.fn.line('w0', win_id_lower), 12)
+    eq(child.fn.line('w$', win_id_lower), 18)
 
     -- Switch windows
     child.cmd('wincmd w')
 
     -- Check dimensions after switching windows
-    validate_win_dims(win_id_upper, { 80, 5 })
-    validate_win_dims(win_id_lower, { 80, 12 })
+    validate_win_dims(win_id_upper, { 80, 7 })
+    validate_win_dims(win_id_lower, { 80, 15 })
+
+    -- Check if the window has been centered on line 15
+    eq(child.fn.line('w0', win_id_upper), 12)
+    eq(child.fn.line('w$', win_id_upper), 18)
 end
 
 T['autoresize']['vsplit'] = function()
     edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
     child.cmd('vsplit')
     local resize_state = child.get_resize_state()
 
     -- Check if we have a column layout
-    eq(resize_state.layout[1], 'row')
-    eq(#resize_state.layout[2], 2)
-
     local win_id_left = resize_state.windows[1]
     local win_id_right = resize_state.windows[2]
+
+    validate_win_layout({
+        'row',
+        { { 'leaf', win_id_left }, { 'leaf', win_id_right } },
+    })
 
     eq(win_id_left, child.api.nvim_get_current_win())
 
@@ -107,15 +122,21 @@ T['autoresize']['vsplit'] = function()
     eq(resize_state.buffer[win_id_left], resize_state.buffer[win_id_right])
 
     -- Check dimensions
-    validate_win_dims(win_id_left, { 49, 18 })
-    validate_win_dims(win_id_right, { 30, 18 })
+    validate_win_dims(win_id_left, { 49, 23 })
+    validate_win_dims(win_id_right, { 30, 23 })
+
+    eq(child.fn.line('w0', win_id_left), 1)
+    eq(child.fn.line('w$', win_id_left), 23)
+
+    eq(child.fn.line('w0', win_id_right), 1)
+    eq(child.fn.line('w$', win_id_right), 23)
 
     -- Switch windows
     child.cmd('wincmd w')
 
     -- Check dimensions after switching windows
-    validate_win_dims(win_id_left, { 30, 18 })
-    validate_win_dims(win_id_right, { 49, 18 })
+    validate_win_dims(win_id_left, { 30, 23 })
+    validate_win_dims(win_id_right, { 49, 23 })
 end
 
 return T
