@@ -6,7 +6,8 @@
 local helpers = dofile('tests/helpers.lua')
 
 local child = helpers.new_child_neovim()
-local expect, eq = helpers.expect, helpers.expect.equality
+local expect, eq, neq =
+    helpers.expect, helpers.expect.equality, helpers.expect.no_equality
 ---@diagnostic disable-next-line: undefined-global
 local new_set = MiniTest.new_set
 
@@ -90,6 +91,31 @@ T['focus_split']['nicely autoresize'] = function()
     -- Check dimensions after switching windows (autoresize)
     validate_win_dims(win_id_left, { 111, 48 })
     validate_win_dims(win_id_right, { 68, 48 })
+end
+
+T['focus_split']['nicely config bufnew'] = function()
+    reload_module({ bufnew = true })
+    edit(lorem_ipsum_file)
+    child.cmd('FocusSplitNicely')
+    local resize_state = child.get_resize_state()
+
+    -- Check if got the layout we expect
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    validate_win_layout({
+        'row',
+        { { 'leaf', win_id_left }, { 'leaf', win_id_right } },
+    })
+
+    -- Check if the right window is the current window
+    eq(win_id_right, child.api.nvim_get_current_win())
+
+    -- The right buffer should have a different winid
+    neq(resize_state.buffer[win_id_left], resize_state.buffer[win_id_right])
+
+    -- The first line should be empty of the new buf
+    eq(child.get_lines(1, 1), {})
 end
 
 return T
