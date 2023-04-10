@@ -203,4 +203,49 @@ T['focus_split']['nicely 3x'] = function()
     )
 end
 
+T['focus_split']['nicely 4x'] = function()
+    edit(lorem_ipsum_file)
+    child.cmd('FocusSplitNicely')
+    child.cmd('FocusSplitNicely')
+    child.cmd('FocusSplitNicely')
+    child.cmd('FocusSplitNicely')
+    local resize_state = child.get_resize_state()
+
+    -- Check if got the layout we expect
+    local win_id_left_upper = resize_state.windows[1]
+    local win_id_left_lower = resize_state.windows[2]
+    local win_id_right_upper = resize_state.windows[3]
+    local win_id_right_middle = resize_state.windows[4]
+    local win_id_right_lower = resize_state.windows[5]
+
+    validate_win_layout({
+        'row',
+        {
+            { 'col', { { 'leaf', win_id_left_upper }, { 'leaf', win_id_left_lower } } },
+            { 'col', { { 'leaf', win_id_right_upper }, { 'leaf', win_id_right_middle }, { 'leaf', win_id_right_lower } } },
+        },
+    })
+
+    -- Check if the right window is the current window
+    eq(win_id_left_lower, child.api.nvim_get_current_win())
+
+    -- All windows should have the same buffer
+    eq(
+        resize_state.buffer[win_id_left_upper],
+        resize_state.buffer[win_id_left_lower]
+    )
+    eq(
+        resize_state.buffer[win_id_left_upper],
+        resize_state.buffer[win_id_right_upper]
+    )
+    eq(
+        resize_state.buffer[win_id_right_upper],
+        resize_state.buffer[win_id_right_middle]
+    )
+    eq(
+        resize_state.buffer[win_id_right_middle],
+        resize_state.buffer[win_id_right_lower]
+    )
+end
+
 return T
