@@ -31,13 +31,13 @@ local edit = function(x)
     child.cmd('edit ' .. x)
 end
 local validate_win_dims = function(win_id, ref)
-    eq(
-        {
-            child.api.nvim_win_get_width(win_id),
-            child.api.nvim_win_get_height(win_id),
-        },
-        ref
-    )
+    eq({
+        child.api.nvim_win_get_width(win_id),
+        child.api.nvim_win_get_height(win_id),
+    }, ref)
+end
+local validate_win_layout = function(ref)
+    eq(child.fn.winlayout(), ref)
 end
 
 ---@diagnostic disable-next-line: unused-local
@@ -48,7 +48,7 @@ T = new_set({
     hooks = {
         pre_case = function()
             child.setup()
-            child.set_size(20, 80)
+            child.set_size(50, 180)
             load_module()
         end,
         post_once = child.stop,
@@ -60,33 +60,36 @@ T['focus_split'] = new_set()
 
 local lorem_ipsum_file = make_path(testdata_dir, 'loremipsum.txt')
 
-T['focus_split']['nicely'] = function()
+T['focus_split']['nicely autoresize'] = function()
     edit(lorem_ipsum_file)
     child.cmd('FocusSplitNicely')
     local resize_state = child.get_resize_state()
 
-    -- Check if we have a column layout
-    eq(resize_state.layout[1], 'row')
-    eq(#resize_state.layout[2], 2)
-
+    -- Check if got the layout we expect
     local win_id_left = resize_state.windows[1]
     local win_id_right = resize_state.windows[2]
 
+    validate_win_layout({
+        'row',
+        { { 'leaf', win_id_left }, { 'leaf', win_id_right } },
+    })
+
+    -- Check if the right window is the current window
     eq(win_id_right, child.api.nvim_get_current_win())
 
     -- Both windows should have the same buffer
     eq(resize_state.buffer[win_id_left], resize_state.buffer[win_id_right])
 
-    -- Check dimensions
-    validate_win_dims(win_id_left, { 30, 18 })
-    validate_win_dims(win_id_right, { 49, 18 })
+    -- Check dimensions (autoresize)
+    validate_win_dims(win_id_left, { 68, 48 })
+    validate_win_dims(win_id_right, { 111, 48 })
 
     -- Switch windows
     child.cmd('wincmd w')
 
-    -- Check dimensions after switching windows
-    validate_win_dims(win_id_left, { 49, 18 })
-    validate_win_dims(win_id_right, { 30, 18 })
+    -- Check dimensions after switching windows (autoresize)
+    validate_win_dims(win_id_left, { 111, 48 })
+    validate_win_dims(win_id_right, { 68, 48 })
 end
 
 return T
