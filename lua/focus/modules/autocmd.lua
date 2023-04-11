@@ -273,7 +273,7 @@ function M.setup(config)
                 if utils.is_disabled() then
                     return
                 end
-                vim.wo.colorcolumn = config.colorcolumn.width
+                vim.wo.colorcolumn = config.colorcolumn.list
             end,
             desc = 'Color column enter',
         })
@@ -283,7 +283,7 @@ function M.setup(config)
                 if utils.is_disabled() then
                     return
                 end
-                vim.wo.colorcolumn = 0
+                vim.wo.colorcolumn = ''
             end,
             desc = 'Color column leave',
         })

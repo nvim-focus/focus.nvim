@@ -79,7 +79,7 @@ T['setup()']['default config'] = function()
     expect_config('cursorcolumn', false)
     expect_config('signcolumn', true)
     expect_config('colorcolumn.enable', false)
-    expect_config('colorcolumn.width', 80)
+    expect_config('colorcolumn.list', '+1')
     expect_config('winhighlight', false)
     expect_config('number', false)
     expect_config('relativenumber', false)
@@ -122,9 +122,9 @@ T['setup()']['validates config argument'] = function()
         'boolean'
     )
     expect_config_error(
-        { colorcolumn = { width = '3' } },
-        'colorcolumn.width',
-        'number'
+        { colorcolumn = { list = 3 } },
+        'colorcolumn.list',
+        'string'
     )
     expect_config_error({ winhighlight = 3 }, 'winhighlight', 'boolean')
     expect_config_error({ number = 3 }, 'number', 'boolean')
