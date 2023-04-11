@@ -32,7 +32,7 @@ Focus.config = {
     signcolumn = true, -- Display signcolumn in the focussed window only
     colorcolumn = {
         enable = false, -- Display colorcolumn in the foccused window only
-        width = 80, -- Set the width for the colorcolumn
+        list = '+1', -- Set the comma-saperated list for the colorcolumn
     },
     winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
     number = false, -- Display line numbers in the focussed window only
@@ -180,7 +180,7 @@ H.setup_config = function(config)
 
     vim.validate({
         ['colorcolumn.enable'] = { config.colorcolumn.enable, 'boolean' },
-        ['colorcolumn.width'] = { config.colorcolumn.width, 'number' },
+        ['colorcolumn.list'] = { config.colorcolumn.list, 'string' },
     })
 
     return config
