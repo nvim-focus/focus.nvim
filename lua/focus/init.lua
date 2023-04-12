@@ -29,6 +29,10 @@ Focus.config = {
         minheight = 0, -- Force minimum height for the unfocused window
         height_quickfix = 10, -- Set the height of quickfix panel
     },
+    split = {
+        bufnew = false, -- Create blank buffer for new split windows
+        tmux = false, -- Create tmux splits instead of neovim splits
+    },
     cursorline = true, -- Display a cursorline in the focussed window only
     cursorcolumn = false, -- Display cursorcolumn in the focussed window only
     signcolumn = true, -- Display signcolumn in the focussed window only
@@ -41,8 +45,6 @@ Focus.config = {
     relativenumber = false, -- Display relative line numbers in the focussed window only
     hybridnumber = false, -- Display hybrid line numbers in the focussed window only
     absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
-    tmux = false, -- Create tmux splits instead of neovim splits
-    bufnew = false, -- Create blank buffer for new split windows
 }
 
 --- Module setup
@@ -104,7 +106,12 @@ end
 function Focus.split_command(direction, args)
     local config = H.get_config()
     args = args or ''
-    split.split_command(direction, args, config.tmux, config.bufnew)
+    split.split_command(
+        direction,
+        args,
+        config.split.tmux,
+        config.split.bufnew
+    )
 end
 
 function Focus.split_cycle(reverse)
@@ -159,6 +166,7 @@ H.setup_config = function(config)
         enable = { config.enable, 'boolean' },
         commands = { config.commands, 'boolean' },
         autoresize = { config.autoresize, 'table', true },
+        split = { config.split, 'table', true },
         cursorline = { config.cursorline, 'boolean' },
         cursorcolumn = { config.cursorcolumn, 'boolean' },
         signcolumn = { config.signcolumn, 'boolean' },
@@ -171,8 +179,6 @@ H.setup_config = function(config)
             config.absolutenumber_unfocussed,
             'boolean',
         },
-        tmux = { config.tmux, 'boolean' },
-        bufnew = { config.bufnew, 'boolean' },
     })
 
     vim.validate({
@@ -181,7 +187,15 @@ H.setup_config = function(config)
         ['autoresize.height'] = { config.autoresize.height, 'number' },
         ['autoresize.minwidth'] = { config.autoresize.minwidth, 'number' },
         ['autoresize.minheight'] = { config.autoresize.minheight, 'number' },
-        ['autoresize.height_quickfix'] = { config.autoresize.height_quickfix, 'number' },
+        ['autoresize.height_quickfix'] = {
+            config.autoresize.height_quickfix,
+            'number',
+        },
+    })
+
+    vim.validate({
+        ['split.bufnew'] = { config.split.bufnew, 'boolean' },
+        ['split.tmux'] = { config.split.tmux, 'boolean' },
     })
 
     vim.validate({
