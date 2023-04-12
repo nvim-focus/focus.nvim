@@ -375,4 +375,35 @@ T['focus_ui']['colorcolumn with split'] = function()
     )
 end
 
+-- TODO: The test here works but testing it with real neovim doesn't do
+-- anything.
+T['focus_ui']['winhighlight with split'] = function()
+    reload_module({ winhighlight = true })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 0)
+    child.cmd('vsplit')
+
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+    eq(child.wo.winhighlight, 'Normal:FocusedWindow,NormalNC:UnfocusedWindow')
+
+    child.lua([[_G.win_get_colorcolumn = function(winid)
+        local win_colorcolumn = ''
+
+        vim.api.nvim_win_call(winid, function()
+           win_colorcolumn = vim.wo.colorcolumn
+        end)
+
+        return win_colorcolumn
+    end]])
+
+    eq(
+        child.lua_get(string.format('_G.win_get_colorcolumn(%d)', win_id_right)),
+        ''
+    )
+end
+
 return T
