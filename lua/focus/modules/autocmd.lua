@@ -84,7 +84,7 @@ function M.setup(config)
         })
     end
 
-    if config.signcolumn then
+    if config.ui.signcolumn then
         vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
             group = augroup,
             callback = function(_)
@@ -104,7 +104,7 @@ function M.setup(config)
         })
     end
 
-    if config.cursorline then
+    if config.ui.cursorline then
         vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
             group = augroup,
             callback = function(_)
@@ -127,7 +127,7 @@ function M.setup(config)
         })
     end
 
-    if config.number then
+    if config.ui.number then
         vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
             group = augroup,
             callback = function(_)
@@ -147,8 +147,8 @@ function M.setup(config)
         })
     end
 
-    if config.relativenumber then
-        if config.absolutenumber_unfocussed then
+    if config.ui.relativenumber then
+        if config.ui.absolutenumber_unfocussed then
             vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
                 group = augroup,
                 callback = function(_)
@@ -196,8 +196,8 @@ function M.setup(config)
             })
         end
     end
-    if config.hybridnumber then
-        if config.absolutenumber_unfocussed then
+    if config.ui.hybridnumber then
+        if config.ui.absolutenumber_unfocussed then
             vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
                 group = augroup,
                 callback = function(_)
@@ -243,7 +243,7 @@ function M.setup(config)
         end
     end
 
-    if config.cursorcolumn then
+    if config.ui.cursorcolumn then
         vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
             group = augroup,
             callback = function(_)
@@ -266,14 +266,14 @@ function M.setup(config)
         })
     end
 
-    if config.colorcolumn.enable then
+    if config.ui.colorcolumn.enable then
         vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
             group = augroup,
             callback = function(_)
                 if utils.is_disabled() then
                     return
                 end
-                vim.wo.colorcolumn = config.colorcolumn.list
+                vim.wo.colorcolumn = config.ui.colorcolumn.list
             end,
             desc = 'Color column enter',
         })

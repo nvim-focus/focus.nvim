@@ -62,14 +62,14 @@ T['focus_ui'] = new_set()
 local lorem_ipsum_file = make_path(testdata_dir, 'loremipsum.txt')
 
 T['focus_ui']['number'] = function()
-    reload_module({ number = true })
+    reload_module({ ui = { number = true } })
     edit(lorem_ipsum_file)
 
     child.expect_screenshot()
 end
 
 T['focus_ui']['number with split'] = function()
-    reload_module({ number = true })
+    reload_module({ ui = { number = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -99,7 +99,7 @@ T['focus_ui']['number with split'] = function()
 end
 
 T['focus_ui']['relativenumber'] = function()
-    reload_module({ relativenumber = true })
+    reload_module({ ui = { relativenumber = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
 
@@ -107,7 +107,7 @@ T['focus_ui']['relativenumber'] = function()
 end
 
 T['focus_ui']['relativenumber with split'] = function()
-    reload_module({ relativenumber = true })
+    reload_module({ ui = { relativenumber = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -140,7 +140,9 @@ end
 
 T['focus_ui']['relativenumber and absolutenumber_unfocussed with split'] = function(
 )
-    reload_module({ relativenumber = true, absolutenumber_unfocussed = true })
+    reload_module({
+        ui = { relativenumber = true, absolutenumber_unfocussed = true },
+    })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -187,7 +189,7 @@ T['focus_ui']['relativenumber and absolutenumber_unfocussed with split'] = funct
 end
 
 T['focus_ui']['hybridnumber'] = function()
-    reload_module({ hybridnumber = true })
+    reload_module({ ui = { hybridnumber = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
 
@@ -195,7 +197,7 @@ T['focus_ui']['hybridnumber'] = function()
 end
 
 T['focus_ui']['hybridnumber with split'] = function()
-    reload_module({ hybridnumber = true })
+    reload_module({ ui = { hybridnumber = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -207,7 +209,6 @@ T['focus_ui']['hybridnumber with split'] = function()
     eq(win_id_left, child.api.nvim_get_current_win())
     eq(child.wo.number, true)
     eq(child.wo.relativenumber, true)
-
 
     child.lua([[_G.win_get_number = function(winid)
         local win_number = false
@@ -241,8 +242,11 @@ T['focus_ui']['hybridnumber with split'] = function()
     )
 end
 
-T['focus_ui']['hybridnumber and absolutenumber_unfocussed with split'] = function()
-    reload_module({ hybridnumber = true, absolutenumber_unfocussed = true })
+T['focus_ui']['hybridnumber and absolutenumber_unfocussed with split'] = function(
+)
+    reload_module({
+        ui = { hybridnumber = true, absolutenumber_unfocussed = true },
+    })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -254,7 +258,6 @@ T['focus_ui']['hybridnumber and absolutenumber_unfocussed with split'] = functio
     eq(win_id_left, child.api.nvim_get_current_win())
     eq(child.wo.number, true)
     eq(child.wo.relativenumber, true)
-
 
     child.lua([[_G.win_get_number = function(winid)
         local win_number = false
@@ -289,7 +292,7 @@ T['focus_ui']['hybridnumber and absolutenumber_unfocussed with split'] = functio
 end
 
 T['focus_ui']['signcolumn with split'] = function()
-    reload_module({ signcolumn = true })
+    reload_module({ ui = { signcolumn = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -318,7 +321,7 @@ T['focus_ui']['signcolumn with split'] = function()
 end
 
 T['focus_ui']['cursorcolumn with split'] = function()
-    reload_module({ cursorcolumn = true })
+    reload_module({ ui = { cursorcolumn = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -341,13 +344,15 @@ T['focus_ui']['cursorcolumn with split'] = function()
     end]])
 
     eq(
-        child.lua_get(string.format('_G.win_get_cursorcolumn(%d)', win_id_right)),
+        child.lua_get(
+            string.format('_G.win_get_cursorcolumn(%d)', win_id_right)
+        ),
         false
     )
 end
 
 T['focus_ui']['colorcolumn with split'] = function()
-    reload_module({ colorcolumn = { enable = true } })
+    reload_module({ ui = { colorcolumn = { enable = true } } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')
@@ -378,7 +383,7 @@ end
 -- TODO: The test here works but testing it with real neovim doesn't do
 -- anything.
 T['focus_ui']['winhighlight with split'] = function()
-    reload_module({ winhighlight = true })
+    reload_module({ ui = { winhighlight = true } })
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
     child.cmd('vsplit')

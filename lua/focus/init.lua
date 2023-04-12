@@ -33,18 +33,21 @@ Focus.config = {
         bufnew = false, -- Create blank buffer for new split windows
         tmux = false, -- Create tmux splits instead of neovim splits
     },
-    cursorline = true, -- Display a cursorline in the focussed window only
-    cursorcolumn = false, -- Display cursorcolumn in the focussed window only
-    signcolumn = true, -- Display signcolumn in the focussed window only
-    colorcolumn = {
-        enable = false, -- Display colorcolumn in the foccused window only
-        list = '+1', -- Set the comma-saperated list for the colorcolumn
-    },
-    winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
-    number = false, -- Display line numbers in the focussed window only
-    relativenumber = false, -- Display relative line numbers in the focussed window only
-    hybridnumber = false, -- Display hybrid line numbers in the focussed window only
-    absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
+    ui = {
+        number = false, -- Display line numbers in the focussed window only
+        relativenumber = false, -- Display relative line numbers in the focussed window only
+        hybridnumber = false, -- Display hybrid line numbers in the focussed window only
+        absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
+
+        cursorline = true, -- Display a cursorline in the focussed window only
+        cursorcolumn = false, -- Display cursorcolumn in the focussed window only
+        colorcolumn = {
+            enable = false, -- Display colorcolumn in the foccused window only
+            list = '+1', -- Set the comma-saperated list for the colorcolumn
+        },
+        signcolumn = true, -- Display signcolumn in the focussed window only
+        winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
+    }
 }
 
 --- Module setup
@@ -69,7 +72,7 @@ Focus.setup = function(config)
             commands.setup()
         end
 
-        if config.winhighlight then
+        if config.ui.winhighlight then
             if vim.fn.has('nvim-0.9') then
                 vim.api.nvim_set_hl(0, 'FocusedWindow', { link = 'VertSplit' })
                 vim.api.nvim_set_hl(0, 'UnfocusedWindow', { link = 'Normal' })
@@ -167,18 +170,7 @@ H.setup_config = function(config)
         commands = { config.commands, 'boolean' },
         autoresize = { config.autoresize, 'table', true },
         split = { config.split, 'table', true },
-        cursorline = { config.cursorline, 'boolean' },
-        cursorcolumn = { config.cursorcolumn, 'boolean' },
-        signcolumn = { config.signcolumn, 'boolean' },
-        colorcolumn = { config.colorcolumn, 'table', true },
-        winhighlight = { config.winhighlight, 'boolean' },
-        number = { config.number, 'boolean' },
-        relativenumber = { config.relativenumber, 'boolean' },
-        hybridnumber = { config.hybridnumber, 'boolean' },
-        absolutenumber_unfocussed = {
-            config.absolutenumber_unfocussed,
-            'boolean',
-        },
+        ui = { config.split, 'table', true },
     })
 
     vim.validate({
@@ -198,9 +190,25 @@ H.setup_config = function(config)
         ['split.tmux'] = { config.split.tmux, 'boolean' },
     })
 
+
     vim.validate({
-        ['colorcolumn.enable'] = { config.colorcolumn.enable, 'boolean' },
-        ['colorcolumn.list'] = { config.colorcolumn.list, 'string' },
+        ['ui.number'] = { config.ui.number, 'boolean' },
+        ['ui.relativenumber'] = { config.ui.relativenumber, 'boolean' },
+        ['ui.hybridnumber'] = { config.ui.hybridnumber, 'boolean' },
+        ['ui.absolutenumber_unfocussed'] = {
+            config.ui.absolutenumber_unfocussed,
+            'boolean',
+        },
+        ['ui.cursorline'] = { config.ui.cursorline, 'boolean' },
+        ['ui.cursorcolumn'] = { config.ui.cursorcolumn, 'boolean' },
+        ['ui.colorcolumn'] = { config.ui.colorcolumn, 'table', true },
+        ['ui.signcolumn'] = { config.ui.signcolumn, 'boolean' },
+        ['ui.winhighlight'] = { config.ui.winhighlight, 'boolean' },
+    })
+
+    vim.validate({
+        ['ui.colorcolumn.enable'] = { config.ui.colorcolumn.enable, 'boolean' },
+        ['ui.colorcolumn.list'] = { config.ui.colorcolumn.list, 'string' },
     })
 
     return config

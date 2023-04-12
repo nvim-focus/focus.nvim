@@ -69,24 +69,27 @@ T['setup()']['default config'] = function()
     end
     expect_config('enable', true)
     expect_config('commands', true)
+
     expect_config('autoresize.enable', true)
     expect_config('autoresize.width', 0)
     expect_config('autoresize.height', 0)
     expect_config('autoresize.minwidth', 0)
     expect_config('autoresize.minheight', 0)
     expect_config('autoresize.height_quickfix', 10)
+
     expect_config('split.bufnew', false)
     expect_config('split.tmux', false)
-    expect_config('cursorline', true)
-    expect_config('cursorcolumn', false)
-    expect_config('signcolumn', true)
-    expect_config('colorcolumn.enable', false)
-    expect_config('colorcolumn.list', '+1')
-    expect_config('winhighlight', false)
-    expect_config('number', false)
-    expect_config('relativenumber', false)
-    expect_config('hybridnumber', false)
-    expect_config('absolutenumber_unfocussed', false)
+
+    expect_config('ui.number', false)
+    expect_config('ui.relativenumber', false)
+    expect_config('ui.hybridnumber', false)
+    expect_config('ui.absolutenumber_unfocussed', false)
+    expect_config('ui.cursorline', true)
+    expect_config('ui.cursorcolumn', false)
+    expect_config('ui.colorcolumn.enable', false)
+    expect_config('ui.colorcolumn.list', '+1')
+    expect_config('ui.signcolumn', true)
+    expect_config('ui.winhighlight', false)
 end
 
 T['setup()']['respects config argument'] = function()
@@ -136,34 +139,52 @@ T['setup()']['validates config argument'] = function()
         'autoresize.height_quickfix',
         'number'
     )
-    expect_config_error({ split = { bufnew = 3 }}, 'split.bufnew', 'boolean')
-    expect_config_error({ split = { tmux = 3 }}, 'split.tmux', 'boolean')
-    expect_config_error({ cursorline = 3 }, 'cursorline', 'boolean')
-    expect_config_error({ cursorcolumn = 3 }, 'cursorcolumn', 'boolean')
-    expect_config_error({ signcolumn = 3 }, 'signcolumn', 'boolean')
+
+    expect_config_error({ split = { bufnew = 3 } }, 'split.bufnew', 'boolean')
+    expect_config_error({ split = { tmux = 3 } }, 'split.tmux', 'boolean')
+
+    expect_config_error({ ui = { number = 3 } }, 'number', 'boolean')
     expect_config_error(
-        { colorcolumn = { enable = 3 } },
+        { ui = { relativenumber = 3 } },
+        'relativenumber',
+        'boolean'
+    )
+    expect_config_error(
+        { ui = { hybridnumber = 3 } },
+        'hybridnumber',
+        'boolean'
+    )
+    expect_config_error(
+        { ui = { absolutenumber_unfocussed = 3 } },
+        'absolutenumber_unfocussed',
+        'boolean'
+    )
+    expect_config_error({ ui = { cursorline = 3 } }, 'cursorline', 'boolean')
+    expect_config_error(
+        { ui = { cursorcolumn = 3 } },
+        'cursorcolumn',
+        'boolean'
+    )
+    expect_config_error(
+        { ui = { colorcolumn = { enable = 3 } } },
         'colorcolumn.enable',
         'boolean'
     )
     expect_config_error(
-        { colorcolumn = { list = 3 } },
+        { ui = { colorcolumn = { list = 3 } } },
         'colorcolumn.list',
         'string'
     )
-    expect_config_error({ winhighlight = 3 }, 'winhighlight', 'boolean')
-    expect_config_error({ number = 3 }, 'number', 'boolean')
-    expect_config_error({ relativenumber = 3 }, 'relativenumber', 'boolean')
-    expect_config_error({ hybridnumber = 3 }, 'hybridnumber', 'boolean')
+    expect_config_error({ ui = { signcolumn = 3 } }, 'signcolumn', 'boolean')
     expect_config_error(
-        { absolutenumber_unfocussed = 3 },
-        'absolutenumber_unfocussed',
+        { ui = { winhighlight = 3 } },
+        'winhighlight',
         'boolean'
     )
 end
 
 T['setup()']['autoresize'] = function()
-    reload_module({ autoresize = { enable = true }})
+    reload_module({ autoresize = { enable = true } })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -198,7 +219,7 @@ T['setup()']['cursorline'] = function()
 end
 
 T['setup()']['number'] = function()
-    reload_module({ autoresize = { enable = true }, number = true })
+    reload_module({ autoresize = { enable = true }, ui = { number = true } })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -211,7 +232,10 @@ T['setup()']['number'] = function()
 end
 
 T['setup()']['relativenumber'] = function()
-    reload_module({ autoresize = { enable = true }, relativenumber = true })
+    reload_module({
+        autoresize = { enable = true },
+        ui = { relativenumber = true },
+    })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -226,8 +250,10 @@ end
 T['setup()']['relativenumber absolutenumber_unfocussed'] = function()
     reload_module({
         autoresize = { enable = true },
-        relativenumber = true,
-        absolutenumber_unfocussed = true,
+        ui = {
+            relativenumber = true,
+            absolutenumber_unfocussed = true,
+        },
     })
 
     -- Auto command group
@@ -256,8 +282,10 @@ end
 T['setup()']['hybridnumber absolutenumber_unfocussed'] = function()
     reload_module({
         autoresize = { enable = true },
-        hybridnumber = true,
-        absolutenumber_unfocussed = true,
+        ui = {
+            hybridnumber = true,
+            absolutenumber_unfocussed = true,
+        },
     })
 
     -- Auto command group
@@ -271,7 +299,10 @@ T['setup()']['hybridnumber absolutenumber_unfocussed'] = function()
 end
 
 T['setup()']['cursorcolumn'] = function()
-    reload_module({ autoresize = { enable = true }, cursorcolumn = true })
+    reload_module({
+        autoresize = { enable = true },
+        ui = { cursorcolumn = true },
+    })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -284,7 +315,12 @@ T['setup()']['cursorcolumn'] = function()
 end
 
 T['setup()']['colorcolumn'] = function()
-    reload_module({ autoresize = { enable = true }, colorcolumn = { enabled = true } })
+    reload_module({
+        autoresize = { enable = true },
+        ui = {
+            colorcolumn = { enabled = true },
+        },
+    })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
