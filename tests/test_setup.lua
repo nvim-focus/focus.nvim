@@ -69,12 +69,12 @@ T['setup()']['default config'] = function()
     end
     expect_config('enable', true)
     expect_config('commands', true)
-    expect_config('autoresize', true)
-    expect_config('width', 0)
-    expect_config('height', 0)
-    expect_config('minwidth', 0)
-    expect_config('minheight', 0)
-    expect_config('height_quickfix', 10)
+    expect_config('autoresize.enable', true)
+    expect_config('autoresize.width', 0)
+    expect_config('autoresize.height', 0)
+    expect_config('autoresize.minwidth', 0)
+    expect_config('autoresize.minheight', 0)
+    expect_config('autoresize.height_quickfix', 10)
     expect_config('cursorline', true)
     expect_config('cursorcolumn', false)
     expect_config('signcolumn', true)
@@ -106,13 +106,36 @@ T['setup()']['validates config argument'] = function()
     expect_config_error('a', 'config', 'table')
     expect_config_error({ enable = 3 }, 'enable', 'boolean')
     expect_config_error({ commands = 3 }, 'commands', 'boolean')
-    expect_config_error({ autoresize = 3 }, 'autoresize', 'boolean')
-    expect_config_error({ width = '5' }, 'width', 'number')
-    expect_config_error({ height = '5' }, 'height', 'number')
-    expect_config_error({ minwidth = '5' }, 'minwidth', 'number')
-    expect_config_error({ minheight = '5' }, 'minheight', 'number')
-    expect_config_error({ minheight = '5' }, 'minheight', 'number')
-    expect_config_error({ height_quickfix = '5' }, 'height_quickfix', 'number')
+    expect_config_error(
+        { autoresize = { enable = 3 } },
+        'autoresize.enable',
+        'boolean'
+    )
+    expect_config_error(
+        { autoresize = { width = '5' } },
+        'autoresize.width',
+        'number'
+    )
+    expect_config_error(
+        { autoresize = { height = '5' } },
+        'autoresize.height',
+        'number'
+    )
+    expect_config_error(
+        { autoresize = { minwidth = '5' } },
+        'autoresize.minwidth',
+        'number'
+    )
+    expect_config_error(
+        { autoresize = { minheight = '5' } },
+        'autoresize.minheight',
+        'number'
+    )
+    expect_config_error(
+        { autoresize = { height_quickfix = '5' } },
+        'autoresize.height_quickfix',
+        'number'
+    )
     expect_config_error({ cursorline = 3 }, 'cursorline', 'boolean')
     expect_config_error({ cursorcolumn = 3 }, 'cursorcolumn', 'boolean')
     expect_config_error({ signcolumn = 3 }, 'signcolumn', 'boolean')
@@ -140,7 +163,7 @@ T['setup()']['validates config argument'] = function()
 end
 
 T['setup()']['autoresize'] = function()
-    reload_module({ autoresize = true })
+    reload_module({ autoresize = { enable = true }})
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -149,7 +172,7 @@ T['setup()']['autoresize'] = function()
 end
 
 T['setup()']['signcolumn'] = function()
-    reload_module({ autoresize = false, signcolumn = true })
+    reload_module({ autoresize = { enable = true }, signcolumn = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -162,7 +185,7 @@ T['setup()']['signcolumn'] = function()
 end
 
 T['setup()']['cursorline'] = function()
-    reload_module({ autoresize = false, cursorline = true })
+    reload_module({ autoresize = { enable = true }, cursorline = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -175,7 +198,7 @@ T['setup()']['cursorline'] = function()
 end
 
 T['setup()']['number'] = function()
-    reload_module({ autoresize = false, number = true })
+    reload_module({ autoresize = { enable = true }, number = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -188,7 +211,7 @@ T['setup()']['number'] = function()
 end
 
 T['setup()']['relativenumber'] = function()
-    reload_module({ autoresize = false, relativenumber = true })
+    reload_module({ autoresize = { enable = true }, relativenumber = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -202,7 +225,7 @@ end
 
 T['setup()']['relativenumber absolutenumber_unfocussed'] = function()
     reload_module({
-        autoresize = false,
+        autoresize = { enable = true },
         relativenumber = true,
         absolutenumber_unfocussed = true,
     })
@@ -218,7 +241,7 @@ T['setup()']['relativenumber absolutenumber_unfocussed'] = function()
 end
 
 T['setup()']['hybridnumber'] = function()
-    reload_module({ autoresize = false, hybridnumber = true })
+    reload_module({ autoresize = { enable = true }, hybridnumber = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -232,7 +255,7 @@ end
 
 T['setup()']['hybridnumber absolutenumber_unfocussed'] = function()
     reload_module({
-        autoresize = false,
+        autoresize = { enable = true },
         hybridnumber = true,
         absolutenumber_unfocussed = true,
     })
@@ -248,7 +271,7 @@ T['setup()']['hybridnumber absolutenumber_unfocussed'] = function()
 end
 
 T['setup()']['cursorcolumn'] = function()
-    reload_module({ autoresize = false, cursorcolumn = true })
+    reload_module({ autoresize = { enable = true }, cursorcolumn = true })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
@@ -261,7 +284,7 @@ T['setup()']['cursorcolumn'] = function()
 end
 
 T['setup()']['colorcolumn'] = function()
-    reload_module({ autoresize = false, colorcolumn = { enabled = true } })
+    reload_module({ autoresize = { enable = true }, colorcolumn = { enabled = true } })
 
     -- Auto command group
     eq(child.fn.exists('#Focus'), 1)
