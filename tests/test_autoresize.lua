@@ -102,7 +102,7 @@ T['autoresize']['split'] = function()
 end
 
 T['autoresize']['split height'] = function()
-    reload_module({ height = 18 })
+    reload_module({ autoresize = { height = 18 }})
     edit(lorem_ipsum_file)
     child.set_cursor(15, 1)
     child.cmd('split')
@@ -122,7 +122,7 @@ T['autoresize']['split height'] = function()
 end
 
 T['autoresize']['split minheight'] = function()
-    reload_module({ height = 20, minheight = 10 })
+    reload_module({ autoresize = { height = 20, minheight = 10 }})
     edit(lorem_ipsum_file)
     child.set_cursor(15, 1)
     child.cmd('split')
@@ -181,7 +181,7 @@ T['autoresize']['vsplit'] = function()
 end
 
 T['autoresize']['vsplit width'] = function()
-    reload_module({ width = 50 })
+    reload_module({ autoresize = { width = 50 }})
     edit(lorem_ipsum_file)
     child.set_cursor(15, 1)
     child.cmd('vsplit')
@@ -199,7 +199,7 @@ T['autoresize']['vsplit width'] = function()
 end
 
 T['autoresize']['vsplit minwidth'] = function()
-    reload_module({ width = 70, minwidth = 30 })
+    reload_module({ autoresize = { width = 70, minwidth = 30 }})
     edit(lorem_ipsum_file)
     child.set_cursor(15, 1)
     child.cmd('vsplit')
@@ -220,7 +220,7 @@ T['autoresize']['vsplit minwidth'] = function()
 end
 
 T['autoresize']['quickfix'] = function()
-    reload_module({ height_quickfix = 10 })
+    reload_module({ autoresize = { height_quickfix = 10 }})
     child.cmd('vimgrep /ipsum/' .. lorem_ipsum_file)
     child.cmd('copen')
 

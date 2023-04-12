@@ -29,7 +29,7 @@ function M.setup(config)
         return
     end
 
-    if config.autoresize then
+    if config.autoresize.enable then
         local previous_win_id = 0
 
         vim.api.nvim_create_autocmd('BufEnter', {

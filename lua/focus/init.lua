@@ -21,12 +21,14 @@ local Focus = {}
 Focus.config = {
     enable = true, -- Enable module
     commands = true, -- Create Focus commands
-    autoresize = true, -- Enable or disable auto-resizing of splits
-    width = 0, -- Force width for the focused window
-    height = 0, -- Force height for the focused window
-    minwidth = 0, -- Force minimum width for the unfocused window
-    minheight = 0, -- Force minimum height for the unfocused window
-    height_quickfix = 10, -- Set the height of quickfix panel
+    autoresize = {
+        enable = true, -- Enable or disable auto-resizing of splits
+        width = 0, -- Force width for the focused window
+        height = 0, -- Force height for the focused window
+        minwidth = 0, -- Force minimum width for the unfocused window
+        minheight = 0, -- Force minimum height for the unfocused window
+        height_quickfix = 10, -- Set the height of quickfix panel
+    },
     cursorline = true, -- Display a cursorline in the focussed window only
     cursorcolumn = false, -- Display cursorcolumn in the focussed window only
     signcolumn = true, -- Display signcolumn in the focussed window only
@@ -156,12 +158,7 @@ H.setup_config = function(config)
     vim.validate({
         enable = { config.enable, 'boolean' },
         commands = { config.commands, 'boolean' },
-        autoresize = { config.autoresize, 'boolean' },
-        width = { config.width, 'number' },
-        height = { config.height, 'number' },
-        minwidth = { config.minwidth, 'number' },
-        minheight = { config.minheight, 'number' },
-        height_quickfix = { config.height_quickfix, 'number' },
+        autoresize = { config.autoresize, 'table', true },
         cursorline = { config.cursorline, 'boolean' },
         cursorcolumn = { config.cursorcolumn, 'boolean' },
         signcolumn = { config.signcolumn, 'boolean' },
@@ -176,6 +173,15 @@ H.setup_config = function(config)
         },
         tmux = { config.tmux, 'boolean' },
         bufnew = { config.bufnew, 'boolean' },
+    })
+
+    vim.validate({
+        ['autoresize.enable'] = { config.autoresize.enable, 'boolean' },
+        ['autoresize.width'] = { config.autoresize.width, 'number' },
+        ['autoresize.height'] = { config.autoresize.height, 'number' },
+        ['autoresize.minwidth'] = { config.autoresize.minwidth, 'number' },
+        ['autoresize.minheight'] = { config.autoresize.minheight, 'number' },
+        ['autoresize.height_quickfix'] = { config.autoresize.height_quickfix, 'number' },
     })
 
     vim.validate({
