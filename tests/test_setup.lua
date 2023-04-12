@@ -75,6 +75,8 @@ T['setup()']['default config'] = function()
     expect_config('autoresize.minwidth', 0)
     expect_config('autoresize.minheight', 0)
     expect_config('autoresize.height_quickfix', 10)
+    expect_config('split.bufnew', false)
+    expect_config('split.tmux', false)
     expect_config('cursorline', true)
     expect_config('cursorcolumn', false)
     expect_config('signcolumn', true)
@@ -85,8 +87,6 @@ T['setup()']['default config'] = function()
     expect_config('relativenumber', false)
     expect_config('hybridnumber', false)
     expect_config('absolutenumber_unfocussed', false)
-    expect_config('tmux', false)
-    expect_config('bufnew', false)
 end
 
 T['setup()']['respects config argument'] = function()
@@ -136,6 +136,8 @@ T['setup()']['validates config argument'] = function()
         'autoresize.height_quickfix',
         'number'
     )
+    expect_config_error({ split = { bufnew = 3 }}, 'split.bufnew', 'boolean')
+    expect_config_error({ split = { tmux = 3 }}, 'split.tmux', 'boolean')
     expect_config_error({ cursorline = 3 }, 'cursorline', 'boolean')
     expect_config_error({ cursorcolumn = 3 }, 'cursorcolumn', 'boolean')
     expect_config_error({ signcolumn = 3 }, 'signcolumn', 'boolean')
@@ -158,8 +160,6 @@ T['setup()']['validates config argument'] = function()
         'absolutenumber_unfocussed',
         'boolean'
     )
-    expect_config_error({ tmux = 3 }, 'tmux', 'boolean')
-    expect_config_error({ bufnew = 3 }, 'bufnew', 'boolean')
 end
 
 T['setup()']['autoresize'] = function()
