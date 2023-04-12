@@ -32,7 +32,8 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
     end
 
     if vim.bo.ft == 'qf' then
-        vim.o.winheight = config.height_quickfix or 10
+        vim.o.winminheight = 1
+        vim.o.winheight = config.height_quickfix
         return
     end
 
