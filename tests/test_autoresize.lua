@@ -101,6 +101,47 @@ T['autoresize']['split'] = function()
     eq(child.fn.line('w$', win_id_upper), 18)
 end
 
+T['autoresize']['split height'] = function()
+    reload_module({ height = 18 })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+
+    -- Check if we have a column layout
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    eq(win_id_upper, child.api.nvim_get_current_win())
+
+    eq(child.o.winheight, 18)
+
+    -- Check dimensions
+    validate_win_dims(win_id_upper, { 80, 18 })
+    validate_win_dims(win_id_lower, { 80, 4 })
+end
+
+T['autoresize']['split minheight'] = function()
+    reload_module({ height = 20, minheight = 10 })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+
+    -- Check if we have a column layout
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    eq(child.o.winheight, 20)
+    eq(child.o.winminheight, 10)
+
+    eq(win_id_upper, child.api.nvim_get_current_win())
+
+    -- Check dimensions
+    validate_win_dims(win_id_upper, { 80, 12 })
+    validate_win_dims(win_id_lower, { 80, 10 })
+end
+
 T['autoresize']['vsplit'] = function()
     edit(lorem_ipsum_file)
     child.set_cursor(15, 1)
@@ -137,6 +178,45 @@ T['autoresize']['vsplit'] = function()
     -- Check dimensions after switching windows
     validate_win_dims(win_id_left, { 30, 23 })
     validate_win_dims(win_id_right, { 49, 23 })
+end
+
+T['autoresize']['vsplit width'] = function()
+    reload_module({ width = 50 })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+
+    -- Check if we have a column layout
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Check dimensions
+    validate_win_dims(win_id_left, { 50, 23 })
+    validate_win_dims(win_id_right, { 29, 23 })
+end
+
+T['autoresize']['vsplit minwidth'] = function()
+    reload_module({ width = 70, minwidth = 30 })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+
+    -- Check if we have a column layout
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(child.o.winwidth, 70)
+    eq(child.o.winminwidth, 30)
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Check dimensions
+    validate_win_dims(win_id_left, { 49, 23 })
+    validate_win_dims(win_id_right, { 30, 23 })
 end
 
 return T
