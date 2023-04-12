@@ -219,4 +219,21 @@ T['autoresize']['vsplit minwidth'] = function()
     validate_win_dims(win_id_right, { 30, 23 })
 end
 
+T['autoresize']['quickfix'] = function()
+    reload_module({ height_quickfix = 10 })
+    child.cmd('vimgrep /ipsum/' .. lorem_ipsum_file)
+    child.cmd('copen')
+
+    local resize_state = child.get_resize_state()
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    -- We should be in the quickfix window
+    eq(win_id_lower, child.api.nvim_get_current_win())
+
+    -- Check dimensions
+    validate_win_dims(win_id_upper, { 80, 12 })
+    validate_win_dims(win_id_lower, { 80, 10 })
+end
+
 return T
