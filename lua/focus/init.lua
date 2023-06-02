@@ -47,7 +47,7 @@ Focus.config = {
         },
         signcolumn = true, -- Display signcolumn in the focussed window only
         winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
-    }
+    },
 }
 
 --- Module setup
@@ -109,12 +109,7 @@ end
 function Focus.split_command(direction, args)
     local config = H.get_config()
     args = args or ''
-    split.split_command(
-        direction,
-        args,
-        config.split.tmux,
-        config.split.bufnew
-    )
+    split.split_command(direction, args, config.split.tmux, config.split.bufnew)
 end
 
 function Focus.split_cycle(reverse)
@@ -189,7 +184,6 @@ H.setup_config = function(config)
         ['split.bufnew'] = { config.split.bufnew, 'boolean' },
         ['split.tmux'] = { config.split.tmux, 'boolean' },
     })
-
 
     vim.validate({
         ['ui.number'] = { config.ui.number, 'boolean' },
