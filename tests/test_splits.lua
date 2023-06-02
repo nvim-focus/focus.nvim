@@ -221,8 +221,21 @@ T['focus_split']['nicely 4x'] = function()
     validate_win_layout({
         'row',
         {
-            { 'col', { { 'leaf', win_id_left_upper }, { 'leaf', win_id_left_lower } } },
-            { 'col', { { 'leaf', win_id_right_upper }, { 'leaf', win_id_right_middle }, { 'leaf', win_id_right_lower } } },
+            {
+                'col',
+                {
+                    { 'leaf', win_id_left_upper },
+                    { 'leaf', win_id_left_lower },
+                },
+            },
+            {
+                'col',
+                {
+                    { 'leaf', win_id_right_upper },
+                    { 'leaf', win_id_right_middle },
+                    { 'leaf', win_id_right_lower },
+                },
+            },
         },
     })
 
