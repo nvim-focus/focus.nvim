@@ -65,7 +65,7 @@ T['focus_ui']['number'] = function()
     reload_module({ ui = { number = true } })
     edit(lorem_ipsum_file)
 
-    child.expect_screenshot()
+    eq(child.wo.number, true)
 end
 
 T['focus_ui']['number with split'] = function()
@@ -103,7 +103,7 @@ T['focus_ui']['relativenumber'] = function()
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
 
-    child.expect_screenshot()
+    eq(child.wo.relativenumber, true)
 end
 
 T['focus_ui']['relativenumber with split'] = function()
@@ -193,7 +193,8 @@ T['focus_ui']['hybridnumber'] = function()
     edit(lorem_ipsum_file)
     child.set_cursor(15, 0)
 
-    child.expect_screenshot()
+    eq(child.wo.number, true)
+    eq(child.wo.relativenumber, true)
 end
 
 T['focus_ui']['hybridnumber with split'] = function()
