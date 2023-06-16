@@ -1,11 +1,11 @@
 # focus.nvim
 
-[![GitHub stars](https://img.shields.io/github/stars/beauwilliams/focus.nvim.svg?style=social&label=Star)](https://GitHub.com/beauwilliams/focus.nvim/stargazers/)
+[![GitHub stars](https://img.shields.io/github/stars/nvim-focus/focus.nvim.svg?style=social&label=Star)](https://GitHub.com/nvim-focus/focus.nvim/stargazers/)
 [![Requires Neovim 0.7+](https://img.shields.io/badge/requires-nvim%200.7%2B-9cf?logo=neovim)](https://neovim.io/)
-[![GitHub contributors](https://img.shields.io/github/contributors/beauwilliams/focus.nvim.svg)](https://GitHub.com/beauwilliams/focus.nvim/graphs/contributors/)
+[![GitHub contributors](https://img.shields.io/github/contributors/nvim-focus/focus.nvim.svg)](https://GitHub.com/nvim-focus/focus.nvim/graphs/contributors/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com/)
-[![GitHub issues](https://img.shields.io/github/issues/beauwilliams/focus.nvim.svg)](https://GitHub.com/beauwilliams/focus.nvim/issues/)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/beauwilliams/focus.nvim.svg)](https://GitHub.com/beauwilliams/focus.nvim/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub issues](https://img.shields.io/github/issues/nvim-focus/focus.nvim.svg)](https://GitHub.com/nvim-focus/focus.nvim/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/nvim-focus/focus.nvim.svg)](https://GitHub.com/nvim-focus/focus.nvim/issues?q=is%3Aissue+is%3Aclosed)
 
 Always have a nice view over your split windows
 
@@ -17,7 +17,7 @@ Always have a nice view over your split windows
 columns.
 
 *See a visual demonstration of each focus feature
-[here](https://github.com/beauwilliams/focus.nvim/blob/master/DEMO.md)*.
+[here](https://github.com/nvim-focus/focus.nvim/blob/master/DEMO.md)*.
 
 ## Features
 
@@ -43,10 +43,10 @@ Here are code snippets for some common installation methods (use only one):
     <tbody>
         <tr>
             <td rowspan=2>'focus.nvim' library</td>
-            <td>Main</td> <td><code>{ 'beauwilliams/focus.nvim', version = false },</code></td>
+            <td>Main</td> <td><code>{ 'nvim-focus/focus.nvim', version = false },</code></td>
         </tr>
         <tr>
-            <td>Stable</td> <td><code>{ 'beauwilliams/focus.nvim', version = '*' },</code></td>
+            <td>Stable</td> <td><code>{ 'nvim-focus/focus.nvim', version = '*' },</code></td>
         </tr>
     </tbody>
 </table>
@@ -64,10 +64,10 @@ Here are code snippets for some common installation methods (use only one):
     <tbody>
         <tr>
             <td rowspan=2>'focus.nvim' library</td>
-            <td>Main</td> <td><code>use 'beauwilliams/focus.nvim'</code></td>
+            <td>Main</td> <td><code>use 'nvim-focus/focus.nvim'</code></td>
         </tr>
         <tr>
-            <td>Stable</td> <td><code>use { 'beauwilliams/focus.nvim', branch = 'stable' }</code></td>
+            <td>Stable</td> <td><code>use { 'nvim-focus/focus.nvim', branch = 'stable' }</code></td>
         </tr>
     </tbody>
 </table>
@@ -85,10 +85,10 @@ Here are code snippets for some common installation methods (use only one):
     <tbody>
         <tr>
             <td rowspan=2>'focus.nvim' library</td>
-            <td>Main</td> <td><code>Plug 'beauwilliams/focus.nvim'</code></td>
+            <td>Main</td> <td><code>Plug 'nvim-focus/focus.nvim'</code></td>
         </tr>
         <tr>
-            <td>Stable</td> <td><code>Plug 'beauwilliams/focus.nvim', { 'branch': 'stable' }</code></td>
+            <td>Stable</td> <td><code>Plug 'nvim-focus/focus.nvim', { 'branch': 'stable' }</code></td>
         </tr>
     </tbody>
 </table>
@@ -478,7 +478,7 @@ split that was created or moved to*
 
   Please note if you lazy load with command `:FocusToggle`, it will load focus,
   but will toggle it off initially. See
-  [#34](https://github.com/beauwilliams/focus.nvim/issues/34).
+  [#34](https://github.com/nvim-focus/focus.nvim/issues/34).
 
   This is because focus is toggled on by default when you load focus, so if you
   load it and then run the command `:FocusToggle`, it toggles it off again.
