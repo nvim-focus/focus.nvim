@@ -61,7 +61,7 @@ function M.setup(config)
                 -- If we switch between horizontal splits, center the window
                 if cur_win_pos[2] == prev_win_pos[2] then
                     vim.api.nvim_win_call(previous_win_id, function()
-                        vim.api.nvim_command('normal! zz')
+                        pcall(vim.api.nvim_command, 'normal! zz')
                     end)
                 end
             end,
