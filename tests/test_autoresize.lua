@@ -236,4 +236,17 @@ T['autoresize']['quickfix'] = function()
     validate_win_dims(win_id_lower, { 80, 10 })
 end
 
+T['autoresize']['terminal'] = function()
+    -- create a new term split
+    child.cmd('split')
+    child.cmd('terminal')
+    -- enter terminal insert mode
+    child.cmd('startinsert!')
+
+    -- Switch to the upper window
+    -- Without pcall, this throws an error because `normal!` doesn't
+    -- work from terminal mode.
+    child.cmd('wincmd w')
+end
+
 return T
