@@ -16,7 +16,7 @@ M.focus_disable = function()
         return
     end
 
-    vim.g.enabled_focus_resizing = 0
+    vim.g.focus_disable = true
     vim.o.winminwidth = 0
     vim.o.winwidth = 20
     vim.o.winminheight = 1
