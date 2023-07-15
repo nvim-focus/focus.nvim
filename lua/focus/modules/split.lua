@@ -132,14 +132,9 @@ function M.split_cycle(reverse, bufnew)
 end
 
 function M.split_exists_direction(winnr, direction)
-    cmd('wincmd ' .. direction)
-    if winnr == vim.api.nvim_get_current_win() then
-        return false
-    else
-        -- we want to stay in the current split we were in
-        cmd('wincmd ' .. move_back(direction))
-        return true
-    end
+    return vim.api.nvim_win_call(winnr, function()
+        return vim.fn.winnr() ~= vim.fn.winnr(direction)
+    end)
 end
 
 return M
