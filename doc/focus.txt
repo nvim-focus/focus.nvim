@@ -1,4 +1,4 @@
-*focus.txt*            For Neovim >= 0.7.0           Last change: 2023 July 04
+*focus.txt*            For Neovim >= 0.7.0           Last change: 2023 July 15
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
