@@ -85,7 +85,7 @@ Focus.setup = function(config)
                 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
         end
 
-        if config.autoresize then
+        if config.autoresize.enable == true then
             Focus.resize()
         end
     end

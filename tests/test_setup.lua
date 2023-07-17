@@ -192,6 +192,21 @@ T['setup()']['autoresize'] = function()
     eq(child.fn.exists('#Focus#BufEnter'), 1)
 end
 
+T['setup()']['autoresize disabled'] = function()
+    reload_module({
+        autoresize = { enable = false },
+        ui = { cursorline = false, signcolumn = false },
+    })
+
+    eq(child.lua_get('_G.Focus.config.autoresize.enable'), false)
+
+    -- Auto command group, this is always created
+    eq(child.fn.exists('#Focus'), 1)
+
+    -- There should be no BufEnter if we have all features disabled
+    eq(child.fn.exists('#Focus#BufEnter'), 0)
+end
+
 T['setup()']['signcolumn'] = function()
     reload_module({ autoresize = { enable = true }, signcolumn = true })
 

@@ -101,6 +101,29 @@ T['autoresize']['split'] = function()
     eq(child.fn.line('w$', win_id_upper), 18)
 end
 
+T['autoresize']['disabled'] = function()
+    reload_module({ autoresize = { enable = false } })
+
+    eq(child.lua_get('_G.Focus.config.autoresize.enable'), false)
+
+    edit(lorem_ipsum_file)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+
+    -- Check if we have a column layout
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    validate_win_layout({
+        'col',
+        { { 'leaf', win_id_upper }, { 'leaf', win_id_lower } },
+    })
+
+    -- Check if dimensions are equal
+    validate_win_dims(win_id_upper, { 80, 11 })
+    validate_win_dims(win_id_lower, { 80, 11 })
+end
+
 T['autoresize']['split height'] = function()
     reload_module({ autoresize = { height = 18 } })
     edit(lorem_ipsum_file)

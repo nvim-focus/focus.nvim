@@ -24,6 +24,7 @@ end
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
     if
         utils.is_disabled()
+        or config.autoresize.enable == false
         or vim.api.nvim_win_get_option(0, 'diff')
         or vim.api.nvim_win_get_config(0).relative ~= ''
     then
