@@ -46,6 +46,7 @@ Focus.config = {
             list = '+1', -- Set the comma-saperated list for the colorcolumn
         },
         signcolumn = true, -- Display signcolumn in the focussed window only
+        signcolumn_focused_value = 'auto', -- Set the value of signcolumn for the focused window only (yes, number, auto)
         winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
     },
 }
@@ -197,6 +198,11 @@ H.setup_config = function(config)
         ['ui.cursorcolumn'] = { config.ui.cursorcolumn, 'boolean' },
         ['ui.colorcolumn'] = { config.ui.colorcolumn, 'table', true },
         ['ui.signcolumn'] = { config.ui.signcolumn, 'boolean' },
+        ['ui.signcolumn_focused_value'] = {
+            config.ui.signcolumn_focused_value,
+            'string',
+        },
+        ['ui.winhighlight'] = { config.ui.winhighlight, 'boolean' },
         ['ui.winhighlight'] = { config.ui.winhighlight, 'boolean' },
     })
 

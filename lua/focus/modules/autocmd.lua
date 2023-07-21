@@ -13,8 +13,8 @@ local M = {}
 
 -- if focus auto signcolumn is set to true then
 -- we assume it to be auto in case signcolumn = no
-local function get_sign_column()
-    local default_signcolumn = 'auto'
+local function get_sign_column(config)
+    local default_signcolumn = config.ui.signcolumn_focused_value or 'auto'
     if vim.opt.signcolumn:get() == 'no' then
         return default_signcolumn
     else
@@ -91,7 +91,7 @@ function M.setup(config)
                 if utils.is_disabled() then
                     return
                 end
-                vim.wo.signcolumn = get_sign_column()
+                vim.wo.signcolumn = get_sign_column(config)
             end,
             desc = 'Enable signcolumn',
         })
