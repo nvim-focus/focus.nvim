@@ -49,6 +49,11 @@ Focus.config = {
         signcolumn_focused_value = 'auto', -- Set the value of signcolumn for the focused window only (yes, number, auto)
         winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
     },
+    exclude = {
+        filetypes = {}, -- Filetypes to exclude from Focus
+        buftypes = {}, -- Buftypes to exclude from Focus
+        bufnames = {}, -- File names to exclude from Focus
+    },
 }
 
 --- Module setup
@@ -167,6 +172,7 @@ H.setup_config = function(config)
         autoresize = { config.autoresize, 'table', true },
         split = { config.split, 'table', true },
         ui = { config.split, 'table', true },
+        exclude = { config.exclude, 'table', true },
     })
 
     vim.validate({
@@ -209,6 +215,12 @@ H.setup_config = function(config)
     vim.validate({
         ['ui.colorcolumn.enable'] = { config.ui.colorcolumn.enable, 'boolean' },
         ['ui.colorcolumn.list'] = { config.ui.colorcolumn.list, 'string' },
+    })
+
+    vim.validate({
+        ['exclude.filetypes'] = { config.exclude.filetypes, 'table' },
+        ['exclude.buftypes'] = { config.exclude.buftypes, 'table' },
+        ['exclude.bufnames'] = { config.exclude.bufnames, 'table' },
     })
 
     return config

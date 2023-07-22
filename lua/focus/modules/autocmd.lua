@@ -161,7 +161,7 @@ function M.setup(config)
                     vim.wo.number = false
                     vim.wo.relativenumber = true
                 end,
-                desc = 'Absolutnumber unfoccused enter',
+                desc = 'Absolutenumber unfoccused enter',
             })
             vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
                 group = augroup,
@@ -172,7 +172,7 @@ function M.setup(config)
                     vim.wo.number = true
                     vim.wo.relativenumber = false
                 end,
-                desc = 'Absolutnumber unfoccused leave',
+                desc = 'Absolutenumber unfoccused leave',
             })
         else
             vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
@@ -291,6 +291,50 @@ function M.setup(config)
             desc = 'Color column leave',
         })
     end
+
+    if #config.exclude.filetypes > 0 then
+        vim.api.nvim_create_autocmd({ 'FileType' }, {
+            group = augroup,
+            callback = function(_)
+                if
+                    vim.tbl_contains(config.exclude.filetypes, vim.bo.filetype)
+                then
+                    vim.b.focus_disable = true
+                end
+            end,
+            desc = 'Disable focus autoresize for FileType',
+        })
+    end
+
+    if #config.exclude.buftypes > 0 then
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+            group = augroup,
+            callback = function(_)
+                if
+                    vim.tbl_contains(config.exclude.buftypes, vim.bo.buftype)
+                then
+                    vim.b.focus_disable = true
+                end
+            end,
+            desc = 'Disable focus autoresize for BufType',
+        })
+    end
+
+    if #config.exclude.bufnames > 0 then
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+            group = augroup,
+            callback = function(_)
+                if
+                    vim.tbl_contains(config.exclude.bufnames, vim.fn.bufname())
+                then
+                    vim.b.focus_disable = true
+                end
+            end,
+            desc = 'Disable focus autoresize for BufName',
+        })
+    end
+
+    return M
 end
 
 return M
