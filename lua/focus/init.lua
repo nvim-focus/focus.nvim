@@ -209,7 +209,6 @@ H.setup_config = function(config)
             'string',
         },
         ['ui.winhighlight'] = { config.ui.winhighlight, 'boolean' },
-        ['ui.winhighlight'] = { config.ui.winhighlight, 'boolean' },
     })
 
     vim.validate({
