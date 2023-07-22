@@ -307,17 +307,23 @@ function M.setup(config)
     end
 
     if #config.exclude.buftypes > 0 then
-        vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
-            group = augroup,
-            callback = function(_)
-                if
-                    vim.tbl_contains(config.exclude.buftypes, vim.bo.buftype)
-                then
-                    vim.b.focus_disable = true
-                end
-            end,
-            desc = 'Disable focus autoresize for BufType',
-        })
+        vim.api.nvim_create_autocmd(
+            { 'BufEnter', 'WinEnter', 'BufRead', 'BufNewFile' },
+            {
+                group = augroup,
+                callback = function(_)
+                    if
+                        vim.tbl_contains(
+                            config.exclude.buftypes,
+                            vim.bo.buftype
+                        )
+                    then
+                        vim.b.focus_disable = true
+                    end
+                end,
+                desc = 'Disable focus autoresize for BufType',
+            }
+        )
     end
 
     if #config.exclude.bufnames > 0 then
