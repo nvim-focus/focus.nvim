@@ -21,76 +21,78 @@ local golden_ratio_minheight = function()
     return math.floor(golden_ratio_height() / (3 * golden_ratio))
 end
 
+function M.autoresize(config)
+    local width
+    if config.autoresize.width > 0 then
+        width = config.autoresize.width
+    else
+        width = golden_ratio_width()
+        if config.autoresize.minwidth > 0 then
+            width = math.max(width, config.autoresize.minwidth)
+        elseif width < golden_ratio_minwidth() then
+            width = golden_ratio_minwidth()
+        end
+    end
+
+    local height
+    if config.autoresize.height > 0 then
+        height = config.autoresize.height
+    else
+        height = golden_ratio_height()
+        if config.autoresize.minheight > 0 then
+            height = math.max(height, config.autoresize.minheight)
+        elseif height < golden_ratio_minheight() then
+            height = golden_ratio_minheight()
+        end
+    end
+
+    local win = vim.api.nvim_get_current_win()
+    local view = vim.fn.winsaveview()
+    local cur_h = vim.api.nvim_win_get_height(win)
+    local cur_w = vim.api.nvim_win_get_width(win)
+
+    if width > cur_w then
+        vim.api.nvim_win_set_width(win, width)
+    end
+    if height > cur_h then
+        vim.api.nvim_win_set_height(win, height)
+    end
+    vim.fn.winrestview(view)
+end
+
+function M.equalise()
+    vim.api.nvim_exec2('wincmd =', { output = false })
+end
+
+function M.maximise()
+    local width, height = vim.o.columns, vim.o.lines
+
+    local win = vim.api.nvim_get_current_win()
+    local view = vim.fn.winsaveview()
+    vim.api.nvim_win_set_width(win, width)
+    vim.api.nvim_win_set_height(win, height)
+    vim.api.nvim_win_call(function()
+        vim.fn.winrestview(view)
+    end)
+end
+
+M.goal = 'autoresize'
+
 function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
     if
         utils.is_disabled()
         or vim.api.nvim_win_get_option(0, 'diff')
         or vim.api.nvim_win_get_config(0).relative ~= ''
     then
-        vim.o.winminwidth = 1
-        vim.o.winwidth = 1
-        vim.o.winminheight = 1
-        vim.o.winheight = 1
-
         return
     end
 
-    if vim.bo.ft == 'qf' then
-        vim.o.winminheight = 1
-        vim.o.winheight = config.autoresize.height_quickfix
+    if vim.bo.filetype == 'qf' and config.autoresize.height_quickfix > 0 then
+        vim.api.nvim_win_set_height(0, config.autoresize.height_quickfix)
         return
     end
 
-    if config.autoresize.width > 0 then
-        vim.o.winwidth = config.autoresize.width
-        if config.autoresize.minwidth > 0 then
-            vim.o.winminwidth = config.autoresize.minwidth
-        else
-            vim.o.winminwidth = golden_ratio_minwidth()
-        end
-    else
-        vim.o.winwidth = golden_ratio_width()
-        if config.autoresize.minwidth > 0 then
-            if config.autoresize.minwidth < golden_ratio_width() then
-                print(
-                    'Focus.nvim: config.autoresize.red minwidth is less than '
-                        .. 'golden_ratio_width derived from your display. '
-                        .. 'Please set minwidth to at least '
-                        .. golden_ratio_width()
-                )
-            else
-                vim.o.winminwidth = config.autoresize.minwidth
-            end
-        else
-            vim.o.winminwidth = golden_ratio_minwidth()
-        end
-    end
-
-    if config.autoresize.height > 0 then
-        vim.o.winheight = config.autoresize.height
-        if config.autoresize.minheight > 0 then
-            vim.o.winminheight = config.autoresize.minheight
-        else
-            --NOTE: avoid setting width lower than mindwidth
-            vim.o.winminheight = golden_ratio_minheight()
-        end
-    else
-        vim.o.winheight = golden_ratio_height()
-        if config.autoresize.minheight > 0 then
-            if config.autoresize.minheight < golden_ratio_height() then
-                print(
-                    'Focus.nvim: config.autoresize.red minheight is less than default '
-                        .. 'golden_ratio_height derived from your display. Please '
-                        .. 'set minheight to at least '
-                        .. golden_ratio_height()
-                )
-            else
-                vim.o.winminheight = config.autoresize.minheight
-            end
-        else
-            vim.o.winminheight = golden_ratio_minheight()
-        end
-    end
+    M[M.goal](config)
 end
 
 return M

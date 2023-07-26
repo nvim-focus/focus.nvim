@@ -143,14 +143,17 @@ end
 
 function Focus.focus_disable_window()
     vim.b.focus_disable = true
+    Focus.resize()
 end
 
 function Focus.focus_enable_window()
     vim.b.focus_disable = false
+    Focus.resize()
 end
 
 function Focus.focus_toggle_window()
     vim.b.focus_disable = not vim.b.focus_disable
+    Focus.resize()
 end
 
 H.default_config = Focus.config
