@@ -8,6 +8,7 @@ M.focus_enable = function()
     end
 
     vim.g.focus_disable = false
+    require('focus.modules.resizer').goal = 'autoresize'
     require('focus').resize()
 end
 
@@ -17,10 +18,6 @@ M.focus_disable = function()
     end
 
     vim.g.focus_disable = true
-    vim.o.winminwidth = 0
-    vim.o.winwidth = 20
-    vim.o.winminheight = 1
-    vim.o.winheight = 1
     cmd('wincmd=')
 end
 
@@ -35,17 +32,18 @@ M.focus_toggle = function()
 end
 
 M.focus_maximise = function()
-    -- we add +1 just incase winminwidth or height is full width/height
-    vim.o.winwidth = vim.o.columns + 1
-    vim.o.winheight = vim.o.lines + 1
+    require('focus.modules.resizer').goal = 'maximise'
+    require('focus').resize()
 end
 
 M.focus_equalise = function()
-    vim.o.winminwidth = 0
-    vim.o.winwidth = 20
-    vim.o.winminheight = 1
-    vim.o.winheight = 1
-    cmd('wincmd=')
+    require('focus.modules.resizer').goal = 'equalise'
+    require('focus').resize()
+end
+
+M.focus_autoresize = function()
+    require('focus.modules.resizer').goal = 'autoresize'
+    require('focus').resize()
 end
 
 M.focus_max_or_equal = function()
