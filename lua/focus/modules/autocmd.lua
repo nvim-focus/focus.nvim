@@ -325,21 +325,6 @@ function M.setup(config)
             }
         )
     end
-
-    if #config.exclude.bufnames > 0 then
-        vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
-            group = augroup,
-            callback = function(_)
-                if
-                    vim.tbl_contains(config.exclude.bufnames, vim.fn.bufname())
-                then
-                    vim.b.focus_disable = true
-                end
-            end,
-            desc = 'Disable focus autoresize for BufName',
-        })
-    end
-
     return M
 end
 

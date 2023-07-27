@@ -19,40 +19,39 @@ local H = {}
 local Focus = {}
 
 Focus.config = {
-    enable = true, -- Enable module
-    commands = true, -- Create Focus commands
+    enable = true,            -- Enable module
+    commands = true,          -- Create Focus commands
     autoresize = {
-        enable = true, -- Enable or disable auto-resizing of splits
-        width = 0, -- Force width for the focused window
-        height = 0, -- Force height for the focused window
-        minwidth = 0, -- Force minimum width for the unfocused window
-        minheight = 0, -- Force minimum height for the unfocused window
+        enable = true,        -- Enable or disable auto-resizing of splits
+        width = 0,            -- Force width for the focused window
+        height = 0,           -- Force height for the focused window
+        minwidth = 0,         -- Force minimum width for the unfocused window
+        minheight = 0,        -- Force minimum height for the unfocused window
         height_quickfix = 10, -- Set the height of quickfix panel
     },
     split = {
         bufnew = false, -- Create blank buffer for new split windows
-        tmux = false, -- Create tmux splits instead of neovim splits
+        tmux = false,   -- Create tmux splits instead of neovim splits
     },
     ui = {
-        number = false, -- Display line numbers in the focussed window only
-        relativenumber = false, -- Display relative line numbers in the focussed window only
-        hybridnumber = false, -- Display hybrid line numbers in the focussed window only
+        number = false,                    -- Display line numbers in the focussed window only
+        relativenumber = false,            -- Display relative line numbers in the focussed window only
+        hybridnumber = false,              -- Display hybrid line numbers in the focussed window only
         absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
 
-        cursorline = true, -- Display a cursorline in the focussed window only
-        cursorcolumn = false, -- Display cursorcolumn in the focussed window only
+        cursorline = true,                 -- Display a cursorline in the focussed window only
+        cursorcolumn = false,              -- Display cursorcolumn in the focussed window only
         colorcolumn = {
-            enable = false, -- Display colorcolumn in the foccused window only
-            list = '+1', -- Set the comma-saperated list for the colorcolumn
+            enable = false,                -- Display colorcolumn in the foccused window only
+            list = '+1',                   -- Set the comma-saperated list for the colorcolumn
         },
-        signcolumn = true, -- Display signcolumn in the focussed window only
+        signcolumn = true,                 -- Display signcolumn in the focussed window only
         signcolumn_focused_value = 'auto', -- Set the value of signcolumn for the focused window only (yes, number, auto)
-        winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
+        winhighlight = false,              -- Auto highlighting for focussed/unfocussed windows
     },
     exclude = {
         filetypes = {}, -- Filetypes to exclude from Focus
-        buftypes = {}, -- Buftypes to exclude from Focus
-        bufnames = {}, -- File names to exclude from Focus
+        buftypes = {},  -- Buftypes to exclude from Focus
     },
 }
 
@@ -88,7 +87,7 @@ Focus.setup = function(config)
             end
 
             vim.wo.winhighlight =
-                'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
+            'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
         end
 
         if config.autoresize then
@@ -219,7 +218,6 @@ H.setup_config = function(config)
     vim.validate({
         ['exclude.filetypes'] = { config.exclude.filetypes, 'table' },
         ['exclude.buftypes'] = { config.exclude.buftypes, 'table' },
-        ['exclude.bufnames'] = { config.exclude.bufnames, 'table' },
     })
 
     return config
