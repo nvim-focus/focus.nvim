@@ -28,15 +28,6 @@ function M.remove_from_set(set, item)
     return set
 end
 
--- SPLITS A STRING BY SPACE FOR : COMMAND PARSING
-function M.split(s, delimiter)
-    local result = {}
-    for match in (s .. delimiter):gmatch('(.-)' .. delimiter) do
-        table.insert(result, match)
-    end
-    return result
-end
-
 M.is_disabled = function()
     return vim.g.focus_disable == true or vim.b.focus_disable == true
 end

@@ -6,7 +6,7 @@ local M = {}
 local golden_ratio = 1.618
 
 local function process_split_args(created, args, bufnew)
-    local args_array = utils.split(args, ' ')
+    local args_array = vim.split(args, ' ')
     if args_array[1] ~= '' and args_array[1] ~= 'cmd' then
         cmd('edit ' .. args_array[1])
     elseif args_array[1] == 'cmd' and args_array[2] ~= nil then
