@@ -292,12 +292,12 @@ function M.setup(config)
         })
     end
 
-    if #config.exclude.filetypes > 0 then
+    if #config.excluded.filetypes > 0 then
         vim.api.nvim_create_autocmd({ 'FileType' }, {
             group = augroup,
             callback = function(_)
                 if
-                    vim.tbl_contains(config.exclude.filetypes, vim.bo.filetype)
+                    vim.tbl_contains(config.excluded.filetypes, vim.bo.filetype)
                 then
                     vim.b.focus_disable = true
                 end
@@ -306,7 +306,7 @@ function M.setup(config)
         })
     end
 
-    if #config.exclude.buftypes > 0 then
+    if #config.excluded.buftypes > 0 then
         vim.api.nvim_create_autocmd(
             { 'BufEnter', 'WinEnter', 'BufRead', 'BufNewFile' },
             {
@@ -314,7 +314,7 @@ function M.setup(config)
                 callback = function(_)
                     if
                         vim.tbl_contains(
-                            config.exclude.buftypes,
+                            config.excluded.buftypes,
                             vim.bo.buftype
                         )
                     then
