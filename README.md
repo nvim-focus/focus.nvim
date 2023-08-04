@@ -13,19 +13,19 @@ Always have a nice view over your split windows
 
 ![screencast](https://i.ibb.co/0tsKww4/focusop.gif)
 
-*Note*: For reference this screencast features dimensions set to 40 rows and 120
+_Note_: For reference this screencast features dimensions set to 40 rows and 120
 columns.
 
-*See a visual demonstration of each focus feature
-[here](https://github.com/nvim-focus/focus.nvim/blob/master/DEMO.md)*.
+_See a visual demonstration of each focus feature
+[here](https://github.com/nvim-focus/focus.nvim/blob/master/DEMO.md)_.
 
 ## Features
 
-* 👌 Resizes split windows automatically based on [golden ratio](https://en.wikipedia.org/wiki/Golden_ratio)
-* ⚙️ Enables cursorline/signcolumn/numbers on focus window only
-* 🙌 Window creation or switch by direction
-* 🖥 Equalise splits or maximise focused splits, and toggle between the two
-* 🔌 Option to open tmux windows instead of creating new splits
+- 👌 Resizes split windows automatically based on [golden ratio](https://en.wikipedia.org/wiki/Golden_ratio)
+- ⚙️ Enables cursorline/signcolumn/numbers on focus window only
+- 🙌 Window creation or switch by direction
+- 🖥 Equalise splits or maximise focused splits, and toggle between the two
+- 🔌 Option to open tmux windows instead of creating new splits
 
 ## Installation
 
@@ -135,15 +135,31 @@ require("focus").setup({
             enable = false, -- Display colorcolumn in the foccused window only
             list = '+1', -- Set the comma-saperated list for the colorcolumn
         },
-        signcolumn = true, -- Display signcolumn in the focussed window only
-        winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
-    }
+		signcolumn_focused_value = "yes",
+		winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
+	},
+	excluded = {
+		filetypes = {
+			"NvimTree",
+			"startify",
+			"dashboard",
+			"TelescopePrompt",
+			"lazy",
+		},
+		buftypes = {
+			"nofile",
+			"prompt",
+			"popup",
+			"acwrite",
+		},
+	},
 })
 ```
 
 ### Setup options
 
 **Enable/Disable Focus**
+
 ```lua
 -- Completely disable this plugin
 -- Default: true
@@ -151,6 +167,7 @@ require("focus").setup({enable = false})
 ```
 
 **Enable/Disable Focus Commands**
+
 ```lua
 -- This not export :Focus* commands
 -- Default: true
@@ -158,14 +175,15 @@ require("focus").setup({commands = false})
 ```
 
 **Enable/Disable Focus Window Autoresizing**
+
 ```lua
 --The focussed window will no longer automatically resize. Other focus features are still available
 -- Default: true
 require("focus").setup({ autoresize = { enable = false } })
 ```
 
-
 **Set Focus Width**
+
 ```lua
 -- Force width for the focused window
 -- Default: Calculated based on golden ratio
@@ -173,6 +191,7 @@ require("focus").setup({ autoresize = { width = 120 } })
 ```
 
 **Set Focus Minimum Width**
+
 ```lua
 -- Force minimum width for the unfocused window
 -- Default: Calculated based on golden ratio
@@ -180,6 +199,7 @@ require("focus").setup({ autoresize = { minwidth = 80} })
 ```
 
 **Set Focus Height**
+
 ```lua
 -- Force height for the focused window
 -- Default: Calculated based on golden ratio
@@ -187,6 +207,7 @@ require("focus").setup({ autoresize = { height = 40 } })
 ```
 
 **Set Focus Minimum Height**
+
 ```lua
 -- Force minimum height for the unfocused window
 -- Default: 0
@@ -194,6 +215,7 @@ require("focus").setup({ autoresize = { minheight = 10} })
 ```
 
 **Set Focus Quickfix Height**
+
 ```lua
 -- Sets the height of quickfix panel, in case you pass the height to
 -- `:copen <height>`
@@ -202,6 +224,7 @@ require("focus").setup({ autoresize = { height_quickfix = 10 })
 ```
 
 **When creating a new split window, do/don't initialise it as an empty buffer**
+
 ```lua
 -- True: When a :Focus.. command creates a new split window, initialise it as a new blank buffer
 -- False: When a :Focus.. command creates a new split, retain a copy of the current window in the new window
@@ -210,6 +233,7 @@ require("focus").setup({ split = { bufnew = true } })
 ```
 
 **Set Focus Auto Numbers**
+
 ```lua
 -- Displays line numbers in the focussed window only
 -- Not displayed in unfocussed windows
@@ -218,6 +242,7 @@ require("focus").setup({ui = { number = false } })
 ```
 
 **Set Focus Auto Relative Numbers**
+
 ```lua
 -- Displays relative line numbers in the focussed window only
 -- Not displayed in unfocussed windows
@@ -227,6 +252,7 @@ require("focus").setup({ ui = { relativenumber = true } })
 ```
 
 **Set Focus Auto Hybrid Numbers**
+
 ```lua
 -- Displays hybrid line numbers in the focussed window only
 -- Not displayed in unfocussed windows
@@ -237,6 +263,7 @@ require("focus").setup({ ui = { hybridnumber = true} })
 ```
 
 **Set Presrve Absolute Numbers**
+
 ```lua
 -- Preserve absolute numbers in the unfocussed windows
 -- Works in combination with relativenumber or hybridnumber
@@ -245,6 +272,7 @@ require("focus").setup({ ui = { absolutenumber_unfocussed = true } })
 ```
 
 **When creating a new split window, use tmux split instead of neovim**
+
 ```lua
 -- True: Create tmux splits instead of neovim splits
 -- False: Create neovim split windows
@@ -253,6 +281,7 @@ require("focus").setup({ split = { tmux = true } })
 ```
 
 **Set Focus Auto Cursor Line**
+
 ```lua
 -- Displays a cursorline in the focussed window only
 -- Not displayed in unfocussed windows
@@ -261,6 +290,7 @@ require("focus").setup({ ui = { cursorline = false } })
 ```
 
 **Set Focus Auto Cursor Column**
+
 ```lua
 -- Displays a cursor column in the focussed window only
 -- See :help cursorcolumn for more options
@@ -269,6 +299,7 @@ require("focus").setup({ ui = { cursorcolumn = true } })
 ```
 
 **Set Focus Auto Color Column**
+
 ```lua
 -- Displays a color column in the focussed window only
 -- See :help colorcolumn for more options
@@ -284,6 +315,7 @@ require("focus").setup({
 ```
 
 **Set Focus Auto Sign Column**
+
 ```lua
 -- Displays a sign column in the focussed window only
 -- Gets the vim variable setcolumn when focus.setup() is run
@@ -293,6 +325,7 @@ require("focus").setup({ ui = { signcolumn = false } })
 ```
 
 **Set Focus Window Highlighting**
+
 ```lua
 -- Enable auto highlighting for focussed/unfocussed windows
 -- Default: false
@@ -347,27 +380,27 @@ vim.api.nvim_create_autocmd('FileType', {
 
 ## Vim Commands
 
-*For more information on below commands scroll down to see them each described
-in more detail*
+_For more information on below commands scroll down to see them each described
+in more detail_
 
-| _Command_                  | _Description_                                   |
-| -------------------------- | ----------------------------------------------- |
-| `:FocusDisable`            | Disable the plugin per session. Splits will be normalized back to defaults and then spaced evenly. |
-| `:FocusEnable`             | Enable the plugin per session. Splits will be resized back to your configs or defaults if not set. |
-| `:FocusToggle`             | Toggle focus on and off again.                  |
-| `:FocusSplitNicely`        | Split a window based on the golden ratio rule.  |
+| _Command_                  | _Description_                                                                                                                 |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `:FocusDisable`            | Disable the plugin per session. Splits will be normalized back to defaults and then spaced evenly.                            |
+| `:FocusEnable`             | Enable the plugin per session. Splits will be resized back to your configs or defaults if not set.                            |
+| `:FocusToggle`             | Toggle focus on and off again.                                                                                                |
+| `:FocusSplitNicely`        | Split a window based on the golden ratio rule.                                                                                |
 | `:FocusSplitCycle`         | If there are no splits, create one and move to it, else cycle focussed split. `:FocusSplitCycle reverse` for counterclockwise |
-| `:FocusDisableWindow`      | Disable resizing of the current window (winnr). |
-| `:FocusEnableWindow`       | Enable resizing of the current window (winnr).  |
-| `:FocusToggleWindow`       | Toggle focus on and off again on a per window basis. |
-| `:FocusGetDisabledWindows` | Pretty prints the list of disabled window ID's along with the current window ID. |
-| `:FocusSplitLeft`          | Move to existing or create a new split to the left of your current window + open file or custom command. |
-| `:FocusSplitDown`          | Move to existing or create a new split to the bottom of your current window + open file or custom command. |
-| `:FocusSplitUp`            | Move to existing or create a new split to the top of your current window + open file or custom command. |
-| `:FocusSplitRight`         | Move to existing or create a new split to the right of your current window + open file or custom command. |
-| `:FocusEqualise`           | Temporarily equalises the splits so they are all of similar width/height. |
-| `:FocusMaximise`           | Temporarily maximises the focussed window.      |
-| `:FocusMaxOrEqual`         | Toggles Between having the splits equalised or the focussed window maximised. |
+| `:FocusDisableWindow`      | Disable resizing of the current window (winnr).                                                                               |
+| `:FocusEnableWindow`       | Enable resizing of the current window (winnr).                                                                                |
+| `:FocusToggleWindow`       | Toggle focus on and off again on a per window basis.                                                                          |
+| `:FocusGetDisabledWindows` | Pretty prints the list of disabled window ID's along with the current window ID.                                              |
+| `:FocusSplitLeft`          | Move to existing or create a new split to the left of your current window + open file or custom command.                      |
+| `:FocusSplitDown`          | Move to existing or create a new split to the bottom of your current window + open file or custom command.                    |
+| `:FocusSplitUp`            | Move to existing or create a new split to the top of your current window + open file or custom command.                       |
+| `:FocusSplitRight`         | Move to existing or create a new split to the right of your current window + open file or custom command.                     |
+| `:FocusEqualise`           | Temporarily equalises the splits so they are all of similar width/height.                                                     |
+| `:FocusMaximise`           | Temporarily maximises the focussed window.                                                                                    |
+| `:FocusMaxOrEqual`         | Toggles Between having the splits equalised or the focussed window maximised.                                                 |
 
 ## Splitting Nicely
 
@@ -400,20 +433,19 @@ end, { desc = 'split nicely' })
 Additionally you can open a file or a run a custom command with the
 `:FocusSplitNicely` command
 
-*Opens a file in the split created by `FocusSplitNicely` command*
+_Opens a file in the split created by `FocusSplitNicely` command_
 
 `:FocusSplitNicely README.md`
 
-*Opens a terminal window in the split created by `FocusSplitNicely` command by
- using the cmd arg to run a custom command*
+_Opens a terminal window in the split created by `FocusSplitNicely` command by
+using the cmd arg to run a custom command_
 
 `:FocusSplitNicely cmd term`
 
-
 ## Split directionally
 
-Instead of worrying about multiple commands and shortcuts, *simply think about
-splits as to which direction you would like to go*.
+Instead of worrying about multiple commands and shortcuts, _simply think about
+splits as to which direction you would like to go_.
 
 Calling a focus split command i.e :FocusSplitRight will do one of two things,
 **it will attempt to move across to the window** in the specified direction.
@@ -440,29 +472,28 @@ focusmap('l')
 Additionally you can open a file or a run a custom command with the
 `:FocusSplit<direction>` command
 
-*Opens a file in a split that was either created or moved to*
+_Opens a file in a split that was either created or moved to_
 
 `:FocusSplitRight README.md`
 
-*Opening a terminal window by using the cmd arg to run a custom command in a
-split that was created or moved to*
+_Opening a terminal window by using the cmd arg to run a custom command in a
+split that was created or moved to_
 
 `:FocusSplitDown cmd term`
 
 ## FAQ
 
-* **I have a small display and I am finding splits are resized too much**
+- **I have a small display and I am finding splits are resized too much**
 
-  If for example your screen resolution is *1024x768* --> i.e on the smaller
-  side, you may notice that focus by default can maximise a window *too much*.
+  If for example your screen resolution is _1024x768_ --> i.e on the smaller
+  side, you may notice that focus by default can maximise a window _too much_.
 
   That is, the window will sort of 'crush' some of your other splits due to the
   limited screen real estate. This is not an issue with focus, but an issue with
   minimal screen real estate. In this case, you can simply reduce the
   width/height of focus.
 
-
-* **Quickfix window opens in the right split always.
+- **Quickfix window opens in the right split always.
   Is this caused by focus.lua?**
 
   No. This is a
@@ -473,7 +504,7 @@ split that was created or moved to*
   In the meantime, you can open a quickfix window occupying the the full width
   of the window with `:botright copen`
 
-* **I tried to lazy load focus with `:FocusToggle`, but I need to toggle it
+- **I tried to lazy load focus with `:FocusToggle`, but I need to toggle it
   again to get auto-resizing working**
 
   Please note if you lazy load with command `:FocusToggle`, it will load focus,
@@ -485,9 +516,9 @@ split that was created or moved to*
 
 ## Similar plugins
 
-* [anuvyklack/windows.nvim](https://github.com/anuvyklack/windows.nvim)
-* [zhaocai/GoldenView.Vim](https://github.com/zhaocai/GoldenView.Vim)
-* [Bekaboo/deadcolumn.nvim](https://github.com/Bekaboo/deadcolumn.nvim)
+- [anuvyklack/windows.nvim](https://github.com/anuvyklack/windows.nvim)
+- [zhaocai/GoldenView.Vim](https://github.com/zhaocai/GoldenView.Vim)
+- [Bekaboo/deadcolumn.nvim](https://github.com/Bekaboo/deadcolumn.nvim)
 
 ## Developers Only
 
