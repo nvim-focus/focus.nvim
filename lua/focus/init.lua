@@ -85,7 +85,7 @@ Focus.setup = function(config)
                 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
         end
 
-        if config.autoresize then
+        if config.autoresize.enable then
             Focus.resize()
         end
     end
@@ -142,17 +142,17 @@ function Focus.focus_max_or_equal()
 end
 
 function Focus.focus_disable_window()
-    vim.b.focus_disable = true
+    vim.w.focus_disable = true
     Focus.resize()
 end
 
 function Focus.focus_enable_window()
-    vim.b.focus_disable = false
+    vim.w.focus_disable = false
     Focus.resize()
 end
 
 function Focus.focus_toggle_window()
-    vim.b.focus_disable = not vim.b.focus_disable
+    vim.w.focus_disable = not vim.w.focus_disable
     Focus.resize()
 end
 
