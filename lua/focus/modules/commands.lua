@@ -55,6 +55,12 @@ M.commands = {
         end,
         { nargs = 0 },
     },
+    FocusAutoresize = {
+        function()
+            require('focus').focus_autoresize()
+        end,
+        { nargs = 0 },
+    },
     FocusSplitNicely = {
         function(obj)
             require('focus').split_nicely(obj.args)
