@@ -137,6 +137,10 @@ function Focus.focus_equalise()
     functions.focus_equalise()
 end
 
+function Focus.focus_autoresize()
+    functions.focus_autoresize()
+end
+
 function Focus.focus_max_or_equal()
     functions.focus_max_or_equal()
 end
