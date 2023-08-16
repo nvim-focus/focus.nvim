@@ -91,10 +91,10 @@ Focus.setup = function(config)
     end
 end
 
-Focus.resize = function()
+Focus.resize = function(goal)
     local config = H.get_config()
 
-    resizer.split_resizer(config)
+    resizer.split_resizer(config, goal)
 end
 
 -- Exported internal functions for use in commands

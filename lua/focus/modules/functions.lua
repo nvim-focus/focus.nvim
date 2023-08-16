@@ -8,8 +8,7 @@ M.focus_enable = function()
     end
 
     vim.g.focus_disable = false
-    require('focus.modules.resizer').goal = 'autoresize'
-    require('focus').resize()
+    require('focus').resize('autoresize')
 end
 
 M.focus_disable = function()
@@ -32,18 +31,15 @@ M.focus_toggle = function()
 end
 
 M.focus_maximise = function()
-    require('focus.modules.resizer').goal = 'maximise'
-    require('focus').resize()
+    require('focus').resize('maximise')
 end
 
 M.focus_equalise = function()
-    require('focus.modules.resizer').goal = 'equalise'
-    require('focus').resize()
+    require('focus').resize('equalise')
 end
 
 M.focus_autoresize = function()
-    require('focus.modules.resizer').goal = 'autoresize'
-    require('focus').resize()
+    require('focus').resize('autoresize')
 end
 
 M.focus_max_or_equal = function()
