@@ -78,7 +78,7 @@ end
 
 M.goal = 'autoresize'
 
-function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 always
+function M.split_resizer(config, goal) --> Only resize normal buffers, set qf to 10 always
     if
         utils.is_disabled()
         or vim.api.nvim_win_get_option(0, 'diff')
@@ -86,6 +86,9 @@ function M.split_resizer(config) --> Only resize normal buffers, set qf to 10 al
         or not config.autoresize.enable
     then
         return
+    end
+    if goal then
+        M.goal = goal
     end
 
     if vim.bo.filetype == 'qf' and config.autoresize.height_quickfix > 0 then
