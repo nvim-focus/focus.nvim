@@ -32,7 +32,7 @@ function M.setup(config)
     if config.autoresize.enable then
         local previous_win_id = 0
 
-        vim.api.nvim_create_autocmd('BufEnter', {
+        vim.api.nvim_create_autocmd('WinEnter', {
             group = augroup,
             callback = function(_)
                 -- This shouldn't be required with WinScrolled rewrite of 0.9
@@ -70,7 +70,7 @@ function M.setup(config)
         vim.api.nvim_create_autocmd('WinLeave', {
             group = augroup,
             callback = function(_)
-                -- Remember the previous window id
+                -- Remember the previous window id and cursor position
                 previous_win_id = vim.api.nvim_get_current_win()
             end,
             desc = 'Save previous window id from split',

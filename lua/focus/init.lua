@@ -90,16 +90,16 @@ Focus.setup = function(config)
             'Normal:FocusedWindow,NormalNC:UnfocusedWindow'
         end
 
-        if config.autoresize then
+        if config.autoresize.enable then
             Focus.resize()
         end
     end
 end
 
-Focus.resize = function()
+Focus.resize = function(goal)
     local config = H.get_config()
 
-    resizer.split_resizer(config)
+    resizer.split_resizer(config, goal)
 end
 
 -- Exported internal functions for use in commands
@@ -142,20 +142,27 @@ function Focus.focus_equalise()
     functions.focus_equalise()
 end
 
+function Focus.focus_autoresize()
+    functions.focus_autoresize()
+end
+
 function Focus.focus_max_or_equal()
     functions.focus_max_or_equal()
 end
 
 function Focus.focus_disable_window()
-    vim.b.focus_disable = true
+    vim.w.focus_disable = true
+    Focus.resize()
 end
 
 function Focus.focus_enable_window()
-    vim.b.focus_disable = false
+    vim.w.focus_disable = false
+    Focus.resize()
 end
 
 function Focus.focus_toggle_window()
-    vim.b.focus_disable = not vim.b.focus_disable
+    vim.w.focus_disable = not vim.w.focus_disable
+    Focus.resize()
 end
 
 H.default_config = Focus.config

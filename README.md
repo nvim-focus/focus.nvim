@@ -343,7 +343,7 @@ vim.highlight.link('UnfocusedWindow', 'VisualNOS', true)
 ## Disabling Focus
 
 Focus can be disabled by setting a variable for a buffer
-(`vim.b.focus_disable = true`) or globally (`vim.b.focus_disable = true`).
+(`vim.w.focus_disable = true`) or globally (`vim.w.focus_disable = true`).
 
 If you want to disable Focus for certain buffer or file types you can do
 this by setting up autocommands (`:help autocmd`) in your configuration.
@@ -360,18 +360,23 @@ local augroup =
 vim.api.nvim_create_autocmd('WinEnter', {
     group = augroup,
     callback = function(_)
-        if vim.tbl_contains(ignore_buftypes, vim.bo.buftype) then
-            vim.b.focus_disable = true
+        if vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
+        then
+            vim.w.focus_disable = true
+        else
+            vim.w.focus_disable = false
         end
     end,
     desc = 'Disable focus autoresize for BufType',
 })
 
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd('BufWinEnter', {
     group = augroup,
     callback = function(_)
         if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-            vim.b.focus_disable = true
+            vim.w.focus_disable = true
+        else
+            vim.w.focus_disable = false
         end
     end,
     desc = 'Disable focus autoresize for FileType',

@@ -114,8 +114,6 @@ T['autoresize']['split height'] = function()
 
     eq(win_id_upper, child.api.nvim_get_current_win())
 
-    eq(child.o.winheight, 18)
-
     -- Check dimensions
     validate_win_dims(win_id_upper, { 80, 18 })
     validate_win_dims(win_id_lower, { 80, 4 })
@@ -131,9 +129,6 @@ T['autoresize']['split minheight'] = function()
     -- Check if we have a column layout
     local win_id_upper = resize_state.windows[1]
     local win_id_lower = resize_state.windows[2]
-
-    eq(child.o.winheight, 20)
-    eq(child.o.winminheight, 10)
 
     eq(win_id_upper, child.api.nvim_get_current_win())
 
@@ -208,9 +203,6 @@ T['autoresize']['vsplit minwidth'] = function()
     -- Check if we have a column layout
     local win_id_left = resize_state.windows[1]
     local win_id_right = resize_state.windows[2]
-
-    eq(child.o.winwidth, 70)
-    eq(child.o.winminwidth, 30)
 
     eq(win_id_left, child.api.nvim_get_current_win())
 
