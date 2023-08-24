@@ -71,7 +71,7 @@ function M.maximise()
     local view = vim.fn.winsaveview()
     vim.api.nvim_win_set_width(win, width)
     vim.api.nvim_win_set_height(win, height)
-    vim.api.nvim_win_call(function()
+    vim.api.nvim_win_call(win, function()
         vim.fn.winrestview(view)
     end)
 end
