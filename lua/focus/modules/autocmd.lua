@@ -55,6 +55,12 @@ function M.setup(config)
                     return
                 end
 
+                -- Don't center if the previous buffer was a terminal
+                local prev_win_buf = vim.api.nvim_win_get_buf(previous_win_id)
+                if vim.bo[prev_win_buf].buftype == 'terminal' then
+                    return
+                end
+
                 local cur_win_pos = vim.fn.win_screenpos(current_win_id)
                 local prev_win_pos = vim.fn.win_screenpos(previous_win_id)
 
@@ -70,7 +76,7 @@ function M.setup(config)
         vim.api.nvim_create_autocmd('WinLeave', {
             group = augroup,
             callback = function(_)
-                -- Remember the previous window id and cursor position
+                -- Remember the previous window id
                 previous_win_id = vim.api.nvim_get_current_win()
             end,
             desc = 'Save previous window id from split',
