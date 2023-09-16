@@ -44,50 +44,6 @@ function M.setup(config)
             end,
             desc = 'Resize splits',
         })
-        vim.api.nvim_create_autocmd('WinEnter', {
-            group = augroup,
-            callback = function(_)
-                local current_win_id = vim.api.nvim_get_current_win()
-
-                -- If we have a horizontal split, center the window so we keep
-                -- the current line in view.
-                if previous_win_id == 0 then
-                    return
-                end
-
-                -- Don't center if the previous buffer was a terminal
-                local prev_win_buf = vim.api.nvim_win_get_buf(previous_win_id)
-                if vim.bo[prev_win_buf].buftype == 'terminal' then
-                    return
-                end
-
-                local cur_win_pos = vim.fn.win_screenpos(current_win_id)
-                local prev_win_pos = vim.fn.win_screenpos(previous_win_id)
-
-                -- If we switch between horizontal splits, center the window
-                if cur_win_pos[2] == prev_win_pos[2] then
-                    vim.api.nvim_win_call(previous_win_id, function()
-                        pcall(vim.api.nvim_command, 'normal! zz')
-                    end)
-                end
-            end,
-            desc = 'Center window of previous horizontal split',
-        })
-        vim.api.nvim_create_autocmd('WinLeave', {
-            group = augroup,
-            callback = function(_)
-                -- Remember the previous window id
-                previous_win_id = vim.api.nvim_get_current_win()
-            end,
-            desc = 'Save previous window id from split',
-        })
-        vim.api.nvim_create_autocmd('WinClosed', {
-            group = augroup,
-            callback = function(_)
-                previous_win_id = 0
-            end,
-            desc = 'Reset previous window id from closed split',
-        })
     end
 
     if config.ui.signcolumn then

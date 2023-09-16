@@ -86,8 +86,8 @@ T['autoresize']['split'] = function()
     validate_win_dims(win_id_lower, { 80, 7 })
 
     -- Check if the window has been centered on line 15
-    eq(child.fn.line('w0', win_id_lower), 12)
-    eq(child.fn.line('w$', win_id_lower), 18)
+    eq(child.fn.line('w0', win_id_lower), 11)
+    eq(child.fn.line('w$', win_id_lower), 17)
 
     -- Switch windows
     child.cmd('wincmd w')
@@ -97,8 +97,8 @@ T['autoresize']['split'] = function()
     validate_win_dims(win_id_lower, { 80, 15 })
 
     -- Check if the window has been centered on line 15
-    eq(child.fn.line('w0', win_id_upper), 12)
-    eq(child.fn.line('w$', win_id_upper), 18)
+    eq(child.fn.line('w0', win_id_upper), 11)
+    eq(child.fn.line('w$', win_id_upper), 17)
 end
 
 T['autoresize']['split height'] = function()
