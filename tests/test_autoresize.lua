@@ -241,4 +241,42 @@ T['autoresize']['terminal'] = function()
     child.cmd('wincmd w')
 end
 
+T['autoresize']['maximize'] = function()
+    reload_module({ autoresize = {} })
+    child.cmd('vsplit')
+    child.cmd('FocusMaximise')
+
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    -- we should be in the left win
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- let should take up the entire width, other than the winseparator (1 col)
+    -- and numbercolumn (1 col)
+    validate_win_dims(win_id_left, { 78, 23 })
+    validate_win_dims(win_id_right, { 1, 23 })
+end
+
+T['autoresize']['maximize_minwidth'] = function()
+    reload_module({ autoresize = {
+        minwidth = 12,
+    } })
+    child.cmd('vsplit')
+    child.cmd('FocusMaximise')
+
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    -- we should be in the left win
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- let should take up the entire width, other than the winseparator (1 col)
+    -- and numbercolumn (1 col)
+    validate_win_dims(win_id_left, { 67, 23 })
+    validate_win_dims(win_id_right, { 12, 23 })
+end
+
 return T

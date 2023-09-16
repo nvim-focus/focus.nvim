@@ -1,0 +1,5 @@
+std = "lua51+neovim"
+
+[rules]
+global_usage = "allow"
+multiple_statements = "allow"

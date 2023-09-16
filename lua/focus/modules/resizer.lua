@@ -71,14 +71,15 @@ function M.maximise()
     local view = vim.fn.winsaveview()
     vim.api.nvim_win_set_width(win, width)
     vim.api.nvim_win_set_height(win, height)
-    vim.api.nvim_win_call(function()
-        vim.fn.winrestview(view)
-    end)
+    vim.fn.winrestview(view)
 end
 
 M.goal = 'autoresize'
 
 function M.split_resizer(config, goal) --> Only resize normal buffers, set qf to 10 always
+    if goal then
+        M.goal = goal
+    end
     if
         utils.is_disabled()
         or vim.api.nvim_win_get_option(0, 'diff')
@@ -103,10 +104,6 @@ function M.split_resizer(config, goal) --> Only resize normal buffers, set qf to
             end
             vim.o.winminheight = config.autoresize.minheight
         end
-    end
-
-    if goal then
-        M.goal = goal
     end
 
     if vim.bo.filetype == 'qf' and config.autoresize.height_quickfix > 0 then
