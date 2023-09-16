@@ -47,7 +47,6 @@ function M.autoresize(config)
     end
 
     local win = vim.api.nvim_get_current_win()
-    local view = vim.fn.winsaveview()
     local cur_h = vim.api.nvim_win_get_height(win)
     local cur_w = vim.api.nvim_win_get_width(win)
 
@@ -57,7 +56,6 @@ function M.autoresize(config)
     if height > cur_h then
         vim.api.nvim_win_set_height(win, height)
     end
-    vim.fn.winrestview(view)
 end
 
 function M.equalise()
@@ -68,10 +66,8 @@ function M.maximise()
     local width, height = vim.o.columns, vim.o.lines
 
     local win = vim.api.nvim_get_current_win()
-    local view = vim.fn.winsaveview()
     vim.api.nvim_win_set_width(win, width)
     vim.api.nvim_win_set_height(win, height)
-    vim.fn.winrestview(view)
 end
 
 M.goal = 'autoresize'
