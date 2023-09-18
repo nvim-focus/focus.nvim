@@ -279,4 +279,109 @@ T['autoresize']['maximize_minwidth'] = function()
     validate_win_dims(win_id_right, { 12, 23 })
 end
 
+T['autoresize']['resize when switching resize goal (vsplit)'] = function()
+    edit(lorem_ipsum_file)
+
+    child.cmd('vsplit')
+    child.cmd('FocusMaximise')
+
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- validate maximized dimensions
+    validate_win_dims(win_id_left, { 78, 23 })
+    validate_win_dims(win_id_right, { 1, 23 })
+
+    child.cmd('FocusAutoresize')
+
+    -- we should still be in the left win
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- validate golden ratio dimensions
+    validate_win_dims(win_id_left, { 49, 23 })
+    validate_win_dims(win_id_right, { 30, 23 })
+
+    child.api.nvim_win_close(win_id_right, true)
+
+    child.cmd('split')
+    child.cmd('FocusMaximise')
+end
+
+T['autoresize']['resize when switching resize goal (hsplit)'] = function()
+    child.cmd('split')
+    child.cmd('FocusMaximise')
+
+    local resize_state = child.get_resize_state()
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    validate_win_layout({
+        'col',
+        { { 'leaf', win_id_upper }, { 'leaf', win_id_lower } },
+    })
+
+    eq(win_id_upper, child.api.nvim_get_current_win())
+
+    -- Both windows should have the same buffer
+    eq(resize_state.buffer[win_id_upper], resize_state.buffer[win_id_lower])
+
+    -- Check dimensions
+    validate_win_dims(win_id_upper, { 80, 21 })
+    validate_win_dims(win_id_lower, { 80, 1 })
+
+    child.cmd('FocusAutoresize')
+
+    -- we should still be in the left win
+    eq(win_id_upper, child.api.nvim_get_current_win())
+
+    -- Check dimensions after switching windows
+    validate_win_dims(win_id_lower, { 80, 7 })
+    validate_win_dims(win_id_upper, { 80, 15 })
+end
+
+T['autoresize']['golden ratio sizes (complex)'] = function()
+    child.cmd('split')
+    child.cmd('vsplit')
+    child.cmd('FocusMaximise')
+
+    local resize_state = child.get_resize_state()
+    local win_id_upper_left = resize_state.windows[1]
+    local win_id_upper_right = resize_state.windows[2]
+    local win_id_lower = resize_state.windows[3]
+
+    validate_win_layout({
+        'col',
+        {
+            {
+                'row',
+                {
+                    { 'leaf', win_id_upper_left },
+                    { 'leaf', win_id_upper_right },
+                },
+            },
+            { 'leaf', win_id_lower },
+        },
+    })
+
+    eq(win_id_upper_left, child.api.nvim_get_current_win())
+
+    -- validate maximized dimensions
+    validate_win_dims(win_id_upper_left, { 78, 21 })
+    validate_win_dims(win_id_upper_right, { 1, 21 })
+    validate_win_dims(win_id_lower, { 80, 1 })
+
+    child.cmd('FocusAutoresize')
+
+    -- should still be in the upper left win
+    eq(win_id_upper_left, child.api.nvim_get_current_win())
+
+    -- the windows should be resized based on golden ratio
+    validate_win_dims(win_id_upper_left, { 49, 15 })
+    validate_win_dims(win_id_upper_right, { 30, 15 })
+    validate_win_dims(win_id_lower, { 80, 7 })
+end
+
 return T
