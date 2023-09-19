@@ -53,7 +53,7 @@ function M.autoresize(config)
     if cur_w < vim.o.columns then
         vim.api.nvim_win_set_width(win, width)
     end
-    if cur_h < (vim.o.lines - 2) then
+    if cur_h < (vim.o.lines - vim.o.cmdheight - 2) then
         vim.api.nvim_win_set_height(win, height)
     end
 end

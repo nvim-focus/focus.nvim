@@ -384,4 +384,16 @@ T['autoresize']['golden ratio sizes (complex)'] = function()
     validate_win_dims(win_id_lower, { 80, 7 })
 end
 
+T['autoresize']['does not modify cmdheight'] = function()
+    child.o.cmdheight = 1
+
+    child.cmd('FocusMaximise')
+
+    child.cmd('vsplit')
+
+    child.cmd('FocusAutoresize')
+
+    eq(child.o.cmdheight, 1)
+end
+
 return T
