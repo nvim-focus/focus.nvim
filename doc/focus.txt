@@ -1,4 +1,4 @@
-*focus.txt*         For Neovim >= 0.7.0         Last change: 2023 September 16
+*focus.txt*         For Neovim >= 0.7.0         Last change: 2023 September 19
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -104,6 +104,10 @@ default settings:
 <
 
 
+  **Note** To manage window views when resizing, see |splitkeep|. For users of
+  Neovim <= 0.8, it is recommended to use the stabilize
+  <https://github.com/luukvbaal/stabilize.nvim> plugin.
+
 SETUP OPTIONS ~
 
 **Enable/Disable Focus**
@@ -117,7 +121,7 @@ SETUP OPTIONS ~
 **Enable/Disable Focus Commands**
 
 >lua
-    -- This not export :Focus commands
+    -- This not export :Focus* commands
     -- Default: true
     require("focus").setup({commands = false})
 <
