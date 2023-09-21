@@ -46,16 +46,13 @@ function M.autoresize(config)
         end
     end
 
-    local win = vim.api.nvim_get_current_win()
-    local cur_w = vim.api.nvim_win_get_width(win)
-    local cur_h = vim.api.nvim_win_get_height(win)
+    -- save cmdheight to ensure it is not changed by nvim_win_set_height
+    local cmdheight = vim.o.cmdheight
 
-    if cur_w < vim.o.columns then
-        vim.api.nvim_win_set_width(win, width)
-    end
-    if cur_h < (vim.o.lines - vim.o.cmdheight - 2) then
-        vim.api.nvim_win_set_height(win, height)
-    end
+    vim.api.nvim_win_set_width(0, width)
+    vim.api.nvim_win_set_height(0, height)
+
+    vim.o.cmdheight = cmdheight
 end
 
 function M.equalise()
