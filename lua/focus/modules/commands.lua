@@ -37,6 +37,24 @@ M.commands = {
         end,
         { nargs = 0 },
     },
+    FocusDisableBuffer = {
+        function()
+            require('focus').focus_disable_buffer()
+        end,
+        { nargs = 0 },
+    },
+    FocusEnableBuffer = {
+        function()
+            require('focus').focus_enable_buffer()
+        end,
+        { nargs = 0 },
+    },
+    FocusToggleBuffer = {
+        function()
+            require('focus').focus_toggle_buffer()
+        end,
+        { nargs = 0 },
+    },
     FocusEqualise = {
         function()
             require('focus').focus_equalise()

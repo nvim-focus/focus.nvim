@@ -160,6 +160,21 @@ function Focus.focus_toggle_window()
     Focus.resize()
 end
 
+function Focus.focus_disable_buffer()
+    vim.b.focus_disable = true
+    Focus.resize()
+end
+
+function Focus.focus_enable_buffer()
+    vim.b.focus_disable = false
+    Focus.resize()
+end
+
+function Focus.focus_toggle_buffer()
+    vim.b.focus_disable = not vim.b.focus_disable
+    Focus.resize()
+end
+
 H.default_config = Focus.config
 
 H.setup_config = function(config)
