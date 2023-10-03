@@ -29,7 +29,9 @@ function M.remove_from_set(set, item)
 end
 
 M.is_disabled = function()
-    return vim.g.focus_disable == true or vim.w.focus_disable == true
+    return vim.g.focus_disable == true
+        or vim.w.focus_disable == true
+        or vim.b.focus_disable == true
 end
 
 return M
