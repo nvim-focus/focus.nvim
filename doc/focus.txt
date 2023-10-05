@@ -1,4 +1,4 @@
-*focus.txt*         For Neovim >= 0.7.0         Last change: 2023 September 22
+*focus.txt*          For Neovim >= 0.7.0          Last change: 2023 October 05
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -90,7 +90,7 @@ default settings:
             relativenumber = false, -- Display relative line numbers in the focussed window only
             hybridnumber = false, -- Display hybrid line numbers in the focussed window only
             absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
-
+    
             cursorline = true, -- Display a cursorline in the focussed window only
             cursorcolumn = false, -- Display cursorcolumn in the focussed window only
             colorcolumn = {
@@ -283,7 +283,7 @@ buffer**
     -- Enable auto highlighting for focussed/unfocussed windows
     -- Default: false
     require("focus").setup({ ui = { winhighlight = true } })
-
+    
     -- By default, the highlight groups are setup as such:
     --   hi default link FocusedWindow VertSplit
     --   hi default link UnfocusedWindow Normal
@@ -296,8 +296,9 @@ buffer**
 
 DISABLING FOCUS                             *focus-focus.nvim-disabling-focus*
 
-Focus can be disabled by setting a variable for just one window
-(`vim.w.focus_disable = true`) or globally (`vim.g.focus_disable = true`).
+Focus can be disabled by setting a variable for just one window,
+(`vim.w.focus_disable = true`), just one buffer (`vim.b.focus_disable = true`),
+or globally (`vim.g.focus_disable = true`).
 
 If you want to disable Focus for certain buffer or file types you can do this
 by setting up autocommands (`:help autocmd`) in your configuration.
@@ -307,10 +308,10 @@ Here is an example:
 >lua
     local ignore_filetypes = { 'neo-tree' }
     local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
-
+    
     local augroup =
         vim.api.nvim_create_augroup('FocusDisable', { clear = true })
-
+    
     vim.api.nvim_create_autocmd('WinEnter', {
         group = augroup,
         callback = function(_)
@@ -323,7 +324,7 @@ Here is an example:
         end,
         desc = 'Disable focus autoresize for BufType',
     })
-
+    
     vim.api.nvim_create_autocmd('FileType', {
         group = augroup,
         callback = function(_)
@@ -462,7 +463,7 @@ LEVERAGE HJKL TO MOVE OR CREATE YOUR SPLITS DIRECTIONALLY ~
             require('focus').split_command(direction)
         end, { desc = string.format('Create or move to split (%s)', direction) })
     end
-
+    
     -- Use `<Leader>h` to split the screen to the left, same as command FocusSplitLeft etc
     focusmap('h')
     focusmap('j')
