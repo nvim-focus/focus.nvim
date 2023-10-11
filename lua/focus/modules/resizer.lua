@@ -113,10 +113,12 @@ function M.split_resizer(config, goal) --> Only resize normal buffers, set qf to
         or vim.api.nvim_win_get_config(0).relative ~= ''
         or not config.autoresize.enable
     then
-        vim.o.winwidth = 1
+        -- Setting minwidth/minheight must be done before setting width/height
+        -- to avoid errors when winminwidth and winminheight are larger than 1.
         vim.o.winminwidth = 1
-        vim.o.winheight = 1
         vim.o.winminheight = 1
+        vim.o.winwidth = 1
+        vim.o.winheight = 1
         return
     else
         if config.autoresize.minwidth > 0 then
