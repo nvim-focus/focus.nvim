@@ -396,4 +396,30 @@ T['autoresize']['does not modify cmdheight'] = function()
     eq(child.o.cmdheight, 1)
 end
 
+T['autoresize']['does not resize floating windows'] = function()
+    local win_id = child.api.nvim_open_win(0, false, {
+        relative = 'editor',
+        row = 1,
+        col = 1,
+        width = 10,
+        height = 10,
+        style = 'minimal',
+    })
+
+    child.api.nvim_set_current_win(win_id)
+
+    eq(child.api.nvim_win_get_width(win_id), 10)
+    eq(child.api.nvim_win_get_height(win_id), 10)
+
+    child.cmd('FocusAutoresize')
+
+    eq(child.api.nvim_win_get_width(win_id), 10)
+    eq(child.api.nvim_win_get_height(win_id), 10)
+
+    child.cmd('FocusMaximise')
+
+    eq(child.api.nvim_win_get_width(win_id), 10)
+    eq(child.api.nvim_win_get_height(win_id), 10)
+end
+
 return T
