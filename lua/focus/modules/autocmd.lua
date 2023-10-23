@@ -13,8 +13,8 @@ local M = {}
 
 -- if focus auto signcolumn is set to true then
 -- we assume it to be auto in case signcolumn = no
-local function get_sign_column()
-    local default_signcolumn = 'auto'
+local function get_sign_column(config)
+    local default_signcolumn = config.ui.signcolumn_focused_value or 'auto'
     if vim.opt.signcolumn:get() == 'no' then
         return default_signcolumn
     else
@@ -53,13 +53,16 @@ function M.setup(config)
                 if utils.is_disabled() then
                     return
                 end
-                vim.wo.signcolumn = get_sign_column()
+                vim.wo.signcolumn = get_sign_column(config)
             end,
             desc = 'Enable signcolumn',
         })
         vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
             group = augroup,
             callback = function(_)
+                if utils.is_disabled() then
+                    return
+                end
                 vim.wo.signcolumn = 'no'
             end,
             desc = 'Disable signcolumn',
@@ -103,6 +106,9 @@ function M.setup(config)
         vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
             group = augroup,
             callback = function(_)
+                if utils.is_disabled() then
+                    return
+                end
                 vim.wo.number = false
             end,
             desc = 'Disable cursorline',
@@ -120,7 +126,7 @@ function M.setup(config)
                     vim.wo.number = false
                     vim.wo.relativenumber = true
                 end,
-                desc = 'Absolutnumber unfoccused enter',
+                desc = 'Absolutenumber unfoccused enter',
             })
             vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
                 group = augroup,
@@ -131,7 +137,7 @@ function M.setup(config)
                     vim.wo.number = true
                     vim.wo.relativenumber = false
                 end,
-                desc = 'Absolutnumber unfoccused leave',
+                desc = 'Absolutenumber unfoccused leave',
             })
         else
             vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
@@ -250,6 +256,41 @@ function M.setup(config)
             desc = 'Color column leave',
         })
     end
+
+    if #config.excluded.filetypes > 0 then
+        vim.api.nvim_create_autocmd({ 'FileType' }, {
+            group = augroup,
+            callback = function(_)
+                if
+                    vim.tbl_contains(config.excluded.filetypes, vim.bo.filetype)
+                then
+                    vim.b.focus_disable = true
+                end
+            end,
+            desc = 'Disable focus autoresize for FileType',
+        })
+    end
+
+    if #config.excluded.buftypes > 0 then
+        vim.api.nvim_create_autocmd(
+            { 'BufEnter', 'WinEnter', 'BufRead', 'BufNewFile' },
+            {
+                group = augroup,
+                callback = function(_)
+                    if
+                        vim.tbl_contains(
+                            config.excluded.buftypes,
+                            vim.bo.buftype
+                        )
+                    then
+                        vim.b.focus_disable = true
+                    end
+                end,
+                desc = 'Disable focus autoresize for BufType',
+            }
+        )
+    end
+    return M
 end
 
 return M
