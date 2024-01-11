@@ -1,4 +1,4 @@
-*focus.txt*          For Neovim >= 0.7.0          Last change: 2023 October 13
+*focus.txt*          For Neovim >= 0.7.0          Last change: 2024 January 11
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -344,62 +344,68 @@ VIM COMMANDS                                   *focus-focus.nvim-vim-commands*
 _For more information on below commands scroll down to see them each described
 in more detail_
 
-  ------------------------------------------------------------------------
-  Command                    Description
-  -------------------------- ---------------------------------------------
-  :FocusDisable              Disable the plugin per session. Splits will
-                             be normalized back to defaults and then
-                             spaced evenly.
+  -----------------------------------------------------------------------
+  Command                   Description
+  ------------------------- ---------------------------------------------
+  :FocusDisable             Disable the plugin per session. Splits will
+                            be normalized back to defaults and then
+                            spaced evenly.
 
-  :FocusEnable               Enable the plugin per session. Splits will be
-                             resized back to your configs or defaults if
-                             not set.
+  :FocusEnable              Enable the plugin per session. Splits will be
+                            resized back to your configs or defaults if
+                            not set.
 
-  :FocusToggle               Toggle focus on and off again.
+  :FocusToggle              Toggle focus (globally) on and off again.
 
-  :FocusSplitNicely          Split a window based on the golden ratio
-                             rule.
+  :FocusSplitNicely         Split a window based on the golden ratio
+                            rule.
 
-  :FocusSplitCycle           If there are no splits, create one and move
-                             to it, else cycle focussed split.
-                             :FocusSplitCycle reverse for counterclockwise
+  :FocusSplitCycle          If there are no splits, create one and move
+                            to it, else cycle focused split.
+                            :FocusSplitCycle reverse for counterclockwise
 
-  :FocusDisableWindow        Disable resizing of the current window
-                             (winnr).
+  :FocusDisableWindow       Disable resizing of the current window
+                            (winnr).
 
-  :FocusEnableWindow         Enable resizing of the current window
-                             (winnr).
+  :FocusEnableWindow        Enable resizing of the current window
+                            (winnr).
 
-  :FocusToggleWindow         Toggle focus on and off again on a per window
-                             basis.
+  :FocusToggleWindow        Toggle focus on and off again on a per window
+                            basis.
 
-  :FocusGetDisabledWindows   Pretty prints the list of disabled window
-                             ID’s along with the current window ID.
+  :FocusDisableBuffer       Disable resizing for the current buffer
+                            (bufnr).
 
-  :FocusSplitLeft            Move to existing or create a new split to the
-                             left of your current window + open file or
-                             custom command.
+  :FocusEnableBuffer        Enable resizing for the current buffer
+                            (bufnr).
 
-  :FocusSplitDown            Move to existing or create a new split to the
-                             bottom of your current window + open file or
-                             custom command.
+  :FocusToggleBuffer        Toggle focus on and off again on a per buffer
+                            basis.
 
-  :FocusSplitUp              Move to existing or create a new split to the
-                             top of your current window + open file or
-                             custom command.
+  :FocusSplitLeft           Move to existing or create a new split to the
+                            left of your current window + open file or
+                            custom command.
 
-  :FocusSplitRight           Move to existing or create a new split to the
-                             right of your current window + open file or
-                             custom command.
+  :FocusSplitDown           Move to existing or create a new split to the
+                            bottom of your current window + open file or
+                            custom command.
 
-  :FocusEqualise             Temporarily equalises the splits so they are
-                             all of similar width/height.
+  :FocusSplitUp             Move to existing or create a new split to the
+                            top of your current window + open file or
+                            custom command.
 
-  :FocusMaximise             Temporarily maximises the focussed window.
+  :FocusSplitRight          Move to existing or create a new split to the
+                            right of your current window + open file or
+                            custom command.
 
-  :FocusMaxOrEqual           Toggles Between having the splits equalised
-                             or the focussed window maximised.
-  ------------------------------------------------------------------------
+  :FocusEqualise            Temporarily equalises the splits so they are
+                            all of similar width/height.
+
+  :FocusMaximise            Temporarily maximises the focused window.
+
+  :FocusMaxOrEqual          Toggles Between having the splits equalised
+                            or the focused window maximised.
+  -----------------------------------------------------------------------
 
 SPLITTING NICELY                           *focus-focus.nvim-splitting-nicely*
 
