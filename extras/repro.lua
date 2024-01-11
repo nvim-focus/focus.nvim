@@ -28,7 +28,7 @@ require('lazy').setup(plugins, {
     root = root .. '/plugins',
 })
 
-require("focus").setup({
+require('focus').setup({
     enable = true, -- Enable module
     commands = true, -- Create Focus commands
     autoresize = {
@@ -57,6 +57,6 @@ require("focus").setup({
         },
         signcolumn = true, -- Display signcolumn in the focussed window only
         winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
-    }
+    },
 })
 -- add anything else here
