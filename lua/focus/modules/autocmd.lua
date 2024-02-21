@@ -163,6 +163,9 @@ function M.setup(config)
             vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
                 group = augroup,
                 callback = function(_)
+                    if utils.is_disabled() then
+                        return
+                    end
                     vim.wo.number = true
                     vim.wo.relativenumber = true
                 end,
