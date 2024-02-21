@@ -145,6 +145,8 @@ require("focus").setup({
 > To manage window views when resizing, see `:h splitkeep`.<br>
 > For users of Neovim <= 0.8, it is recommended to use the
 > [stabilize](https://github.com/luukvbaal/stabilize.nvim) plugin.
+> For users of lazyvim, they set `opt.winminwidth = 5` in default options
+> may cause conflict with session manage plugins.
 
 ### Setup options
 
