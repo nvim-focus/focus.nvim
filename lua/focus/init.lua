@@ -98,18 +98,20 @@ Focus.resize = function(goal)
 end
 
 -- Exported internal functions for use in commands
-function Focus.split_nicely(args)
+function Focus.split_nicely(args, bufnew)
     local config = H.get_config()
     if args == nil then
         args = ''
     end
-    split.split_nicely(args, config.bufnew)
+    bufnew = bufnew or config.split.bufnew
+    split.split_nicely(args, bufnew)
 end
 
-function Focus.split_command(direction, args)
+function Focus.split_command(direction, args, bufnew)
     local config = H.get_config()
     args = args or ''
-    split.split_command(direction, args, config.split.tmux, config.split.bufnew)
+    bufnew = bufnew or config.split.bufnew
+    split.split_command(direction, args, config.split.tmux, bufnew)
 end
 
 function Focus.split_cycle(reverse)
