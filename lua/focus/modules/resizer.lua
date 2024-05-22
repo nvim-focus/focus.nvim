@@ -48,58 +48,58 @@ local function restore_fixed_win_dims(fixed_dims)
     end
 end
 
-function M.autoresize(config)
-    local width
-    if config.autoresize.width > 0 then
-        width = config.autoresize.width
-    else
-        width = golden_ratio_width()
-        if config.autoresize.minwidth > 0 then
-            width = math.max(width, config.autoresize.minwidth)
-        elseif width < golden_ratio_minwidth() then
-            width = golden_ratio_minwidth()
+local goals = {
+    autoresize = vim.schedule_wrap(function(config)
+        local width
+        if config.autoresize.width > 0 then
+            width = config.autoresize.width
+        else
+            width = golden_ratio_width()
+            if config.autoresize.minwidth > 0 then
+                width = math.max(width, config.autoresize.minwidth)
+            elseif width < golden_ratio_minwidth() then
+                width = golden_ratio_minwidth()
+            end
         end
-    end
 
-    local height
-    if config.autoresize.height > 0 then
-        height = config.autoresize.height
-    else
-        height = golden_ratio_height()
-        if config.autoresize.minheight > 0 then
-            height = math.max(height, config.autoresize.minheight)
-        elseif height < golden_ratio_minheight() then
-            height = golden_ratio_minheight()
+        local height
+        if config.autoresize.height > 0 then
+            height = config.autoresize.height
+        else
+            height = golden_ratio_height()
+            if config.autoresize.minheight > 0 then
+                height = math.max(height, config.autoresize.minheight)
+            elseif height < golden_ratio_minheight() then
+                height = golden_ratio_minheight()
+            end
         end
-    end
 
-    -- save cmdheight to ensure it is not changed by nvim_win_set_height
-    local cmdheight = vim.o.cmdheight
+        -- save cmdheight to ensure it is not changed by nvim_win_set_height
+        local cmdheight = vim.o.cmdheight
 
-    local fixed = save_fixed_win_dims()
+        local fixed = save_fixed_win_dims()
 
-    vim.api.nvim_win_set_width(0, width)
-    vim.api.nvim_win_set_height(0, height)
+        vim.api.nvim_win_set_width(0, width)
+        vim.api.nvim_win_set_height(0, height)
 
-    restore_fixed_win_dims(fixed)
+        restore_fixed_win_dims(fixed)
 
-    vim.o.cmdheight = cmdheight
-end
+        vim.o.cmdheight = cmdheight
+    end),
+    equalise = vim.schedule_wrap(function()
+        vim.api.nvim_exec2('wincmd =', { output = false })
+    end),
+    maximise = vim.schedule_wrap(function()
+        local width, height = vim.o.columns, vim.o.lines
 
-function M.equalise()
-    vim.api.nvim_exec2('wincmd =', { output = false })
-end
+        local fixed = save_fixed_win_dims()
 
-function M.maximise()
-    local width, height = vim.o.columns, vim.o.lines
+        vim.api.nvim_win_set_width(0, width)
+        vim.api.nvim_win_set_height(0, height)
 
-    local fixed = save_fixed_win_dims()
-
-    vim.api.nvim_win_set_width(0, width)
-    vim.api.nvim_win_set_height(0, height)
-
-    restore_fixed_win_dims(fixed)
-end
+        restore_fixed_win_dims(fixed)
+    end),
+}
 
 M.goal = 'autoresize'
 
@@ -140,7 +140,7 @@ function M.split_resizer(config, goal) --> Only resize normal buffers, set qf to
         return
     end
 
-    M[M.goal](config)
+    goals[M.goal](config)
 end
 
 return M
