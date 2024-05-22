@@ -109,7 +109,10 @@ function M.split_resizer(config, goal) --> Only resize normal buffers, set qf to
     end
     if
         utils.is_disabled()
-        or vim.api.nvim_win_get_option(0, 'diff')
+        or vim.api.nvim_get_option_value('diff', {
+            win = 0,
+            scope = 'local',
+        })
         or vim.api.nvim_win_get_config(0).zindex ~= nil
         or not config.autoresize.enable
     then
