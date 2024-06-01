@@ -1,4 +1,4 @@
-*focus.txt*          For Neovim >= 0.7.0         Last change: 2024 February 21
+*focus.txt*            For Neovim >= 0.7.0           Last change: 2024 June 01
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -15,6 +15,7 @@ Table of Contents                                    *focus-table-of-contents*
   - FAQ                                                 |focus-focus.nvim-faq|
   - Similar plugins                         |focus-focus.nvim-similar-plugins|
   - Developers Only                         |focus-focus.nvim-developers-only|
+2. Links                                                         |focus-links|
 
 ==============================================================================
 1. focus.nvim                                               *focus-focus.nvim*
@@ -105,6 +106,7 @@ default settings:
 
 
   **Note** To manage window views when resizing, see |splitkeep|. For users of
+  Neovim >= 0.10, it is recommended to use `splitkeep=cursor`. For users of
   Neovim <= 0.8, it is recommended to use the stabilize
   <https://github.com/luukvbaal/stabilize.nvim> plugin. For users of lazyvim,
   they set `opt.winminwidth = 5` in default options may cause conflict with
