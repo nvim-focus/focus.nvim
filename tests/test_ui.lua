@@ -138,8 +138,7 @@ T['focus_ui']['relativenumber with split'] = function()
     )
 end
 
-T['focus_ui']['relativenumber and absolutenumber_unfocussed with split'] = function(
-)
+T['focus_ui']['relativenumber and absolutenumber_unfocussed with split'] = function()
     reload_module({
         ui = { relativenumber = true, absolutenumber_unfocussed = true },
     })
@@ -243,8 +242,7 @@ T['focus_ui']['hybridnumber with split'] = function()
     )
 end
 
-T['focus_ui']['hybridnumber and absolutenumber_unfocussed with split'] = function(
-)
+T['focus_ui']['hybridnumber and absolutenumber_unfocussed with split'] = function()
     reload_module({
         ui = { hybridnumber = true, absolutenumber_unfocussed = true },
     })
