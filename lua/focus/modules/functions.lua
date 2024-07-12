@@ -44,7 +44,10 @@ end
 
 M.focus_max_or_equal = function()
     local winwidth = vim.fn.winwidth(vim.api.nvim_get_current_win())
-    if winwidth > vim.o.columns / 2 then
+    local winheight = vim.fn.winheight(vim.api.nvim_get_current_win())
+    local bigger_than_half = (winwidth > vim.o.columns / 2)
+        and (winheight > vim.o.lines / 2)
+    if bigger_than_half then
         M.focus_equalise()
     else
         M.focus_maximise()
