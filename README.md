@@ -88,7 +88,7 @@ Here are code snippets for some common installation methods (use only one):
             <td>Main</td> <td><code>Plug 'nvim-focus/focus.nvim'</code></td>
         </tr>
         <tr>
-            <td>Stable</td> <td><code>Plug 'nvim-focus/focus.nvim', { 'branch': 'stable' }</code></td>
+            <td>Stable</td> <td><code>Plug("nvim-focus/focus.nvim", {["tag"]="stable"}) -- stable should be the latest stable version, as of 16th july 2024, it's v1.0.0</code></td>
         </tr>
     </tbody>
 </table>
