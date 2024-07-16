@@ -1,4 +1,4 @@
-*focus.txt*            For Neovim >= 0.7.0           Last change: 2024 June 06
+*focus.txt*            For Neovim >= 0.7.0           Last change: 2024 July 16
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -56,7 +56,7 @@ Github repoBranchCode snippet'focus.nvim' libraryMain{ 'nvim-focus/focus.nvim', 
 
 Github repoBranchCode snippet'focus.nvim' libraryMainuse 'nvim-focus/focus.nvim'Stableuse { 'nvim-focus/focus.nvim', branch = 'stable' }With junegunn/vim-plug ~
 
-Github repoBranchCode snippet'focus.nvim' libraryMainPlug 'nvim-focus/focus.nvim'StablePlug 'nvim-focus/focus.nvim', { 'branch''stable' }
+Github repoBranchCode snippet'focus.nvim' libraryMainPlug 'nvim-focus/focus.nvim'StablePlug("nvim-focus/focus.nvim", {["tag"]="stable"}) – stable should be the latest stable version, as of 16th july 2024, it’s v1.0.0
 
 
 CONFIGURATION                                 *focus-focus.nvim-configuration*
