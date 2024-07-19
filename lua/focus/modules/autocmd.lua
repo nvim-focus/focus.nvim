@@ -60,6 +60,9 @@ function M.setup(config)
         vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
             group = augroup,
             callback = function(_)
+                if utils.is_disabled() then
+                    return
+                end
                 vim.wo.signcolumn = 'no'
             end,
             desc = 'Disable signcolumn',
