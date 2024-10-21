@@ -244,7 +244,7 @@ require("focus").setup({ ui = { relativenumber = true } })
 require("focus").setup({ ui = { hybridnumber = true} })
 ```
 
-**Set Presrve Absolute Numbers**
+**Set Preserve Absolute Numbers**
 ```lua
 -- Preserve absolute numbers in the unfocussed windows
 -- Works in combination with relativenumber or hybridnumber
