@@ -1,4 +1,4 @@
-*focus.txt*            For Neovim >= 0.7.0           Last change: 2024 July 16
+*focus.txt*          For Neovim >= 0.7.0         Last change: 2024 November 13
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -219,7 +219,7 @@ buffer**
     require("focus").setup({ ui = { hybridnumber = true} })
 <
 
-**Set Presrve Absolute Numbers**
+**Set Preserve Absolute Numbers**
 
 >lua
     -- Preserve absolute numbers in the unfocussed windows
