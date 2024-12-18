@@ -117,7 +117,7 @@ function M.setup(config)
                     if utils.is_disabled() then
                         return
                     end
-                    vim.wo.number = false
+                    vim.wo.number = true
                     vim.wo.relativenumber = true
                 end,
                 desc = 'Absolutnumber unfoccused enter',
