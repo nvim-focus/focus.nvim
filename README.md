@@ -117,6 +117,8 @@ require("focus").setup({
         height = 0, -- Force height for the focused window
         minwidth = 0, -- Force minimum width for the unfocused window
         minheight = 0, -- Force minimum height for the unfocused window
+        focusedwindow_minwidth = 0, --Force minimum width for the focused window
+        focusedwindow_minheight = 0, --Force minimum height for the focused window
         height_quickfix = 10, -- Set the height of quickfix panel
     },
     split = {
@@ -187,6 +189,13 @@ require("focus").setup({ autoresize = { width = 120 } })
 require("focus").setup({ autoresize = { minwidth = 80} })
 ```
 
+**Set Focus Minimum Width for Focused Window**
+```lua
+-- Force minimum width for the focused window
+-- Default: Calculated based on golden ratio
+require("focus").setup({ autoresize = { focusedwindow_minwidth = 80} })
+```
+
 **Set Focus Height**
 ```lua
 -- Force height for the focused window
@@ -199,6 +208,13 @@ require("focus").setup({ autoresize = { height = 40 } })
 -- Force minimum height for the unfocused window
 -- Default: 0
 require("focus").setup({ autoresize = { minheight = 10} })
+```
+
+**Set Focus Minimum Height for Focused Window**
+```lua
+-- Force minimum height for the focused window
+-- Default: Calculated based on golden ratio
+require("focus").setup({ autoresize = { focusedwindow_minheight = 80} })
 ```
 
 **Set Focus Quickfix Height**
