@@ -80,6 +80,8 @@ default settings:
             height = 0, -- Force height for the focused window
             minwidth = 0, -- Force minimum width for the unfocused window
             minheight = 0, -- Force minimum height for the unfocused window
+            focusedwindow_minwidth = 0, -- Force minimum width for the focused window
+            focusedwindow_minheight = 0, -- Force minimum height for the focused window
             height_quickfix = 10, -- Set the height of quickfix panel
         },
         split = {
@@ -91,7 +93,7 @@ default settings:
             relativenumber = false, -- Display relative line numbers in the focussed window only
             hybridnumber = false, -- Display hybrid line numbers in the focussed window only
             absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
-    
+
             cursorline = true, -- Display a cursorline in the focussed window only
             cursorcolumn = false, -- Display cursorcolumn in the focussed window only
             colorcolumn = {
@@ -154,6 +156,14 @@ SETUP OPTIONS ~
     require("focus").setup({ autoresize = { minwidth = 80} })
 <
 
+**Set Focus Minimum Width for Focused Window**
+
+>lua
+    -- Force minimum width for the focused window
+    -- Default: Calculated based on golden ratio
+    require("focus").setup({ autoresize = { focusedwindow_minwidth = 80} })
+<
+
 **Set Focus Height**
 
 >lua
@@ -168,6 +178,14 @@ SETUP OPTIONS ~
     -- Force minimum height for the unfocused window
     -- Default: 0
     require("focus").setup({ autoresize = { minheight = 10} })
+<
+
+**Set Focus Minimum Height for Focused Window**
+
+>lua
+    -- Force minimum height for the focused window
+    -- Default: Calculated based on golden ratio
+    require("focus").setup({ autoresize = { focusedwindow_minheight = 80} })
 <
 
 **Set Focus Quickfix Height**
@@ -287,7 +305,7 @@ buffer**
     -- Enable auto highlighting for focussed/unfocussed windows
     -- Default: false
     require("focus").setup({ ui = { winhighlight = true } })
-    
+
     -- By default, the highlight groups are setup as such:
     --   hi default link FocusedWindow VertSplit
     --   hi default link UnfocusedWindow Normal
@@ -312,10 +330,10 @@ Here is an example:
 >lua
     local ignore_filetypes = { 'neo-tree' }
     local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
-    
+
     local augroup =
         vim.api.nvim_create_augroup('FocusDisable', { clear = true })
-    
+
     vim.api.nvim_create_autocmd('WinEnter', {
         group = augroup,
         callback = function(_)
@@ -328,7 +346,7 @@ Here is an example:
         end,
         desc = 'Disable focus autoresize for BufType',
     })
-    
+
     vim.api.nvim_create_autocmd('FileType', {
         group = augroup,
         callback = function(_)
@@ -473,7 +491,7 @@ LEVERAGE HJKL TO MOVE OR CREATE YOUR SPLITS DIRECTIONALLY ~
             require('focus').split_command(direction)
         end, { desc = string.format('Create or move to split (%s)', direction) })
     end
-    
+
     -- Use `<Leader>h` to split the screen to the left, same as command FocusSplitLeft etc
     focusmap('h')
     focusmap('j')

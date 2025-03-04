@@ -54,7 +54,11 @@ function M.autoresize(config)
         width = config.autoresize.width
     else
         width = golden_ratio_width()
-        if config.autoresize.minwidth > 0 then
+        if config.autoresize.focusedwindow_minwidth > 0 then
+            if width < config.autoresize.focusedwindow_minwidth then
+                width = config.autoresize.focusedwindow_minwidth
+            end
+        elseif config.autoresize.minwidth > 0 then
             width = math.max(width, config.autoresize.minwidth)
         elseif width < golden_ratio_minwidth() then
             width = golden_ratio_minwidth()
@@ -66,7 +70,11 @@ function M.autoresize(config)
         height = config.autoresize.height
     else
         height = golden_ratio_height()
-        if config.autoresize.minheight > 0 then
+        if config.autoresize.focusedwindow_minheight > 0 then
+            if height < config.autoresize.focusedwindow_minheight then
+                height = config.autoresize.focusedwindow_minheight
+            end
+        elseif config.autoresize.minheight > 0 then
             height = math.max(height, config.autoresize.minheight)
         elseif height < golden_ratio_minheight() then
             height = golden_ratio_minheight()
@@ -121,13 +129,19 @@ function M.split_resizer(config, goal) --> Only resize normal buffers, set qf to
         vim.o.winheight = 1
         return
     else
-        if config.autoresize.minwidth > 0 then
+        if
+            config.autoresize.minwidth > 0
+            and config.autoresize.focusedwindow_minwidth <= 0
+        then
             if vim.o.winwidth < config.autoresize.minwidth then
                 vim.o.winwidth = config.autoresize.minwidth
             end
             vim.o.winminwidth = config.autoresize.minwidth
         end
-        if config.autoresize.minheight > 0 then
+        if
+            config.autoresize.minheight > 0
+            and config.autoresize.focusedwindow_minheight <= 0
+        then
             if vim.o.winheight < config.autoresize.minheight then
                 vim.o.winheight = config.autoresize.minheight
             end

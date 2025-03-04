@@ -37,6 +37,8 @@ require('focus').setup({
         height = 0, -- Force height for the focused window
         minwidth = 0, -- Force minimum width for the unfocused window
         minheight = 0, -- Force minimum height for the unfocused window
+        focusedwindow_minwidth = 0, -- Force minimum width for the focused window
+        focusedwindow_minheight = 0, -- Force minimum height for the focused window
         height_quickfix = 10, -- Set the height of quickfix panel
     },
     split = {

@@ -27,6 +27,8 @@ Focus.config = {
         height = 0, -- Force height for the focused window
         minwidth = 0, -- Force minimum width for the unfocused window
         minheight = 0, -- Force minimum height for the unfocused window
+        focusedwindow_minwidth = 0, -- Force minimum width for the focused window
+        focusedwindow_minheight = 0, -- Force minimum height for the focused window
         height_quickfix = 10, -- Set the height of quickfix panel
     },
     split = {
@@ -196,6 +198,14 @@ H.setup_config = function(config)
         ['autoresize.height'] = { config.autoresize.height, 'number' },
         ['autoresize.minwidth'] = { config.autoresize.minwidth, 'number' },
         ['autoresize.minheight'] = { config.autoresize.minheight, 'number' },
+        ['autoresize.focusedwindow_minwidth'] = {
+            config.autoresize.focusedwindow_minwidth,
+            'number',
+        },
+        ['autoresize.focusedwindow_minheight'] = {
+            config.autoresize.focusedwindow_minheight,
+            'number',
+        },
         ['autoresize.height_quickfix'] = {
             config.autoresize.height_quickfix,
             'number',
