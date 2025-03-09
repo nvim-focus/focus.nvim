@@ -211,6 +211,129 @@ T['autoresize']['vsplit minwidth'] = function()
     validate_win_dims(win_id_right, { 30, 23 })
 end
 
+-- focused minwidth for vertical splits
+T['autoresize']['vsplit focusedwindow_minwidth'] = function()
+    reload_module({ autoresize = { focusedwindow_minwidth = 55 } })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Expect the left window's width to be at least 55.
+    -- In the default test, the left width is 49.
+    -- With forced focusedwindow_minwidth, we now expect 55.
+    validate_win_dims(win_id_left, { 55, 23 })
+    -- The right window should take the remaining width
+    validate_win_dims(win_id_right, { 24, 23 })
+end
+
+-- focused minwidth for vertical splits inferior to the default one obtained by
+-- the golden ratio
+T['autoresize']['vsplit focusedwindow_minwidth < golden_ratio expected value'] = function()
+    reload_module({ autoresize = { focusedwindow_minwidth = 40 } })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- The expected value is the golden ratio one
+    validate_win_dims(win_id_left, { 49, 23 })
+    -- The right window should take the remaining width
+    validate_win_dims(win_id_right, { 30, 23 })
+end
+
+-- focused minheight for horizontal splits
+T['autoresize']['split focusedwindow_minheight'] = function()
+    reload_module({ autoresize = { focusedwindow_minheight = 17 } })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    -- In the default test, the upper window height is 15.
+    -- With forced focusedwindow_minheight, we now expect 17.
+    validate_win_dims(win_id_upper, { 80, 17 })
+    -- The lower window gets the rest (assuming total height used equals 22)
+    validate_win_dims(win_id_lower, { 80, 5 })
+end
+
+-- focused minheight for horizontal splits inferior to the default one obtained by
+-- the golden ratio
+T['autoresize']['split focusedwindow_minheight < golden_ratio expected value'] = function()
+    reload_module({ autoresize = { focusedwindow_minheight = 10 } })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    -- The expected value is the golden ratio one
+    validate_win_dims(win_id_upper, { 80, 15 })
+    -- The lower window gets the rest
+    validate_win_dims(win_id_lower, { 80, 7 })
+end
+
+-- focused minwidth for vertical splits with minwidth + focusedwindow_minwidth >
+-- maxwidth.
+T['autoresize']['vsplit minwidth focusedwindow_minwidth'] = function()
+    reload_module({
+        autoresize = { minwidth = 20, focusedwindow_minwidth = 80 },
+    })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Expect the left window's width to be at least the maxwidth (80) minus 21,
+    -- 20 from the right window as the minimum width possible and 1 from the
+    -- separator.
+    -- With forced focusedwindow_minwidth, we now expect 59.
+    validate_win_dims(win_id_left, { 78, 23 })
+    -- The right window should have the minwidth.
+    validate_win_dims(win_id_right, { 1, 23 })
+
+    child.api.nvim_set_current_win(win_id_right)
+
+    validate_win_dims(win_id_left, { 1, 23 })
+    -- The right window should have the minwidth.
+    validate_win_dims(win_id_right, { 78, 23 })
+end
+
+-- focused minheight for horizontal splits with minheight as 0
+T['autoresize']['split minheight focusedwindow_minheight'] = function()
+    reload_module({
+        autoresize = { minheight = 10, focusedwindow_minheight = 25 },
+    })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 1)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    -- Expect the upper window's height to be at least the maxheight (23) minus 2,
+    -- 1 from the lower window as the minimum height and 1 from the separator.
+    -- With forced focusedwindow_minheight, we now expect 21.
+    validate_win_dims(win_id_upper, { 80, 21 })
+    -- The lower window should have the minimum height.
+    validate_win_dims(win_id_lower, { 80, 1 })
+end
+
 T['autoresize']['quickfix'] = function()
     reload_module({ autoresize = { height_quickfix = 10 } })
     child.cmd('vimgrep /ipsum/' .. lorem_ipsum_file)
