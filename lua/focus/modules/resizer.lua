@@ -49,6 +49,34 @@ local function restore_fixed_win_dims(fixed_dims)
 end
 
 function M.autoresize(config)
+    -- Check if we should use equal splits based on terminal size
+    -- When columns >= equalise_min_cols AND/OR rows >= equalise_min_rows, use equal splits (wincmd =)
+    -- Otherwise, use golden ratio autoresize
+    local should_equalise = false
+    local cols_check = config.autoresize.equalise_min_cols > 0 and vim.o.columns >= config.autoresize.equalise_min_cols
+    local rows_check = config.autoresize.equalise_min_rows > 0 and vim.o.lines >= config.autoresize.equalise_min_rows
+
+    -- If both thresholds are set, both conditions must be met
+    -- If only one is set, only that condition needs to be met
+    if config.autoresize.equalise_min_cols > 0 and config.autoresize.equalise_min_rows > 0 then
+        should_equalise = cols_check and rows_check
+    elseif config.autoresize.equalise_min_cols > 0 then
+        should_equalise = cols_check
+    elseif config.autoresize.equalise_min_rows > 0 then
+        should_equalise = rows_check
+    end
+
+    -- If equalise mode, just equalize all windows and return
+    if should_equalise then
+        local cmdheight = vim.o.cmdheight
+        local fixed = save_fixed_win_dims()
+        vim.api.nvim_exec2('wincmd =', { output = false })
+        restore_fixed_win_dims(fixed)
+        vim.o.cmdheight = cmdheight
+        return
+    end
+
+    -- Otherwise, use golden ratio autoresize
     local width
     if config.autoresize.width > 0 then
         width = config.autoresize.width
