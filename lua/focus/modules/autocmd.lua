@@ -30,8 +30,6 @@ function M.setup(config)
     end
 
     if config.autoresize.enable then
-        local previous_win_id = 0
-
         vim.api.nvim_create_autocmd('WinEnter', {
             group = augroup,
             callback = function(_)
