@@ -75,13 +75,8 @@ Focus.setup = function(config)
         end
 
         if config.ui.winhighlight then
-            if vim.fn.has('nvim-0.9') then
-                vim.api.nvim_set_hl(0, 'FocusedWindow', { link = 'VertSplit' })
-                vim.api.nvim_set_hl(0, 'UnfocusedWindow', { link = 'Normal' })
-            else
-                vim.highlight.link('FocusedWindow', 'VertSplit', true)
-                vim.highlight.link('UnfocusedWindow', 'Normal', true)
-            end
+            vim.api.nvim_set_hl(0, 'FocusedWindow', { link = 'VertSplit' })
+            vim.api.nvim_set_hl(0, 'UnfocusedWindow', { link = 'Normal' })
 
             vim.wo.winhighlight =
                 'Normal:FocusedWindow,NormalNC:UnfocusedWindow'

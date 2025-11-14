@@ -1,7 +1,7 @@
 # focus.nvim
 
 [![GitHub stars](https://img.shields.io/github/stars/nvim-focus/focus.nvim.svg?style=social&label=Star)](https://GitHub.com/nvim-focus/focus.nvim/stargazers/)
-[![Requires Neovim 0.8+](https://img.shields.io/badge/requires-nvim%200.8%2B-9cf?logo=neovim)](https://neovim.io/)
+[![Requires Neovim 0.9+](https://img.shields.io/badge/requires-nvim%200.9%2B-9cf?logo=neovim)](https://neovim.io/)
 [![GitHub contributors](https://img.shields.io/github/contributors/nvim-focus/focus.nvim.svg)](https://GitHub.com/nvim-focus/focus.nvim/graphs/contributors/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com/)
 [![GitHub issues](https://img.shields.io/github/issues/nvim-focus/focus.nvim.svg)](https://GitHub.com/nvim-focus/focus.nvim/issues/)
@@ -146,8 +146,6 @@ require("focus").setup({
 > **Note**
 > To manage window views when resizing, see `:h splitkeep`.<br>
 > For users of Neovim >= 0.10, it is recommended to use `splitkeep=cursor`.<br>
-> For users of Neovim <= 0.8, it is recommended to use the
-> [stabilize](https://github.com/luukvbaal/stabilize.nvim) plugin.
 > For users of lazyvim, they set `opt.winminwidth = 5` in default options
 > may cause conflict with session manage plugins.
 
