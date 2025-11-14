@@ -151,7 +151,7 @@ T['focus_ui']['relativenumber and absolutenumber_unfocussed with split'] = funct
     local win_id_right = resize_state.windows[2]
 
     eq(win_id_left, child.api.nvim_get_current_win())
-    eq(child.wo.number, false)
+    eq(child.wo.number, true)
     eq(child.wo.relativenumber, true)
 
     child.lua([[_G.win_get_relativenumber = function(winid)
@@ -185,6 +185,51 @@ T['focus_ui']['relativenumber and absolutenumber_unfocussed with split'] = funct
         child.lua_get(string.format('_G.win_get_number(%d)', win_id_right)),
         true
     )
+end
+
+T['focus_ui']['absolutenumber_unfocussed keeps line numbers'] = function()
+    -- Test for commit a81388c: unfocused windows show absolute line numbers
+    -- when absolutenumber_unfocussed is enabled
+    reload_module({
+        ui = { relativenumber = true, absolutenumber_unfocussed = true },
+    })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 0)
+    child.cmd('vsplit')
+
+    local resize_state = child.get_resize_state()
+    local focused_win = child.api.nvim_get_current_win()
+    local unfocused_win = nil
+
+    -- Find the unfocused window
+    for _, win_id in ipairs(resize_state.windows) do
+        if win_id ~= focused_win then
+            unfocused_win = win_id
+            break
+        end
+    end
+
+    -- Helper to get window options
+    child.lua([[_G.get_win_number_opts = function(winid)
+        local opts = {}
+        vim.api.nvim_win_call(winid, function()
+            opts.number = vim.wo.number
+            opts.relativenumber = vim.wo.relativenumber
+        end)
+        return opts
+    end]])
+
+    local unfocused_opts = child.lua_get(
+        string.format('_G.get_win_number_opts(%d)', unfocused_win)
+    )
+
+    -- Unfocused window should have absolute line numbers
+    eq(unfocused_opts.number, true)
+    eq(unfocused_opts.relativenumber, false)
+
+    -- Focused window should have hybrid numbering
+    eq(child.wo.number, true)
+    eq(child.wo.relativenumber, true)
 end
 
 T['focus_ui']['hybridnumber'] = function()
