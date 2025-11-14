@@ -1,0 +1,7 @@
+# Custom standard library for MiniTest testing framework globals
+
+[MiniTest]
+any = true
+
+[T]
+any = true

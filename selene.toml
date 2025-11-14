@@ -1,5 +1,6 @@
-std = "lua51+neovim"
+std = "lua51+neovim+minitest"
 
 [rules]
 global_usage = "allow"
 multiple_statements = "allow"
+incorrect_standard_library_use = "allow"
