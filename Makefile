@@ -14,3 +14,7 @@ test_file:
 	$(NVIM_EXEC) --headless --noplugin -u ./tests/minimal_init.lua \
 		-c "lua require('mini.test').setup()" \
 		-c "lua MiniTest.run_file('$(FILE)', { execute = { reporter = MiniTest.gen_reporter.stdout({ group_depth = $(GROUP_DEPTH) }) } })"
+
+format:
+	@command -v stylua >/dev/null 2>&1 || { echo "Error: stylua is not installed. Please install it from https://github.com/JohnnyMorganz/StyLua"; exit 1; }
+	stylua .
