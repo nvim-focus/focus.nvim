@@ -18,3 +18,7 @@ test_file:
 format:
 	@command -v stylua >/dev/null 2>&1 || { echo "Error: stylua is not installed. Please install it from https://github.com/JohnnyMorganz/StyLua"; exit 1; }
 	stylua .
+
+lint:
+	@command -v selene >/dev/null 2>&1 || { echo "Error: selene is not installed. Please install it from https://github.com/Kampfkarren/selene"; exit 1; }
+	selene lua/ tests/
