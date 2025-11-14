@@ -1,4 +1,3 @@
-local utils = require('focus.modules.utils')
 local vim = vim
 local cmd = vim.api.nvim_command
 local M = {}
@@ -32,18 +31,6 @@ local golden_ratio_split_cmd = function(winnr)
     end
 
     return 'split'
-end
-
-local function move_back(direction)
-    if direction == 'h' then
-        return 'l'
-    elseif direction == 'l' then
-        return 'h'
-    elseif direction == 'j' then
-        return 'k'
-    elseif direction == 'k' then
-        return 'j'
-    end
 end
 
 local split_ENOROOM = function(err)
