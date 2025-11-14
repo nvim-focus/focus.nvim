@@ -1,4 +1,4 @@
-*focus.txt*          For Neovim >= 0.9.0         Last change: 2025 November 14
+*focus.txt*          For Neovim >= 0.7.0         Last change: 2025 November 14
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -109,10 +109,8 @@ default settings:
 
   **Note** To manage window views when resizing, see |splitkeep|. For users of
   Neovim >= 0.10, it is recommended to use `splitkeep=cursor`. For users of
-  Neovim <= 0.8, it is recommended to use the stabilize
-  <https://github.com/luukvbaal/stabilize.nvim> plugin. For users of lazyvim,
-  they set `opt.winminwidth = 5` in default options may cause conflict with
-  session manage plugins.
+  lazyvim, they set `opt.winminwidth = 5` in default options may cause conflict
+  with session manage plugins.
 
 SETUP OPTIONS ~
 
@@ -568,7 +566,7 @@ You can run the tests using `make test` if you initialise the git submodules.
 2. Links                                                         *focus-links*
 
 1. *GitHub stars*: https://img.shields.io/github/stars/nvim-focus/focus.nvim.svg?style=social&label=Star
-2. *Requires Neovim 0.7+*: https://img.shields.io/badge/requires-nvim%200.7%2B-9cf?logo=neovim
+2. *Requires Neovim 0.9+*: https://img.shields.io/badge/requires-nvim%200.9%2B-9cf?logo=neovim
 3. *GitHub contributors*: https://img.shields.io/github/contributors/nvim-focus/focus.nvim.svg
 4. *PRs Welcome*: https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 5. *GitHub issues*: https://img.shields.io/github/issues/nvim-focus/focus.nvim.svg
