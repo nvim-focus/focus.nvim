@@ -1,4 +1,4 @@
-*focus.txt*           For Neovim >= 0.7.0           Last change: 2025 April 27
+*focus.txt*          For Neovim >= 0.7.0         Last change: 2025 November 14
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -31,8 +31,8 @@ Always have a nice view over your split windows
 
 PREVIEW                                             *focus-focus.nvim-preview*
 
-_Note_For reference this screencast features dimensions set to 40 rows and 120
-columns.
+_Note_: For reference this screencast features dimensions set to 40 rows and
+120 columns.
 
 _See a visual demonstration of each focus feature here_.
 
