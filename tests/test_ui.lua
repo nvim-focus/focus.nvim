@@ -364,6 +364,45 @@ T['focus_ui']['signcolumn with split'] = function()
     )
 end
 
+T['focus_ui']['signcolumn respects disabled state on WinLeave'] = function()
+    -- Test for commit 6f70aff: signcolumn should not change when focus is disabled
+    reload_module({ ui = { signcolumn = true } })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 0)
+    child.cmd('vsplit')
+
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Set signcolumn to 'auto' in the current window
+    child.cmd('set signcolumn=auto')
+    eq(child.wo.signcolumn, 'auto')
+
+    -- Disable focus.nvim
+    child.lua('vim.g.focus_disable = true')
+
+    -- Switch to the other window (triggers WinLeave on current window)
+    child.api.nvim_set_current_win(win_id_right)
+
+    -- Helper to get signcolumn from specific window
+    child.lua([[_G.win_get_signcolumn = function(winid)
+        local win_signcolumn = ''
+        vim.api.nvim_win_call(winid, function()
+           win_signcolumn = vim.wo.signcolumn
+        end)
+        return win_signcolumn
+    end]])
+
+    -- The left window's signcolumn should still be 'auto' because focus is disabled
+    eq(
+        child.lua_get(string.format('_G.win_get_signcolumn(%d)', win_id_left)),
+        'auto'
+    )
+end
+
 T['focus_ui']['cursorcolumn with split'] = function()
     reload_module({ ui = { cursorcolumn = true } })
     edit(lorem_ipsum_file)
