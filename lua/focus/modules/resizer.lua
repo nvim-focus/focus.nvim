@@ -53,12 +53,17 @@ function M.autoresize(config)
     -- When columns >= equalise_min_cols AND/OR rows >= equalise_min_rows, use equal splits (wincmd =)
     -- Otherwise, use golden ratio autoresize
     local should_equalise = false
-    local cols_check = config.autoresize.equalise_min_cols > 0 and vim.o.columns >= config.autoresize.equalise_min_cols
-    local rows_check = config.autoresize.equalise_min_rows > 0 and vim.o.lines >= config.autoresize.equalise_min_rows
+    local cols_check = config.autoresize.equalise_min_cols > 0
+        and vim.o.columns >= config.autoresize.equalise_min_cols
+    local rows_check = config.autoresize.equalise_min_rows > 0
+        and vim.o.lines >= config.autoresize.equalise_min_rows
 
     -- If both thresholds are set, both conditions must be met
     -- If only one is set, only that condition needs to be met
-    if config.autoresize.equalise_min_cols > 0 and config.autoresize.equalise_min_rows > 0 then
+    if
+        config.autoresize.equalise_min_cols > 0
+        and config.autoresize.equalise_min_rows > 0
+    then
         should_equalise = cols_check and rows_check
     elseif config.autoresize.equalise_min_cols > 0 then
         should_equalise = cols_check

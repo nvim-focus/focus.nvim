@@ -582,7 +582,12 @@ T['autoresize']['equalise_min_cols when wide enough'] = function()
     expect.no_error(function()
         local diff = math.abs(new_left_width - new_right_width)
         if diff > 1 then
-            error('Windows not equal after switch: ' .. new_left_width .. ' vs ' .. new_right_width)
+            error(
+                'Windows not equal after switch: '
+                    .. new_left_width
+                    .. ' vs '
+                    .. new_right_width
+            )
         end
     end)
 end
@@ -633,7 +638,9 @@ T['autoresize']['equalise_min_rows when tall enough'] = function()
     expect.no_error(function()
         local diff = math.abs(upper_height - lower_height)
         if diff > 1 then
-            error('Windows not equal: ' .. upper_height .. ' vs ' .. lower_height)
+            error(
+                'Windows not equal: ' .. upper_height .. ' vs ' .. lower_height
+            )
         end
     end)
 
@@ -647,7 +654,12 @@ T['autoresize']['equalise_min_rows when tall enough'] = function()
     expect.no_error(function()
         local diff = math.abs(new_upper_height - new_lower_height)
         if diff > 1 then
-            error('Windows not equal after switch: ' .. new_upper_height .. ' vs ' .. new_lower_height)
+            error(
+                'Windows not equal after switch: '
+                    .. new_upper_height
+                    .. ' vs '
+                    .. new_lower_height
+            )
         end
     end)
 end
@@ -679,7 +691,9 @@ end
 
 -- Test when both equalise_min_cols and equalise_min_rows are set and both met
 T['autoresize']['equalise both conditions met'] = function()
-    reload_module({ autoresize = { equalise_min_cols = 80, equalise_min_rows = 25 } })
+    reload_module({
+        autoresize = { equalise_min_cols = 80, equalise_min_rows = 25 },
+    })
     child.set_size(25, 80)
     edit(lorem_ipsum_file)
     child.cmd('vsplit')
@@ -722,7 +736,9 @@ end
 
 -- Test when both are set but only cols condition is met
 T['autoresize']['equalise both set only cols met'] = function()
-    reload_module({ autoresize = { equalise_min_cols = 80, equalise_min_rows = 30 } })
+    reload_module({
+        autoresize = { equalise_min_cols = 80, equalise_min_rows = 30 },
+    })
     child.set_size(25, 80)
     edit(lorem_ipsum_file)
     child.cmd('vsplit')
@@ -740,7 +756,9 @@ end
 
 -- Test when both are set but only rows condition is met
 T['autoresize']['equalise both set only rows met'] = function()
-    reload_module({ autoresize = { equalise_min_cols = 100, equalise_min_rows = 25 } })
+    reload_module({
+        autoresize = { equalise_min_cols = 100, equalise_min_rows = 25 },
+    })
     child.set_size(25, 80)
     edit(lorem_ipsum_file)
     child.cmd('split')
@@ -758,7 +776,9 @@ end
 
 -- Test when both are set and neither condition is met
 T['autoresize']['equalise both set neither met'] = function()
-    reload_module({ autoresize = { equalise_min_cols = 100, equalise_min_rows = 30 } })
+    reload_module({
+        autoresize = { equalise_min_cols = 100, equalise_min_rows = 30 },
+    })
     child.set_size(25, 80)
     edit(lorem_ipsum_file)
     child.cmd('vsplit')
