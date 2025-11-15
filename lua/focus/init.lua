@@ -30,6 +30,8 @@ Focus.config = {
         focusedwindow_minwidth = 0, -- Force minimum width for the focused window
         focusedwindow_minheight = 0, -- Force minimum height for the focused window
         height_quickfix = 10, -- Set the height of quickfix panel
+        equalise_min_cols = 0, -- Use equal splits when columns >= this value (0 = ignore)
+        equalise_min_rows = 0, -- Use equal splits when rows >= this value (0 = ignore)
     },
     split = {
         bufnew = false, -- Create blank buffer for new split windows
@@ -203,6 +205,14 @@ H.setup_config = function(config)
         },
         ['autoresize.height_quickfix'] = {
             config.autoresize.height_quickfix,
+            'number',
+        },
+        ['autoresize.equalise_min_cols'] = {
+            config.autoresize.equalise_min_cols,
+            'number',
+        },
+        ['autoresize.equalise_min_rows'] = {
+            config.autoresize.equalise_min_rows,
             'number',
         },
     })

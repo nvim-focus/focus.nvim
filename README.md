@@ -120,6 +120,8 @@ require("focus").setup({
         focusedwindow_minwidth = 0, --Force minimum width for the focused window
         focusedwindow_minheight = 0, --Force minimum height for the focused window
         height_quickfix = 10, -- Set the height of quickfix panel
+        equalise_min_cols = 0, -- Use equal splits when columns >= this value (0 = ignore)
+        equalise_min_rows = 0, -- Use equal splits when rows >= this value (0 = ignore)
     },
     split = {
         bufnew = false, -- Create blank buffer for new split windows
@@ -221,6 +223,24 @@ require("focus").setup({ autoresize = { focusedwindow_minheight = 80} })
 -- `:copen <height>`
 -- Default: 10
 require("focus").setup({ autoresize = { height_quickfix = 10 })
+```
+
+**Set Minimum Terminal Size for Equal Splits**
+```lua
+-- Use equal-size splits when terminal has sufficient columns and/or rows
+-- When thresholds are met: all splits are equal size (via wincmd =)
+-- When thresholds are not met: use golden ratio autoresize (focused window larger)
+-- Useful for large terminals where equal splits are preferred
+-- Default: 0 (always use golden ratio autoresize)
+
+-- Equal splits on wide terminals (120+ columns)
+require("focus").setup({ autoresize = { equalise_min_cols = 120 })
+
+-- Equal splits on tall terminals (40+ rows)
+require("focus").setup({ autoresize = { equalise_min_rows = 40 })
+
+-- Equal splits only when BOTH wide AND tall (120+ columns AND 40+ rows)
+require("focus").setup({ autoresize = { equalise_min_cols = 120, equalise_min_rows = 40 })
 ```
 
 **When creating a new split window, do/don't initialise it as an empty buffer**

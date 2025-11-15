@@ -545,4 +545,253 @@ T['autoresize']['does not resize floating windows'] = function()
     eq(child.api.nvim_win_get_height(win_id), 10)
 end
 
+-- Test equalise_min_cols when terminal is wide enough
+T['autoresize']['equalise_min_cols when wide enough'] = function()
+    reload_module({ autoresize = { equalise_min_cols = 80 } })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Since terminal width (80) >= equalise_min_cols (80), windows should be equal
+    -- Total width is 80, minus 1 for separator = 79, divided by 2 = 39.5
+    -- Both windows should be approximately equal (39 and 40)
+    local left_width = child.api.nvim_win_get_width(win_id_left)
+    local right_width = child.api.nvim_win_get_width(win_id_right)
+
+    -- Check that windows are approximately equal (difference <= 1)
+    expect.no_error(function()
+        local diff = math.abs(left_width - right_width)
+        if diff > 1 then
+            error('Windows not equal: ' .. left_width .. ' vs ' .. right_width)
+        end
+    end)
+
+    -- Switch windows and verify equal sizes are maintained
+    child.cmd('wincmd w')
+
+    local new_left_width = child.api.nvim_win_get_width(win_id_left)
+    local new_right_width = child.api.nvim_win_get_width(win_id_right)
+
+    -- After switching, windows should still be equal (not golden ratio)
+    expect.no_error(function()
+        local diff = math.abs(new_left_width - new_right_width)
+        if diff > 1 then
+            error(
+                'Windows not equal after switch: '
+                    .. new_left_width
+                    .. ' vs '
+                    .. new_right_width
+            )
+        end
+    end)
+end
+
+-- Test equalise_min_cols when terminal is NOT wide enough
+T['autoresize']['equalise_min_cols when not wide enough'] = function()
+    reload_module({ autoresize = { equalise_min_cols = 100 } })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Since terminal width (80) < equalise_min_cols (100), use golden ratio
+    -- Should match the default golden ratio behavior
+    validate_win_dims(win_id_left, { 49, 23 })
+    validate_win_dims(win_id_right, { 30, 23 })
+
+    -- Switch windows and verify golden ratio behavior
+    child.cmd('wincmd w')
+
+    validate_win_dims(win_id_left, { 30, 23 })
+    validate_win_dims(win_id_right, { 49, 23 })
+end
+
+-- Test equalise_min_rows when terminal is tall enough
+T['autoresize']['equalise_min_rows when tall enough'] = function()
+    reload_module({ autoresize = { equalise_min_rows = 25 } })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    eq(win_id_upper, child.api.nvim_get_current_win())
+
+    -- Since terminal height (25) >= equalise_min_rows (25), windows should be equal
+    local upper_height = child.api.nvim_win_get_height(win_id_upper)
+    local lower_height = child.api.nvim_win_get_height(win_id_lower)
+
+    -- Check that windows are approximately equal (difference <= 1)
+    expect.no_error(function()
+        local diff = math.abs(upper_height - lower_height)
+        if diff > 1 then
+            error(
+                'Windows not equal: ' .. upper_height .. ' vs ' .. lower_height
+            )
+        end
+    end)
+
+    -- Switch windows and verify equal sizes are maintained
+    child.cmd('wincmd w')
+
+    local new_upper_height = child.api.nvim_win_get_height(win_id_upper)
+    local new_lower_height = child.api.nvim_win_get_height(win_id_lower)
+
+    -- After switching, windows should still be equal (not golden ratio)
+    expect.no_error(function()
+        local diff = math.abs(new_upper_height - new_lower_height)
+        if diff > 1 then
+            error(
+                'Windows not equal after switch: '
+                    .. new_upper_height
+                    .. ' vs '
+                    .. new_lower_height
+            )
+        end
+    end)
+end
+
+-- Test equalise_min_rows when terminal is NOT tall enough
+T['autoresize']['equalise_min_rows when not tall enough'] = function()
+    reload_module({ autoresize = { equalise_min_rows = 30 } })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    eq(win_id_upper, child.api.nvim_get_current_win())
+
+    -- Since terminal height (25) < equalise_min_rows (30), use golden ratio
+    -- Should match the default golden ratio behavior
+    validate_win_dims(win_id_upper, { 80, 15 })
+    validate_win_dims(win_id_lower, { 80, 7 })
+
+    -- Switch windows and verify golden ratio behavior
+    child.cmd('wincmd w')
+
+    validate_win_dims(win_id_upper, { 80, 7 })
+    validate_win_dims(win_id_lower, { 80, 15 })
+end
+
+-- Test when both equalise_min_cols and equalise_min_rows are set and both met
+T['autoresize']['equalise both conditions met'] = function()
+    reload_module({
+        autoresize = { equalise_min_cols = 80, equalise_min_rows = 25 },
+    })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('vsplit')
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+
+    local win_id_upper_left = resize_state.windows[1]
+    local win_id_lower_left = resize_state.windows[2]
+    local win_id_right = resize_state.windows[3]
+
+    eq(win_id_upper_left, child.api.nvim_get_current_win())
+
+    -- Since both conditions are met, all windows should be approximately equal
+    local ul_width = child.api.nvim_win_get_width(win_id_upper_left)
+    local ll_width = child.api.nvim_win_get_width(win_id_lower_left)
+    local r_width = child.api.nvim_win_get_width(win_id_right)
+
+    -- Left windows should have same width
+    eq(ul_width, ll_width)
+
+    -- All columns should be approximately equal
+    expect.no_error(function()
+        local diff = math.abs(ul_width - r_width)
+        if diff > 1 then
+            error('Columns not equal: ' .. ul_width .. ' vs ' .. r_width)
+        end
+    end)
+
+    -- Heights should also be approximately equal for the left column
+    local ul_height = child.api.nvim_win_get_height(win_id_upper_left)
+    local ll_height = child.api.nvim_win_get_height(win_id_lower_left)
+
+    expect.no_error(function()
+        local diff = math.abs(ul_height - ll_height)
+        if diff > 1 then
+            error('Heights not equal: ' .. ul_height .. ' vs ' .. ll_height)
+        end
+    end)
+end
+
+-- Test when both are set but only cols condition is met
+T['autoresize']['equalise both set only cols met'] = function()
+    reload_module({
+        autoresize = { equalise_min_cols = 80, equalise_min_rows = 30 },
+    })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Since cols met (80 >= 80) but rows not met (25 < 30), use golden ratio
+    validate_win_dims(win_id_left, { 49, 23 })
+    validate_win_dims(win_id_right, { 30, 23 })
+end
+
+-- Test when both are set but only rows condition is met
+T['autoresize']['equalise both set only rows met'] = function()
+    reload_module({
+        autoresize = { equalise_min_cols = 100, equalise_min_rows = 25 },
+    })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('split')
+    local resize_state = child.get_resize_state()
+
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    eq(win_id_upper, child.api.nvim_get_current_win())
+
+    -- Since rows met (25 >= 25) but cols not met (80 < 100), use golden ratio
+    validate_win_dims(win_id_upper, { 80, 15 })
+    validate_win_dims(win_id_lower, { 80, 7 })
+end
+
+-- Test when both are set and neither condition is met
+T['autoresize']['equalise both set neither met'] = function()
+    reload_module({
+        autoresize = { equalise_min_cols = 100, equalise_min_rows = 30 },
+    })
+    child.set_size(25, 80)
+    edit(lorem_ipsum_file)
+    child.cmd('vsplit')
+    local resize_state = child.get_resize_state()
+
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+
+    -- Since neither condition met, use golden ratio
+    validate_win_dims(win_id_left, { 49, 23 })
+    validate_win_dims(win_id_right, { 30, 23 })
+end
+
 return T
