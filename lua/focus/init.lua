@@ -14,6 +14,7 @@ local autocmd = require('focus.modules.autocmd')
 local split = require('focus.modules.split')
 local functions = require('focus.modules.functions')
 local resizer = require('focus.modules.resizer')
+local utils = require('focus.modules.utils')
 
 local H = {}
 local Focus = {}
@@ -177,11 +178,11 @@ end
 H.default_config = Focus.config
 
 H.setup_config = function(config)
-    vim.validate({ config = { config, 'table', true } })
+    utils.validate({ config = { config, 'table', true } })
 
     config = vim.tbl_deep_extend('force', H.default_config, config or {})
 
-    vim.validate({
+    utils.validate({
         enable = { config.enable, 'boolean' },
         commands = { config.commands, 'boolean' },
         autoresize = { config.autoresize, 'table', true },
@@ -189,7 +190,7 @@ H.setup_config = function(config)
         ui = { config.split, 'table', true },
     })
 
-    vim.validate({
+    utils.validate({
         ['autoresize.enable'] = { config.autoresize.enable, 'boolean' },
         ['autoresize.width'] = { config.autoresize.width, 'number' },
         ['autoresize.height'] = { config.autoresize.height, 'number' },
@@ -217,12 +218,12 @@ H.setup_config = function(config)
         },
     })
 
-    vim.validate({
+    utils.validate({
         ['split.bufnew'] = { config.split.bufnew, 'boolean' },
         ['split.tmux'] = { config.split.tmux, 'boolean' },
     })
 
-    vim.validate({
+    utils.validate({
         ['ui.number'] = { config.ui.number, 'boolean' },
         ['ui.relativenumber'] = { config.ui.relativenumber, 'boolean' },
         ['ui.hybridnumber'] = { config.ui.hybridnumber, 'boolean' },
@@ -237,7 +238,7 @@ H.setup_config = function(config)
         ['ui.winhighlight'] = { config.ui.winhighlight, 'boolean' },
     })
 
-    vim.validate({
+    utils.validate({
         ['ui.colorcolumn.enable'] = { config.ui.colorcolumn.enable, 'boolean' },
         ['ui.colorcolumn.list'] = { config.ui.colorcolumn.list, 'string' },
     })

@@ -1,5 +1,25 @@
 local M = {}
 
+function M.validate(T)
+  local max = vim.fn.has('nvim-0.11') == 1 and 3 or 4
+  for name, spec in pairs(T) do
+    while #spec > max do
+      table.remove(spec, #spec)
+    end
+
+    T[name] = spec
+  end
+
+  for name, spec in pairs(T) do
+    if vim.fn.has('nvim-0.11') == 1 then
+      table.insert(spec, 1, name)
+      vim.validate(unpack(spec))
+    else
+      vim.validate(spec)
+    end
+  end
+end
+
 --RETURNS TABLE OF LOWER CASE STRINGS
 --
 function M.to_lower(list)
