@@ -30,7 +30,7 @@ function M.setup(config)
     end
 
     if config.autoresize.enable then
-        vim.api.nvim_create_autocmd('WinEnter', {
+        vim.api.nvim_create_autocmd({ 'WinEnter', 'VimResized' }, {
             group = augroup,
             callback = function(_)
                 require('focus').resize()
