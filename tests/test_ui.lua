@@ -403,6 +403,38 @@ T['focus_ui']['signcolumn respects disabled state on WinLeave'] = function()
     )
 end
 
+T['focus_ui']['number respects disabled state on WinLeave'] = function()
+    reload_module({ ui = { number = true } })
+    edit(lorem_ipsum_file)
+    child.set_cursor(15, 0)
+    child.cmd('vsplit')
+
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(win_id_left, child.api.nvim_get_current_win())
+    eq(child.wo.number, true)
+
+    -- Disable focus.nvim
+    child.lua('vim.g.focus_disable = true')
+
+    -- Switch to the other window (triggers WinLeave on current window)
+    child.api.nvim_set_current_win(win_id_right)
+
+    -- Helper to get number option from specific window
+    child.lua([[_G.win_get_number = function(winid)
+        local win_number = false
+        vim.api.nvim_win_call(winid, function()
+           win_number = vim.wo.number
+        end)
+        return win_number
+    end]])
+
+    -- The left window's number should still be true because focus is disabled
+    eq(child.lua_get(string.format('_G.win_get_number(%d)', win_id_left)), true)
+end
+
 T['focus_ui']['cursorcolumn with split'] = function()
     reload_module({ ui = { cursorcolumn = true } })
     edit(lorem_ipsum_file)
