@@ -1,4 +1,5 @@
-*focus.txt*          For Neovim >= 0.7.0         Last change: 2026 February 08
+*focus.txt*
+                          For Neovim >= 0.7.0    Last change: 2026 November 14
 
 ==============================================================================
 Table of Contents                                    *focus-table-of-contents*
@@ -95,7 +96,7 @@ default settings:
             relativenumber = false, -- Display relative line numbers in the focussed window only
             hybridnumber = false, -- Display hybrid line numbers in the focussed window only
             absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
-    
+
             cursorline = true, -- Display a cursorline in the focussed window only
             cursorcolumn = false, -- Display cursorcolumn in the focussed window only
             colorcolumn = {
@@ -205,13 +206,13 @@ SETUP OPTIONS ~
     -- When thresholds are not met: use golden ratio autoresize (focused window larger)
     -- Useful for large terminals where equal splits are preferred
     -- Default: 0 (always use golden ratio autoresize)
-    
+
     -- Equal splits on wide terminals (120+ columns)
     require("focus").setup({ autoresize = { equalise_min_cols = 120 })
-    
+
     -- Equal splits on tall terminals (40+ rows)
     require("focus").setup({ autoresize = { equalise_min_rows = 40 })
-    
+
     -- Equal splits only when BOTH wide AND tall (120+ columns AND 40+ rows)
     require("focus").setup({ autoresize = { equalise_min_cols = 120, equalise_min_rows = 40 })
 <
@@ -324,7 +325,7 @@ buffer**
     -- Enable auto highlighting for focussed/unfocussed windows
     -- Default: false
     require("focus").setup({ ui = { winhighlight = true } })
-    
+
     -- By default, the highlight groups are setup as such:
     --   hi default link FocusedWindow VertSplit
     --   hi default link UnfocusedWindow Normal
@@ -349,10 +350,10 @@ Here is an example:
 >lua
     local ignore_filetypes = { 'neo-tree' }
     local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
-    
+
     local augroup =
         vim.api.nvim_create_augroup('FocusDisable', { clear = true })
-    
+
     vim.api.nvim_create_autocmd('WinEnter', {
         group = augroup,
         callback = function(_)
@@ -365,7 +366,7 @@ Here is an example:
         end,
         desc = 'Disable focus autoresize for BufType',
     })
-    
+
     vim.api.nvim_create_autocmd('FileType', {
         group = augroup,
         callback = function(_)
@@ -510,7 +511,7 @@ LEVERAGE HJKL TO MOVE OR CREATE YOUR SPLITS DIRECTIONALLY ~
             require('focus').split_command(direction)
         end, { desc = string.format('Create or move to split (%s)', direction) })
     end
-    
+
     -- Use `<Leader>h` to split the screen to the left, same as command FocusSplitLeft etc
     focusmap('h')
     focusmap('j')
@@ -542,8 +543,8 @@ FAQ                                                     *focus-focus.nvim-faq*
     width/height of focus.
 - **Quickfix window opens in the right split always. Is this caused by
     focus.lua?**
-    No. This is a documented
-    <http://vimdoc.sourceforge.net/htmldoc/quickfix.html#quickfix> design decision
+    No. This is a documented
+<http://vimdoc.sourceforge.net/htmldoc/quickfix.html#quickfix> design decision
     by core vim, this might be something that can be adjusted upstream.
     In the meantime, you can open a quickfix window occupying the the full width of
     the window with `:botright copen`
@@ -551,7 +552,7 @@ FAQ                                                     *focus-focus.nvim-faq*
     to get auto-resizing working**
     Please note if you lazy load with command `:FocusToggle`, it will load focus,
     but will toggle it off initially. See #34
-    <https://github.com/nvim-focus/focus.nvim/issues/34>.
+<https://github.com/nvim-focus/focus.nvim/issues/34>.
     This is because focus is toggled on by default when you load focus, so if you
     load it and then run the command `:FocusToggle`, it toggles it off again.
 
