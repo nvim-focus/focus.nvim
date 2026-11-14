@@ -21,8 +21,9 @@ local golden_ratio_minheight = function()
     return math.floor(golden_ratio_height() / (3 * golden_ratio))
 end
 
-local function save_fixed_win_dims()
+local function save_fixed_win_dims(config)
     local fixed_dims = {}
+    local height_quickfix = config and config.autoresize.height_quickfix or 0
 
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
         if vim.api.nvim_win_get_config(win).zindex == nil then
@@ -32,6 +33,8 @@ local function save_fixed_win_dims()
                     width = vim.api.nvim_win_get_width(win),
                     height = vim.api.nvim_win_get_height(win),
                 }
+            elseif height_quickfix > 0 and vim.bo[buf].filetype == 'qf' then
+                fixed_dims[win] = { height = height_quickfix }
             end
         end
     end
@@ -42,7 +45,9 @@ end
 local function restore_fixed_win_dims(fixed_dims)
     for win, dims in pairs(fixed_dims) do
         if vim.api.nvim_win_is_valid(win) then
-            vim.api.nvim_win_set_width(win, dims.width)
+            if dims.width then
+                vim.api.nvim_win_set_width(win, dims.width)
+            end
             vim.api.nvim_win_set_height(win, dims.height)
         end
     end
@@ -74,7 +79,7 @@ function M.autoresize(config)
     -- If equalise mode, just equalize all windows and return
     if should_equalise then
         local cmdheight = vim.o.cmdheight
-        local fixed = save_fixed_win_dims()
+        local fixed = save_fixed_win_dims(config)
         vim.api.nvim_exec2('wincmd =', { output = false })
         restore_fixed_win_dims(fixed)
         vim.o.cmdheight = cmdheight
@@ -117,7 +122,7 @@ function M.autoresize(config)
     -- save cmdheight to ensure it is not changed by nvim_win_set_height
     local cmdheight = vim.o.cmdheight
 
-    local fixed = save_fixed_win_dims()
+    local fixed = save_fixed_win_dims(config)
 
     vim.api.nvim_win_set_width(0, width)
     vim.api.nvim_win_set_height(0, height)
