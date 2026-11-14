@@ -351,6 +351,22 @@ T['autoresize']['quickfix'] = function()
     validate_win_dims(win_id_lower, { 80, 10 })
 end
 
+T['autoresize']['quickfix keeps height_quickfix when focus leaves'] = function()
+    reload_module({ autoresize = { height_quickfix = 5 } })
+    child.cmd('vimgrep /ipsum/' .. lorem_ipsum_file)
+    child.cmd('copen')
+
+    local resize_state = child.get_resize_state()
+    local win_id_upper = resize_state.windows[1]
+    local win_id_lower = resize_state.windows[2]
+
+    -- Moving focus to the upper window resizes it; the quickfix window must
+    -- keep its configured height.
+    child.api.nvim_set_current_win(win_id_upper)
+
+    eq(child.api.nvim_win_get_height(win_id_lower), 5)
+end
+
 T['autoresize']['terminal'] = function()
     -- create a new term split
     child.cmd('split')
