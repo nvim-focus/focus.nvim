@@ -810,4 +810,46 @@ T['autoresize']['equalise both set neither met'] = function()
     validate_win_dims(win_id_right, { 30, 23 })
 end
 
+T['autoresize']['diff windows'] = function()
+    edit(lorem_ipsum_file)
+    child.cmd('vsplit')
+    child.cmd('windo diffthis')
+
+    local resize_state = child.get_resize_state()
+    local win_id_left = resize_state.windows[1]
+    local win_id_right = resize_state.windows[2]
+
+    eq(child.api.nvim_get_option_value('diff', { win = win_id_left }), true)
+    eq(child.api.nvim_get_option_value('diff', { win = win_id_right }), true)
+
+    child.api.nvim_set_current_win(win_id_left)
+    child.cmd('wincmd =')
+
+    -- Focusing a diff window should autoresize it
+    child.cmd('wincmd w')
+    eq(win_id_right, child.api.nvim_get_current_win())
+    validate_win_dims(win_id_left, { 30, 23 })
+    validate_win_dims(win_id_right, { 49, 23 })
+
+    -- FocusMaximise and FocusEqualise should also work in diff windows
+    child.cmd('FocusMaximise')
+    validate_win_dims(win_id_left, { 1, 23 })
+    validate_win_dims(win_id_right, { 78, 23 })
+
+    child.cmd('FocusEqualise')
+    local left_width = child.api.nvim_win_get_width(win_id_left)
+    local right_width = child.api.nvim_win_get_width(win_id_right)
+    expect.no_error(function()
+        local diff = math.abs(left_width - right_width)
+        if diff > 1 then
+            error(
+                'Diff windows not equal: '
+                    .. left_width
+                    .. ' vs '
+                    .. right_width
+            )
+        end
+    end)
+end
+
 return T
